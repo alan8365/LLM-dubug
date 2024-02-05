@@ -5,6 +5,8 @@ from glob import glob
 from pathlib import Path
 from typing import List, TypedDict
 
+from tqdm import tqdm
+
 
 class TestInfo(TypedDict):
     function_name: str
@@ -13,16 +15,65 @@ class TestInfo(TypedDict):
     fail_test_case: List[int]
 
 
-def extract_def_function(code: str):
-    # function to extract def function block from py file
+def extract_def_block(code: str):
     def_block = []
 
     code = code.split("\n")
-    for line in code:
-        if line.startswith("def"):
+    splitted_code = [line for line in code if line.strip() != '']
+
+    flag = 0  # 0: not in def block, 1: in def block, 2: end
+    indent = '    '
+    for line in splitted_code:
+        if flag == 0 and line.startswith("def"):
             def_block.append(line)
+            flag = 1
+        elif flag == 1 and line.startswith(indent):
+            def_block.append(line)
+        elif flag == 1 and not line.startswith(indent):
+            flag = 2
+        elif flag == 2:
+            break
+
+    def_block = '\n'.join(def_block)
 
     return def_block
+
+
+def generate_code(code_file_name, generated_code_dir, genai, defaults):
+    with open(code_file_name, 'r') as f:
+        code = f.read()
+    code = filter_comment(code)
+    function_name = code_file_name.split('/')[-1][:-3]
+
+    (generated_code_dir / function_name).mkdir(parents=True, exist_ok=True)
+
+    prompt = (
+        f'{code}\n'
+        'Please fix the code above.\n'
+        '\n'
+        'The fixed code:'
+    )
+    with open(generated_code_dir / function_name / (function_name + '_input.txt'), 'w') as f:
+        f.write(prompt)
+
+    for j in range(4):
+        generated_file_path = generated_code_dir / function_name / (function_name + f'_{j + 1}.py')
+        if generated_file_path.exists():
+            continue
+
+        response = genai.generate_text(
+            **defaults,
+            prompt=prompt
+        )
+
+        fixed_code = response.result
+
+        with open(generated_file_path.with_suffix('.txt'), 'w') as f:
+            f.write(fixed_code)
+
+        cleaned_code = extract_def_block(fixed_code)
+        with open(generated_file_path, 'w') as f:
+            f.write(cleaned_code)
 
 
 def copy_to_custom_folder(generated_code_path: Path, index: int) -> None:
@@ -56,7 +107,7 @@ def copy_to_custom_folder(generated_code_path: Path, index: int) -> None:
     all_folders = sorted(all_folders)
 
     # Copy the generated code to custom folder
-    for folder in all_folders:
+    for folder in tqdm(all_folders):
         source_file = generated_code_path / folder / f'{folder}_{index}.py'
         destination_file = custom_folder_path / f'{folder}.py'
         shutil.copyfile(source_file, destination_file)
@@ -140,3 +191,17 @@ def extract_test_info_from_pytest_log(pytest_log: str) -> TestInfo:
         raise ValueError(f'Count number mismatched, real: {real_count}, observe: {observe_count}')
 
     return result
+
+
+def filter_comment(code):
+    regex = r"\"\"\".*\"\"\""
+    matches = re.finditer(regex, code, re.MULTILINE | re.DOTALL)
+
+    for match in matches:
+        start = match.start()
+        end = match.end()
+        comment = code[start:end]
+        code = code.replace(comment, '')
+
+    code = code.strip()
+    return code

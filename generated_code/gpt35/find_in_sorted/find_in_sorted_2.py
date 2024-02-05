@@ -11,5 +11,3 @@ def find_in_sorted(arr, x):
             return mid
 
     return binsearch(0, len(arr))
-
-# The code has been fixed by adjusting the conditions and parameters in the recursive calls to the binsearch function.

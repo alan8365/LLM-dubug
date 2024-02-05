@@ -12,5 +12,3 @@ def kth(arr, k):
         return kth(above, k - num_lessoreq)
     else:
         return pivot
-
-# The only change made is in the second recursive call, where we subtract num_lessoreq from k

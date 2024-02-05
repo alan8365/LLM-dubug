@@ -1,7 +1,8 @@
 from heapq import heappush, heappop
 
+
 def shortest_path_length(length_by_edge, startnode, goalnode):
-    unvisited_nodes = [] # list containing (distance, node) pairs
+    unvisited_nodes = []  # list containing (distance, node) pairs
     heappush(unvisited_nodes, (0, startnode))
     visited_nodes = set()
 
@@ -17,12 +18,12 @@ def shortest_path_length(length_by_edge, startnode, goalnode):
                 continue
 
             insert_or_update(unvisited_nodes,
-                (min(
-                    get(unvisited_nodes, nextnode) or float('inf'),
-                    get(unvisited_nodes, node) + length_by_edge[node, nextnode]
-                ),
-                nextnode)
-            )
+                             (min(
+                                 get(unvisited_nodes, nextnode) or float('inf'),
+                                 get(unvisited_nodes, node) + length_by_edge[node, nextnode]
+                             ),
+                              nextnode)
+                             )
 
     return float('inf')
 
@@ -33,13 +34,14 @@ def get(node_heap, wanted_node):
             return dist
     return 0
 
+
 def insert_or_update(node_heap, dist_node):
     dist, node = dist_node
     for i, tpl in enumerate(node_heap):
         a, b = tpl
         if b == node:
             node_heap[i] = dist_node
-            heapq.heapify(node_heap) # heapify to maintain sorted property
+            heapq.heapify(node_heap)  # heapify to maintain sorted property
             return None
 
     heappush(node_heap, dist_node)

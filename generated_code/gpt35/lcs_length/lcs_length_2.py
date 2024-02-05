@@ -9,5 +9,3 @@ def lcs_length(s, t):
                 dp[i, j] = dp[i - 1, j - 1] + 1
 
     return max(dp.values()) if dp else 0
-
-The modification made was to change `dp[i, j] = dp[i - 1, j] + 1` to `dp[i, j] = dp[i - 1, j - 1] + 1`. This change ensures that the correct values are being added to the counter `dp`.
