@@ -3,12 +3,11 @@ from openai import OpenAI
 
 
 class CodeRepairAPIModule:
-    def __init__(self, api_type, api_key, language, model_name=None):
+    def __init__(self, api_type, api_key, model_name=None):
         self.api_call = None
 
         self.api_type = api_type
         self.api_key = api_key
-        self.language = language
         self.prompt = self.default_prompt()
         self.model_name = model_name
 
@@ -16,15 +15,12 @@ class CodeRepairAPIModule:
 
     def default_prompt(self):
         return f'''Fix the bugs in the following code:
-```{self.language.lower()}=
+```%s=
 %s
 ```
 
 Fixed code:
 '''
-
-    def update_prompt(self, new_prompt):
-        self.prompt = new_prompt
 
     def configure_api(self):
         if self.api_type == "OpenAI":
@@ -51,8 +47,8 @@ Fixed code:
                         "content": prompt
                     }
                 ],
-                temperature=1,
-                max_tokens=256,
+                temperature=0.9,
+                max_tokens=2048,
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=0
@@ -101,8 +97,17 @@ Fixed code:
 
         return api_call
 
+    def prepare_request(self, code_snippet, language):
+        return {
+            'code': code_snippet,
+            'language': language
+        }
+
     def make_api_call(self, payload):
-        prompt = self.prompt % payload
+        code_snippet = payload['code']
+        language = payload['language']
+
+        prompt = self.prompt % (language, code_snippet)
         return self.api_call(prompt)
 
 
@@ -116,7 +121,7 @@ if __name__ == "__main__":
     # api_key = os.getenv("GOOGLE_API_KEY")
     api_key = os.getenv("OPENAI_API_KEY")
 
-    api_module = CodeRepairAPIModule(api_type="OpenAI", api_key=api_key, language="Python")
-    payload = "def greet(name): print('Hello, ' & name)"
+    api_module = CodeRepairAPIModule(api_type="OpenAI", api_key=api_key)
+    payload = api_module.prepare_request("def greet(name): print('Hello, ' & name)", "Python")
     response = api_module.make_api_call(payload)
     print(response)

@@ -1,5 +1,8 @@
 datasets
 venv
 
+generated_code/*
+results/*
+
 .DS_Store
 .idea/
