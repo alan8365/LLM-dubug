@@ -1,5 +1,6 @@
 import google.generativeai as genai
 from openai import OpenAI
+import time
 
 
 class CodeRepairAPIModule:
@@ -9,7 +10,12 @@ class CodeRepairAPIModule:
         self.api_type = api_type
         self.api_key = api_key
         self.prompt = self.default_prompt()
-        self.model_name = model_name
+
+        if api_type == "OpenAI":
+            self.model_name = model_name if model_name is not None else 'gpt35'
+        elif api_type == "Gemini":
+            self.model_name = 'gemini-pro'
+
 
         self.configure_api()
 
@@ -33,8 +39,10 @@ Fixed code:
     def openai_api_config(self):
         if self.model_name == 'gpt4':
             model_name = 'gpt-4'
-        else:
+        elif self.model_name == 'gpt35':
             model_name = 'gpt-3.5-turbo'
+        else:
+            raise ValueError("Unsupported model name [%s]" % self.model_name)
 
         client = OpenAI()
 
@@ -108,7 +116,20 @@ Fixed code:
         language = payload['language']
 
         prompt = self.prompt % (language, code_snippet)
-        return self.api_call(prompt)
+
+        start = time.time()
+        repaired_code = self.api_call(prompt)
+        end = time.time()
+
+        response = {
+            'model': self.model_name,
+            'prompt': prompt,
+            'language': language,
+            'repaired_code': repaired_code,
+            'run_time': end - start
+        }
+
+        return response
 
 
 if __name__ == "__main__":
@@ -121,7 +142,7 @@ if __name__ == "__main__":
     # api_key = os.getenv("GOOGLE_API_KEY")
     api_key = os.getenv("OPENAI_API_KEY")
 
-    api_module = CodeRepairAPIModule(api_type="OpenAI", api_key=api_key)
+    api_module = CodeRepairAPIModule(api_type="OpenAI", api_key=api_key, model_name='gpt35')
     payload = api_module.prepare_request("def greet(name): print('Hello, ' & name)", "Python")
     response = api_module.make_api_call(payload)
     print(response)
