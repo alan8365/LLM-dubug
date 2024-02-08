@@ -25,10 +25,30 @@ To set up this project, follow these steps:
 5. Activate the virtual environment: `source venv/bin/activate`.
 6. Install the required packages: `pip install -r requirements.txt`.
 
-## Usage
+## Process
 
-<!-- TODO complete usage -->
-To use this project, follow these steps:
+Here is the sketch of the process:
+
+1. **Data Preparation**:
+   - Load the QuixBugs dataset.
+   - Parse code snippets from the dataset.
+   - Structure the code snippets for API requests.
+
+2. **API Interaction**:
+   - Send the structured code snippets to the API.
+   - Handle the responses from the API.
+
+3. **Metrics Calculation**:
+   - Take in the original code, repaired code, and the correct solution.
+   - Compute metrics (the specific metrics are to be determined).
+
+4. **Experimentation**:
+   - Experiment with different LLM models and programming languages.
+   - Arrange the results in a table or graph.
+   - Compare the performance of the LLM models.
+
+5. **Results Analysis**:
+   - Analyze the results to draw conclusions about the performance of the LLM models in debugging code.
 
 ## Future Work
 
