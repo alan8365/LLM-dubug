@@ -2,9 +2,19 @@ import google.generativeai as genai
 from openai import OpenAI
 import time
 
+from typing import Optional, Union
+
 
 class CodeRepairAPIModule:
-    def __init__(self, api_type, api_key, model_name=None):
+    
+
+    def __init__(self, api_type: str, api_key: str, model_name: Optional[str] = None):
+        """
+        Initializes the CodeRepairAPIModule with the specified API type, API key, and model name.
+        :param api_type: The type of API to be used (e.g. OpenAI, Gemini).
+        :param api_key: The API key for the specified API.
+        :param model_name: The name of the model to be used (optional, defaults to None).
+        """
         self.api_call = None
 
         self.api_type = api_type
@@ -15,7 +25,8 @@ class CodeRepairAPIModule:
             self.model_name = model_name if model_name is not None else 'gpt35'
         elif api_type == "Gemini":
             self.model_name = 'gemini-pro'
-
+        else: 
+            raise ValueError("Unsupported API type")
 
         self.configure_api()
 
