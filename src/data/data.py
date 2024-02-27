@@ -1,14 +1,24 @@
 import os
 
 
+def read_files_content(buggy_path, correct_path):
+    with open(buggy_path, 'r') as buggy_file, open(correct_path, 'r') as correct_file:
+        return buggy_file.read(), correct_file.read()
+
 class DataModule:
     def __init__(self, base_dir):
         self.base_dir = base_dir
         self.data = []
         self.excluded_files = ['Node.java', 'node.py', 'WeightedEdge.java']
         self.dirs = {
-            "Python": ("Python", ".py", "python_programs", "correct_python_programs", "python_testcases"),
-            "Java": ("Java", ".java", "java_programs", "correct_java_programs", "java_testcases")
+            "Python": ("Python", ".py", 
+                       "python_programs", 
+                       "correct_python_programs", 
+                       "python_testcases"),
+            "Java": ("Java", ".java", 
+                     "java_programs", 
+                     "correct_java_programs", 
+                     "java_testcases")
         }
         self.traverse_and_pair_directories()
 
@@ -17,7 +27,7 @@ class DataModule:
             full_buggy_dir = os.path.join(self.base_dir, buggy_dir)
             full_correct_dir = os.path.join(self.base_dir, correct_dir)
             full_test_dir = os.path.join(self.base_dir, test_dir)
-
+        
             self.pair_code(full_buggy_dir, full_correct_dir, full_test_dir, language, ext)
 
     def pair_code(self, buggy_dir, correct_dir, test_dir, language, ext):
@@ -25,7 +35,7 @@ class DataModule:
             if self.is_valid_file(file_name, ext):
                 buggy_path, correct_path, test_path = self.get_file_paths(buggy_dir, correct_dir, test_dir, file_name,
                                                                           language)
-                buggy_code, correct_code = self.read_files(buggy_path, correct_path)
+                buggy_code, correct_code = read_files_content(buggy_path, correct_path)
                 uses_node_lib = self.detect_library_usage(test_path, "Node", language)
                 uses_weighted_edge_lib = self.detect_library_usage(test_path, "WeightedEdge", language)
 
@@ -72,10 +82,6 @@ class DataModule:
         test_path = os.path.join(test_dir, test_file_name)
         return buggy_path, correct_path, test_path
 
-    def read_files(self, buggy_path, correct_path):
-        with open(buggy_path, 'r') as buggy_file, open(correct_path, 'r') as correct_file:
-            return buggy_file.read(), correct_file.read()
-
     def detect_library_usage(self, test_path, lib_name, language):
         if not os.path.exists(test_path):
             return False
@@ -97,7 +103,7 @@ class DataModule:
 
         return False
 
-    def get_lib_content(self, lang, lib_name):
+    def get_lib_content(self, lang: str, lib_name: str) -> str:
         """
         Retrieves the content of a library file based on the language and library name.
 

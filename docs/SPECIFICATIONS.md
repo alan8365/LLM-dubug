@@ -28,19 +28,23 @@
 pass
 
 ### d. Goals or Product and Technical Requirements
+> TODO Compelete this section
 
 - Product requirements in the form of user stories
 - Technical requirements
 
 ### e. Non-Goals or Out of Scope
+> TODO Compelete this section
 
 - Product and technical requirements that will be disregarded
 
 ### f. Future Goals
+> TODO Compelete this section
 
 - Product and technical requirements slated for a future time
 
 ### g. Assumptions
+> TODO Compelete this section
 
 - Conditions and resources that need to be present and accessible for the solution to work as described.
 
@@ -53,13 +57,9 @@ pass
 - Cons of the current solution: The current solution lacks a clear connection between actions and contains a lot of redundant code, which makes it hard to read and modify.
 
 ### b. Suggested or Proposed Solution / Design
+> TODO Compelete this section
 
-- External components that the solution will interact with and that it will alter
-
-- Dependencies of the current solution
-
-- Pros and cons of the proposed solution
-
+```
 - Data Model / Schema Changes
   - Schema definitions
   - New data models
@@ -69,3 +69,49 @@ pass
   - API changes
   - Pseudocode
   - Flow
+```
+
+#### Data Model / Schema Changes
+
+- QuixBugs dataset item schema
+  - ID
+  - Bug data
+  - Prog name
+    - Language
+    - Lib usage
+      - Lib name: Lib code
+    - Bug type
+  - Code data
+    - Buggy code
+    - Correct code
+
+- Patch schema
+  - ID
+  - Dataset item id
+  - LLM data
+    - Prompt
+    - Model name
+  - Code data
+    - Repaired code
+
+- Patch evaluation schema
+  - ID
+  - Patch ID
+  - Evaluation data
+    - Execution time
+    - Plausible patch related
+      - The number of test cases passed
+      - The number of test cases failed
+    - Correct patch related
+      - Patch's syntax tree matches the correct patch
+    - Fault localization sensitiveness
+
+#### Business Logic
+
+- Flow overview
+  - Load QuixBugs dataset
+  - Generate prompt
+  - Call api to generate patch
+  - Evaluate patch
+  - Save the result to csv
+

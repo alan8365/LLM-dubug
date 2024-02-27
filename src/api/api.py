@@ -5,9 +5,8 @@ import time
 from typing import Optional, Union
 
 
+# TODO Add addtional lib in prompt
 class CodeRepairAPIModule:
-    
-
     def __init__(self, api_type: str, api_key: str, model_name: Optional[str] = None):
         """
         Initializes the CodeRepairAPIModule with the specified API type, API key, and model name.
@@ -116,15 +115,17 @@ Fixed code:
 
         return api_call
 
-    def prepare_request(self, code_snippet, language):
+    def prepare_request(self, code_snippet: str, language: str, lib: Optional[list[str]] = None) -> dict:
         return {
             'code': code_snippet,
-            'language': language
+            'language': language,
+            'lib': lib
         }
 
     def make_api_call(self, payload):
         code_snippet = payload['code']
         language = payload['language']
+        libs = payload['lib']
 
         prompt = self.prompt % (language, code_snippet)
 

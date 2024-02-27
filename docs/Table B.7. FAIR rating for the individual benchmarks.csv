@@ -1,0 +1,74 @@
+Empty Cell           ,(1a) ,(1b) ,(2) ,(3) ,(4a) ,(4b) ,(5a) ,(5b) ,(O)
+10Y Bug-Fix DS       ,   5 ,   1 ,  5 ,  4 ,   5 ,   5 ,   5 ,   5 ,4.4
+20 C# projects       ,   4 ,   5 ,  5 ,  5 ,   2 ,   1 ,   1 ,   1 ,3.4
+6 Java projects      ,   5 ,   1 ,  5 ,  5 ,   5 ,   5 ,   5 ,   5 ,4.6
+Andror2              ,   5 ,   1 ,  5 ,  5 ,   5 ,   5 ,   5 ,   5 ,4.6
+APIMU4C              ,   4 ,   5 ,  5 ,  2 ,   2 ,   1 ,   4 ,   5 ,3.5
+APIRepBench          ,   4 ,   1 ,  5 ,  5 ,   5 ,   1 ,   4 ,   5 ,4.0
+AppLeak              ,   4 ,   5 ,  5 ,  3 ,   5 ,   1 ,   4 ,   5 ,4.0
+Bears                ,   4 ,   5 ,  5 ,  5 ,   5 ,   5 ,   1 ,   1 ,4.1
+Bench4BL             ,   2 ,   5 ,  5 ,  5 ,   5 ,   1 ,   1 ,   1 ,3.5
+BenchERoid           ,   4 ,   5 ,  5 ,  3 ,   5 ,   5 ,   4 ,   5 ,4.4
+BigFix               ,   5 ,   5 ,  5 ,  2 ,   5 ,   5 ,   5 ,   5 ,4.4
+Brosch dataset       ,   4 ,   1 ,  5 ,  5 ,   5 ,   5 ,   5 ,   5 ,4.5
+BugInjector          ,   5 ,   5 ,  5 ,  3 ,   5 ,   5 ,   5 ,   5 ,4.6
+BugLocator           ,   4 ,   5 ,  5 ,  5 ,   1 ,   5 ,   3 ,   1 ,3.9
+Bugs.jar             ,   4 ,   5 ,  5 ,  5 ,   5 ,   5 ,   4 ,   5 ,4.8
+BugsInPy             ,   4 ,   1 ,  5 ,  3 ,   5 ,   1 ,   4 ,   5 ,3.6
+BugsJS               ,   4 ,   5 ,  5 ,  4 ,   5 ,   5 ,   1 ,   1 ,3.9
+BugSwarm             ,   2 ,   5 ,  5 ,  5 ,   5 ,   1 ,   5 ,   5 ,4.3
+ClabureDB            ,   2 ,   1 ,  5 ,  3 ,   5 ,   5 ,   1 ,   1 ,3.1
+CloudBugs            ,   2 ,   1 ,  5 ,  3 ,   5 ,   1 ,   1 ,   1 ,2.7
+Code4Bench           ,   5 ,   5 ,  5 ,  2 ,   5 ,   5 ,   5 ,   5 ,4.4
+Codeflaws            ,   2 ,   5 ,  5 ,  4 ,   5 ,   1 ,   1 ,   1 ,3.3
+CoREBench            ,   4 ,   1 ,  5 ,  3 ,   5 ,   5 ,   4 ,   5 ,4.0
+CryptoAPI-Bench      ,   4 ,   5 ,  5 ,  2 ,   2 ,   5 ,   4 ,   5 ,3.9
+DataLossRepository   ,   3 ,   5 ,  5 ,  3 ,   5 ,   1 ,   4 ,   5 ,3.9
+DataRaceBench        ,   4 ,   5 ,  5 ,  3 ,   5 ,   5 ,   5 ,   5 ,4.5
+DbgBench             ,   4 ,   1 ,  5 ,  4 ,   5 ,   5 ,   4 ,   5 ,4.2
+Defects4J            ,   4 ,   5 ,  5 ,  4 ,   5 ,   5 ,   5 ,   5 ,4.7
+Defexts              ,   2 ,   5 ,  5 ,  4 ,   5 ,   1 ,   1 ,   1 ,3.3
+Denchmark            ,   4 ,   1 ,  5 ,  5 ,   2 ,   1 ,   4 ,   5 ,3.7
+DroidLeaks           ,   5 ,   1 ,  5 ,  3 ,   2 ,   5 ,   5 ,   5 ,3.9
+EDD                  ,   4 ,   1 ,  5 ,  1 ,   5 ,   5 ,   4 ,   5 ,3.6
+Except.-related bugs ,   4 ,   1 ,  5 ,  3 ,   5 ,   1 ,   4 ,   5 ,3.6
+Ghera                ,   4 ,   5 ,  5 ,  3 ,   5 ,   5 ,   4 ,   5 ,4.4
+GoBench              ,   4 ,   1 ,  5 ,  5 ,   5 ,   1 ,   4 ,   5 ,4.0
+High impact bugs     ,   2 ,   1 ,  5 ,  2 ,   2 ,   1 ,   1 ,   1 ,2.2
+HireBuild            ,   2 ,   1 ,  5 ,  2 ,   2 ,   1 ,   3 ,   1 ,2.4
+Hist.Driv.Repair     ,   4 ,   1 ,  5 ,  3 ,   1 ,   1 ,   4 ,   5 ,3.2
+IBM ConTest          ,   2 ,   5 ,  5 ,  1 ,   2 ,   1 ,   1 ,   1 ,2.4
+iBugs                ,   2 ,   5 ,  5 ,  5 ,   5 ,   1 ,   1 ,   1 ,3.5
+IFSpec               ,   2 ,   5 ,  5 ,  3 ,   2 ,   1 ,   1 ,   1 ,2.8
+IntroClass           ,   2 ,   5 ,  5 ,  5 ,   5 ,   5 ,   3 ,   1 ,4.1
+IntroClass Java      ,   4 ,   5 ,  5 ,  5 ,   5 ,   1 ,   4 ,   5 ,4.4
+IR dataset           ,   1 ,   1 ,  1 ,  5 ,   1 ,   1 ,   1 ,   1 ,1.8
+JaConTeBe            ,   2 ,   5 ,  1 ,  3 ,   2 ,   2 ,   5 ,   1 ,2.5
+JBench               ,   4 ,   5 ,  5 ,  5 ,   1 ,   1 ,   4 ,   5 ,4.0
+JCrashPack           ,   4 ,   5 ,  5 ,  5 ,   5 ,   5 ,   5 ,   5 ,4.9
+Lava                 ,   2 ,   5 ,  5 ,  3 ,   2 ,   1 ,   1 ,   1 ,2.8
+Leak Study           ,   4 ,   1 ,  5 ,  4 ,   1 ,   1 ,   4 ,   5 ,3.4
+Magma                ,   4 ,   5 ,  5 ,  3 ,   5 ,   1 ,   5 ,   5 ,4.1
+Mandelbugs           ,   2 ,   1 ,  5 ,  3 ,   2 ,   1 ,   1 ,   1 ,2.4
+ManyBugs             ,   2 ,   5 ,  5 ,  4 ,   5 ,   5 ,   3 ,   1 ,3.9
+ManySSTuBs4J         ,   5 ,   1 ,  5 ,  5 ,   5 ,   5 ,   5 ,   5 ,4.6
+MuBench              ,   4 ,   1 ,  5 ,  5 ,   5 ,   4 ,   5 ,   5 ,4.4
+NFBugs               ,   5 ,   1 ,  5 ,  5 ,   5 ,   5 ,   5 ,   5 ,4.6
+NIST SAMATE          ,   3 ,   5 ,  5 ,  3 ,   5 ,   1 ,   5 ,   5 ,4.0
+OWASP                ,   4 ,   5 ,  5 ,  5 ,   5 ,   5 ,   5 ,   5 ,4.9
+Pairika              ,   4 ,   1 ,  5 ,  1 ,   5 ,   1 ,   4 ,   5 ,3.2
+PAR dataset          ,   2 ,   5 ,  5 ,  1 ,   1 ,   1 ,   1 ,   1 ,2.3
+PerfBugReplication   ,   2 ,   5 ,  5 ,  1 ,   5 ,   5 ,   1 ,   1 ,3.1
+QuixBugs             ,   4 ,   5 ,  5 ,  3 ,   5 ,   5 ,   4 ,   5 ,4.4
+Refactory dataset    ,   4 ,   5 ,  5 ,  4 ,   5 ,   5 ,   4 ,   5 ,4.6
+SCTBench             ,   4 ,   5 ,  5 ,  3 ,   5 ,   1 ,   4 ,   5 ,4.0
+SECbench             ,   4 ,   1 ,  5 ,  4 ,   5 ,   5 ,   4 ,   5 ,4.2
+Securibench mirco    ,   4 ,   5 ,  5 ,  3 ,   2 ,   5 ,   4 ,   5 ,4.1
+SIR                  ,   2 ,   5 ,  1 ,  3 ,   5 ,   2 ,   5 ,   1 ,2.8
+Tech. Debt Dataset   ,   4 ,   1 ,  5 ,  3 ,   5 ,   5 ,   5 ,   5 ,4.1
+TempList             ,   2 ,   5 ,  5 ,  1 ,   1 ,   1 ,   1 ,   1 ,2.3
+Toyota ITC           ,   4 ,   5 ,  5 ,  1 ,   1 ,   5 ,   4 ,   5 ,3.6
+TrainTicket          ,   4 ,   5 ,  5 ,  3 ,   5 ,   5 ,   4 ,   5 ,4.4
+Variability bugs     ,   4 ,   5 ,  5 ,  3 ,   1 ,   5 ,   4 ,   5 ,4.0
+VariabilityFL        ,   2 ,   5 ,  5 ,  3 ,   5 ,   1 ,   5 ,   5 ,3.9
+VDBENCHWS-PD         ,   2 ,   5 ,  5 ,  2 ,   2 ,   1 ,   1 ,   1 ,2.6
