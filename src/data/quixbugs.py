@@ -12,13 +12,15 @@ LANG = Literal["python", "java"]
 CODE_TYPE = Literal["buggy", "correct", "testcase"]
 LIB = Literal["Node", "WeightedEdge"]
 
+
 class QuixBugsDatasetItem:
+    """A class representing an item in the QuixBugs dataset."""
     def __init__(
         self,
         prog_id: int,
         prog_name: str,
         language: LANG,
-        base_dir: Optional[str] = None,
+        base_dir: Optional[Path] = None,
     ) -> None:
         self.prog_id = prog_id
         self.prog_name = prog_name
@@ -28,7 +30,7 @@ class QuixBugsDatasetItem:
             raise ValueError(f"Unsupported language: {self.language}")
 
         if base_dir:
-            self.base_dir = Path(base_dir)
+            self.base_dir = base_dir
         elif os.getenv("QUIX_BUGS_DIR"):
             self.base_dir = Path(str(os.getenv("QUIX_BUGS_DIR")))
 
@@ -201,16 +203,21 @@ class QuixBugsDatasetItem:
 
 
 class QuixBugsDataset:
-    def __init__(self):
-        with open('prog_names.json', 'r') as file:
-            self.prog_names = json.load(file)
-        self.items: list[QuixBugsDatasetItem] = ''
+    """A class representing a dataset of QuixBugs programs."""
+    def __init__(self, langauge: LANG):
+        self.base_dir = Path(str(os.getenv("QUIX_BUGS_DIR")))
+        with open(self.base_dir / "prog_names.json", "r") as file:
+            self.prog_names: str = json.load(file)
+
+        self.items: list[QuixBugsDatasetItem] = [
+            QuixBugsDatasetItem(i, prog_name, langauge, self.base_dir)
+            for i, prog_name in enumerate(self.prog_names)
+        ]
+    
+    def __getitem__(self, index) -> QuixBugsDatasetItem:
+        return self.items[index]
+    
 
 
 if __name__ == "__main__":
-    quixbugs_dataset_item = QuixBugsDatasetItem(0, "minimum_spanning_tree", "java")
-
-    # print(quixbugs_dataset_item)
-
-    a = quixbugs_dataset_item.get_lib_content("Node")
-    # print(a)
+    quix_bugs_dataset = QuixBugsDataset("python")
