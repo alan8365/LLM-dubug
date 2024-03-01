@@ -1,10 +1,11 @@
-from typing import Literal, Optional
+from typing import Literal, Optional, Union
 
 from dotenv import load_dotenv
 from pathlib import Path
 
 import os
 import json
+import re
 
 load_dotenv()
 
@@ -13,6 +14,7 @@ CODE_TYPE = Literal["buggy", "correct", "testcase"]
 LIB = Literal["Node", "WeightedEdge"]
 
 
+# TODO extract buggy code
 class QuixBugsDatasetItem:
     """A class representing an item in the QuixBugs dataset."""
 
@@ -35,7 +37,8 @@ class QuixBugsDatasetItem:
         elif os.getenv("QUIX_BUGS_DIR"):
             self.base_dir = Path(str(os.getenv("QUIX_BUGS_DIR")))
 
-        self.buggy_code = self.read_code("buggy")
+        self.org_buggy_code = self.read_code("buggy") 
+        self.buggy_code = self.delete_buggy_comment(self.org_buggy_code)
         self.correct_code = self.read_code("correct")
 
         self.lib_usage: dict[LIB, str] = self.detect_library_usage()
@@ -124,6 +127,18 @@ class QuixBugsDatasetItem:
 
         return file_content
 
+    def delete_buggy_comment(self, code: str):
+        if self.language == "python":
+            pattern = re.compile(r"\"{3}.*?\"{3}", re.MULTILINE | re.DOTALL)
+
+            comment = pattern.findall(code)[-1]
+            pure_code = code.replace(comment, "").strip()
+        elif self.language == "java":
+            pattern = re.compile(r"/\*.*?\*/", re.MULTILINE | re.DOTALL)
+            pure_code = pattern.sub("", code)
+
+        return pure_code
+
     def detect_library_usage(self) -> dict[LIB, str]:
         """
         This method detects the usage of libraries in the test file.
@@ -211,14 +226,29 @@ class QuixBugsDataset:
         with open(self.base_dir / "prog_names.json", "r") as file:
             self.prog_names: str = json.load(file)
 
+        self.prog_names_dict = {prog_name: i for i, prog_name in enumerate(self.prog_names)}
         self.items: list[QuixBugsDatasetItem] = [
             QuixBugsDatasetItem(i, prog_name, langauge, self.base_dir)
             for i, prog_name in enumerate(self.prog_names)
         ]
 
-    def __getitem__(self, index) -> QuixBugsDatasetItem:
-        return self.items[index]
+    def __getitem__(self, index: Union[int, str]) -> QuixBugsDatasetItem:
+        if isinstance(index, int):
+            return self.items[index]
+        elif isinstance(index, str):
+            i = self.prog_names_dict[index]
+            
+            return self.items[i]
+        else:
+            raise ValueError(f"Invalid index type: {type(index)}. Index must be int or str.")
 
+
+from random import randint
 
 if __name__ == "__main__":
-    quix_bugs_dataset = QuixBugsDataset("python")
+    quix_bugs_dataset = QuixBugsDataset("java")
+
+    a = [i.buggy_code for i in quix_bugs_dataset.items]
+
+    with open('temp.java', 'w') as f:
+        f.write('\n//---------\n'.join(a))
