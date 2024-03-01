@@ -15,6 +15,7 @@ LIB = Literal["Node", "WeightedEdge"]
 
 class QuixBugsDatasetItem:
     """A class representing an item in the QuixBugs dataset."""
+
     def __init__(
         self,
         prog_id: int,
@@ -204,6 +205,7 @@ class QuixBugsDatasetItem:
 
 class QuixBugsDataset:
     """A class representing a dataset of QuixBugs programs."""
+
     def __init__(self, langauge: LANG):
         self.base_dir = Path(str(os.getenv("QUIX_BUGS_DIR")))
         with open(self.base_dir / "prog_names.json", "r") as file:
@@ -213,10 +215,9 @@ class QuixBugsDataset:
             QuixBugsDatasetItem(i, prog_name, langauge, self.base_dir)
             for i, prog_name in enumerate(self.prog_names)
         ]
-    
+
     def __getitem__(self, index) -> QuixBugsDatasetItem:
         return self.items[index]
-    
 
 
 if __name__ == "__main__":
