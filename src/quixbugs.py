@@ -1,21 +1,19 @@
-from typing import Literal, Optional, Union
-
 from dotenv import load_dotenv
-from pathlib import Path
 
+from src_types import LANG, CODE_TYPE, LIB
+
+
+from typing import Optional, Union
+from pathlib import Path
 import os
 import json
 import re
 
 load_dotenv()
 
-LANG = Literal["python", "java"]
-CODE_TYPE = Literal["buggy", "correct", "testcase"]
-LIB = Literal["Node", "WeightedEdge"]
-
 
 # TODO extract buggy code
-class QuixBugsDatasetItem:
+class QuixBugsSample:
     """A class representing an item in the QuixBugs dataset."""
 
     def __init__(
@@ -37,7 +35,7 @@ class QuixBugsDatasetItem:
         elif os.getenv("QUIX_BUGS_DIR"):
             self.base_dir = Path(str(os.getenv("QUIX_BUGS_DIR")))
 
-        self.org_buggy_code = self.read_code("buggy") 
+        self.org_buggy_code = self.read_code("buggy")
         self.buggy_code = self.delete_buggy_comment(self.org_buggy_code)
         self.correct_code = self.read_code("correct")
 
@@ -226,21 +224,25 @@ class QuixBugsDataset:
         with open(self.base_dir / "prog_names.json", "r") as file:
             self.prog_names: str = json.load(file)
 
-        self.prog_names_dict = {prog_name: i for i, prog_name in enumerate(self.prog_names)}
-        self.items: list[QuixBugsDatasetItem] = [
-            QuixBugsDatasetItem(i, prog_name, langauge, self.base_dir)
+        self.prog_names_dict = {
+            prog_name: i for i, prog_name in enumerate(self.prog_names)
+        }
+        self.items: list[QuixBugsSample] = [
+            QuixBugsSample(i, prog_name, langauge, self.base_dir)
             for i, prog_name in enumerate(self.prog_names)
         ]
 
-    def __getitem__(self, index: Union[int, str]) -> QuixBugsDatasetItem:
+    def __getitem__(self, index: Union[int, str]) -> QuixBugsSample:
         if isinstance(index, int):
             return self.items[index]
         elif isinstance(index, str):
             i = self.prog_names_dict[index]
-            
+
             return self.items[i]
         else:
-            raise ValueError(f"Invalid index type: {type(index)}. Index must be int or str.")
+            raise ValueError(
+                f"Invalid index type: {type(index)}. Index must be int or str."
+            )
 
 
 from random import randint
@@ -250,5 +252,5 @@ if __name__ == "__main__":
 
     a = [i.buggy_code for i in quix_bugs_dataset.items]
 
-    with open('temp.java', 'w') as f:
-        f.write('\n//---------\n'.join(a))
+    with open("temp.java", "w") as f:
+        f.write("\n//---------\n".join(a))

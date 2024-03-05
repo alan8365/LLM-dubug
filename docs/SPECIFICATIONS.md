@@ -73,7 +73,7 @@ pass
 
 #### Data Model / Schema Changes
 
-- QuixBugs dataset item schema
+- QuixBugs dataset sample schema
   - ID
   - Bug data
   - Prog name
@@ -85,14 +85,21 @@ pass
     - Buggy code
     - Correct code
 
+- Prompt schem
+  - prompt type
+  - prompt content
+  - Dataset sample id
+
 - Patch schema
-  - ID
-  - Dataset item id
+  - ID for group
+  - Code data
+    - Repaired code
+
+- Patch group schma
   - LLM data
     - Prompt
     - Model name
-  - Code data
-    - Repaired code
+  - Multi patch
 
 - Patch evaluation schema
   - ID

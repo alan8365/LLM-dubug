@@ -1,38 +1,50 @@
-from quixbugs import QuixBugsDatasetItem, QuixBugsDataset
+from quixbugs import QuixBugsSample, QuixBugsDataset
 from typing import Literal
 
-PROMPT_TYPE = Literal['basic', 'with_lib', 'with_eng']
+PROMPT_TYPE = Literal["basic", "with_lib", "with_step"]
 
-def prompt_generate(data: QuixBugsDatasetItem, prompt_type: PROMPT_TYPE = 'basic'):
+
+class Prompt:
     prompt_templates: dict[PROMPT_TYPE, str] = {
-        "basic": """Fix the bugs in the following code:
-```{lang}=
-{code}
-```
-
-Fixed code:
-""",
-        "with_lib": """Fix the bugs in the following code:
-```{lang}=
-{code}
-```
-
-Here is the library code used in the code above:
-```{lang}=
-{lib_code}
-```
-
-Fixed code:
-""",
+        "basic": (
+            "Fix the bugs in the following code:\n"
+            "```{lang}=\n"
+            "{code}\n"
+            "```\n"
+            "\n"
+            "Fixed code:\n"
+        ),
+        "with_lib": (
+            "Fix the bugs in the following code:\n"
+            "```{lang}=\n"
+            "{code}\n"
+            "```\n"
+            "Here is the library code used in the code above:\n"
+            "```{lang}=\n"
+            "{lib_code}\n"
+            "```\n"
+            "Fixed code:\n"
+        ),
     }
 
-    lib_code = '\n'.join(data.lib_usage.values())
-    
-    prompt = prompt_templates[prompt_type].format(lang=data.language, code=data.buggy_code, lib_code=lib_code)
+    def __init__(
+        self, sample: QuixBugsSample, prompt_type: PROMPT_TYPE = "basic"
+    ) -> None:
+        self.sample = sample
+        self.prompt_type = prompt_type
 
-    return prompt
+        lib_code = "\n".join(sample.lib_usage.values())
+        prompt = self.prompt_templates[prompt_type].format(
+            lang=sample.language, code=sample.buggy_code, lib_code=lib_code
+        )
+
+        self.prompt = prompt
+
+
 
 if __name__ == "__main__":
-    a = QuixBugsDataset('java')
-    b = a['breadth_first_search']
-    c = prompt_generate(b, 'with_lib')
+    a = QuixBugsDataset("python")
+    b = a["breadth_first_search"]
+    c = Prompt(b, "basic")
+
+    print(c.prompt)
