@@ -3,6 +3,7 @@ venv
 
 generated_code/*
 results/*
+exp/*
 
 .DS_Store
 .idea/

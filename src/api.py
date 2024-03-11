@@ -43,7 +43,7 @@ class LlmApi(ABC):
 
         return patch
 
-    def patch_group_generator(self, prompt: Prompt) -> PatchGroup:
+    def get_patch_group(self, prompt: Prompt) -> PatchGroup:
         patchs = [self.get_patch(prompt, i) for i in range(3)]
         patch_group = PatchGroup(patchs, prompt, self.model_name)
 
@@ -52,7 +52,6 @@ class LlmApi(ABC):
 
 class OpenAiApi(LlmApi):
     def __init__(self, model_name: MODEL_NAME) -> None:
-        super().__init__(model_name)
         model_name_list = ["gpt-3.5-turbo-0125", "gpt-4"]
         if not model_name in model_name_list:
             raise ValueError(
@@ -132,17 +131,15 @@ if __name__ == "__main__":
     dataset = QuixBugsDataset("python")
     prompt = Prompt(dataset[0])
 
-    # model_name: MODEL_NAME = "gpt-3.5-turbo-0125"
-    model_name: MODEL_NAME = "gemini-1.0-pro"
-    a = GeminiApi(model_name)
+    model_name: MODEL_NAME = "gpt-3.5-turbo-0125"
+    a = OpenAiApi(model_name)
 
-    patch = a.get_patch(prompt, 0)
+    # model_name: MODEL_NAME = "gemini-1.0-pro"
+    # a = GeminiApi(model_name)
 
-    print(patch)
+    patch_group = a.get_patch_group(prompt)
 
-    # GOOGLE_API_KEY="AIzaSyDGuEKKmbihmn3Di5kfVyoqBAYke4dGycs"
-    # genai.configure(api_key=GOOGLE_API_KEY)
-    # model = genai.GenerativeModel('gemini-pro')
-    # response = model.generate_content("What is the meaning of life?", request_options={'timeout': 1000})
+    print(patch_group)
 
-    # print(response.text)
+    with open('temp.json', 'w') as f:
+        f.write(patch_group.to_json())

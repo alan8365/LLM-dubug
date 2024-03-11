@@ -1,7 +1,9 @@
-from quixbugs import QuixBugsSample, QuixBugsDataset
 from typing import Literal
 
-PROMPT_TYPE = Literal["basic", "with_lib", "with_step"]
+from quixbugs import QuixBugsSample, QuixBugsDataset
+from src_types import PROMPT_TYPE
+
+
 
 
 class Prompt:
@@ -39,6 +41,9 @@ class Prompt:
         )
 
         self.prompt = prompt
+
+    def __repr__(self):
+        return f"Prompt(prompt type: {self.prompt_type}, sample: {self.sample})"
 
 
 

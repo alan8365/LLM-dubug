@@ -12,7 +12,6 @@ import re
 load_dotenv()
 
 
-# TODO extract buggy code
 class QuixBugsSample:
     """A class representing an item in the QuixBugs dataset."""
 
@@ -213,7 +212,17 @@ class QuixBugsSample:
             return ""
 
     def __repr__(self) -> str:
-        return f"QuixBugsDatasetItem(ID: {self.prog_id}, Prog Name: {self.prog_name}, Language: {self.language})"
+        return f"QuixBugsSample(ID: {self.prog_id}, Prog Name: {self.prog_name}, Language: {self.language})"
+
+    def to_json(self) -> str:
+        sample_data = {
+            "id": self.prog_id,
+            "name": self.prog_name,
+            "language": self.language,
+        }
+
+        return json.dumps(sample_data, indent=4)
+        
 
 
 class QuixBugsDataset:
@@ -232,6 +241,9 @@ class QuixBugsDataset:
             for i, prog_name in enumerate(self.prog_names)
         ]
 
+    def __len__(self):
+        return len(self.items)
+
     def __getitem__(self, index: Union[int, str]) -> QuixBugsSample:
         if isinstance(index, int):
             return self.items[index]
@@ -244,13 +256,12 @@ class QuixBugsDataset:
                 f"Invalid index type: {type(index)}. Index must be int or str."
             )
 
+    def __iter__(self):
+        yield from self.items
 
-from random import randint
 
 if __name__ == "__main__":
     quix_bugs_dataset = QuixBugsDataset("java")
 
-    a = [i.buggy_code for i in quix_bugs_dataset.items]
-
-    with open("temp.java", "w") as f:
-        f.write("\n//---------\n".join(a))
+    for i in quix_bugs_dataset:
+        print(i)
