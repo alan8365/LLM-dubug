@@ -4,7 +4,7 @@ from pathlib import Path
 
 from tqdm import tqdm  # type: ignore
 
-from api import LlmApi, OpenAiApi
+from api import LlmApi, OpenAiApi, GeminiApi, ClaudeApi
 from prompt import Prompt
 from quixbugs import QuixBugsDataset
 from src_types import LANG, PROMPT_TYPE
@@ -51,8 +51,8 @@ class Experiment:
             with open(json_path, "w") as f:
                 f.write(patch_group.to_json())
 
-    def to_json(self):
-        exp_data = {
+    def to_dict(self):
+        return {
             "name": self.name,
             "lang": self.lang,
             "llm_api": self.llm_api.__class__.__name__,
@@ -60,11 +60,22 @@ class Experiment:
             "exp_dir": str(self.exp_dir),
             "patch_dir": str(self.patch_dir),
         }
-        return json.dumps(exp_data, indent=4)
+
+    def to_json(self):
+        return json.dumps(self.to_dict(), indent=4)
 
 
 if __name__ == "__main__":
     exp = Experiment(
-        "gpt35-python-with_lib", "python", OpenAiApi("gpt-3.5-turbo-0125"), "with_lib"
+        "gpt35-python-with_step", "python", OpenAiApi("gpt-3.5-turbo-0125"), "with_step"
     )
+    # exp = Experiment(
+    #     "gpt4-python-with_lib_v2", "python", OpenAiApi("gpt-4"), "with_lib"
+    # )
+    # exp = Experiment(
+    #     "gemini-python-with_step", "python", GeminiApi("gemini-1.0-pro"), "with_step"
+    # )
+    # exp = Experiment(
+    #     "claude-python-basic", "python", ClaudeApi("claude-3-opus-20240229"), "basic"
+    # )
     exp.run()

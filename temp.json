@@ -1,0 +1,34 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef bitcount(n):\n    count = 0\n    while n:\n        n ^= n - 1\n        count += 1\n    return count\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 0,
+            "prog_name": "bitcount",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.430415153503418,
+            "repaired_code": "def bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count",
+            "raw_code": "```python\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.7553009986877441,
+            "repaired_code": "def bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count",
+            "raw_code": "```python\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.6366009712219238,
+            "repaired_code": "=\n\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count",
+            "raw_code": "```python=\n\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count\n\n\n\n\n```"
+        }
+    ]
+}

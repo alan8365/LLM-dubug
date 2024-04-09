@@ -101,9 +101,9 @@ pass
     - Model name
   - Multi patch
 
-- Patch evaluation schema
+- Patch group evaluation schema
   - ID
-  - Patch ID
+  - Patch group
   - Evaluation data
     - Execution time
     - Plausible patch related

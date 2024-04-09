@@ -2,6 +2,8 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 from google import generativeai as genai  # type: ignore
+from anthropic import Anthropic
+
 
 from prompt import Prompt
 from quixbugs import QuixBugsDataset, QuixBugsSample
@@ -9,6 +11,7 @@ from patch import Patch, PatchGroup
 from src_types import MODEL_NAME
 
 import os
+import re
 import time
 from typing import Optional
 from abc import ABC, abstractmethod
@@ -25,21 +28,35 @@ class LlmApi(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_repaired_code(self, prompt: Prompt):
+    def get_repaired_response(self, prompt: Prompt):
         raise NotImplementedError
 
-    def api_call(self, prompt: Prompt) -> tuple[Optional[str], float]:
+    def api_call(self, prompt: Prompt) -> tuple[str, float]:
         start = time.time()
-        repaired_code = self.get_repaired_code(prompt)
+        repaired_response = self.get_repaired_response(prompt)
         end = time.time()
 
         run_time = end - start
 
-        return repaired_code, run_time
+        return repaired_response, run_time
+
+    # TODO move to eval
+    def clean_response(self, prompt: Prompt, response) -> str:
+        lang = prompt.sample.language
+        pattern = re.compile(rf"```{lang}=?(.*?)\n```", re.MULTILINE | re.DOTALL)
+        find_all = pattern.findall(response)
+
+        if find_all:
+            cleaned_code = find_all[0]
+        else:
+            raise ValueError(f"Pattern error:\n {response}")
+
+        return cleaned_code
 
     def get_patch(self, prompt: Prompt, patch_id: int) -> Patch:
-        repaired_code, run_time = self.api_call(prompt)
-        patch = Patch(patch_id, repaired_code, run_time)
+        repaired_response, run_time = self.api_call(prompt)
+        repaired_code = self.clean_response(prompt, repaired_response)
+        patch = Patch(patch_id, repaired_response, repaired_code, run_time)
 
         return patch
 
@@ -61,7 +78,7 @@ class OpenAiApi(LlmApi):
         self.model_name = model_name
         self.api_key = os.getenv("OPENAI_API_KEY")
 
-    def get_repaired_code(self, prompt: Prompt) -> Optional[str]:
+    def get_repaired_response(self, prompt: Prompt) -> str:
         client = OpenAI()
         response = client.chat.completions.create(
             model=self.model_name,
@@ -75,7 +92,10 @@ class OpenAiApi(LlmApi):
 
         repaired_code = response.choices[0].message.content
 
-        return repaired_code
+        if repaired_code:
+            return repaired_code
+        else:
+            raise ValueError("No response.")
 
 
 class GeminiApi(LlmApi):
@@ -88,7 +108,7 @@ class GeminiApi(LlmApi):
 
         self.model_name = model_name
         self.api_key = os.getenv("GOOGLE_API_KEY")
-        genai.configure(api_key=self.api_key, transport='rest')
+        genai.configure(api_key=self.api_key, transport="rest")
 
     def get_config(self):
         generation_config = {
@@ -112,7 +132,7 @@ class GeminiApi(LlmApi):
 
         return generation_config, safety_settings
 
-    def get_repaired_code(self, prompt: Prompt):
+    def get_repaired_response(self, prompt: Prompt):
         generation_config, safety_settings = self.get_config()
 
         model = genai.GenerativeModel(
@@ -127,19 +147,57 @@ class GeminiApi(LlmApi):
         return convo.last.text
 
 
+class ClaudeApi(LlmApi):
+    def __init__(self, model_name: MODEL_NAME) -> None:
+        model_name_list = ["claude-3-opus-20240229"]
+        if not model_name in model_name_list:
+            raise ValueError(
+                f"Invalid model name provided: {model_name}. Please choose from {model_name_list}"
+            )
+
+        self.model_name = model_name
+        self.api_key = os.getenv("CLAUDE_API_KEY")
+        self.client = Anthropic(
+            # defaults to os.environ.get("ANTHROPIC_API_KEY")
+            api_key=self.api_key,
+        )
+
+    def get_repaired_response(self, prompt: Prompt):
+        message = self.client.messages.create(
+            model=self.model_name,
+            max_tokens=1000,
+            temperature=0.9,
+            messages=[
+                {
+                    "role": "user",
+                    "content": [{"type": "text", "text": prompt.prompt}],
+                }
+            ],
+        )
+
+        return message.content[0].text
+
+
 if __name__ == "__main__":
     dataset = QuixBugsDataset("python")
     prompt = Prompt(dataset[0])
 
-    model_name: MODEL_NAME = "gpt-3.5-turbo-0125"
-    a = OpenAiApi(model_name)
+    # model_name: MODEL_NAME = "gpt-3.5-turbo-0125"
+    # a = OpenAiApi(model_name)
 
     # model_name: MODEL_NAME = "gemini-1.0-pro"
     # a = GeminiApi(model_name)
 
-    patch_group = a.get_patch_group(prompt)
+    # model_name: MODEL_NAME = "claude-3-opus-20240229"
+    # a = ClaudeApi(model_name)
 
-    print(patch_group)
+    # b = a.api_call(prompt)
 
-    with open('temp.json', 'w') as f:
-        f.write(patch_group.to_json())
+    # print(b)
+
+    # patch_group = a.get_patch_group(prompt)
+
+    # print(patch_group)
+
+    # with open("temp.json", "w") as f:
+    #     f.write(patch_group.to_json())

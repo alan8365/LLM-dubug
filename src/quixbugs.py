@@ -17,13 +17,12 @@ class QuixBugsSample:
 
     def __init__(
         self,
-        prog_id: int,
-        prog_name: str,
+        prog_info: dict,
         language: LANG,
         base_dir: Optional[Path] = None,
     ) -> None:
-        self.prog_id = prog_id
-        self.prog_name = prog_name
+        self.prog_id = prog_info["prog_id"]
+        self.prog_name = prog_info["prog_name"]
         self.language = language
 
         if self.language not in ["python", "java"]:
@@ -35,12 +34,15 @@ class QuixBugsSample:
             self.base_dir = Path(str(os.getenv("QUIX_BUGS_DIR")))
 
         self.org_buggy_code = self.read_code("buggy")
-        self.buggy_code = self.delete_buggy_comment(self.org_buggy_code)
+        self.buggy_code = self.delete_comment(self.org_buggy_code)
         self.correct_code = self.read_code("correct")
+        self.correct_code = self.delete_comment(self.correct_code)
 
         self.lib_usage: dict[LIB, str] = self.detect_library_usage()
-        # TODO add bug type here
-        # self.bug_type = bug_type
+
+        self.bug_type = prog_info["bug_type"]
+        self.fault_location = prog_info["fault_location"]
+        self.testcase_num = prog_info["testcase_num"]
 
     def get_code_path(self, code_type: CODE_TYPE) -> Path:
         """
@@ -49,7 +51,7 @@ class QuixBugsSample:
         If the file path does not exist, it raises a FileNotFoundError.
 
         Args:
-            code_type (CODE_TYPE): The type of the code ('buggy', 'correct', 'testcase').
+            code_type (CODE_TYPE): The type of the code ('buggy', 'correct').
 
         Returns:
             Path: The file path.
@@ -77,6 +79,18 @@ class QuixBugsSample:
             raise FileNotFoundError(f"File {file_path} does not exist")
 
         return file_path
+
+    def get_testcase_json(self) -> list:
+        testcase_dir = self.base_dir / f"json_testcases"
+        json_path = testcase_dir / f"{self.prog_name}.json"
+
+        if json_path.exists():
+            with open(testcase_dir / f"{self.prog_name}.json") as f:
+                result = [json.loads(line) for line in f.readlines()]
+        else:
+            result = []
+
+        return result
 
     def get_test_path(self) -> Path:
         """
@@ -124,12 +138,11 @@ class QuixBugsSample:
 
         return file_content
 
-    def delete_buggy_comment(self, code: str):
+    def delete_comment(self, code: str):
         if self.language == "python":
             pattern = re.compile(r"\"{3}.*?\"{3}", re.MULTILINE | re.DOTALL)
 
-            comment = pattern.findall(code)[-1]
-            pure_code = code.replace(comment, "").strip()
+            pure_code = pattern.sub("", code)
         elif self.language == "java":
             pattern = re.compile(r"/\*.*?\*/", re.MULTILINE | re.DOTALL)
             pure_code = pattern.sub("", code)
@@ -212,17 +225,20 @@ class QuixBugsSample:
             return ""
 
     def __repr__(self) -> str:
-        return f"QuixBugsSample(ID: {self.prog_id}, Prog Name: {self.prog_name}, Language: {self.language})"
+        return f"QuixBugsSample(ID: {self.prog_id}, Language: {self.language}, Prog Name: {self.prog_name})"
 
-    def to_json(self) -> str:
-        sample_data = {
-            "id": self.prog_id,
-            "name": self.prog_name,
+    def to_dict(self) -> dict:
+        return {
+            "prog_id": self.prog_id,
+            "prog_name": self.prog_name,
             "language": self.language,
+            "testcase_num": self.testcase_num,
+            "fault_location": self.fault_location,
+            "bug_type": self.bug_type,
         }
 
-        return json.dumps(sample_data, indent=4)
-        
+    def to_json(self) -> str:
+        return json.dumps(self.to_dict(), indent=4)
 
 
 class QuixBugsDataset:
@@ -230,15 +246,20 @@ class QuixBugsDataset:
 
     def __init__(self, langauge: LANG):
         self.base_dir = Path(str(os.getenv("QUIX_BUGS_DIR")))
-        with open(self.base_dir / "prog_names.json", "r") as file:
-            self.prog_names: str = json.load(file)
+        with open(self.base_dir / "prog_info.json", "r") as file:
+            self.prog_info: list[dict] = json.load(file)
+        self.prog_names = [i["prog_name"] for i in self.prog_info]
 
         self.prog_names_dict = {
             prog_name: i for i, prog_name in enumerate(self.prog_names)
         }
         self.items: list[QuixBugsSample] = [
-            QuixBugsSample(i, prog_name, langauge, self.base_dir)
-            for i, prog_name in enumerate(self.prog_names)
+            QuixBugsSample(
+                prog,
+                langauge,
+                self.base_dir,
+            )
+            for prog in self.prog_info
         ]
 
     def __len__(self):
@@ -261,7 +282,22 @@ class QuixBugsDataset:
 
 
 if __name__ == "__main__":
-    quix_bugs_dataset = QuixBugsDataset("java")
+    quix_bugs_dataset = QuixBugsDataset("python")
 
     for i in quix_bugs_dataset:
         print(i)
+
+    # a = []
+    # for i in quix_bugs_dataset:
+    #     a.append(
+    #         {
+    #             "prog_id": i.prog_id,
+    #             "prog_name": i.prog_name,
+    #             "fault_location": i.fault_location,
+    #             "bug_type": i.bug_type,
+    #             "testcase_num": i.testcase_num,
+    #         }
+    #     )
+
+    # with open("prog_info.json", "w") as f:
+    #     json.dump(a, f)

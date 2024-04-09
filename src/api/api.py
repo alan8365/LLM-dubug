@@ -21,22 +21,22 @@ class CodeRepairAPIModule:
         self.prompt = self.default_prompt()
 
         if api_type == "OpenAI":
-            self.model_name = model_name if model_name is not None else 'gpt35'
+            self.model_name = model_name if model_name is not None else "gpt35"
         elif api_type == "Gemini":
-            self.model_name = 'gemini-pro'
-        else: 
+            self.model_name = "gemini-pro"
+        else:
             raise ValueError("Unsupported API type")
 
         self.configure_api()
 
     def default_prompt(self):
-        return f'''Fix the bugs in the following code:
+        return f"""Fix the bugs in the following code:
 ```%s=
 %s
 ```
 
 Fixed code:
-'''
+"""
 
     def configure_api(self):
         if self.api_type == "OpenAI":
@@ -47,10 +47,10 @@ Fixed code:
             raise ValueError("Unsupported API type")
 
     def openai_api_config(self):
-        if self.model_name == 'gpt4':
-            model_name = 'gpt-4'
-        elif self.model_name == 'gpt35':
-            model_name = 'gpt-3.5-turbo'
+        if self.model_name == "gpt4":
+            model_name = "gpt-4"
+        elif self.model_name == "gpt35":
+            model_name = "gpt-3.5-turbo"
         else:
             raise ValueError("Unsupported model name [%s]" % self.model_name)
 
@@ -59,17 +59,12 @@ Fixed code:
         def api_call(prompt):
             response = client.chat.completions.create(
                 model=model_name,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ],
+                messages=[{"role": "user", "content": prompt}],
                 temperature=0.9,
                 max_tokens=2048,
                 top_p=1,
                 frequency_penalty=0,
-                presence_penalty=0
+                presence_penalty=0,
             )
 
             return response.choices[0].message.content
@@ -85,27 +80,23 @@ Fixed code:
             "max_output_tokens": 2048,
         }
         safety_settings = [
-            {
-                "category": "HARM_CATEGORY_HARASSMENT",
-                "threshold": "BLOCK_ONLY_HIGH"
-            },
-            {
-                "category": "HARM_CATEGORY_HATE_SPEECH",
-                "threshold": "BLOCK_ONLY_HIGH"
-            },
+            {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_ONLY_HIGH"},
+            {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_ONLY_HIGH"},
             {
                 "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                "threshold": "BLOCK_ONLY_HIGH"
+                "threshold": "BLOCK_ONLY_HIGH",
             },
             {
                 "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-                "threshold": "BLOCK_ONLY_HIGH"
+                "threshold": "BLOCK_ONLY_HIGH",
             },
         ]
 
-        model = genai.GenerativeModel(model_name="gemini-pro",
-                                      generation_config=generation_config,
-                                      safety_settings=safety_settings)
+        model = genai.GenerativeModel(
+            model_name="gemini-pro",
+            generation_config=generation_config,
+            safety_settings=safety_settings,
+        )
 
         def api_call(prompt):
             convo = model.start_chat()
@@ -115,17 +106,15 @@ Fixed code:
 
         return api_call
 
-    def prepare_request(self, code_snippet: str, language: str, lib: Optional[list[str]] = None) -> dict:
-        return {
-            'code': code_snippet,
-            'language': language,
-            'lib': lib
-        }
+    def prepare_request(
+        self, code_snippet: str, language: str, lib: Optional[list[str]] = None
+    ) -> dict:
+        return {"code": code_snippet, "language": language, "lib": lib}
 
     def make_api_call(self, payload):
-        code_snippet = payload['code']
-        language = payload['language']
-        libs = payload['lib']
+        code_snippet = payload["code"]
+        language = payload["language"]
+        libs = payload["lib"]
 
         prompt = self.prompt % (language, code_snippet)
 
@@ -134,11 +123,11 @@ Fixed code:
         end = time.time()
 
         response = {
-            'model': self.model_name,
-            'prompt': prompt,
-            'language': language,
-            'repaired_code': repaired_code,
-            'run_time': end - start
+            "model": self.model_name,
+            "prompt": prompt,
+            "language": language,
+            "repaired_code": repaired_code,
+            "run_time": end - start,
         }
 
         return response
@@ -154,7 +143,11 @@ if __name__ == "__main__":
     # api_key = os.getenv("GOOGLE_API_KEY")
     api_key = os.getenv("OPENAI_API_KEY")
 
-    api_module = CodeRepairAPIModule(api_type="OpenAI", api_key=api_key, model_name='gpt35')
-    payload = api_module.prepare_request("def greet(name): print('Hello, ' & name)", "Python")
+    api_module = CodeRepairAPIModule(
+        api_type="OpenAI", api_key=api_key, model_name="gpt35"
+    )
+    payload = api_module.prepare_request(
+        "def greet(name): print('Hello, ' & name)", "Python"
+    )
     response = api_module.make_api_call(payload)
     print(response)

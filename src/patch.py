@@ -1,6 +1,6 @@
-from quixbugs import QuixBugsSample
+from quixbugs import QuixBugsSample, QuixBugsDataset
 from prompt import Prompt
-from src_types import MODEL_NAME
+from src_types import MODEL_NAME, LANG, PROMPT_TYPE
 
 from typing import Final, Optional
 import json
@@ -10,11 +10,16 @@ PATCH_NUM_IN_GROUP: Final[int] = 3
 
 class Patch:
     def __init__(
-        self, patch_id: int, repaired_code: Optional[str], run_time: float
+        self,
+        patch_id: int,
+        raw_code: str,
+        repaired_code: str,
+        run_time: float,
     ) -> None:
         # Patch data
         self.patch_id = patch_id
         self.repaired_code = repaired_code
+        self.raw_code = raw_code
 
         # Eval data
         self.run_time = run_time
@@ -22,13 +27,16 @@ class Patch:
     def __repr__(self) -> str:
         return f"Patch(id={self.patch_id}, run_time={self.run_time:.3f} s, repaired_code={self.repaired_code})"
 
-    def to_json(self) -> str:
-        patch_data = {
+    def to_dict(self) -> dict:
+        return {
             "patch_id": self.patch_id,
             "run_time": self.run_time,
             "repaired_code": self.repaired_code,
+            "raw_code": self.raw_code,
         }
-        return json.dumps(patch_data)
+
+    def to_json(self) -> str:
+        return json.dumps(self.to_dict)
 
 
 class PatchGroup:
@@ -58,22 +66,39 @@ class PatchGroup:
     def __repr__(self):
         return f"PatchGroup(model name: {self.model_name}, prompt: {self.prompt})"
 
+    def to_dict(self):
+        patchs_data = [patch.to_dict() for patch in self.patchs]
 
-    def to_json(self):
-        patchs_data = [
-            {
-                "patch_id": patch.patch_id,
-                "run_time": patch.run_time,
-                "repaired_code": patch.repaired_code,
-            }
-            for patch in self.patchs
-        ]
-
-        result = {
+        return {
             "model_name": self.model_name,
-            "prompt": self.prompt.prompt,
-            "sample": self.prompt.sample.to_json(),
-            "patches": patchs_data
+            "prompt": self.prompt.to_dict(),
+            "patches": patchs_data,
         }
 
-        return json.dumps(result, indent=4)
+    def to_json(self):
+        return json.dumps(self.to_dict(), indent=4)
+
+
+# TODO complete this func
+def read_patch_group_from_json(file_path) -> PatchGroup:
+    with open(file_path, "r") as f:
+        json_data = json.load(f)
+
+    lang: LANG = json_data["prompt"]["sample"]["language"]
+    model_name: MODEL_NAME = json_data["model_name"]
+    prompt_type: PROMPT_TYPE = json_data["prompt"]["prompt_type"]
+    prog_id: int = json_data["prompt"]["sample"]["prog_id"]
+
+    dataset = QuixBugsDataset(lang)
+    prompt = Prompt(dataset[prog_id], prompt_type)
+
+    patches = []
+    for i in range(3):
+        patch = json_data["patches"][i]
+
+        raw_code = patch["raw_code"]
+        repaired_code = patch["repaired_code"]
+        run_time = patch["run_time"]
+        patches.append(Patch(i, raw_code, repaired_code, run_time))
+
+    return PatchGroup(patches, prompt, model_name)
