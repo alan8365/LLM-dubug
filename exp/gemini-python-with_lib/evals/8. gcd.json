@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 8, "prog_name": "gcd", "language": "python", "testcase_num": 6, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.005187749862671, "pass_num": 6, "fail_num": 0}, {"run_time": 2.9440419673919678, "pass_num": 6, "fail_num": 0}, {"run_time": 3.4864487648010254, "pass_num": 6, "fail_num": 0}]}

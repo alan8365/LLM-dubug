@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef subsequences(a, b, k):\n    if k == 0:\n        return []\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.978318214416504,
+            "repaired_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        subseqs = subsequences(i + 1, b, k - 1)\n        for subseq in subseqs:\n            ret.append([i] + subseq)\n\n    return ret",
+            "raw_code": "```python\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        subseqs = subsequences(i + 1, b, k - 1)\n        for subseq in subseqs:\n            ret.append([i] + subseq)\n\n    return ret\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.079878091812134,
+            "repaired_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k + 1):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret",
+            "raw_code": "```python\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k + 1):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.4980480670928955,
+            "repaired_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret",
+            "raw_code": "```python\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret\n```"
+        }
+    ]
+}

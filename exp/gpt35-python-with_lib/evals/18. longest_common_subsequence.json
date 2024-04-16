@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 18, "prog_name": "longest_common_subsequence", "language": "python", "testcase_num": 10, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.6221649646759033, "pass_num": 2, "fail_num": 0}, {"run_time": 2.226137161254883, "pass_num": 2, "fail_num": 0}, {"run_time": 2.3740077018737793, "pass_num": 2, "fail_num": 0}]}

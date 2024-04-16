@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 19, "prog_name": "max_sublist_sum", "language": "python", "testcase_num": 6, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 1.9744079113006592, "pass_num": 5, "fail_num": 1}, {"run_time": 1.6566720008850098, "pass_num": 5, "fail_num": 1}, {"run_time": 1.9754688739776611, "pass_num": 5, "fail_num": 1}]}

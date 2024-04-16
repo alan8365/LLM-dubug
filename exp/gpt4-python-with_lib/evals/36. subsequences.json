@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 36, "prog_name": "subsequences", "language": "python", "testcase_num": 12, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 11.916733980178833, "pass_num": 4, "fail_num": 8}, {"run_time": 4.489142179489136, "pass_num": 4, "fail_num": 8}, {"run_time": 3.9103431701660156, "pass_num": 12, "fail_num": 0}]}

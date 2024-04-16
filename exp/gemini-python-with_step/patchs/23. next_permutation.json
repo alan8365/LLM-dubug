@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\n\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 23,
+            "prog_name": "next_permutation",
+            "language": "python",
+            "testcase_num": 8,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.566102027893066,
+            "repaired_code": "\nnext_perm[i + 1:] = sorted(next_perm[i + 1:], reverse=True)",
+            "raw_code": "**Bug:** The function tries to return the next permutation of the given list, but it's not correctly updating the last part of the list, which is supposed to be sorted in descending order.\n\n**Location:** The bug is in the last line of the code: `next_perm[i + 1:] = reversed(next_perm[i + 1:])`\n\n**Patch:** Replace the line with the following to correct the sorting order:\n\n```python=\nnext_perm[i + 1:] = sorted(next_perm[i + 1:], reverse=True)\n```\n\n**Complete Code with Patch:**\n\n```python=\n\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = sorted(next_perm[i + 1:], reverse=True)\n                    return next_perm\n\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.485144138336182,
+            "repaired_code": "\n\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None\n",
+            "raw_code": "**Bug:** The bug occurs in the line `next_perm[i + 1:] = reversed(next_perm[i + 1:])`. It reverses only a part of the array from `i + 1` to the end. As a result, the permutation produced may not be lexicographically larger than the input.\n\n**Patch:** The patch should replace the line `next_perm[i + 1:] = reversed(next_perm[i + 1:])` with `next_perm[i + 1:] = reversed(next_perm[i + 1:])`.\n\n**Complete code with patch applied:**\n```python=\n\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.8529651165008545,
+            "repaired_code": "\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm",
+            "raw_code": "**Bug:**\n\nThe bug is in the `next_permutation` function. The problem is that it doesn't handle the case when the current permutation is the last permutation in the lexicographical order. In this case, the function should return the first permutation.\n\n**Location:**\n\nThe bug is in the following section of the code:\n\n```python\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```\n\n**Patch:**\n\nTo fix the bug, add the following code to the end of the function:\n\n```python\n    else:\n        return perm[::-1]\n```\n\n**Complete Code with Patch Applied:**\n\n```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    else:\n        return perm[::-1]\n```"
+        }
+    ]
+}

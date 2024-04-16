@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k)\n    else:\n        return pivot\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 14,
+            "prog_name": "kth",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.557060718536377,
+            "repaired_code": "\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x >= pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)\n    else:\n        return pivot\n\n\n\n\n",
+            "raw_code": "```python=\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x >= pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)\n    else:\n        return pivot\n\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.7011818885803223,
+            "repaired_code": "\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k == num_less:\n        return pivot\n    else:\n        return kth(above, k - num_lessoreq)",
+            "raw_code": "```python=\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k == num_less:\n        return pivot\n    else:\n        return kth(above, k - num_lessoreq)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.5478718280792236,
+            "repaired_code": "\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = num_less + 1\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)\n    else:\n        return pivot\n",
+            "raw_code": "```python=\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = num_less + 1\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)\n    else:\n        return pivot\n\n```"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "name": "gemini-python-with_lib_v2",
+    "lang": "python",
+    "llm_api": "GeminiApi",
+    "prompt_type": "with_lib",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/patchs"
+}

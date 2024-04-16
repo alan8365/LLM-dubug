@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 22, "prog_name": "next_palindrome", "language": "python", "testcase_num": 5, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 11.178835153579712, "pass_num": 1, "fail_num": 4}, {"run_time": 9.826411962509155, "pass_num": 4, "fail_num": 1}, {"run_time": 6.962689161300659, "pass_num": 4, "fail_num": 1}]}

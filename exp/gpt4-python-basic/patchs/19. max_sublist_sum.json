@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max_ending_here + x\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 7.128766059875488,
+            "repaired_code": "def max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = -float('inf')\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n        \n    return max_so_far",
+            "raw_code": "```python\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = -float('inf')\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n        \n    return max_so_far\n\n```\nThe fix needed here is to change the initial value of max_so_far to negative infinity because if the list contain all negative numbers, then the answer would be the maximum number (which is negative) and not 0. \n\nAlso, for each number, the current maximum sum could be the number itself or the sum of the previous maximum sum and the number. In the buggy code, there is no consideration for when the list contains negative numbers that could potentially decrease the sum."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.327952861785889,
+            "repaired_code": "def max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = -float('inf')\n\n    for x in arr:\n        max_ending_here = max_ending_here + x\n        if max_ending_here < 0:\n            max_ending_here = 0\n        elif (max_so_far < max_ending_here):\n            max_so_far = max_ending_here\n\n    return max_so_far",
+            "raw_code": "```python\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = -float('inf')\n\n    for x in arr:\n        max_ending_here = max_ending_here + x\n        if max_ending_here < 0:\n            max_ending_here = 0\n        elif (max_so_far < max_ending_here):\n            max_so_far = max_ending_here\n\n    return max_so_far\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.209073781967163,
+            "repaired_code": "def max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = -float('inf')\n    \n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n        \n    return max_so_far",
+            "raw_code": "```python\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = -float('inf')\n    \n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n        \n    return max_so_far\n```\n\nThe main issue with the original code is that max_ending_here is always incremented, even when x is negative and decreases the sum. Also, max_so_far should be initially set to -inf to handle cases where all elements in array are negative."
+        }
+    ]
+}

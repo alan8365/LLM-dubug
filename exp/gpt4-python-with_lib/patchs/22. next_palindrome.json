@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 11.178835153579712,
+            "repaired_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] > 9 or digit_list[low_mid] > 9:\n            return \"Error: The input digit list should only contain single digits.\"\n        elif digit_list[high_mid] == 9 and digit_list[low_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digital_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + [0]*(len(digit_list)-1) + [1]",
+            "raw_code": "```python\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] > 9 or digit_list[low_mid] > 9:\n            return \"Error: The input digit list should only contain single digits.\"\n        elif digit_list[high_mid] == 9 and digit_list[low_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digital_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + [0]*(len(digit_list)-1) + [1]\n```\nFixed the following bugs:\n1. Added an error check to make sure list elements are single digits.\n2. Fixed the incrementing logic for the middle elements of the array to make them the same (since it's supposed to be a palindrome).\n3. Fixed the return list at the end to make sure it's a palindrome."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 9.826411962509155,
+            "repaired_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]",
+            "raw_code": "```python\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]\n```\nThis revised code makes sure that the indices `low_mid` and `high_mid` always point to mirrored positions in the list `digit_list` (which should represent a palindrome). The lines in the `else` clause ensure that if the digits at the `low_mid` and `high_mid` positions are not equal to 9, they are incremented by 1 and then made equal to ensure the palindrome property of the list is maintained. The code also correctly handles the case where all digits of the input list are 9."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.962689161300659,
+            "repaired_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + [0] * len(digit_list) + [1]",
+            "raw_code": "```python\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + [0] * len(digit_list) + [1]\n```"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 30,
+        "prog_name": "shortest_path_length",
+        "language": "python",
+        "testcase_num": 4,
+        "fault_location": 19,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 5.912557125091553,
+            "pass_num": 4,
+            "fail_num": 0,
+            "reparied_code": "\nfrom heapq import *\n\n\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    unvisited_nodes = []  # List containing (distance, node) tuples\n    heappush(unvisited_nodes, (0, startnode))\n    visited_nodes = set()\n\n    while unvisited_nodes:\n        distance, node = heappop(unvisited_nodes)\n        if node is goalnode:\n            return distance\n\n        visited_nodes.add(node)\n\n        for nextnode in node.successors:\n            if nextnode in visited_nodes:\n                continue\n\n            next_distance = get(unvisited_nodes, nextnode) or float('inf')\n            new_distance = distance + length_by_edge[node, nextnode]\n            if new_distance < next_distance:\n                insert_or_update(unvisited_nodes, (new_distance, nextnode))\n\n    return float('inf')\n\n\ndef get(node_heap, wanted_node):\n    for dist, node in node_heap:\n        if node == wanted_node:\n            return dist\n    return None\n\n\ndef insert_or_update(node_heap, dist_node):\n    dist, node = dist_node\n    for i, tpl in enumerate(node_heap):\n        a, b = tpl\n        if b == node:\n            node_heap[i] = dist_node  # Updating the existing node's distance\n            heapify(node_heap)  # Re-sort the list after updating\n            return None\n\n    heappush(node_heap, dist_node)  # Inserting a new node\n    return None"
+        },
+        {
+            "run_time": 6.113890886306763,
+            "pass_num": 4,
+            "fail_num": 0,
+            "reparied_code": "\nfrom heapq import *\n\n\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    unvisited_nodes = []  # FibHeap containing (node, distance) pairs\n    heappush(unvisited_nodes, (0, startnode))\n    visited_nodes = set()\n\n    while len(unvisited_nodes) > 0:\n        distance, node = heappop(unvisited_nodes)\n        if node == goalnode:\n            return distance\n\n        visited_nodes.add(node)\n\n        for nextnode in node.successors:\n            if nextnode in visited_nodes:\n                continue\n\n            insert_or_update(unvisited_nodes,\n                              (min(\n                                  get(unvisited_nodes, nextnode) or float('inf'),\n                                  distance + length_by_edge.get((node, nextnode), float('inf'))\n                              ),\n                                  nextnode)\n                              )\n\n    return float('inf')\n\n\ndef get(node_heap, wanted_node):\n    for dist, node in node_heap:\n        if node == wanted_node:\n            return dist\n    return float('inf')\n\n\ndef insert_or_update(node_heap, dist_node):\n    dist, node = dist_node\n    for i, tpl in enumerate(node_heap):\n        a, b = tpl\n        if b == node:\n            node_heap[i] = dist_node  # heapq retains sorted property\n            heapify(node_heap)  # Re-heapify after update\n            return None\n\n    heappush(node_heap, dist_node)\n    return None"
+        },
+        {
+            "run_time": 5.463054180145264,
+            "pass_num": 4,
+            "fail_num": 0,
+            "reparied_code": "\nfrom heapq import *\n\n\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    unvisited_nodes = []  # FibHeap containing (node, distance) pairs\n    heappush(unvisited_nodes, (0, startnode))\n    visited_nodes = set()\n\n    while len(unvisited_nodes) > 0:\n        distance, node = heappop(unvisited_nodes)\n        if node == goalnode:\n            return distance\n\n        visited_nodes.add(node)\n\n        for nextnode in node.successors:\n            if nextnode in visited_nodes:\n                continue\n\n            new_dist = min(\n                get(unvisited_nodes, nextnode) or float('inf'),\n                distance + length_by_edge[node, nextnode]\n            )\n            insert_or_update(unvisited_nodes, (new_dist, nextnode))\n\n    return float('inf')\n\n\ndef get(node_heap, wanted_node):\n    for dist, node in node_heap:\n        if node == wanted_node:\n            return dist\n    return 0\n\n\ndef insert_or_update(node_heap, dist_node):\n    dist, node = dist_node\n    for i, tpl in enumerate(node_heap):\n        a, b = tpl\n        if b == node:\n            node_heap[i] = dist_node  # heapq retains sorted property\n            heapify(node_heap)  # Re-balance the heap after updating\n            return None\n\n    heappush(node_heap, dist_node)\n    return None"
+        }
+    ]
+}

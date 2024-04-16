@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 24,
+            "prog_name": "pascal",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 11.650712966918945,
+            "repaired_code": "\ndef pascal(n):\n    if n == 0:\n        return []\n    elif n == 1:\n        return [[1]]\n    else:\n        rows = [[1]]\n        for r in range(1, n):\n            row = [1]\n            for c in range(1, r):\n                upleft = rows[r - 1][c - 1] if c > 0 else 0\n                upright = rows[r - 1][c] if c < r else 0\n                row.append(upleft + upright)\n            row.append(1)\n            rows.append(row)\n        return rows",
+            "raw_code": "```python\ndef pascal(n):\n    if n == 0:\n        return []\n    elif n == 1:\n        return [[1]]\n    else:\n        rows = [[1]]\n        for r in range(1, n):\n            row = [1]\n            for c in range(1, r):\n                upleft = rows[r - 1][c - 1] if c > 0 else 0\n                upright = rows[r - 1][c] if c < r else 0\n                row.append(upleft + upright)\n            row.append(1)\n            rows.append(row)\n        return rows\n```\nExplanation:\n1. When `n` is `0` or `1`, the code failed to handle these edge cases. So, I added conditions to handle these cases.\n2. Each row in Pascal's triangle starts and ends with `1`, which was missing in the original code. Therefore, I modified the code to add `1` at the start and end of each row.\n3. The original code calculated `upright` and `upleft` for `c == r`, which caused an out of index error. I changed the inner loop to end before `r` to fix this."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 9.807143926620483,
+            "repaired_code": "\n\ndef pascal(n):\n    if n == 0:\n        return []\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1] \n            upright = rows[r - 1][c] \n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n\n    return rows\n",
+            "raw_code": "```python\n\ndef pascal(n):\n    if n == 0:\n        return []\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1] \n            upright = rows[r - 1][c] \n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n\n    return rows\n\n```\nThis code generates rows of Pascal's Triangle up to the nth row. The errors in the initial code were:\n- The first element and the last element of each row in Pascal's triangle is always 1. So, the inner loop should start with a 1 and end with a 1.\n- There is no need to check for r or c being greater than 0 or less than r because they are controlled by the loop ranges. \n- If `n` equals to zero it should return a empty list."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 7.280939102172852,
+            "repaired_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n\n    return rows",
+            "raw_code": "```python\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n\n    return rows\n```"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "model_name": "claude-3-opus-20240229",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )\n\n    return length_by_path\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 18.503839254379272,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path",
+            "raw_code": "Here's the fixed code:\n\n```python\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path\n```\n\nThe bug in the original code was in the line:\n\n```python\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[j, k]\n)\n```\n\nThe correct indices for the second part of the minimum comparison should be `length_by_path[i, k] + length_by_path[k, j]` instead of `length_by_path[i, k] + length_by_path[j, k]`.\n\nThe reason for this is that the shortest path from node `i` to node `j` through node `k` is the sum of the shortest path from node `i` to node `k` (`length_by_path[i, k]`) and the shortest path from node `k` to node `j` (`length_by_path[k, j]`).\n\nWith this correction, the code should now correctly compute the shortest path lengths between all pairs of nodes using the Floyd-Warshall algorithm."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 16.984596967697144,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path",
+            "raw_code": "Here's the fixed code:\n\n```python\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path\n```\n\nThe bug in the original code was in the line:\n\n```python\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[j, k]\n)\n```\n\nThe correct indices for the Floyd-Warshall algorithm should be `[i, k]` and `[k, j]` instead of `[i, k]` and `[j, k]`. The fixed line should be:\n\n```python\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[k, j]\n)\n```\n\nThis ensures that the shortest path from node `i` to node `j` is correctly calculated by considering the path through the intermediate node `k`.\n\nWith this fix, the `shortest_path_lengths` function should now correctly compute the shortest path lengths between all pairs of nodes in the graph using the Floyd-Warshall algorithm."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 16.3853018283844,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path",
+            "raw_code": "Here's the fixed code:\n\n```python\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path\n```\n\nThe bug in the original code was in the line:\n\n```python\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[j, k]\n)\n```\n\nThe correct indices for the Floyd-Warshall algorithm should be `length_by_path[i, k] + length_by_path[k, j]` instead of `length_by_path[i, k] + length_by_path[j, k]`. The path from vertex `i` to vertex `j` goes through the intermediate vertex `k`, so the correct indices are `i, k` and `k, j`.\n\nWith this fix, the `shortest_path_lengths` function will correctly calculate the shortest path lengths between all pairs of vertices using the Floyd-Warshall algorithm."
+        }
+    ]
+}

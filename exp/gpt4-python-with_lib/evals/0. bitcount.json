@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 0, "prog_name": "bitcount", "language": "python", "testcase_num": 9, "fault_location": 3, "bug_type": ""}, "patchs_eval": [{"run_time": 1.8279509544372559, "pass_num": 9, "fail_num": 0}, {"run_time": 8.441601037979126, "pass_num": 9, "fail_num": 0}, {"run_time": 2.134755849838257, "pass_num": 9, "fail_num": 0}]}

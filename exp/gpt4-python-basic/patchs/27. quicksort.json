@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 27,
+            "prog_name": "quicksort",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.036107063293457,
+            "repaired_code": "def quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    equal = [x for x in arr if x == pivot]\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + equal + greater",
+            "raw_code": "```python\ndef quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    equal = [x for x in arr if x == pivot]\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + equal + greater\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.3677608966827393,
+            "repaired_code": "def quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    equal = [x for x in arr if x == pivot]\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + equal + greater",
+            "raw_code": "```python\ndef quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    equal = [x for x in arr if x == pivot]\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + equal + greater\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.784614086151123,
+            "repaired_code": "def quicksort(arr):\n    if len(arr) == 0:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x <= pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater",
+            "raw_code": "```python\ndef quicksort(arr):\n    if len(arr) == 0:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x <= pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater\n```"
+        }
+    ]
+}

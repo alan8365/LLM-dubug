@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 35, "prog_name": "sqrt", "language": "python", "testcase_num": 7, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 1.3614311218261719, "pass_num": 7, "fail_num": 0}, {"run_time": 1.670039176940918, "pass_num": 7, "fail_num": 0}, {"run_time": 1.4748551845550537, "pass_num": 7, "fail_num": 0}]}

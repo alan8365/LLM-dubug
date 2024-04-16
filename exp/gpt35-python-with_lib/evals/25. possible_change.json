@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 25, "prog_name": "possible_change", "language": "python", "testcase_num": 10, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 1.8244588375091553, "pass_num": 10, "fail_num": 0}, {"run_time": 1.746654987335205, "pass_num": 10, "fail_num": 0}, {"run_time": 1.843700885772705, "pass_num": 10, "fail_num": 0}]}

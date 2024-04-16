@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n\n        for j in range(1, capacity + 1):\n            memo[i, j] = memo[i - 1, j]\n\n            if weight < j:\n                memo[i, j] = max(\n                    memo[i, j],\n                    value + memo[i - 1, j - weight]\n                )\n\n    return memo[len(items), capacity]\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 13,
+            "prog_name": "knapsack",
+            "language": "python",
+            "testcase_num": 10,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 6.2520599365234375,
+            "repaired_code": "\ndef knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n\n        for j in range(1, capacity + 1):\n            memo[i, j] = memo[i - 1, j]\n\n            if weight <= j:\n                memo[i, j] = max(\n                    memo[i, j],\n                    value + memo[i - 1, j - weight]\n                )\n\n    return memo[len(items), capacity]",
+            "raw_code": "```python\ndef knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n\n        for j in range(1, capacity + 1):\n            memo[i, j] = memo[i - 1, j]\n\n            if weight <= j:\n                memo[i, j] = max(\n                    memo[i, j],\n                    value + memo[i - 1, j - weight]\n                )\n\n    return memo[len(items), capacity]\n```\nThe comparison operator at line 10 in the original code should be \"<=\" instead of \"<\". This is because when determining if an item fits in the knapsack, we should also consider the case where the weight of the item is exactly equal to the current capacity of the knapsack. This adjustment allows the algorithm to correctly account for objects that exactly match the remaining capacity."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 6.276939868927002,
+            "repaired_code": "\n\ndef knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n\n        for j in range(capacity + 1):\n            if weight > j:\n                memo[i, j] = memo[i - 1, j]\n            else:\n                memo[i, j] = max(\n                    memo[i - 1, j],\n                    value + memo[i - 1, j - weight]\n                )\n\n    return memo[len(items), capacity]",
+            "raw_code": "```python=\n\ndef knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n\n        for j in range(capacity + 1):\n            if weight > j:\n                memo[i, j] = memo[i - 1, j]\n            else:\n                memo[i, j] = max(\n                    memo[i - 1, j],\n                    value + memo[i - 1, j - weight]\n                )\n\n    return memo[len(items), capacity]\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.832266807556152,
+            "repaired_code": "\n\ndef knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n\n        for j in range(1, capacity + 1):\n            memo[i, j] = memo[i - 1, j]\n\n            if weight <= j:\n                memo[i, j] = max(\n                    memo[i, j],\n                    value + memo[i - 1, j - weight]\n                )\n\n    return memo[len(items), capacity]\n",
+            "raw_code": "```python=\n\ndef knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n\n        for j in range(1, capacity + 1):\n            memo[i, j] = memo[i - 1, j]\n\n            if weight <= j:\n                memo[i, j] = max(\n                    memo[i, j],\n                    value + memo[i - 1, j - weight]\n                )\n\n    return memo[len(items), capacity]\n\n```"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 20, "prog_name": "mergesort", "language": "python", "testcase_num": 14, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 13.510857820510864, "pass_num": 14, "fail_num": 0}, {"run_time": 15.980936050415039, "pass_num": 14, "fail_num": 0}, {"run_time": 11.31673288345337, "pass_num": 14, "fail_num": 0}]}

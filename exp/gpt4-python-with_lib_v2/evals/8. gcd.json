@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 8,
+        "prog_name": "gcd",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在遞迴呼叫時，沒有交換數字的位置，使得b的位置始終保持不變，導致遞迴不會停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 1.5347900390625,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)"
+        },
+        {
+            "run_time": 1.5738732814788818,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)"
+        },
+        {
+            "run_time": 6.109551191329956,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)"
+        }
+    ]
+}

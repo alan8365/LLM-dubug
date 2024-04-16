@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 37,
+            "prog_name": "to_base",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.8085989952087402,
+            "repaired_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result",
+            "raw_code": "```python\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.8818848133087158,
+            "repaired_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if num == 0:\n        return '0'\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result",
+            "raw_code": "```python\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if num == 0:\n        return '0'\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.8983826637268066,
+            "repaired_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result",
+            "raw_code": "```python\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result\n```"
+        }
+    ]
+}

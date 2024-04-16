@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield flatten(x)\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 7,
+            "prog_name": "flatten",
+            "language": "python"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.319859027862549,
+            "repaired_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```\nThe bug was that instead of yielding the value directly if it was not a list, it was yielding the result of calling `flatten(x)`, which would cause an error because it was not iterating over a list but simply a single value."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.1489946842193604,
+            "repaired_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            yield from flatten(x)\n        else:\n            yield x",
+            "raw_code": "```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            yield from flatten(x)\n        else:\n            yield x\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.5342540740966797,
+            "repaired_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        }
+    ]
+}

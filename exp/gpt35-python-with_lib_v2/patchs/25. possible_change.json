@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 25,
+            "prog_name": "possible_change",
+            "language": "python",
+            "testcase_num": 10,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.6146149635314941,
+            "repaired_code": "\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n",
+            "raw_code": "```python\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.928333044052124,
+            "repaired_code": "\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n\n# Test the function\ncoins = [1, 2, 5]\ntotal = 5\nprint(possible_change(coins, total))  # Output should be 4",
+            "raw_code": "```python\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n\n# Test the function\ncoins = [1, 2, 5]\ntotal = 5\nprint(possible_change(coins, total))  # Output should be 4\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.82781982421875,
+            "repaired_code": "\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)",
+            "raw_code": "```python\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```"
+        }
+    ]
+}

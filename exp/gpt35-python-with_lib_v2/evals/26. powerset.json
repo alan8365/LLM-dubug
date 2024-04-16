@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 26,
+        "prog_name": "powerset",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在遞迴的回傳值中沒有把rest_subsets也加入，造成每次遞迴都不存在空集合，導致所有輸出都只會輸出輸入陣列本身所以都是錯誤的"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 1.6476249694824219,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+        },
+        {
+            "run_time": 2.707590103149414,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+        },
+        {
+            "run_time": 1.8458399772644043,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+        }
+    ]
+}

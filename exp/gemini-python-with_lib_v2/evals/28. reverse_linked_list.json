@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 28,
+        "prog_name": "reverse_linked_list",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 1.8083868026733398,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n\n\n\n"
+        },
+        {
+            "run_time": 1.8188729286193848,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n\n"
+        },
+        {
+            "run_time": 1.6404328346252441,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n\n\n\n"
+        }
+    ]
+}

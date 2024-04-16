@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.420341968536377,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = []\n    heapq.heapify(heap)\n\n    # Pushing first k elements into the heap\n    for i in range(k):\n        heapq.heappush(heap, arr[i])\n\n    # For the remaining elements\n    for x in arr[k:]:\n        # If the current element is larger than the smallest(top) element of the heap, then we pop the smallest element and push the current element into the heap\n        if x > heap[0]:\n            heapq.heappushpop(heap, x)\n\n    # Pop the remaining elements in the heap and these will be the largest k elements\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = []\n    heapq.heapify(heap)\n\n    # Pushing first k elements into the heap\n    for i in range(k):\n        heapq.heappush(heap, arr[i])\n\n    # For the remaining elements\n    for x in arr[k:]:\n        # If the current element is larger than the smallest(top) element of the heap, then we pop the smallest element and push the current element into the heap\n        if x > heap[0]:\n            heapq.heappushpop(heap, x)\n\n    # Pop the remaining elements in the heap and these will be the largest k elements\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.76492977142334,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 11.158972978591919,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    # Create the initial heap from the first k elements\n    heap = arr[:k+1]\n    heapq.heapify(heap)\n\n    # For each remaining element\n    for x in arr[k+1:]:\n        yield heapq.heappushpop(heap, x)\n        \n    # Pop the remaining elements from the heap\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python\ndef kheapsort(arr, k):\n    import heapq\n\n    # Create the initial heap from the first k elements\n    heap = arr[:k+1]\n    heapq.heapify(heap)\n\n    # For each remaining element\n    for x in arr[k+1:]:\n        yield heapq.heappushpop(heap, x)\n        \n    # Pop the remaining elements from the heap\n    while heap:\n        yield heapq.heappop(heap)\n```\nThe code needed two different corrections:\n\n1. In the original line `heap = arr[:k]`, the slice of the array should have been `k+1` elements long. The heap initial size should be equal to k in order to generate k smallest values from the array.\n\n2. In the original line `for x in arr:`, it should have been `for x in arr[k+1:]:`. We need to consider elements after the initial k-elements, as we already added first `k+1` elements to the heap. The original loop was incorrect because it included the elements that were already part of the heap."
+        }
+    ]
+}

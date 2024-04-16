@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 25,
+            "prog_name": "possible_change",
+            "language": "python"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.8244588375091553,
+            "repaired_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or len(coins) == 0:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)",
+            "raw_code": "```python\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or len(coins) == 0:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.746654987335205,
+            "repaired_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)",
+            "raw_code": "```python\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.843700885772705,
+            "repaired_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:  # Added condition for empty coins list\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)",
+            "raw_code": "```python\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:  # Added condition for empty coins list\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```"
+        }
+    ]
+}

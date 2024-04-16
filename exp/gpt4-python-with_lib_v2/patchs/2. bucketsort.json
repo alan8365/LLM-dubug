@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(arr):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 2,
+            "prog_name": "bucketsort",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.562272787094116,
+            "repaired_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.9069676399230957,
+            "repaired_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        if x < k:\n            counts[x] += 1\n        else:\n            raise ValueError(\"The value\" + str(x) + \" exceeds the range of bucket sort.\")\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        if x < k:\n            counts[x] += 1\n        else:\n            raise ValueError(\"The value\" + str(x) + \" exceeds the range of bucket sort.\")\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.0437419414520264,
+            "repaired_code": "\ndef bucketsort(arr, k):\n    counts = [0] * (k + 1)  # we need to include k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):  # should be counts not arr\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * (k + 1)  # we need to include k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):  # should be counts not arr\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        }
+    ]
+}

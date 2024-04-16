@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n\n    return lines\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.6024010181427,
+            "repaired_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end + 1:]\n        lines.append(line)\n\n    if text:\n        lines.append(text)\n\n    return lines",
+            "raw_code": "```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end + 1:]\n        lines.append(line)\n\n    if text:\n        lines.append(text)\n\n    return lines\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.6327149868011475,
+            "repaired_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    lines.append(text)\n    return lines",
+            "raw_code": "```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    lines.append(text)\n    return lines\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.8110570907592773,
+            "repaired_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    if text:\n        lines.append(text)\n        \n    return lines",
+            "raw_code": "```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    if text:\n        lines.append(text)\n        \n    return lines\n```"
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return []\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.056367874145508,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if n // i != i:\n                factors.append(n // i)\n\n    return factors",
+            "raw_code": "**Bug:** The code doesn't handle the case when `n` is a perfect square. In such cases, the function will infinitely recurse because the same factor will be appended to the list multiple times.\n\n**Patched Code:**\n```python=\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if n // i != i:\n                factors.append(n // i)\n\n    return factors\n```\n\n**Complete Code with Patch Applied:**\n```python=\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if n // i != i:\n                factors.append(n // i)\n\n    return factors\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.171019077301025,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    elif n % 1 == 0:\n        return [1, n]\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return []",
+            "raw_code": "The bug in the code is that it does not handle the case where `n` is a prime number greater than 1. In this case, the function will return an empty list, which is incorrect.\n\nThe following patch fixes the bug:\n\n```\n@@ -10,3 +10,4 @@ def get_factors(n):\n     if n == 1:\n         return []\n\n+    elif n % 1 == 0:\n+        return [1, n]\n\n     for i in range(2, int(n ** 0.5) + 1):\n         if n % i == 0:\n             return [i] + get_factors(n // i)\n```\n\nThe complete code with the patch applied is:\n\n```python=\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    elif n % 1 == 0:\n        return [1, n]\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return []\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.1009089946746826,
+            "repaired_code": "\nif n == 1 or n == 2:\n    return []",
+            "raw_code": "**Bug**: The function `get_factors` does not handle the case when `n = 2`. In this case, the function should return `[2]`.\n\n**Location**: Line 3\n\n**Patch**:\n\n```python=\nif n == 1 or n == 2:\n    return []\n```\n\n**Complete code with patch applied**:\n\n```python=\n\ndef get_factors(n):\n    if n == 1 or n == 2:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return []\n\n\n\n\n```"
+        }
+    ]
+}

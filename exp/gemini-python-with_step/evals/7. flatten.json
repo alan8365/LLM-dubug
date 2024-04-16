@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 7,
+        "prog_name": "flatten",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 6,
+        "bug_type": "",
+        "bug_detail_desc": "在遞回的終止條件回傳時，對於不是list的輸入依舊使用遞迴，導致大部分輸出不是預期的元素"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 2.9162471294403076,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
+        },
+        {
+            "run_time": 3.788283109664917,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
+        },
+        {
+            "run_time": 3.1159708499908447,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n\n\n\n\n"
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return []\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.375720977783203,
+            "repaired_code": "\ndef get_factors(n):\n    factors = []\n    if n == 1:\n        return factors\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]",
+            "raw_code": "```python\ndef get_factors(n):\n    factors = []\n    if n == 1:\n        return factors\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]\n```\nIn the original code, it didn't return the factor when there isn't anymore factor found which is smaller than its square root. The factor should be `n` itself when `n` is a prime number. Thus, it should return `[n]` instead of `[]`."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 7.481230020523071,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            n = n // i\n    if n > 1:\n        factors.append(n)\n    return factors",
+            "raw_code": "```python\ndef get_factors(n):\n    if n == 1:\n        return []\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            n = n // i\n    if n > 1:\n        factors.append(n)\n    return factors\n```\nIn the original code, the function was returning the list of factors as soon as it found a factor. This caused it to stop searching for other factors. In the fixed code, we keep track of all factors found and continue searching for more. We also handle the case where n is larger than 1 after the loop, which indicates that n itself is a factor."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.089492082595825,
+            "repaired_code": "\ndef get_factors(n):\n    factors = []\n    for i in range(1, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if i != n // i:  # Avoid duplicate entries\n                factors.append(n // i)\n    return sorted(factors)",
+            "raw_code": "```python\ndef get_factors(n):\n    factors = []\n    for i in range(1, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if i != n // i:  # Avoid duplicate entries\n                factors.append(n // i)\n    return sorted(factors)\n```"
+        }
+    ]
+}

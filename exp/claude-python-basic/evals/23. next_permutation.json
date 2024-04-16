@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 23,
+        "prog_name": "next_permutation",
+        "language": "python",
+        "testcase_num": 8,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在檢查首元素要置換為哪個元素時，將首元素索引i和比較元素索引j錯誤的置換，導致所有輸出都是錯誤或直接輸出空值"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 18.02366304397583,
+            "pass_num": 8,
+            "fail_num": 0,
+            "reparied_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # Changed condition to perm[j] > perm[i]\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None  # Added return statement for the case when no next permutation exists"
+        },
+        {
+            "run_time": 18.32794427871704,
+            "pass_num": 8,
+            "fail_num": 0,
+            "reparied_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return perm[::-1]"
+        },
+        {
+            "run_time": 17.098376989364624,
+            "pass_num": 8,
+            "fail_num": 0,
+            "reparied_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # Changed the condition to perm[j] > perm[i]\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None  # Added a return statement for the case when no next permutation exists"
+        }
+    ]
+}

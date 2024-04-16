@@ -1,0 +1,34 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max_ending_here + x\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.4479129314422607,
+            "repaired_code": "\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(0, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\n",
+            "raw_code": "```python=\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(0, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.2781009674072266,
+            "repaired_code": "\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\n",
+            "raw_code": "```python=\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.2215077877044678,
+            "repaired_code": "\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = arr[0]  # Initializing with the first element\n\n    for x in arr:\n        max_ending_here = max_ending_here + x\n        max_ending_here = max(max_ending_here, 0)  # Resetting to 0 if negative\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\n",
+            "raw_code": "```python=\n\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = arr[0]  # Initializing with the first element\n\n    for x in arr:\n        max_ending_here = max_ending_here + x\n        max_ending_here = max(max_ending_here, 0)  # Resetting to 0 if negative\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\n\n```"
+        }
+    ]
+}

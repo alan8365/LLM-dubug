@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j] + 1\n\n    return max(dp.values()) if dp else 0\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 15,
+            "prog_name": "lcs_length",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.363570928573608,
+            "repaired_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp.get((i - 1, j - 1), 0) + 1\n            else:\n                dp[i, j] = max(dp.get((i - 1, j), 0), dp.get((i, j - 1), 0))\n\n    return max(dp.values()) if dp else 0",
+            "raw_code": "```python\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp.get((i - 1, j - 1), 0) + 1\n            else:\n                dp[i, j] = max(dp.get((i - 1, j), 0), dp.get((i, j - 1), 0))\n\n    return max(dp.values()) if dp else 0\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 18.406960248947144,
+            "repaired_code": "\ndef lcs_length(s, t):\n    from collections import defaultdict\n\n    dp = defaultdict(int)\n\n    for i in range(1, len(s)+1):\n        for j in range(1, len(t)+1):\n            if s[i-1] == t[j-1]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n\n    return dp[len(s), len(t)]",
+            "raw_code": "```python=\ndef lcs_length(s, t):\n    from collections import defaultdict\n\n    dp = defaultdict(int)\n\n    for i in range(1, len(s)+1):\n        for j in range(1, len(t)+1):\n            if s[i-1] == t[j-1]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n\n    return dp[len(s), len(t)]\n```\nThe bugs in the original code are as follows:\n1. The original code uses Counter from collections, but we actually want to use defaultdict(int) so that non-existing keys default to 0.\n\n2. The range in the for-loops should start from 1 (not 0) to avoid out-of-bounds indices in the first iteration. Consequently, when referencing the strings s and t, we must subtract one from the current index (i or j) because Python is zero-indexed.\n\n3. The original code only updates dp[i, j] when characters at the current indices of s and t match. We must extend the logic to include the case where they don't match. In this situation, we need to keep the maximum length of the two potential LCSs: one that includes the current character of s (but not t) and one that includes the current character of t (but not s). \n\n4. The return statement should guarantee the length of the longest common subsequence, which corresponds to the dp value for the last characters of s and t."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.370957136154175,
+            "repaired_code": "\ndef lcs_length(s, t):\n    from collections import defaultdict\n\n    dp = defaultdict(int)\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n\n    return dp[len(s) - 1, len(t) - 1] if dp else 0",
+            "raw_code": "```python=\ndef lcs_length(s, t):\n    from collections import defaultdict\n\n    dp = defaultdict(int)\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n\n    return dp[len(s) - 1, len(t) - 1] if dp else 0\n```"
+        }
+    ]
+}

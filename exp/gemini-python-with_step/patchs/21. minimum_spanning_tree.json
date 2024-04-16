@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.3113720417022705,
+            "repaired_code": "\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}) or weight_by_edge[u, v] == weight_by_edge[v, u]:\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\n",
+            "raw_code": "**Bug:** The code does not handle the case when the input dictionary contains edges with equal weights. In this case, the algorithm can produce an incorrect minimum spanning tree.\n\n**Location:** The bug is in the line:\n```\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n```\n\n**Patch:** The patch to fix the code is:\n```\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}) or weight_by_edge[u, v] == weight_by_edge[v, u]:\n```\n\n**Complete code with the patch applied:**\n```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}) or weight_by_edge[u, v] == weight_by_edge[v, u]:\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.528991937637329,
+            "repaired_code": "\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}).isdisjoint(group_by_node.setdefault(v, {v})):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])",
+            "raw_code": "**Bug:** The code does not handle the case when there are multiple edges between the same pair of nodes, resulting in an incorrect MST.\n**Location:** Lines 9-11\n\n**Patch:**\n```python=\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}).isdisjoint(group_by_node.setdefault(v, {v})):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n```\n\n**Complete Code with Patch Applied:**\n```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}).isdisjoint(group_by_node.setdefault(v, {v})):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.5924391746521,
+            "repaired_code": "\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):",
+            "raw_code": "### Bug\n\nThe code contains a bug in the following section:\n\n```python\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n```\n\n### Patch\n\nReplace the buggy section with the following patch:\n\n```python\nif group_by_node.get(u) != group_by_node.get(v):\n```\n\n### Complete Code\n\n```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.get(u) != group_by_node.get(v):\n            mst_edges.add(edge)\n            group_by_node[u] = group_by_node.get(u, set()).union(group_by_node.get(v, set()))\n            for node in group_by_node.get(v, set()):\n                group_by_node[node] = group_by_node.get(u)\n\n    return mst_edges\n\n\n\n\n\n\n```"
+        }
+    ]
+}

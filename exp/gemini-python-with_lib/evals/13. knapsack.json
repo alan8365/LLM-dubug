@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 13, "prog_name": "knapsack", "language": "python", "testcase_num": 10, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 3.598107099533081, "pass_num": 0, "fail_num": 9}, {"run_time": 3.1785037517547607, "pass_num": 9, "fail_num": 0}, {"run_time": 3.28664493560791, "pass_num": 9, "fail_num": 0}]}

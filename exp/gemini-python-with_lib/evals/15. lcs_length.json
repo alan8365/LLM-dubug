@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 15, "prog_name": "lcs_length", "language": "python", "testcase_num": 9, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.7541160583496094, "pass_num": 9, "fail_num": 0}, {"run_time": 2.412307024002075, "pass_num": 9, "fail_num": 0}, {"run_time": 8.837648868560791, "pass_num": 9, "fail_num": 0}]}

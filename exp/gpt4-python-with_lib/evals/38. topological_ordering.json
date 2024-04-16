@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 38, "prog_name": "topological_ordering", "language": "python", "testcase_num": 3, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 13.412744998931885, "pass_num": 0, "fail_num": 3}, {"run_time": 11.50242304801941, "pass_num": 0, "fail_num": 3}, {"run_time": 14.317285060882568, "pass_num": 3, "fail_num": 0}]}

@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if any(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 34,
+            "prog_name": "sieve",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.1569530963897705,
+            "repaired_code": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes",
+            "raw_code": "```python\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes\n\n```\nThe error in the original code was that the if condition was checking if \"any\" number in the range(2, max+1) is not divisible by any prime number in the list \"primes\" which is wrong. It should check if \"all\" numbers in the range(2, max+1) are not divisible by any prime number in the list \"primes\". Then only the number can be a prime number. Hence, the \"any\" condition should be replaced by \"all\"."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.7276151180267334,
+            "repaired_code": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes",
+            "raw_code": "```python\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.887359857559204,
+            "repaired_code": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p != 0 for p in primes):\n            primes.append(n)\n    return primes",
+            "raw_code": "```python=\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p != 0 for p in primes):\n            primes.append(n)\n    return primes\n\n```\nThe problem in the original code lies in the any() function. It should be all() instead because we want to check if n is not divisible by all the primes, not just any one of them. In other words, a number is prime if it is not divisible by any prime number smaller than it."
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 3,
+        "prog_name": "depth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 2.354292154312134,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is goalnode:\n            return True\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        return any(\n            search_from(nextnode) for nextnode in node.successors\n        )\n\n    return search_from(startnode)\n\n\n\n\n"
+        },
+        {
+            "run_time": 2.5602879524230957,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)  # Add the node to the visited set after checking if it's visited\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 2.456576108932495,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n                if nextnode not in nodesvisited\n            )\n\n    return search_from(startnode)\n"
+        }
+    ]
+}

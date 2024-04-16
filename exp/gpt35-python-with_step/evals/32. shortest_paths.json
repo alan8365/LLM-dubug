@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 32,
+        "prog_name": "shortest_paths",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 5.187820911407471,
+            "pass_num": 0,
+            "fail_num": 3,
+            "reparied_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_edge[u, v] = min(\n                weight_by_edge[u, v],\n                weight_by_node[u] + weight\n            )\n\n    return weight_by_node"
+        },
+        {
+            "run_time": 5.122443199157715,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node"
+        },
+        {
+            "run_time": 6.017627716064453,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        updated = False\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n                updated = True\n        if not updated:\n            break\n\n    return weight_by_node\n"
+        }
+    ]
+}

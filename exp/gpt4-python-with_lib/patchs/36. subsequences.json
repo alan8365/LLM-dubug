@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef subsequences(a, b, k):\n    if k == 0:\n        return []\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret\n\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 11.916733980178833,
+            "repaired_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret",
+            "raw_code": "```python=\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret\n```\n\nExplanation: \n\n1) When k is 0, it should return `[[]]` instead of `[]` because it represents no element subsequence of the original sequence.\n\n2) The for loop should run from `a` to `b + 1` instead of `b + 1 - k` because we want all the numbers from `a` to `b` to be considered for subsequences.\n\n3) Instead of using `extend`, `ret.append` should be used. Because `extend` would flatten the list, while `append` would append the complete list as an element which is the needed behaviour here.\n\n4) In `ret.append([i] + rest)`, `rest` is a list. So, `[i]` is also made a list to be able to perform the addition operation."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.489142179489136,
+            "repaired_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        ret.extend(\n            [[i] + rest] for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret",
+            "raw_code": "```python\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        ret.extend(\n            [[i] + rest] for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.9103431701660156,
+            "repaired_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret",
+            "raw_code": "```python\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret\n```"
+        }
+    ]
+}

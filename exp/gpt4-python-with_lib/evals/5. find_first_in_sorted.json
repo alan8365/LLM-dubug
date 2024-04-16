@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 5, "prog_name": "find_first_in_sorted", "language": "python", "testcase_num": 7, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 5.238426923751831, "pass_num": 7, "fail_num": 0}, {"run_time": 5.924031972885132, "pass_num": 7, "fail_num": 0}, {"run_time": 4.412800073623657, "pass_num": 7, "fail_num": 0}]}

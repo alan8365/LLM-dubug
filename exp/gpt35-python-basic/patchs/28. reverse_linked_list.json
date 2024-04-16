@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode\n    return prevnode\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 28,
+            "prog_name": "reverse_linked_list",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.6340410709381104,
+            "repaired_code": "def reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.next\n        node.next = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode",
+            "raw_code": "```python\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.next\n        node.next = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.5828888416290283,
+            "repaired_code": "def reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode",
+            "raw_code": "```python\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 112.56528496742249,
+            "repaired_code": "def reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode",
+            "raw_code": "```python\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n```"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 26, "prog_name": "powerset", "language": "python", "testcase_num": 5, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 5.374485731124878, "pass_num": 1, "fail_num": 4}, {"run_time": 4.492563009262085, "pass_num": 1, "fail_num": 4}, {"run_time": 3.355992078781128, "pass_num": 5, "fail_num": 0}]}

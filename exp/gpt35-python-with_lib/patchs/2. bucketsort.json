@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(arr):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 2,
+            "prog_name": "bucketsort",
+            "language": "python"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.1487832069396973,
+            "repaired_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):  # Fixed here: should iterate through counts rather than arr\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):  # Fixed here: should iterate through counts rather than arr\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.1417019367218018,
+            "repaired_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # Fixed the enumerate parameter to counts\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # Fixed the enumerate parameter to counts\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.055373191833496,
+            "repaired_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):  # Changed arr to counts\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):  # Changed arr to counts\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        }
+    ]
+}

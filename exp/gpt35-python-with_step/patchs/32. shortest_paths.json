@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_edge[u, v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 32,
+            "prog_name": "shortest_paths",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.187820911407471,
+            "repaired_code": "\nweight_by_edge[u, v] = min(\n    weight_by_edge[u, v],\n    weight_by_node[u] + weight\n)",
+            "raw_code": "Bug: The bug in the provided code is in the nested loop that updates the weights in the `weight_by_edge` dictionary. The statement `weight_by_edge[u, v] = min(weight_by_node[u] + weight, weight_by_node[v])` is incorrect as it is not correctly updating the shortest paths.\n\nPatch:\nTo fix the bug, the correct logic for updating the weights in the `weight_by_edge` dictionary should be:\n```python\nweight_by_edge[u, v] = min(\n    weight_by_edge[u, v],\n    weight_by_node[u] + weight\n)\n```\n\nComplete code with the patch applied:\n```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_edge[u, v] = min(\n                weight_by_edge[u, v],\n                weight_by_node[u] + weight\n            )\n\n    return weight_by_node\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.122443199157715,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node",
+            "raw_code": "Bug: The bug is located in the inner loop where the calculation of the shortest path weight is incorrect. The line `weight_by_edge[u, v] = min(weight_by_node[u] + weight, weight_by_node[v])` should be modified to update the weight of the destination node `v` correctly.\n\nPatch:\n```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```\n\nComplete code with patch applied:\n```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.017627716064453,
+            "repaired_code": "\nfor i in range(len(weight_by_node) - 1):\n    updated = False\n    for (u, v), weight in weight_by_edge.items():\n        if weight_by_node[u] + weight < weight_by_node[v]:\n            weight_by_node[v] = weight_by_node[u] + weight\n            updated = True\n    if not updated:\n        break",
+            "raw_code": "### Bug:\n\nThe bug in the code is in the calculation of the shortest paths. The line `weight_by_edge[u, v] = min(weight_by_node[u] + weight, weight_by_node[v])` is incorrect as it does not update the shortest paths correctly.\n\n### Patch:\n\nReplace the section of code that calculates the shortest paths with the correct implementation using the following patch:\n\n```python\nfor i in range(len(weight_by_node) - 1):\n    updated = False\n    for (u, v), weight in weight_by_edge.items():\n        if weight_by_node[u] + weight < weight_by_node[v]:\n            weight_by_node[v] = weight_by_node[u] + weight\n            updated = True\n    if not updated:\n        break\n```\n\n### Complete Code with Patch:\n\n```python\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        updated = False\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n                updated = True\n        if not updated:\n            break\n\n    return weight_by_node\n\n```"
+        }
+    ]
+}

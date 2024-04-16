@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 7, "prog_name": "flatten", "language": "python", "testcase_num": 7, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.319859027862549, "pass_num": 7, "fail_num": 0}, {"run_time": 1.1489946842193604, "pass_num": 7, "fail_num": 0}, {"run_time": 1.5342540740966797, "pass_num": 7, "fail_num": 0}]}

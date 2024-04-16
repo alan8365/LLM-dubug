@@ -1,1 +1,0 @@
-{"sample": {"prog_id": 39, "prog_name": "wrap", "language": "python", "testcase_num": 5, "fault_location": 9, "bug_type": ""}, "patchs_eval_art": {"is_correct": "F", "bug_location_predict": 0, "patch_fail_detail": ""}}

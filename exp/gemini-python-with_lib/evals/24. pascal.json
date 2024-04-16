@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 24, "prog_name": "pascal", "language": "python", "testcase_num": 5, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.448584794998169, "pass_num": 5, "fail_num": 0}, {"run_time": 2.494281053543091, "pass_num": 5, "fail_num": 0}, {"run_time": 2.9828319549560547, "pass_num": 1, "fail_num": 4}]}

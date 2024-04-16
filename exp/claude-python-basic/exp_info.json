@@ -1,0 +1,8 @@
+{
+    "name": "claude-python-with_lib",
+    "lang": "python",
+    "llm_api": "ClaudeApi",
+    "prompt_type": "basic",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/patchs"
+}

@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 35,
+            "prog_name": "sqrt",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.9556310176849365,
+            "repaired_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx",
+            "raw_code": "```python\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.11655592918396,
+            "repaired_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx",
+            "raw_code": "```python\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.724480152130127,
+            "repaired_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx*approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx",
+            "raw_code": "```python\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx*approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```"
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.3679559230804443,
+            "repaired_code": "\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges\n\n\n\n\n\n",
+            "raw_code": "```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges\n\n\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.9263670444488525,
+            "repaired_code": "\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if u not in group_by_node:\n            group_by_node[u] = {u}\n        if v not in group_by_node:\n            group_by_node[v] = {v}\n        if group_by_node[u] != group_by_node[v]:\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges\n\n\n\n\n\n",
+            "raw_code": "```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if u not in group_by_node:\n            group_by_node[u] = {u}\n        if v not in group_by_node:\n            group_by_node[v] = {v}\n        if group_by_node[u] != group_by_node[v]:\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges\n\n\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.208923101425171,
+            "repaired_code": "\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_u = group_by_node.setdefault(u, {u})\n        group_v = group_by_node.setdefault(v, {v})\n        if group_u != group_v:\n            mst_edges.add(edge)\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges\n\n\n\n\n\n",
+            "raw_code": "```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_u = group_by_node.setdefault(u, {u})\n        group_v = group_by_node.setdefault(v, {v})\n        if group_u != group_v:\n            mst_edges.add(edge)\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges\n\n\n\n\n\n\n```"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 1,
+        "prog_name": "breadth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在while迴圈的判斷式中，應該使用while queue讓佇列數量為0時脫離迴圈卻錯用為while True，導致迴圈無限循環無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 21.15231466293335,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:  # changed from 'True' to 'queue'\n        node = queue.popleft()\n\n        if node == goalnode:  # changed from 'is' to '=='\n            return True\n\n        else:\n            for successor in node.successors: # added for loop\n                if successor not in nodesseen:\n                    queue.append(successor) # changed from 'extend' to 'append'\n                    nodesseen.add(successor) # moved inside the if statement\n\n    return False"
+        },
+        {
+            "run_time": 8.909001111984253,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue: # Changed from 'while True' to 'while queue' to prevent infinite loop if goalnode is not reachable\n        node = queue.popleft()\n\n        if node == goalnode: # Changed 'is' to '==' for correct comparison  \n            return True\n        else:\n            unseen_successors = [successor for successor in node.successors if successor not in nodesseen]\n            queue.extend(unseen_successors)\n            nodesseen.update(unseen_successors) # Fixed to only add unseen_successors, not all successors\n\n    return False"
+        },
+        {
+            "run_time": 8.726741075515747,
+            "pass_num": 2,
+            "fail_num": 3,
+            "reparied_code": "\n\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue: # The previous 'while True' could potentially cause an infinite loop\n        node = queue.popleft()\n\n        if node == goalnode: # Use == instead of 'is' for comparison as 'is' checks if they both are the same object not if they have the same value\n            return True\n        else:\n            # Update nodesseen before extending the queue to prevent duplicate nodes\n            nodesseen.update(node.successors)\n            queue.extend(n for n in node.successors if n not in nodesseen)\n\n    return False"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 23,
+            "prog_name": "next_permutation",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 7.569778919219971,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # This should be > instead of <\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = next_perm[j], next_perm[i]  # This should be next_perm instead of perm\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None  # Return None if there is no next permutation",
+            "raw_code": "```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # This should be > instead of <\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = next_perm[j], next_perm[i]  # This should be next_perm instead of perm\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None  # Return None if there is no next permutation\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 6.753453969955444,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # This line should use > instead of <\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = next_perm[j], next_perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:]) \n                    return next_perm\n    # in case there are no greater permutations\n    return None",
+            "raw_code": "```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # This line should use > instead of <\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = next_perm[j], next_perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:]) \n                    return next_perm\n    # in case there are no greater permutations\n    return None\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 9.564357995986938,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # Change '<' to '>' because we want a value greater than perm[i]\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None  # Add a return statement outside the loops to handle the situation where the input permutation is the last one",
+            "raw_code": "```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # Change '<' to '>' because we want a value greater than perm[i]\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None  # Add a return statement outside the loops to handle the situation where the input permutation is the last one\n```"
+        }
+    ]
+}

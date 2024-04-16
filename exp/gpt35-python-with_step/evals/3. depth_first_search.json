@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 3,
+        "prog_name": "depth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 6.024744987487793,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "\nclass Node:\n    def __init__(self, value=None, successor=None, successors=None, predecessors=None, incoming_nodes=None, outgoing_nodes=None):\n        self.value = value\n        self.successor = successor\n        self.successors = successors if successors is not None else []\n        self.predecessors = predecessors if predecessors is not None else []\n        self.incoming_nodes = incoming_nodes if incoming_nodes is not None else []\n        self.outgoing_nodes = outgoing_nodes if outgoing_nodes is not None else []\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 4.760640859603882,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "\nclass Node:\n    def __init__(self, value=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successors\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 5.796914100646973,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "\nclass Node:\n    def __init__(self, value=None, successor=None, successors=None, predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)"
+        }
+    ]
+}

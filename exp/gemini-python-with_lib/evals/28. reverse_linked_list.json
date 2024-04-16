@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 28, "prog_name": "reverse_linked_list", "language": "python", "testcase_num": 3, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 6.325522184371948, "pass_num": 3, "fail_num": 0}, {"run_time": 2.9890859127044678, "pass_num": 0, "fail_num": 0}, {"run_time": 2.037724256515503, "pass_num": 3, "fail_num": 0}]}

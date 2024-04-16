@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef powerset(arr):\n    if arr:\n        first, *rest = arr #python3 just like car and cdr (in this case anyway..)\n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 26,
+            "prog_name": "powerset",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.374485731124878,
+            "repaired_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr #python3 just like car and cdr (in this case anyway..)\n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] + rest_subsets\n    else:\n        return [[]]",
+            "raw_code": "```python\ndef powerset(arr):\n    if arr:\n        first, *rest = arr #python3 just like car and cdr (in this case anyway..)\n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] + rest_subsets\n    else:\n        return [[]]\n```\nIn the original code, it was only returning the subsets that included the first element of the array. The corrected code also includes the subsets that do not include the first element by appending `rest_subsets` to the return list. This ensures that we get all possible subsets of the array."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.492563009262085,
+            "repaired_code": "\n\ndef powerset(arr):\n    if arr:\n        first, *rest = arr \n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] + rest_subsets\n    else:\n        return [[]]\n\n",
+            "raw_code": "```python=\n\ndef powerset(arr):\n    if arr:\n        first, *rest = arr \n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] + rest_subsets\n    else:\n        return [[]]\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.355992078781128,
+            "repaired_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr #python3 just like car and cdr (in this case anyway..)\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]",
+            "raw_code": "```python=\ndef powerset(arr):\n    if arr:\n        first, *rest = arr #python3 just like car and cdr (in this case anyway..)\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]\n```"
+        }
+    ]
+}

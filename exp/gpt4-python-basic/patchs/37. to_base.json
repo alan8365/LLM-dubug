@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result\n\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 37,
+            "prog_name": "to_base",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.221380949020386,
+            "repaired_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result",
+            "raw_code": "```python\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.020642280578613,
+            "repaired_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b > len(alphabet) or b < 2:\n        raise ValueError(\"Base must be between 2 and \" + str(len(alphabet)))\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result",
+            "raw_code": "```python\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b > len(alphabet) or b < 2:\n        raise ValueError(\"Base must be between 2 and \" + str(len(alphabet)))\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.603417158126831,
+            "repaired_code": "import string\ndef to_base(num, b):\n    if num == 0: # You should account for the case when num is 0, to avoid infinite loops.\n        return '0'\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result  # This should be prefix, not suffix, to get the correct order of digits.\n    return result",
+            "raw_code": "```python\nimport string\ndef to_base(num, b):\n    if num == 0: # You should account for the case when num is 0, to avoid infinite loops.\n        return '0'\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result  # This should be prefix, not suffix, to get the correct order of digits.\n    return result\n```"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 38,
+        "prog_name": "topological_ordering",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 8.80512285232544,
+            "pass_num": 0,
+            "fail_num": 3,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n                \n    if set(nodes) != set(ordered_nodes):\n        raise ValueError(\"Graph has at least one cycle\")\n\n    return ordered_nodes"
+        },
+        {
+            "run_time": 10.86279010772705,
+            "pass_num": 0,
+            "fail_num": 3,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    node_set = set(ordered_nodes)\n\n    for node in list(ordered_nodes):\n        for nextnode in node.outgoing_nodes:\n            next_node_set = set(nextnode.outgoing_nodes)\n            if next_node_set.issubset(node_set) and nextnode not in node_set:\n                ordered_nodes.append(nextnode)\n                node_set.add(nextnode)\n\n    return ordered_nodes"
+        },
+        {
+            "run_time": 4.202386140823364,
+            "pass_num": 0,
+            "fail_num": 3,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    i = 0\n    while i < len(ordered_nodes):\n        for nextnode in ordered_nodes[i].outgoing_nodes:\n            if all(node in ordered_nodes for node in nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n        i += 1\n\n    return ordered_nodes"
+        }
+    ]
+}

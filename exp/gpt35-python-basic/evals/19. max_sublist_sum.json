@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 19,
+        "prog_name": "max_sublist_sum",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 2.412763833999634,
+            "pass_num": 5,
+            "fail_num": 1,
+            "reparied_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = float('-inf')  # Initialize to negative infinity to handle case where all elements are negative\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)  # Compare x with current sum including x\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far"
+        },
+        {
+            "run_time": 2.046627998352051,
+            "pass_num": 5,
+            "fail_num": 1,
+            "reparied_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = float('-inf')\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far"
+        },
+        {
+            "run_time": 2.3557870388031006,
+            "pass_num": 5,
+            "fail_num": 1,
+            "reparied_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = float('-inf')  # Set to negative infinity to handle cases where all elements are negative\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)  # Start new subarray or continue with existing subarray\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far"
+        }
+    ]
+}

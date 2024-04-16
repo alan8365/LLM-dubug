@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 2, "prog_name": "bucketsort", "language": "python", "testcase_num": 7, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 3.475491762161255, "pass_num": 7, "fail_num": 0}, {"run_time": 4.629522323608398, "pass_num": 7, "fail_num": 0}, {"run_time": 3.1047720909118652, "pass_num": 7, "fail_num": 0}]}

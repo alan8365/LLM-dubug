@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 39, "prog_name": "wrap", "language": "python", "testcase_num": 5, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 4.357903957366943, "pass_num": 0, "fail_num": 5}, {"run_time": 3.0279390811920166, "pass_num": 0, "fail_num": 5}, {"run_time": 11.447412014007568, "pass_num": 0, "fail_num": 5}]}

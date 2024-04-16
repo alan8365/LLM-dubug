@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 23,
+            "prog_name": "next_permutation",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 11.326334953308105,
+            "repaired_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # change '<' to '>'\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm",
+            "raw_code": "```python\n\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # change '<' to '>'\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n\n```\nThis code finds the next lexicographic permutation of the list `perm`. It iteratively searches for the first pair of adjacent elements that are in the wrong order when traversed from right to left. It then finds the first element that is greater than the found element when traversed from right to left, and swaps those two elements. Finally, it reverses the elements after (to the right of) the first found element. In the buggy code, it wrongly compared `perm[j]` with `perm[i]` using the less than operator (`<`), when it should have used the greater than operator (`>`)."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.317621946334839,
+            "repaired_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None # if no next permutation is found, return None",
+            "raw_code": "```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None # if no next permutation is found, return None\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.2221879959106445,
+            "repaired_code": "def next_permutation(perm):\n    # find the first decreasing element from back\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            # find the first element greater than the above from back\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: \n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i] # swap these two\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:]) # reverse the remaining elements after the first element\n                    return next_perm\n    return None # if there is no next permutation",
+            "raw_code": "```python\n\ndef next_permutation(perm):\n    # find the first decreasing element from back\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            # find the first element greater than the above from back\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: \n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i] # swap these two\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:]) # reverse the remaining elements after the first element\n                    return next_perm\n    return None # if there is no next permutation\n```"
+        }
+    ]
+}

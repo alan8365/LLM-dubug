@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j] + 1\n\n    return max(dp.values()) if dp else 0\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 15,
+            "prog_name": "lcs_length",
+            "language": "python"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.6235618591308594,
+            "repaired_code": "def lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0",
+            "raw_code": "```python\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.2818260192871094,
+            "repaired_code": "def lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if i == 0 or j == 0:\n                dp[i, j] = 1 if s[i] == t[j] else 0\n            else:\n                if s[i] == t[j]:\n                    dp[i, j] = dp[i - 1, j - 1] + 1\n                else:\n                    dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n\n    return max(dp.values()) if dp else 0",
+            "raw_code": "```python\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if i == 0 or j == 0:\n                dp[i, j] = 1 if s[i] == t[j] else 0\n            else:\n                if s[i] == t[j]:\n                    dp[i, j] = dp[i - 1, j - 1] + 1\n                else:\n                    dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n\n    return max(dp.values()) if dp else 0\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.830847978591919,
+            "repaired_code": "def lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0",
+            "raw_code": "```python\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0\n```"
+        }
+    ]
+}

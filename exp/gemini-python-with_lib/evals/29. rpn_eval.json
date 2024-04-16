@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 29, "prog_name": "rpn_eval", "language": "python", "testcase_num": 6, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 3.7616078853607178, "pass_num": 3, "fail_num": 3}, {"run_time": 3.046830892562866, "pass_num": 6, "fail_num": 0}, {"run_time": 4.450838804244995, "pass_num": 3, "fail_num": 3}]}

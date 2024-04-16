@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 36,
+        "prog_name": "subsequences",
+        "language": "python",
+        "testcase_num": 12,
+        "fault_location": 2,
+        "bug_type": "",
+        "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.315584897994995,
+            "pass_num": 4,
+            "fail_num": 8,
+            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [[i] + rest] for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret"
+        },
+        {
+            "run_time": 4.2187721729278564,
+            "pass_num": 4,
+            "fail_num": 8,
+            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [[i] + rest] for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret"
+        },
+        {
+            "run_time": 2.8779430389404297,
+            "pass_num": 4,
+            "fail_num": 8,
+            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret"
+        }
+    ]
+}

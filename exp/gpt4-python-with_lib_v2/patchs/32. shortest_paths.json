@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_edge[u, v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 32,
+            "prog_name": "shortest_paths",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.245131015777588,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for (u, v) in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n\n    return weight_by_node",
+            "raw_code": "```python=\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for (u, v) in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n\n    return weight_by_node\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.2533440589904785,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n\n    return weight_by_node",
+            "raw_code": "```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n\n    return weight_by_node\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 8.92821478843689,
+            "repaired_code": "\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = { v: float('inf') for u, v in weight_by_edge }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n\n    return weight_by_node",
+            "raw_code": "```python=\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = { v: float('inf') for u, v in weight_by_edge }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n\n    return weight_by_node\n```\nThis code is implementing Bellman-Ford algorithm for finding shortest paths from a single source vertex to all other vertices in a weighted graph.\n\nThe error was on the step of relaxation. It was wrong to update the weight_by_edge, because edge weights are not supposed to change over iterations, it's the weights of the nodes (shortest distances from source) that should be updated. For each edge (u, v), if the current weight of u plus the weight of the edge (u, v) is less than the current weight of v, then we've found a shorter path to v and we need to update the weight of v.\n\nThe condition to update the weight is implemented using an if statement in the corrected code. In the original code this condition was incorrectly implemented using the min function, which resulted in the weight_by_edge dictionary being incorrectly updated. This would cause subsequent iterations to use incorrect edge weights, potentially resulting in incorrect shortest paths."
+        }
+    ]
+}

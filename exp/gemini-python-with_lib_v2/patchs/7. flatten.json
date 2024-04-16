@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield flatten(x)\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 7,
+            "prog_name": "flatten",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.4231951236724854,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            yield from flatten(x)\n        else:\n            yield x",
+            "raw_code": "```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            yield from flatten(x)\n        else:\n            yield x\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.459244966506958,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.5172882080078125,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 27, "prog_name": "quicksort", "language": "python", "testcase_num": 13, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 1.7002289295196533, "pass_num": 13, "fail_num": 0}, {"run_time": 1.8902678489685059, "pass_num": 13, "fail_num": 0}, {"run_time": 2.1528420448303223, "pass_num": 12, "fail_num": 1}]}

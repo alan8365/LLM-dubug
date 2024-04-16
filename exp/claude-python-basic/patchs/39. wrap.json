@@ -1,0 +1,34 @@
+{
+    "model_name": "claude-3-opus-20240229",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n\n    return lines\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 13.608000040054321,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    \n    if text:\n        lines.append(text)\n    \n    return lines",
+            "raw_code": "Here's the fixed code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    \n    if text:\n        lines.append(text)\n    \n    return lines\n```\n\nThe fixed code addresses two issues:\n\n1. When searching for the last space within the specified column range, the `rfind()` method should be called with `cols` as the end index, not `cols + 1`. This ensures that the space is searched within the desired range.\n\n2. After appending the last line to the `lines` list, the remaining text (if any) should also be appended as the final line. This is done by checking if `text` is not empty after the loop ends and appending it to `lines` if necessary.\n\nWith these fixes, the `wrap()` function should now correctly wrap the text into lines based on the specified column width."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 19.048624753952026,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines",
+            "raw_code": "Here's the fixed version of the code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines\n```\n\nExplanation of the fixes:\n\n1. In the original code, the `rfind()` method was searching for a space character up to `cols + 1` index. However, it should search only up to `cols` index to ensure that the line length doesn't exceed the specified number of columns.\n\n2. When slicing the `text` to extract the remaining text after the line break, the original code used `text[end:]`. However, this includes the space character at the `end` index, which should be excluded. To fix this, the slicing is changed to `text[end+1:]` to start from the character after the space.\n\n3. The original code didn't handle the case when there was remaining text that didn't exceed the specified number of columns. As a result, the last line of text would be missing from the output. To fix this, an additional check is added after the while loop to append any remaining text as the last line if it exists.\n\nWith these fixes, the `wrap()` function should correctly wrap the input text into lines based on the specified number of columns."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 17.439055919647217,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines",
+            "raw_code": "Here's the fixed code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines\n```\n\nExplanation of the fixes:\n\n1. In the original code, the `rfind()` function was searching for a space character up to `cols + 1` index. However, it should search only up to `cols` index to ensure that the line length doesn't exceed the specified column width. So, `cols + 1` is changed to `cols`.\n\n2. After splitting the line, the remaining `text` should be updated by removing any leading whitespace. This is done using the `lstrip()` method, which removes leading whitespace characters from the string. Without this, the resulting lines might have unwanted leading spaces.\n\n3. The original code doesn't handle the case when there is remaining text after the last line is extracted. To fix this, an additional check is added after the `while` loop to append any remaining text as the last line if it exists.\n\nWith these fixes, the `wrap()` function should work as expected, splitting the text into lines based on the specified column width and handling the remaining text correctly."
+        }
+    ]
+}

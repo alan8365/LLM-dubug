@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 4,
+            "prog_name": "detect_cycle",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 7.786860942840576,
+            "repaired_code": "\ndef detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = node.successor\n    tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        if hare is tortoise:\n            return True\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n    return False",
+            "raw_code": "```python\ndef detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = node.successor\n    tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        if hare is tortoise:\n            return True\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n    return False\n```\nExplanation:\nThe fixed code includes checks for if the node is None, or if hare or hare.successor is None. It also starts hare one step ahead of tortoise to ensure that they don't start as the same node, which would return a false positive for a cycle. The while loop then increments tortoise by one step at a time, and hare by two steps at a time. If a cycle exists, hare will eventually equal tortoise. If hare reaches the end of the list (hare is None or hare.successor is None), that means there is no cycle and the function returns False."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 11.046741008758545,
+            "repaired_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n\n    return False\n\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors",
+            "raw_code": "```python\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n\n    return False\n\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n```\nIn the original `detect_cycle` function, if a cycle does not exists, it will go into infinite loop. This is because hare will keep on getting None value in `hare.successor.successor` as soon as `hare.successor` becomes None. We need to add a check if the hare and its successor is not None before updating its value."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 19.332581281661987,
+            "repaired_code": "\ndef detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = node.successor\n    tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        if hare == tortoise:\n            return True\n        \n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n    return False",
+            "raw_code": "```python=\ndef detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = node.successor\n    tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        if hare == tortoise:\n            return True\n        \n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n    return False\n```\nIn the given code, there are two bugs:\n\n1. There is no check if the initial `node` or `hare.successor` are `None`, which can lead to an `AttributeError`.\n\n2. The comparison between `hare` and `tortoise` should be done after the assignment statements, not before. If it's before, the `while` loop can prematurely return `True` when `hare` and `tortoise` are both initially assigned to the same `node`.\n\nThe library code seems fine, but the methods `successor`, `successors`, and `predecessors` are redundant since we have direct attribute access to these properties. Also, the `successor` method will cause a recursion error, since it returns `self.successor`, which would call `self.successor` again, and so on. Removing these unused methods may help in preventing bugs in the future.\n\nHere's the simplified library code:\n\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n```"
+        }
+    ]
+}

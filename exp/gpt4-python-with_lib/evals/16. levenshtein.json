@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 16, "prog_name": "levenshtein", "language": "python", "testcase_num": 7, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 5.022011041641235, "pass_num": 6, "fail_num": 0}, {"run_time": 6.164247751235962, "pass_num": 6, "fail_num": 0}, {"run_time": 12.554567098617554, "pass_num": 6, "fail_num": 0}]}

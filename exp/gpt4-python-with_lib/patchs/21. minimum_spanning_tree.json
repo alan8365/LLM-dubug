@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.3986358642578125,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) is not group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u] = group_by_node[u].union(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges",
+            "raw_code": "```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) is not group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u] = group_by_node[u].union(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 12.483547925949097,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.get(u, {u}) != group_by_node.get(v, {v}):\n            mst_edges.add(edge)\n\n            if u in group_by_node:\n                group_by_node[u].update(group_by_node.get(v, {v}))\n            else:\n                group_by_node[u] = group_by_node.get(v, {v})\n            \n            if v in group_by_node:\n                group_by_node[v].update(group_by_node.get(u, {u}))\n            else:\n                group_by_node[v] = group_by_node.get(u, {u})\n\n            for node in group_by_node[v].copy():\n                group_by_node[node] = group_by_node[u]\n            for node in group_by_node[u].copy():\n                group_by_node[node] = group_by_node[v]\n\n    return mst_edges",
+            "raw_code": "```python=\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.get(u, {u}) != group_by_node.get(v, {v}):\n            mst_edges.add(edge)\n\n            if u in group_by_node:\n                group_by_node[u].update(group_by_node.get(v, {v}))\n            else:\n                group_by_node[u] = group_by_node.get(v, {v})\n            \n            if v in group_by_node:\n                group_by_node[v].update(group_by_node.get(u, {u}))\n            else:\n                group_by_node[v] = group_by_node.get(u, {u})\n\n            for node in group_by_node[v].copy():\n                group_by_node[node] = group_by_node[u]\n            for node in group_by_node[u].copy():\n                group_by_node[node] = group_by_node[v]\n\n    return mst_edges\n```\nUpdates: `setdefault` method replaced with `get` method to avoid unintentional creation of entries in `group_by_node`. Additional condition was added to check if `u` and `v` are keys in `group_by_node` before trying to update their values. We also handled updating the same group for all nodes in the particular group to ensure they all belong to the same group. `copy()` is used to avoid \"dictionary changed size during iteration\" error."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 18.47778010368347,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        group_u = group_by_node.setdefault(u, {u})\n        group_v = group_by_node.setdefault(v, {v})\n        if group_u is not group_v:\n            mst_edges.add(edge)\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges",
+            "raw_code": "```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        group_u = group_by_node.setdefault(u, {u})\n        group_v = group_by_node.setdefault(v, {v})\n        if group_u is not group_v:\n            mst_edges.add(edge)\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges\n```\nExplanation:\n- I replaced `weight_by_edge.__getitem__` with `weight_by_edge.get`. These two are equivalent in this case, but `get` is more common and easier to understand.\n- The original `setdefault` lines weren't actually changing the values of `u` or `v` to be the sets they were supposed to represent. To make sure that we're comparing and updating the correct sets, I stored them in new variables `group_u` and `group_v`.\n- Finally, `group_by_node[node].update(group_by_node[u])` is incorrect because at this point `group_by_node[node]` and `group_by_node[u]` reference to the same set, so it's basically trying to update a set with itself. Instead, I updated the `group_by_node[node]` to point to the updated set after the union operation.\n- Changed `group_by_node[u].update(group_by_node[v])` by `group_u.update(group_v)`. Now, `group_u` is the updated set.\n- Last but not least, `group_by_node[node] = group_u` is needed to ensure that all nodes in the same group points to the same set object after the union operation. This is crucial for the correct operation of the algorithm. This assigns to each components of the unioned group the updated group (which is `group_u`)."
+        }
+    ]
+}

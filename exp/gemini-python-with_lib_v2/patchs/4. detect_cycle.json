@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 4,
+            "prog_name": "detect_cycle",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.816835880279541,
+            "repaired_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare is None or hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n\n        if hare is tortoise:\n            return True\n\n        hare = hare.successor.successor",
+            "raw_code": "```python\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare is None or hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n\n        if hare is tortoise:\n            return True\n\n        hare = hare.successor.successor\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.1739962100982666,
+            "repaired_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor\n        if hare is None or hare.successor is None:\n            return False\n        hare = hare.successor\n\n        if hare is tortoise:\n            return True\n",
+            "raw_code": "```python=\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor\n        if hare is None or hare.successor is None:\n            return False\n        hare = hare.successor\n\n        if hare is tortoise:\n            return True\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.2538468837738037,
+            "repaired_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None or hare.successor.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n\n\n\n\n",
+            "raw_code": "```python=\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None or hare.successor.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n\n\n\n\n\n```"
+        }
+    ]
+}

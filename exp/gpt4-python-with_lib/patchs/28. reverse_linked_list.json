@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode\n    return prevnode\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 28,
+            "prog_name": "reverse_linked_list",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 9.07201600074768,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prev_node = None\n    current_node = node\n    while current_node:\n        next_node = current_node.successor\n        current_node.successor = prev_node\n        prev_node = current_node\n        current_node = next_node\n    return prev_node\n\n\n",
+            "raw_code": "```python=\ndef reverse_linked_list(node):\n    prev_node = None\n    current_node = node\n    while current_node:\n        next_node = current_node.successor\n        current_node.successor = prev_node\n        prev_node = current_node\n        current_node = next_node\n    return prev_node\n\n\n\n```\nHere is the library code used in the code above:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None):\n        self.value = value\n        self.successor = successor\n\n    def get_successor(self):\n        return self.successor\n\n    def set_successor(self, node):\n        self.successor = node\n\n\n```\nIn the original code, there were multiple unnecessary parameters and methods in the `Node` class which were not used in the reverse_linked_list function. Also, successor was used as an attribute and a method which is not a good practice. It was renamed to `get_successor` for getting the successor and `set_successor` for setting the successor. In the `reverse_linked_list` function, variables were renamed to more readable names and current_node was added for clarity."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 11.495195865631104,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode",
+            "raw_code": "```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n```\n\nIn your original code, you forgot to update `prevnode` inside the while loop.\n\nAlso, in your original `Node` class, the methods `successor` and `successors` are redundant and cause confusion as their names clash with the instance variable names. Here is a simplified and corrected `Node` class:\n\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None):\n        self.value = value\n        self.successor = successor\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 10.592985153198242,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode",
+            "raw_code": "```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n```\n\nIn the original code, the `prevnode` was not being updated in the while loop. This caused the node to keep pointing to None and thus, the reverse linked list was not achieved. It is fixed in the updated code by adding the statement `prevnode = node` in the loop.\n\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def get_successor(self):\n        return self.successor\n\n    def get_successors(self):\n        return self.successors\n\n    def get_predecessors(self):\n        return self.predecessors\n```\n\nThe original class definition contained method names that were the same as property names. This caused potential confusion and errors. In the updated code, the `get_` prefix has been added to the method names to distinguish them from the properties."
+        }
+    ]
+}

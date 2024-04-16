@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 21, "prog_name": "minimum_spanning_tree", "language": "python", "testcase_num": 3, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 3.2243220806121826, "pass_num": 3, "fail_num": 0}, {"run_time": 2.467136859893799, "pass_num": 3, "fail_num": 0}, {"run_time": 2.5365209579467773, "pass_num": 3, "fail_num": 0}]}

@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 6.922648906707764,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors()\n            )\n\n    return search_from(startnode)",
+            "raw_code": "```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors()\n            )\n\n    return search_from(startnode)\n```\n\nThe fixed code adds the current node to the set 'nodesvisited' in the recursive implementation of depth-first search. This ensures that the recursive function doesn't enter an infinite loop when it encounters a node that has already been visited. This is a key part of the depth-first search algorithm, which is designed to avoid visiting the same node twice.\n\nThe other change is 'node.successors' has been changed to 'node.successors()', as 'successors' is a method of class Node, not a property."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 19.64365816116333,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node.value == goalnode.value:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors()\n            )\n    return search_from(startnode)",
+            "raw_code": "```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node.value == goalnode.value:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors()\n            )\n    return search_from(startnode)\n```\nHere is the fixed library code:\n```python=\nclass Node:\n    def __init__(self, value=None, successors=[]):\n        self.value = value\n        self._successors = successors\n\n    def successors(self):\n        return self._successors\n```\n\nChanges made:\n\n1. Added a line to append the current node to the set of visited nodes in the `search_from` function. Otherwise, the function could go into an infinite loop if there is a cycle in the graph.\n\n2. Changed the `is` operator to `==` for comparing node and goalnode as `is` compares the identity of the objects, not their values.\n\n3. Removed unneeded parameters and methods from the Node class, leaving only `value` and `successors`.\n\n4. Changed attribute name `successors` to `_successors` to avoid name conflict with method `successors`.\n\n5. The successors of a node are now retrieved using a method call `node.successors()` instead of direct attribute access `node.successors`."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 10.773727893829346,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)",
+            "raw_code": "```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```\n\nExplanation:\nThe main bug in the code is that we forgot to add the visited node to our record (set `nodesvisited`). Without this, the code can get stuck in an infinite loop if there's a cycle in the graph. \n\nNote: The library code doesn't seem to have any apparent bugs but it seems unusual to have undefined parameters like `successor`, `successors`, `predecessors`, `incoming_nodes`, and `outgoing_nodes` by default. Also, we have both `successor` as an attribute and a method. It might be better to clarify the structure and functions needed for the `Node` class based on the particular use case.\nTherefore, I have removed the `successor` method and attribute, and other unused attributes from the class node. The updated `Node` class looks as follows:\n\n```python\nclass Node:\n    def __init__(self, value=None, successors=None):\n        self.value = value\n        self.successors = successors if successors is not None else []\n\n    def get_successors(self):\n        return self.successors\n```"
+        }
+    ]
+}

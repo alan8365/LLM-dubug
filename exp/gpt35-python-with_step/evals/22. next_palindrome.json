@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 22,
+        "prog_name": "next_palindrome",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 14,
+        "bug_type": "",
+        "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 6.365458965301514,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + (len(digit_list) - 1) * [0] + [1]"
+        },
+        {
+            "run_time": 5.530251979827881,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    if len(digit_list) % 2 == 0:\n        low_mid = (len(digit_list) - 1) // 2\n    else:\n        low_mid = len(digit_list) // 2\n\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]"
+        },
+        {
+            "run_time": 4.572925806045532,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return digit_list[::-1]  # Return the next palindrome number if no palindrome found\n\n"
+        }
+    ]
+}

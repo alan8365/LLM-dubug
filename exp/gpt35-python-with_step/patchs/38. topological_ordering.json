@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\n",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.083407163619995,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(node.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "Bug: The bug in the code is in the condition `set(ordered_nodes).issuperset(nextnode.outgoing_nodes)`. The intention is to check if the set of ordered nodes contains all the outgoing nodes of the next node, but it is mistakenly accessing `nextnode.outgoing_nodes` instead of `node.outgoing_nodes`.\n\nPatch:\nReplace the condition `set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` with `set(ordered_nodes).issuperset(node.outgoing_nodes)`.\n\nComplete code with the patch applied:\n```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(node.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.8713109493255615,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "Bug: The bug in the code is in the condition `set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` where it should be `set(ordered_nodes).issuperset(nextnode.incoming_nodes)`.\n\nPatch:\nReplace the condition `set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` with `set(ordered_nodes).issuperset(nextnode.incoming_nodes)`.\n\nHere is the complete code with the patch applied:\n\n```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```\n\nNow, the code should correctly perform the topological ordering based on the incoming nodes."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.720324993133545,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "Bug:\nThe bug in the code is in the condition `if set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` where it should check if `ordered_nodes` is a superset of `nextnode.incoming_nodes` instead of `nextnode.outgoing_nodes`.\n\nPatch:\nReplace the condition `if set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` with `if set(ordered_nodes).issuperset(nextnode.incoming_nodes)`.\n\nComplete code with the patch applied:\n```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        }
+    ]
+}

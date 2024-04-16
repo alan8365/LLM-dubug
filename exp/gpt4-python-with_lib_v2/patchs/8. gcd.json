@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b)\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.5347900390625,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)",
+            "raw_code": "```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.5738732814788818,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)",
+            "raw_code": "```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.109551191329956,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)",
+            "raw_code": "```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```\nThe above code contains a recursive function that uses the Euclidean algorithm to find the greatest common divisor (gcd) of two numbers. The bug in the original code was that the arguments in the recursive call were in the wrong order. In the correct implementation, as shown in the revised code, the second argument for the recursive call should be the remainder of `a` divided by `b`(i.e., `a % b`). Instead, `b` was being passed as the second argument, which was causing the function to loop indefinitely for some inputs."
+        }
+    ]
+}

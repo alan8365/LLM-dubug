@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 10.708977222442627,
+            "repaired_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node == goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors()\n            )\n\n    return search_from(startnode)",
+            "raw_code": "```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node == goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors()\n            )\n\n    return search_from(startnode)\n```\nIn this function, the corrections made are:\n\n1. Included `nodesvisited.add(node)` in the `search_from` function to make sure the visited nodes are added to the `nodesvisited` set.\n2. Replaced `node is goalnode` with `node == goalnode` because the 'is' operator checks the identity of two objects (i.e., they are the same object), while '==' checks for equality (i.e., they are two different objects but their contents are the same). \n3. Assuming `node.successors` is a function that returns the successors of the node, added `()` to `node.successors` to call the function. If `node.successors` is a property or variable, this change would not be needed."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 8.236729860305786,
+            "repaired_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is None:\n            return False\n        elif node in nodesvisited:\n            return False\n        elif node == goalnode:\n            return True\n\n        nodesvisited.add(node)\n\n        for nextnode in node.successors:\n            if search_from(nextnode):\n                return True\n        \n        return False\n\n    return search_from(startnode)",
+            "raw_code": "```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is None:\n            return False\n        elif node in nodesvisited:\n            return False\n        elif node == goalnode:\n            return True\n\n        nodesvisited.add(node)\n\n        for nextnode in node.successors:\n            if search_from(nextnode):\n                return True\n        \n        return False\n\n    return search_from(startnode)\n```\nThis code has been fixed by correcting the possible `None` type issue at `node`, also keep updating the `nodesvisited` set whenever a new node is visited and add a check to see if the `nextnode` is in the path. The condition `node is goalnode` is also changed to `node == goalnode` in order to make sure they have same value but not necessarily be the same object."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.851540803909302,
+            "repaired_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is None:   # check if node is None\n            return False\n        elif node in nodesvisited:\n            return False\n        nodesvisited.add(node)   # mark the current node as visited\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors if nextnode   # check if nextnode is not None\n            )\n\n    return search_from(startnode)",
+            "raw_code": "```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is None:   # check if node is None\n            return False\n        elif node in nodesvisited:\n            return False\n        nodesvisited.add(node)   # mark the current node as visited\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors if nextnode   # check if nextnode is not None\n            )\n\n    return search_from(startnode)\n```"
+        }
+    ]
+}

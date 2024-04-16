@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 6.009766101837158,
+            "repaired_code": "def levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n    \n    if source[0] == target[0]:\n        cost = 0\n    else:\n        cost = 1\n\n    return min(\n        levenshtein(source[1:], target) + 1,\n        levenshtein(source, target[1:]) + 1,\n        levenshtein(source[1:], target[1:]) + cost,\n    )",
+            "raw_code": "```python\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n    \n    if source[0] == target[0]:\n        cost = 0\n    else:\n        cost = 1\n\n    return min(\n        levenshtein(source[1:], target) + 1,\n        levenshtein(source, target[1:]) + 1,\n        levenshtein(source[1:], target[1:]) + cost,\n    )\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 7.697415828704834,
+            "repaired_code": "def levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        substitution_cost = 0\n    else:\n        substitution_cost = 1\n\n    return min(levenshtein(source[1:], target) + 1,\n               levenshtein(source, target[1:]) + 1,\n               levenshtein(source[1:], target[1:]) + substitution_cost)",
+            "raw_code": "```python\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        substitution_cost = 0\n    else:\n        substitution_cost = 1\n\n    return min(levenshtein(source[1:], target) + 1,\n               levenshtein(source, target[1:]) + 1,\n               levenshtein(source[1:], target[1:]) + substitution_cost)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.1975319385528564,
+            "repaired_code": "def levenshtein(source, target):\n    if source == '':\n        return len(target)\n    if target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )",
+            "raw_code": "```python\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    if target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```"
+        }
+    ]
+}

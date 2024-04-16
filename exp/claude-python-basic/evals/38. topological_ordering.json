@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 38,
+        "prog_name": "topological_ordering",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 26.119428157806396,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    remaining_nodes = [node for node in nodes if node not in ordered_nodes]\n\n    while remaining_nodes:\n        progress = False\n        for node in remaining_nodes:\n            if all(prev_node in ordered_nodes for prev_node in node.incoming_nodes):\n                ordered_nodes.append(node)\n                remaining_nodes.remove(node)\n                progress = True\n                break\n\n        if not progress:\n            raise ValueError(\"Graph contains a cycle\")\n\n    return ordered_nodes"
+        },
+        {
+            "run_time": 20.533332109451294,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    remaining_nodes = [node for node in nodes if node not in ordered_nodes]\n\n    while remaining_nodes:\n        found_node = False\n        for node in remaining_nodes:\n            if all(prevnode in ordered_nodes for prevnode in node.incoming_nodes):\n                ordered_nodes.append(node)\n                remaining_nodes.remove(node)\n                found_node = True\n                break\n\n        if not found_node:\n            raise ValueError(\"Graph contains a cycle\")\n\n    return ordered_nodes"
+        },
+        {
+            "run_time": 22.679256916046143,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    remaining_nodes = [node for node in nodes if node not in ordered_nodes]\n\n    while remaining_nodes:\n        for node in remaining_nodes:\n            if all(incoming_node in ordered_nodes for incoming_node in node.incoming_nodes):\n                ordered_nodes.append(node)\n                remaining_nodes.remove(node)\n                break\n        else:\n            raise ValueError(\"The graph contains a cycle.\")\n\n    return ordered_nodes"
+        }
+    ]
+}

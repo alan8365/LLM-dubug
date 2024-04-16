@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.620607137680054,
+            "repaired_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    if digit_list[0] == 0:\n        return [1] + (len(digit_list) - 1) * [0] + [1]\n    else:\n        return digit_list",
+            "raw_code": "```python\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    if digit_list[0] == 0:\n        return [1] + (len(digit_list) - 1) * [0] + [1]\n    else:\n        return digit_list\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 9.218657970428467,
+            "repaired_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid] #this line is updated\n            return digit_list\n    return [1] + len(digit_list) * [0] + [1]",
+            "raw_code": "```python=\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid] #this line is updated\n            return digit_list\n    return [1] + len(digit_list) * [0] + [1]\n```\nIn the original code, for the case when `digit_list[high_mid]` is not 9, it increments `digit_list[high_mid]` and also `digit_list[low_mid]` in case when `low_mid` is not equal to `high_mid`. But, for getting the next higher palindrome number, the reflected index value should be the same as the changed value, not its increment. Hence `digit_list[low_mid]` should be updated to `digit_list[high_mid]` and not its increment."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 7.821040868759155,
+            "repaired_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid] # Make sure the low digit equals the high digit to keep it a palindrome\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]",
+            "raw_code": "```python\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid] # Make sure the low digit equals the high digit to keep it a palindrome\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]\n```"
+        }
+    ]
+}

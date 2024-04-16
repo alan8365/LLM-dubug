@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 29,
+            "prog_name": "rpn_eval",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 10.102298021316528,
+            "repaired_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, (float, int)):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()",
+            "raw_code": "```python\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, (float, int)):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n```\nIn the original code:\n\n1. Only floats are considered in the given \"isinstance\" condition, but integers should also be considered.\n2. The order of popping the values a and b from the stack is incorrect. In a stack, the last element added is the first one to be removed. So the first number popped should be 'b' and the second one should be 'a'.\n3. The lambdas inside the dictionary in the 'op' function doesn't need parameters. They will use the parameters defined in the enclosing function. So, the parameters of the lambdas are removed."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 6.962175130844116,
+            "repaired_code": "\n\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, str):\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n        else:\n            stack.append(token)\n\n    return stack.pop()\n",
+            "raw_code": "```python\n\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, str):\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n        else:\n            stack.append(token)\n\n    return stack.pop()\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 12.541007995605469,
+            "repaired_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n\n    stack = []\n\n    for token in tokens:\n        if token in '+-*/':\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n        else:\n            stack.append(float(token))\n\n    return stack.pop()",
+            "raw_code": "```python\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n\n    stack = []\n\n    for token in tokens:\n        if token in '+-*/':\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n        else:\n            stack.append(float(token))\n\n    return stack.pop()\n```\nThe bugs in the code are as follows:\n1. The order in which operands `a` and `b` are popped from the stack is incorrect. The value `b` should be popped first and then `a`.\n2. The `if` condition that checks if the token is an `float` is incorrect. It should actually check if the token is an operator.\n3. The else part should convert the token to a `float` before appending it to the stack.\n4. In the `op` function, the `lambda` functions are not needed. We can just use direct operations. So, it should be changed to `lambdas`."
+        }
+    ]
+}

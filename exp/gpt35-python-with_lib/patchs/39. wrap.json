@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n\n    return lines\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.0980889797210693,
+            "repaired_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    lines.append(text)  # Append the remaining text\n    return lines",
+            "raw_code": "```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    lines.append(text)  # Append the remaining text\n    return lines\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.7848200798034668,
+            "repaired_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = cols\n        if ' ' in text[:cols]:\n            end = text.rfind(' ', 0, cols + 1)\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n        \n    lines.append(text)\n\n    return lines",
+            "raw_code": "```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = cols\n        if ' ' in text[:cols]:\n            end = text.rfind(' ', 0, cols + 1)\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n        \n    lines.append(text)\n\n    return lines\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.9710121154785156,
+            "repaired_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].strip()\n        lines.append(line)\n\n    lines.append(text)\n    return lines",
+            "raw_code": "```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].strip()\n        lines.append(line)\n\n    lines.append(text)\n    return lines\n```"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 11,
+        "prog_name": "is_valid_parenthesization",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 10,
+        "bug_type": "",
+        "bug_detail_desc": "在遍歷完字串後直接回傳True而沒有考慮到depth大於1時仍非合法的狀況，導致最後depth大於1的輸入皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 1.8213858604431152,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0"
+        },
+        {
+            "run_time": 1.6694316864013672,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n    \n    return depth == 0"
+        },
+        {
+            "run_time": 1.7061810493469238,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth == 0:\n                return False\n            depth -= 1\n\n    return depth == 0"
+        }
+    ]
+}

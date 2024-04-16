@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 38,
+        "prog_name": "topological_ordering",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.9486260414123535,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes"
+        },
+        {
+            "run_time": 1.7220401763916016,
+            "pass_num": 2,
+            "fail_num": 1,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.predecessors]\n\n    for node in ordered_nodes:\n        for nextnode in node.successors:\n            if set(ordered_nodes).issuperset(nextnode.predecessors) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes"
+        },
+        {
+            "run_time": 2.0844712257385254,
+            "pass_num": 2,
+            "fail_num": 1,
+            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if all(nextnode.outgoing_nodes in ordered_nodes for nextnode in nextnode.predecessors) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes"
+        }
+    ]
+}

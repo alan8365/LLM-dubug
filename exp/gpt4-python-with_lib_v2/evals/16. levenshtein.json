@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 16,
+        "prog_name": "levenshtein",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.632664203643799,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:])\n        )"
+        },
+        {
+            "run_time": 6.416668891906738,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef levenshtein(source, target):\n    if len(source) == 0:\n        return len(target)\n    if len(target) == 0:\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:])\n        )"
+        },
+        {
+            "run_time": 3.900803804397583,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef levenshtein(source, target):\n    if len(source) == 0:\n        return len(target)\n    if len(target) == 0:\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        substitution = levenshtein(source[1:], target[1:])\n        insertion = levenshtein(source, target[1:])\n        deletion = levenshtein(source[1:], target)\n\n        return 1 + min(substitution, insertion, deletion)"
+        }
+    ]
+}

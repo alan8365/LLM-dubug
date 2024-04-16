@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.022011041641235,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source, target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:])\n        )",
+            "raw_code": "```python\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source, target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:])\n        )\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 6.164247751235962,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    if target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )",
+            "raw_code": "```python\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    if target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 12.554567098617554,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n\n    if target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:])\n        )\n",
+            "raw_code": "```python\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n\n    if target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:])\n        )\n\n```\n\nExplanation: \nThe Levenshtein distance algorithm calculates the lowest cost (number of insertions, deletions or substitutions) needed to transform one string into another.\n\nThe initial check for empty strings in the source code was slightly off. If either source or target are empty, the Levenshtein distance is simply the length of the non-empty string. Therefore, we need two separate checks for source and target being empty.\n\nAlso, when the first characters of both strings match, there is no need to add 1 to the result of the recursive call. That's because no operation (insertion, deletion or substitution) is required in that case. Hence, the 1 + is removed from the condition where source[0] == target[0].\n\nFinally, in the else clause (where the first characters of the strings do not match) the minimum of three operations (deletion, insertion, and substitution) is calculated correctly."
+        }
+    ]
+}

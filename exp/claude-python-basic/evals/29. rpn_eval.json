@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 29,
+        "prog_name": "rpn_eval",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 19,
+        "bug_type": "",
+        "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 19.10926103591919,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "\nif isinstance(token, (float, int)):"
+        },
+        {
+            "run_time": 25.963906049728394,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: b - a,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: b / a\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, (int, float)):\n            stack.append(token)\n        else:\n            if len(stack) < 2:\n                raise ValueError(\"Insufficient operands for operator\")\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    if len(stack) != 1:\n        raise ValueError(\"Invalid expression\")\n\n    return stack.pop()"
+        },
+        {
+            "run_time": 24.463709831237793,
+            "pass_num": 3,
+            "fail_num": 3,
+            "reparied_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: b - a,  # Fixed the order of operands for subtraction\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: b / a   # Fixed the order of operands for division\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, (int, float)):  # Check for both int and float types\n            stack.append(token)\n        else:\n            if len(stack) < 2:  # Check if there are enough operands in the stack\n                raise ValueError(\"Insufficient operands in the stack\")\n            b = stack.pop()  # Fixed the order of operands\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    if len(stack) != 1:  # Check if there is only one value left in the stack\n        raise ValueError(\"Invalid RPN expression\")\n\n    return stack.pop()"
+        }
+    ]
+}

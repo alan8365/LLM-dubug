@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 10.916479110717773,
+            "repaired_code": "def minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) is not group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group = group_by_node[u].union(group_by_node[v])\n            for node in group:\n                group_by_node[node] = group\n    return mst_edges",
+            "raw_code": "```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) is not group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group = group_by_node[u].union(group_by_node[v])\n            for node in group:\n                group_by_node[node] = group\n    return mst_edges\n```\nThis code is implementing the Kruskal's algorithm for finding the minimum spanning tree of a graph. The bug in the code was related to the logic for merging the trees (or sets) in the forest of trees. The original logic was leading to an incorrect assignment of nodes to its sets. This was solved by creating a new set (group) by union of the sets of the two nodes in the current edge and updating the sets of each node in this new set to the new set itself.\nExplicitly checking for object identity using 'is not' instead of '!=' improves performance as 'is not' checks for object identity, not for value equality. This makes sense here because we want to check if the nodes belong to the same group, not if their groups have the same values.\nAlso, changing the `__getitem__` attribute to a more pythonic `get` method improves readability.\n"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 6.6218581199646,
+            "repaired_code": "def minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) is not group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group = group_by_node[u].union(group_by_node[v])\n            for node in group:\n                group_by_node[node] = group\n\n    return mst_edges",
+            "raw_code": "```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) is not group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group = group_by_node[u].union(group_by_node[v])\n            for node in group:\n                group_by_node[node] = group\n\n    return mst_edges\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.957816123962402,
+            "repaired_code": "def minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) is not group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_to_update = group_by_node[u].union(group_by_node[v])\n            for node in group_to_update:\n                group_by_node[node] = group_to_update\n\n    return mst_edges",
+            "raw_code": "```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) is not group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_to_update = group_by_node[u].union(group_by_node[v])\n            for node in group_to_update:\n                group_by_node[node] = group_to_update\n\n    return mst_edges\n```"
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )\n\n    return length_by_path\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 6.575962066650391,
+            "repaired_code": "\nif length_by_path[i, k] + length_by_path[j, k] < length_by_path[i, j]:\n    length_by_path[i, j] = length_by_path[i, k] + length_by_path[j, k]",
+            "raw_code": "### Bug\n\nThe code above has a bug in line 12:\n\n\n```\nlength_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )\n```\nThe issue with this code is that it considers paths with cycles which can lead to incorrect shortest path lengths. To fix this issue, the code should add a check to ignore paths with cycles.\n\n### Patch\n\nTo fix the code, we can replace the code in line 12 with the following:\n\n```python\nif length_by_path[i, k] + length_by_path[j, k] < length_by_path[i, j]:\n    length_by_path[i, j] = length_by_path[i, k] + length_by_path[j, k]\n```\nThis change will add a check to ensure that the new path length is shorter than the current path length before updating it, effectively ignoring paths with cycles.\n\n### Complete code with patch applied\n\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                if length_by_path[i, k] + length_by_path[j, k] < length_by_path[i, j]:\n                    length_by_path[i, j] = length_by_path[i, k] + length_by_path[j, k]\n\n    return length_by_path\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 6.491065979003906,
+            "repaired_code": "\nlength_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[j, k] if i != j else float('inf'))",
+            "raw_code": "**Bug:**\nThe code above doesn't correctly update the `length_by_path` for all cases. In the nested loop, when `i` is equal to `j` (i.e. when the source and destination are the same node), the minimum value is incorrectly chosen as `length_by_path[i, j]` itself, which is incorrect.\n\n**Location:**\nLine 15: `length_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[j, k])`\n\n**Patch:**\nTo fix this, the minimum value should be chosen between the current value of `length_by_path[i, j]` and the sum of lengths `length_by_path[i, k]` and `length_by_path[j, k]`.\n\n```python\nlength_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[j, k] if i != j else float('inf'))\n```\n\n**Complete Code with Patch Applied:**\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[j, k] if i != j else float('inf'))\n\n    return length_by_path\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.052541017532349,
+            "repaired_code": "\nlength_by_path.update({(i, i): 0 for i in range(n)})",
+            "raw_code": "**Bug**: The code does not initialize the diagonal elements of the `length_by_path` matrix to `0`.\n\n**Location of the bug**: Line 5\n\n**Patch**: \n```python=\nlength_by_path.update({(i, i): 0 for i in range(n)})\n```\n\n**Complete code with the patch applied**:\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )\n\n    return length_by_path\n\n\n\n\n```"
+        }
+    ]
+}

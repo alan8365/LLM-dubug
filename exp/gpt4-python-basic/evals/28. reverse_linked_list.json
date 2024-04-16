@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 28,
+        "prog_name": "reverse_linked_list",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 5.432960033416748,
+            "pass_num": 1,
+            "fail_num": 2,
+            "reparied_code": "\ndef reverse_linked_list(node):\n    prev_node = None\n    while node:\n        next_node = node.next  # \"next\" is often used in linked list nodes, instead of \"successor\"\n        node.next = prev_node  # Change \"node.successor\" to \"node.next\"\n        prev_node = node\n        node = next_node\n    return prev_node"
+        },
+        {
+            "run_time": 3.272382974624634,
+            "pass_num": 1,
+            "fail_num": 2,
+            "reparied_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.next\n        node.next = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode"
+        },
+        {
+            "run_time": 5.5572710037231445,
+            "pass_num": 1,
+            "fail_num": 2,
+            "reparied_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.next  # in python, linked list nodes are usually accessed using 'next', not 'successor'\n        node.next = prevnode  # use 'next' here as well\n        prevnode = node\n        node = nextnode\n    return prevnode"
+        }
+    ]
+}

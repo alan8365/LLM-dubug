@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 10,
+        "prog_name": "hanoi",
+        "language": "python",
+        "testcase_num": 8,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在步驟二中的交換把end寫成helper，使func無法交換到最後目標上，導致大部分情況都只能給出錯誤答案"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 11.732389211654663,
+            "pass_num": 8,
+            "fail_num": 0,
+            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))  # Fixed: Changed helper to end\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps"
+        },
+        {
+            "run_time": 13.71201205253601,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "\nsteps.append((start, end))"
+        },
+        {
+            "run_time": 28.005011081695557,
+            "pass_num": 8,
+            "fail_num": 0,
+            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps"
+        }
+    ]
+}

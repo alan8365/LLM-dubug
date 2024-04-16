@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.5258781909942627,
+            "repaired_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length] + 1]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest",
+            "raw_code": "```python\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length] + 1]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.773498058319092,
+            "repaired_code": "\ndef lis(arr):\n    ends = {0: arr[0]}\n    longest = 1\n\n    for i in range(1, len(arr)):\n        if arr[i] < ends[0]:\n            ends[0] = arr[i]\n        elif arr[i] > ends[longest - 1]:\n            ends[longest] = arr[i]\n            longest += 1\n        else:\n            low, high = 0, longest - 1\n            while low < high:\n                mid = low + (high - low) // 2\n                if arr[i] > ends[mid]:\n                    low = mid + 1\n                else:\n                    high = mid\n            ends[low] = arr[i]\n\n    return longest",
+            "raw_code": "```python\ndef lis(arr):\n    ends = {0: arr[0]}\n    longest = 1\n\n    for i in range(1, len(arr)):\n        if arr[i] < ends[0]:\n            ends[0] = arr[i]\n        elif arr[i] > ends[longest - 1]:\n            ends[longest] = arr[i]\n            longest += 1\n        else:\n            low, high = 0, longest - 1\n            while low < high:\n                mid = low + (high - low) // 2\n                if arr[i] > ends[mid]:\n                    low = mid + 1\n                else:\n                    high = mid\n            ends[low] = arr[i]\n\n    return longest\n```\nI fixed the bugs by updating the logic in the code to correctly handle the cases where the current value is less than the minimum or greater than the maximum value in the `ends` dictionary. I also added a binary search to find the correct position for the current value in the `ends` dictionary."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.2409827709198,
+            "repaired_code": "\ndef lis(arr):\n    ends = {0: -1}\n    longest = 0\n\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in ends if arr[ends[j]] < val]\n        length = max(prefix_lengths, default=0)\n\n        if length == longest or val < arr[ends[length]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest",
+            "raw_code": "```python\ndef lis(arr):\n    ends = {0: -1}\n    longest = 0\n\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in ends if arr[ends[j]] < val]\n        length = max(prefix_lengths, default=0)\n\n        if length == longest or val < arr[ends[length]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n```"
+        }
+    ]
+}

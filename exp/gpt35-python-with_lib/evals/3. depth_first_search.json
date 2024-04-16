@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 3, "prog_name": "depth_first_search", "language": "python", "testcase_num": 5, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.0365488529205322, "pass_num": 5, "fail_num": 0}, {"run_time": 1.9545009136199951, "pass_num": 5, "fail_num": 0}, {"run_time": 1.855799913406372, "pass_num": 5, "fail_num": 0}]}

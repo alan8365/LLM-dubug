@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 19,
+        "prog_name": "max_sublist_sum",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 18.014642000198364,
+            "pass_num": 5,
+            "fail_num": 1,
+            "reparied_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = arr[0]\n    max_so_far = arr[0]\n\n    for x in arr[1:]:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far"
+        },
+        {
+            "run_time": 11.719894170761108,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(0, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far"
+        },
+        {
+            "run_time": 21.557295083999634,
+            "pass_num": 5,
+            "fail_num": 1,
+            "reparied_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = float('-inf')\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far"
+        }
+    ]
+}

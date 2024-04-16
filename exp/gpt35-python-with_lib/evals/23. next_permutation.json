@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 23, "prog_name": "next_permutation", "language": "python", "testcase_num": 8, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 3.3370702266693115, "pass_num": 8, "fail_num": 0}, {"run_time": 2.9144210815429688, "pass_num": 8, "fail_num": 0}, {"run_time": 2.81640887260437, "pass_num": 8, "fail_num": 0}]}

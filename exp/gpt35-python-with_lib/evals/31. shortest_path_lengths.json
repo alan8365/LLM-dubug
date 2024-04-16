@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 31, "prog_name": "shortest_path_lengths", "language": "python", "testcase_num": 4, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.862511157989502, "pass_num": 4, "fail_num": 0}, {"run_time": 2.868924856185913, "pass_num": 4, "fail_num": 0}, {"run_time": 3.3751118183135986, "pass_num": 0, "fail_num": 4}]}

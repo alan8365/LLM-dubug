@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 15,
+        "prog_name": "lcs_length",
+        "language": "python",
+        "testcase_num": 9,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 6.422682762145996,
+            "pass_num": 5,
+            "fail_num": 4,
+            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import defaultdict\n\n    dp = defaultdict(int)\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                if i == 0 or j == 0:\n                    dp[i, j] = 1\n                else:\n                    dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                if i == 0 and j > 0:\n                    dp[i, j] = dp[i, j - 1]\n                elif j == 0 and i > 0:\n                    dp[i, j] = dp[i - 1, j]\n                elif i > 0 and j > 0:\n                    dp[i, j] = max(dp[i, j - 1], dp[i - 1, j])\n\n    return max(dp.values()) if dp else 0"
+        },
+        {
+            "run_time": 2.9894559383392334,
+            "pass_num": 5,
+            "fail_num": 4,
+            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import defaultdict\n\n    dp = defaultdict(int)\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i, j - 1], dp[i - 1, j])\n\n    return max(dp.values()) if dp else 0"
+        },
+        {
+            "run_time": 4.077339172363281,
+            "pass_num": 5,
+            "fail_num": 4,
+            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import defaultdict\n\n    dp = defaultdict(int)\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n\n    return dp[len(s) - 1, len(t) - 1] if dp else 0"
+        }
+    ]
+}

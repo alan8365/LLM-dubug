@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 6.764963150024414,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    i = 0\n    while i < len(ordered_nodes):\n        node = ordered_nodes[i]\n        for nextnode in node.outgoing_nodes:\n            if all(n in ordered_nodes for n in nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n        i += 1\n\n    return ordered_nodes",
+            "raw_code": "```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    i = 0\n    while i < len(ordered_nodes):\n        node = ordered_nodes[i]\n        for nextnode in node.outgoing_nodes:\n            if all(n in ordered_nodes for n in nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n        i += 1\n\n    return ordered_nodes\n```\nExplanation:\n\n- `set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` is replaced with `all(n in ordered_nodes for n in nextnode.incoming_nodes)`. The reason is that we want to check if all incoming nodes of `nextnode` are already in `ordered_nodes`, not its outgoing nodes.\n  \n- Furthermore, the original for loop on `ordered_nodes` is replaced by the while loop. The reason behind is that the for loop does not handle the modifications (with `append`) during iteration while the while loop does handle them. We increment `i` manually after each step and check again for the updated `ordered_nodes`."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.9514269828796387,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 10.668060302734375,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    while len(ordered_nodes) < len(nodes):\n        for node in nodes:\n            if node not in ordered_nodes and all(pred in ordered_nodes for pred in node.incoming_nodes):\n                ordered_nodes.append(node)\n\n    return ordered_nodes",
+            "raw_code": "```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    while len(ordered_nodes) < len(nodes):\n        for node in nodes:\n            if node not in ordered_nodes and all(pred in ordered_nodes for pred in node.incoming_nodes):\n                ordered_nodes.append(node)\n\n    return ordered_nodes\n```\nBelow is the fixed function and an explanation of what was changed.\n\n1. In the loop where nodes are added to `ordered_nodes`, the condition checked was not correct. We are not interested in whether `ordered_nodes` includes all outgoing nodes of `nextnode`. Instead, we want to make sure that all incoming nodes of a node are in `ordered_nodes` before we add that node to `ordered_nodes`. That means, we can only process a node when all its dependencies have been processed. \n\n2. Also, we don't need to convert `ordered_nodes` to a set every time in the loop. This is inefficient because it's being done for each node. Instead, we can just iterate over all nodes and directly check whether they are in `ordered_nodes`.\n\n3. Lastly, looping over `ordered_nodes` might not cover all nodes in our graph. So instead, we should keep adding nodes to `ordered_nodes` until its length is equal to the length of `nodes` because all nodes will be included in our final ordering. \n\n4. The Node Class does not need to be edited.\n\nPlease note, this algorithm assumes there are no cycles in the graph, because topological ordering cannot be done if there are cycles. Also, for graphs that are not connected, this algorithm might return one of many valid topological orders."
+        }
+    ]
+}

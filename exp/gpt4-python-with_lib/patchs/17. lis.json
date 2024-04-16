@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 8.000488996505737,
+            "repaired_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        # Check if ends[length + 1] exists before comparing its value with val\n        if length == longest or (length + 1 in ends and val < arr[ends[length + 1]]):\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest",
+            "raw_code": "```python=\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        # Check if ends[length + 1] exists before comparing its value with val\n        if length == longest or (length + 1 in ends and val < arr[ends[length + 1]]):\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 19.666978120803833,
+            "repaired_code": "\n\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in ends.keys() if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or (length + 1 in ends.keys() and val < arr[ends[length + 1]]):\n            ends[length + 1] = i\n            longest = max(longest, length + 1)\n\n    return longest\n",
+            "raw_code": "```python\n\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in ends.keys() if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or (length + 1 in ends.keys() and val < arr[ends[length + 1]]):\n            ends[length + 1] = i\n            longest = max(longest, length + 1)\n\n    return longest\n\n```\nThe bugs in the previous code were:\n1) When creating the prefix_lengths list, we want to iterate over the keys of the `ends` dictionary (which are the lengths of the subsequences), not the range up to `longest`.\n2) In the conditional block, we need to make sure `length + 1` exists in the `ends` dictionary before trying to access it. Therefore I added `length + 1 in ends.keys()`.\n3) Update the `longest` variable inside the conditional block by taking the maximum between `longest` and `length + 1`, ensuring it always stores the length of the longest increasing subsequence found so far. \nNote that this function still assumes that the input list `arr` is non-empty. To handle an empty input list as well, you can add a condition at the start of the function to return 0 if `arr` is empty."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.584547758102417,
+            "repaired_code": "\n\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or (length + 1 in ends and val < arr[ends[length + 1]]):\n            ends[length + 1] = i\n            longest = max(longest, length + 1)\n\n    return longest\n",
+            "raw_code": "```python\n\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or (length + 1 in ends and val < arr[ends[length + 1]]):\n            ends[length + 1] = i\n            longest = max(longest, length + 1)\n\n    return longest\n\n```"
+        }
+    ]
+}

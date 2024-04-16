@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 3,
+        "prog_name": "depth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 10.708977222442627,
+            "pass_num": 1,
+            "fail_num": 4,
+            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node == goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors()\n            )\n\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 8.236729860305786,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is None:\n            return False\n        elif node in nodesvisited:\n            return False\n        elif node == goalnode:\n            return True\n\n        nodesvisited.add(node)\n\n        for nextnode in node.successors:\n            if search_from(nextnode):\n                return True\n        \n        return False\n\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 5.851540803909302,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is None:   # check if node is None\n            return False\n        elif node in nodesvisited:\n            return False\n        nodesvisited.add(node)   # mark the current node as visited\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors if nextnode   # check if nextnode is not None\n            )\n\n    return search_from(startnode)"
+        }
+    ]
+}

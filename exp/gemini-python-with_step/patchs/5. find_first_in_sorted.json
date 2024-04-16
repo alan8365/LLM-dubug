@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 5,
+            "prog_name": "find_first_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.353382110595703,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid]:\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n\n\n\n",
+            "raw_code": "**Bug Location and Description**:\n\nThe bug is in the condition: `if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):`. This condition checks if the element at index `mid` in the array is equal to `x` and also checks if `mid` is the first index in the array or if the element at index `mid - 1` is not equal to `x`. However, the condition is incorrect because it checks if the previous element is not equal to `x`, which is not necessary for finding the first occurrence of `x`.\n\n**Patch**:\n\nReplace the condition with: `if x == arr[mid]:`. This will simply check if the element at index `mid` in the array is equal to `x`.\n\n**Complete Code with Patch Applied**:\n\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid]:\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.786888837814331,
+            "repaired_code": "\n        if x == arr[mid] and (mid > 0 and x != arr[mid - 1]):",
+            "raw_code": "**Bug**: The comparison of `x != arr[mid - 1]` checks if the element at index `mid - 1` is not equal to `x`. However, this check should be performed only if `mid` is greater than 0, to avoid accessing negative indices.\n\n**Bug Location**: Line 12\n\n**Patch**:\n```python=\n        if x == arr[mid] and (mid > 0 and x != arr[mid - 1]):\n```\n\n**Complete Code with Patch Applied**:\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid > 0 and x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.2051010131835938,
+            "repaired_code": "\nelif x > arr[mid]:\n            hi = mid - 1",
+            "raw_code": "**Bug:** The variable `hi` should be assigned to `mid - 1` when `x > arr[mid]` instead of `mid`.\n\n**Location:** Line 16\n\n**Patch:**\n```python=\nelif x > arr[mid]:\n            hi = mid - 1\n```\n\n**Complete Code with Patch Applied:**\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n    return -1\n```"
+        }
+    ]
+}

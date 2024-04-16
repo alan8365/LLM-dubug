@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 37,
+            "prog_name": "to_base",
+            "language": "python",
+            "testcase_num": 10,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.1626858711242676,
+            "repaired_code": "\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b < 0 or b > len(alphabet):\n        return \"Invalid base\"\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n",
+            "raw_code": "```python=\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b < 0 or b > len(alphabet):\n        return \"Invalid base\"\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.9421441555023193,
+            "repaired_code": "\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b > len(alphabet):\n      return \"invalid base\"\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n",
+            "raw_code": "```python=\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b > len(alphabet):\n      return \"invalid base\"\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.155010223388672,
+            "repaired_code": "\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b <= 0 or b > len(alphabet):\n        return 'Invalid base'\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n",
+            "raw_code": "```python=\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b <= 0 or b > len(alphabet):\n        return 'Invalid base'\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n\n```"
+        }
+    ]
+}

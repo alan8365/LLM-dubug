@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 9,
+        "prog_name": "get_factors",
+        "language": "python",
+        "testcase_num": 11,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 5.007827043533325,
+            "pass_num": 7,
+            "fail_num": 4,
+            "reparied_code": "\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if n // i != i:\n                factors.append(n // i)\n    \n    return factors if factors else [n]\n"
+        },
+        {
+            "run_time": 5.19861912727356,
+            "pass_num": 2,
+            "fail_num": 9,
+            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n    \n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if n // i != i:\n                factors.append(n // i)\n\n    return factors"
+        },
+        {
+            "run_time": 5.656879901885986,
+            "pass_num": 7,
+            "fail_num": 4,
+            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    \n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if n // i != i:  # Check if the other factor is not the same\n                factors.append(n // i)\n    \n    if len(factors) == 0:  # If no factors were found, n is a prime number\n        factors.append(n)\n\n    return factors"
+        }
+    ]
+}

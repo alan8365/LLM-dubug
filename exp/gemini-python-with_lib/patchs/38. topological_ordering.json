@@ -1,0 +1,34 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\n\n```\nHere is the library code used in the code above:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.2458748817443848,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    nodes_visited = set(ordered_nodes)\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(nodes_visited).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n                nodes_visited.add(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    nodes_visited = set(ordered_nodes)\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(nodes_visited).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n                nodes_visited.add(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.8959248065948486,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    while ordered_nodes:\n        node = ordered_nodes.pop(0)\n        \n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n",
+            "raw_code": "```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    while ordered_nodes:\n        node = ordered_nodes.pop(0)\n        \n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.018868923187256,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    while ordered_nodes:\n        node = ordered_nodes.pop(0)\n        for nextnode in node.outgoing_nodes:\n            nextnode.incoming_nodes.remove(node)\n            if not nextnode.incoming_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\n",
+            "raw_code": "```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    while ordered_nodes:\n        node = ordered_nodes.pop(0)\n        for nextnode in node.outgoing_nodes:\n            nextnode.incoming_nodes.remove(node)\n            if not nextnode.incoming_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\n\n```"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 33, "prog_name": "shunting_yard", "language": "python", "testcase_num": 6, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 6.437871217727661, "pass_num": 6, "fail_num": 0}, {"run_time": 5.677901029586792, "pass_num": 6, "fail_num": 0}, {"run_time": 5.294442892074585, "pass_num": 6, "fail_num": 0}]}

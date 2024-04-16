@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 1,
+        "prog_name": "breadth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在while迴圈的判斷式中，應該使用while queue讓佇列數量為0時脫離迴圈卻錯用為while True，導致迴圈無限循環無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.362984895706177,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    if startnode is None or goalnode is None:\n        return False\n    \n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            for successor in node.successors:\n                if successor not in nodesseen:\n                    queue.append(successor)\n                    nodesseen.add(successor)\n\n    return False"
+        },
+        {
+            "run_time": 13.096706628799438,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n\n    if startnode == goalnode:\n        return True\n\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node == goalnode:\n            return True\n\n        for successor in node.successors:\n            if successor not in nodesseen:\n                queue.append(successor)\n                nodesseen.add(successor)\n\n    return False"
+        },
+        {
+            "run_time": 4.5855817794799805,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            for successor in node.successors:\n                if successor not in nodesseen:\n                    queue.append(successor)\n                    nodesseen.add(successor)\n\n    return False"
+        }
+    ]
+}

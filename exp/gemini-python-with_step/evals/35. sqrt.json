@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 35,
+        "prog_name": "sqrt",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 2,
+        "bug_type": "",
+        "bug_detail_desc": "在誤差計算時，忘記把approx平方，造成誤差計算的是x跟根號x的差，導致除了x=1或epsilon很大的情況外計算都不會停下"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 2.609070062637329,
+            "pass_num": 0,
+            "fail_num": 7,
+            "reparied_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while approx**2** - x > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+        },
+        {
+            "run_time": 3.1167290210723877,
+            "pass_num": 1,
+            "fail_num": 6,
+            "reparied_code": "\ndef sqrt(x, epsilon):\n    approx = x  # Replace approx = x / 2 with approx = x\n    while abs(x - approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+        },
+        {
+            "run_time": 2.9110519886016846,
+            "pass_num": 1,
+            "fail_num": 6,
+            "reparied_code": "\n\ndef sqrt(x, epsilon):\n    approx = x\n    while abs(x - approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n\n"
+        }
+    ]
+}

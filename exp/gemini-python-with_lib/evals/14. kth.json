@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 14, "prog_name": "kth", "language": "python", "testcase_num": 7, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.858154058456421, "pass_num": 6, "fail_num": 1}, {"run_time": 4.650908946990967, "pass_num": 1, "fail_num": 6}, {"run_time": 5.130014896392822, "pass_num": 7, "fail_num": 0}]}

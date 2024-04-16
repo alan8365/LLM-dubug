@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 10, "prog_name": "hanoi", "language": "python", "testcase_num": 8, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.3809778690338135, "pass_num": 8, "fail_num": 0}, {"run_time": 3.2979719638824463, "pass_num": 8, "fail_num": 0}, {"run_time": 2.7451529502868652, "pass_num": 8, "fail_num": 0}]}

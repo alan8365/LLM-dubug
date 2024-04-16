@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 9, "prog_name": "get_factors", "language": "python", "testcase_num": 11, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.049164056777954, "pass_num": 2, "fail_num": 9}, {"run_time": 1.8340919017791748, "pass_num": 11, "fail_num": 0}, {"run_time": 3.273937940597534, "pass_num": 11, "fail_num": 0}]}

@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 18,
+        "prog_name": "longest_common_subsequence",
+        "language": "python",
+        "testcase_num": 10,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在兩字串首字一致呼叫遞迴式的情況下，字串b沒有移除首字便直接輸入，導致不斷重複比較輸出錯誤答案"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 17.402812242507935,
+            "pass_num": 10,
+            "fail_num": 0,
+            "reparied_code": "\ndef longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )"
+        },
+        {
+            "run_time": 11.316241025924683,
+            "pass_num": 10,
+            "fail_num": 0,
+            "reparied_code": "\ndef longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )"
+        },
+        {
+            "run_time": 15.65505313873291,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "\nreturn a[0] + longest_common_subsequence(a[1:], b[1:])"
+        }
+    ]
+}

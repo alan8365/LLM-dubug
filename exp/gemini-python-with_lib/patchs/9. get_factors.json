@@ -1,0 +1,34 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return []\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.1379151344299316,
+            "repaired_code": "\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            factors.extend(get_factors(n // i))\n            break\n\n    return factors\n\n\n\n",
+            "raw_code": "```python=\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            factors.extend(get_factors(n // i))\n            break\n\n    return factors\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.2596890926361084,
+            "repaired_code": "\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            factors.extend(get_factors(n // i))\n            break\n\n    return factors\n\n\n\n",
+            "raw_code": "```python=\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            factors.extend(get_factors(n // i))\n            break\n\n    return factors\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.3501780033111572,
+            "repaired_code": "\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            factors.extend(get_factors(n // i))\n            break\n\n    return factors\n\n",
+            "raw_code": "```python=\n\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            factors.extend(get_factors(n // i))\n            break\n\n    return factors\n\n\n```"
+        }
+    ]
+}

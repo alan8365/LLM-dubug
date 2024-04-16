@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return True\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 11,
+            "prog_name": "is_valid_parenthesization",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 8.89603304862976,
+            "repaired_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0",
+            "raw_code": "```python\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0\n```\nThis code checks if the input string has a valid parenthesization. For every open parentheses, it increments the `depth` variable. For each closing parentheses, it decrements `depth`. If at any point, depth becomes less than 0, it means there is an extra closing parenthesis without a matching opening one, so it returns False.\n\nIn the end, if `depth` is not 0, it means there are unmatched opening parentheses, so it should also return False. Therefore, the code should `return depth == 0` instead of `return True`. \n\nThe bug in the original code was that it was not checking for closing parentheses properly (it was checking for any character other than '(' instead of specifically ')') and it was not checking if there were unmatched opening parentheses at the end."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.470331192016602,
+            "repaired_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0",
+            "raw_code": "```python\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0\n```\nI added a condition to check for a closing parenthesis in the loop and changed the final return statement to check if `depth` is 0. This ensures that the function checks for a valid parenthesization (i.e., each opening parenthesis has a corresponding closing one)."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.989047050476074,
+            "repaired_code": "\n\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0\n",
+            "raw_code": "```python\n\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0\n\n```"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 8.80512285232544,
+            "repaired_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n                \n    if set(nodes) != set(ordered_nodes):\n        raise ValueError(\"Graph has at least one cycle\")\n\n    return ordered_nodes",
+            "raw_code": "```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n                \n    if set(nodes) != set(ordered_nodes):\n        raise ValueError(\"Graph has at least one cycle\")\n\n    return ordered_nodes\n```\n\nHere we have added a check to see if all the nodes have been ordered. If not, it means that a cycle exists in the graph.  \n\nThis fixed code assumes that the graph is directed and acyclic (DAG), and assumes that `incoming_nodes` and `outgoing_nodes` are tell us all the incoming and outgoing nodes from a node respectively. It raises a `ValueError` if a cycle is detected."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 10.86279010772705,
+            "repaired_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    node_set = set(ordered_nodes)\n\n    for node in list(ordered_nodes):\n        for nextnode in node.outgoing_nodes:\n            next_node_set = set(nextnode.outgoing_nodes)\n            if next_node_set.issubset(node_set) and nextnode not in node_set:\n                ordered_nodes.append(nextnode)\n                node_set.add(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    node_set = set(ordered_nodes)\n\n    for node in list(ordered_nodes):\n        for nextnode in node.outgoing_nodes:\n            next_node_set = set(nextnode.outgoing_nodes)\n            if next_node_set.issubset(node_set) and nextnode not in node_set:\n                ordered_nodes.append(nextnode)\n                node_set.add(nextnode)\n\n    return ordered_nodes\n```\nThis code has several bugs:\n1. The `set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` operation recreates the `ordered_nodes` set on every iteration which can slow down the program. To improve efficiency, we can create a separate set outside of the loop (`node_set = set(ordered_nodes)`) and update it inside the loop (`node_set.add(nextnode)`).\n2. The condition `if set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` should actually be `if next_node_set.issubset(node_set)`. We want to check if all the outgoing nodes of `nextnode` are already in the `ordered_nodes` list.\n3. Finally, the for loop `for node in ordered_nodes:` is modifying `ordered_nodes`, which can lead to unexpected behavior. We need to loop over a copy of `ordered_nodes` with `for node in list(ordered_nodes):`."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.202386140823364,
+            "repaired_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    i = 0\n    while i < len(ordered_nodes):\n        for nextnode in ordered_nodes[i].outgoing_nodes:\n            if all(node in ordered_nodes for node in nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n        i += 1\n\n    return ordered_nodes",
+            "raw_code": "```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    i = 0\n    while i < len(ordered_nodes):\n        for nextnode in ordered_nodes[i].outgoing_nodes:\n            if all(node in ordered_nodes for node in nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n        i += 1\n\n    return ordered_nodes\n```"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 11, "prog_name": "is_valid_parenthesization", "language": "python", "testcase_num": 3, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 8.89603304862976, "pass_num": 3, "fail_num": 0}, {"run_time": 5.470331192016602, "pass_num": 3, "fail_num": 0}, {"run_time": 6.989047050476074, "pass_num": 3, "fail_num": 0}]}

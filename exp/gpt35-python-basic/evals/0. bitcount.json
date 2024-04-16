@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 0,
+        "prog_name": "bitcount",
+        "language": "python",
+        "testcase_num": 9,
+        "fault_location": 3,
+        "bug_type": "",
+        "bug_detail_desc": "在運算消除n中的1時，應該用and運算卻用成xor，造成原本應該能消掉1的步驟變成n只能保持不變，導致while迴圈無限循環"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 1.391730785369873,
+            "pass_num": 9,
+            "fail_num": 0,
+            "reparied_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count"
+        },
+        {
+            "run_time": 1.5507309436798096,
+            "pass_num": 9,
+            "fail_num": 0,
+            "reparied_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= (n - 1)\n        count += 1\n    return count"
+        },
+        {
+            "run_time": 1.492333173751831,
+            "pass_num": 9,
+            "fail_num": 0,
+            "reparied_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count"
+        }
+    ]
+}

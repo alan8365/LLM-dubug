@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 4,
+            "prog_name": "detect_cycle",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.4628961086273193,
+            "repaired_code": "def detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = node.successor\n    tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        if hare is tortoise:\n            return True\n        hare = hare.successor.successor\n        tortoise = tortoise.successor\n\n    return False",
+            "raw_code": "```python\ndef detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = node.successor\n    tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        if hare is tortoise:\n            return True\n        hare = hare.successor.successor\n        tortoise = tortoise.successor\n\n    return False\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.8997340202331543,
+            "repaired_code": "def detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = node.successor\n    tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        if hare is tortoise:\n            return True\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n    return False",
+            "raw_code": "```python\ndef detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = node.successor\n    tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        if hare is tortoise:\n            return True\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n    return False\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 7.172960996627808,
+            "repaired_code": "def detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare == tortoise:\n            return True\n\n    return False",
+            "raw_code": "```python\ndef detect_cycle(node):\n    if node is None:\n        return False\n\n    hare = tortoise = node\n\n    while hare is not None and hare.successor is not None:\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare == tortoise:\n            return True\n\n    return False\n```\nIn the fixed code:\n- First, it checks if the input node is None. If the input node is None, return False since a None node can't create a cycle.\n- The condition for the while loop is changed. It should run only when hare and hare.successor are not None. Before it only checked hare.successor which could cause a NoneType error when accessing hare.successor.successor if hare.successor was None.\n- Finally, at the end it returns False, which means that when the loop ends without finding any cycles, it will assume there are no cycles. Before it would continue looping indefinitely if no cycle was detected."
+        }
+    ]
+}

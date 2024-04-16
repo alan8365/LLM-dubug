@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 21,
+        "prog_name": "minimum_spanning_tree",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 10,
+        "bug_type": "",
+        "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 21.297518253326416,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_u = group_by_node.setdefault(u, {u})\n        group_v = group_by_node.setdefault(v, {v})\n        if group_u != group_v:\n            mst_edges.add(edge)\n            union = group_u.union(group_v)\n            for node in union:\n                group_by_node[node] = union\n\n    return mst_edges"
+        },
+        {
+            "run_time": 22.56458806991577,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_u = group_by_node.setdefault(u, {u})\n        group_v = group_by_node.setdefault(v, {v})\n\n        if group_u != group_v:\n            mst_edges.add(edge)\n            union = group_u.union(group_v)\n            for node in union:\n                group_by_node[node] = union\n\n    return mst_edges"
+        },
+        {
+            "run_time": 18.03978681564331,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_u = group_by_node.setdefault(u, {u})\n        group_v = group_by_node.setdefault(v, {v})\n\n        if group_u != group_v:\n            mst_edges.add(edge)\n            union = group_u.union(group_v)\n            for node in union:\n                group_by_node[node] = union\n\n    return mst_edges"
+        }
+    ]
+}

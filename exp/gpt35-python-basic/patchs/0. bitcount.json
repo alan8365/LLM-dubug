@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef bitcount(n):\n    count = 0\n    while n:\n        n ^= n - 1\n        count += 1\n    return count\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 0,
+            "prog_name": "bitcount",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.391730785369873,
+            "repaired_code": "def bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count",
+            "raw_code": "```python\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.5507309436798096,
+            "repaired_code": "def bitcount(n):\n    count = 0\n    while n:\n        n &= (n - 1)\n        count += 1\n    return count",
+            "raw_code": "```python\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= (n - 1)\n        count += 1\n    return count\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.492333173751831,
+            "repaired_code": "def bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count",
+            "raw_code": "```python\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count\n```"
+        }
+    ]
+}

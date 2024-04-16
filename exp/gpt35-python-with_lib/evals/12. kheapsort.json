@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 12, "prog_name": "kheapsort", "language": "python", "testcase_num": 4, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.1613030433654785, "pass_num": 4, "fail_num": 0}, {"run_time": 1.9623360633850098, "pass_num": 4, "fail_num": 0}, {"run_time": 1.8115787506103516, "pass_num": 4, "fail_num": 0}]}

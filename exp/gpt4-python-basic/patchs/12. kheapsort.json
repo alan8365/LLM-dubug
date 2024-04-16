@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 9.222762107849121,
+            "repaired_code": "def kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k+1]\n    heapq.heapify(heap)\n\n    for x in arr[k+1:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k+1]\n    heapq.heapify(heap)\n\n    for x in arr[k+1:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```\nThe bugs were:\n\n1) The range of the initial heap should be from the start of the array to the kth element (inclusive), so it should be `arr[:k+1]`, not `arr[:k]`.\n\n2) The code was adding all elements of `arr` to the heap, including the ones already in the heap. Only elements beyond the kth element should be added to the heap, so the loop should iterate over `arr[k+1:]`, not `arr`."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.9868738651275635,
+            "repaired_code": "def kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k+1]\n    heapq.heapify(heap)\n\n    for x in arr[k+1:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k+1]\n    heapq.heapify(heap)\n\n    for x in arr[k+1:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.9496681690216064,
+            "repaired_code": "def kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k + 1]\n    heapq.heapify(heap)\n\n    for x in arr[k + 1:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k + 1]\n    heapq.heapify(heap)\n\n    for x in arr[k + 1:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        }
+    ]
+}

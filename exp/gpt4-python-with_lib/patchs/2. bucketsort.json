@@ -1,0 +1,34 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(arr):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n\n\n\n\n\n```\nHere is the library code used in the code above:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 2,
+            "prog_name": "bucketsort",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.475491762161255,
+            "repaired_code": "def bucketsort(arr, k):\n    counts = [0] * (k+1)\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * (k+1)\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.629522323608398,
+            "repaired_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        if 0<= x < k: # add this if condition to prevent possible IndexError\n            counts[x] += 1\n        else:\n            raise ValueError(\"All elements must be in the range [0, k). Element \"+ str(x)+\" is out of range.\")\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # replace arr with counts\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        if 0<= x < k: # add this if condition to prevent possible IndexError\n            counts[x] += 1\n        else:\n            raise ValueError(\"All elements must be in the range [0, k). Element \"+ str(x)+\" is out of range.\")\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # replace arr with counts\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.1047720909118652,
+            "repaired_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        }
+    ]
+}

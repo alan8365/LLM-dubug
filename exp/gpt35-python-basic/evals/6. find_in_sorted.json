@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 6,
+        "prog_name": "find_in_sorted",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在目標大於中點時，新陣列起始序號mid沒有+1，導致邊緣情況遞迴不會停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 2.157431125640869,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid+1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))"
+        },
+        {
+            "run_time": 1.9682271480560303,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))"
+        },
+        {
+            "run_time": 2.775296688079834,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid+1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))"
+        }
+    ]
+}

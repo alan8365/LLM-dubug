@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 12,
+        "prog_name": "kheapsort",
+        "language": "python",
+        "testcase_num": 4,
+        "fault_location": 6,
+        "bug_type": "",
+        "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.420341968536377,
+            "pass_num": 0,
+            "fail_num": 4,
+            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = []\n    heapq.heapify(heap)\n\n    # Pushing first k elements into the heap\n    for i in range(k):\n        heapq.heappush(heap, arr[i])\n\n    # For the remaining elements\n    for x in arr[k:]:\n        # If the current element is larger than the smallest(top) element of the heap, then we pop the smallest element and push the current element into the heap\n        if x > heap[0]:\n            heapq.heappushpop(heap, x)\n\n    # Pop the remaining elements in the heap and these will be the largest k elements\n    while heap:\n        yield heapq.heappop(heap)"
+        },
+        {
+            "run_time": 2.76492977142334,
+            "pass_num": 4,
+            "fail_num": 0,
+            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)"
+        },
+        {
+            "run_time": 11.158972978591919,
+            "pass_num": 4,
+            "fail_num": 0,
+            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    # Create the initial heap from the first k elements\n    heap = arr[:k+1]\n    heapq.heapify(heap)\n\n    # For each remaining element\n    for x in arr[k+1:]:\n        yield heapq.heappushpop(heap, x)\n        \n    # Pop the remaining elements from the heap\n    while heap:\n        yield heapq.heappop(heap)"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-4",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return True\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 11,
+            "prog_name": "is_valid_parenthesization",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.792140007019043,
+            "repaired_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    if depth == 0:\n        return True \n    else: \n        return False",
+            "raw_code": "```python\n\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    if depth == 0:\n        return True \n    else: \n        return False  \n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 8.987547874450684,
+            "repaired_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth == 0",
+            "raw_code": "```python\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth == 0\n```\nIn the original code, the if else logic doesn't correctly handle the case where the `paren` is not a '('. For example, if `paren` was something other than '(' and ')' the else branch would execute. It should be 'elif paren == \")\"' to make sure the logic is correctly handled when `paren` is ')'. Additionally, the function should return true only when `depth` is 0, i.e., when there are as many opening and closing parentheses."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.8899269104003906,
+            "repaired_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0",
+            "raw_code": "```python\n\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0\n\n\n```"
+        }
+    ]
+}

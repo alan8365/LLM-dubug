@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 17, "prog_name": "lis", "language": "python", "testcase_num": 12, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 8.000488996505737, "pass_num": 8, "fail_num": 4}, {"run_time": 19.666978120803833, "pass_num": 12, "fail_num": 0}, {"run_time": 5.584547758102417, "pass_num": 12, "fail_num": 0}]}

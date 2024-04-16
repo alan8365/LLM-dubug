@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 9,
+        "prog_name": "get_factors",
+        "language": "python",
+        "testcase_num": 11,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 20.76841902732849,
+            "pass_num": 1,
+            "fail_num": 10,
+            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return [1]\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if i != n // i:\n                factors.append(n // i)\n\n    factors.sort()\n    return factors"
+        },
+        {
+            "run_time": 18.333989143371582,
+            "pass_num": 10,
+            "fail_num": 1,
+            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return [1]\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.extend([i] + get_factors(n // i))\n            return factors\n\n    return [n]"
+        },
+        {
+            "run_time": 17.82193899154663,
+            "pass_num": 10,
+            "fail_num": 1,
+            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return [1]\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.extend([i] + get_factors(n // i))\n            break\n\n    if not factors:\n        factors.append(n)\n\n    return factors"
+        }
+    ]
+}

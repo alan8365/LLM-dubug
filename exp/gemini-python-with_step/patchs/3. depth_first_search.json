@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\n",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.137997150421143,
+            "repaired_code": "\n    return all(\n        search_from(nextnode) for nextnode in node.successors\n    )",
+            "raw_code": "**Bug**: The code uses `any` function to check if any of the successors of the current node leads to the goal node. However, `any` function stops iterating as soon as it finds the first `True` value. In this case, if there are multiple paths to the goal node, the code will only find the first one and stop searching for others.\n\n**Location**: Line 12\n\n**Patch**: Replace the code on line 12 with the following:\n\n```python\n    return all(\n        search_from(nextnode) for nextnode in node.successors\n    )\n```\n\n**Complete code with patch applied**:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return all(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.021220922470093,
+            "repaired_code": "\nif node in nodesvisited:\n    return False",
+            "raw_code": "**Bug:** The code incorrectly marks a node as visited when `search_from` is called on it, instead of when the function recurses into the next node.\n\n**Location:**\n```python=\nif node in nodesvisited:\n    return False\n```\nshould be\n```python=\nif node in nodesvisited:\n    return True\n```\n\n**Patch:**\n```python=\nif node in nodesvisited:\n    return True\nelif node is goalnode:\n    return True\n```\n\n**Complete Code with Patch:**\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return True\n        elif node is goalnode:\n            return True\n        else:\n            nodesvisited.add(node)\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.941234827041626,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n\n\n\n\n",
+            "raw_code": "**Bug:** The `search_from` function does not add visited nodes to `nodesvisited` set.\n**Location:** Line 5 in the provided code.\n**Patch:**\n```\ndef search_from(node):\n    if node in nodesvisited:\n        return False\n    nodesvisited.add(node)\n    elif node is goalnode:\n        return True\n    else:\n        return any(\n            search_from(nextnode) for nextnode in node.successors\n        )\n```\n**Full Code with Patch Applied:**\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n\n\n\n\n\n```"
+        }
+    ]
+}

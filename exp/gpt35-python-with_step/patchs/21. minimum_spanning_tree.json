@@ -1,0 +1,35 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n```python=\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.226576089859009,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges\n",
+            "raw_code": "Bug: The bug in the code is in the line `group_by_node[node].update(group_by_node[u])`. The correct update operation should be `group_by_node[node] = group_by_node[u]` to properly update the group for each node.\n\nPatch:\nReplace the line `group_by_node[node].update(group_by_node[u])` with `group_by_node[node] = group_by_node[u]`.\n\nUpdated code with the patch:\n```python=\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.6070618629455566,
+            "repaired_code": "\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):",
+            "raw_code": "Bug:\nThe bug in the provided code is in the comparison of the sets for the nodes `u` and `v`. The comparison should be done using `intersection` to check if the sets have any common elements, rather than using `!=` directly.\n\nPatch:\nReplace the line:\n```python\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n```\nwith:\n```python\nif not group_by_node[u].intersection(group_by_node[v]):\n```\n\nComplete code with patch:\n```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if not group_by_node[u].intersection(group_by_node[v]):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.3212621212005615,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges",
+            "raw_code": "Bug: The bug in the code is that when updating the nodes' groups in the minimum_spanning_tree function, it is updating the wrong group for the nodes.\n\nPatch:\nReplace the section of the code that updates groups for the nodes with the correct update logic:\n\n```python=\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges\n```\n\nComplete code with the patch applied:\n\n```python=\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges\n```"
+        }
+    ]
+}

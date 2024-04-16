@@ -1,0 +1,35 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 35,
+            "prog_name": "sqrt",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.5149579048156738,
+            "repaired_code": "\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n",
+            "raw_code": "```python=\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.7663722038269043,
+            "repaired_code": "\n\ndef sqrt(x, epsilon):\n    if x < 0:\n        raise ValueError(\"Cannot compute square root of a negative number\")\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n",
+            "raw_code": "```python=\n\ndef sqrt(x, epsilon):\n    if x < 0:\n        raise ValueError(\"Cannot compute square root of a negative number\")\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.5967812538146973,
+            "repaired_code": "\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n",
+            "raw_code": "```python=\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n\n```"
+        }
+    ]
+}

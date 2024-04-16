@@ -1,0 +1,32 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while True:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 1,
+            "prog_name": "breadth_first_search",
+            "language": "python"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.036249876022339,
+            "repaired_code": "def breadth_first_search(startnode, goalnode):\n    queue = []\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.pop(0)\n\n        if node == goalnode:\n            return True\n        else:\n            for successor in node.successors:\n                if successor not in nodesseen:\n                    queue.append(successor)\n                    nodesseen.add(successor)\n\n    return False",
+            "raw_code": "```python\ndef breadth_first_search(startnode, goalnode):\n    queue = []\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.pop(0)\n\n        if node == goalnode:\n            return True\n        else:\n            for successor in node.successors:\n                if successor not in nodesseen:\n                    queue.append(successor)\n                    nodesseen.add(successor)\n\n    return False\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.5508620738983154,
+            "repaired_code": "from collections import deque\n\ndef breadth_first_search(startnode, goalnode):\n    queue = deque()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node == goalnode:\n            return True\n        else:\n            for successor in node.successors:\n                if successor not in nodesseen:\n                    queue.append(successor)\n                    nodesseen.add(successor)\n\n    return False",
+            "raw_code": "```python\nfrom collections import deque\n\ndef breadth_first_search(startnode, goalnode):\n    queue = deque()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node == goalnode:\n            return True\n        else:\n            for successor in node.successors:\n                if successor not in nodesseen:\n                    queue.append(successor)\n                    nodesseen.add(successor)\n\n    return False\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.93334698677063,
+            "repaired_code": "from collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node == goalnode:\n            return True\n        else:\n            queue.extend(child for child in node.successors if child not in nodesseen)\n            nodesseen.update(child for child in node.successors if child not in nodesseen)\n\n    return False",
+            "raw_code": "```python\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node == goalnode:\n            return True\n        else:\n            queue.extend(child for child in node.successors if child not in nodesseen)\n            nodesseen.update(child for child in node.successors if child not in nodesseen)\n\n    return False\n```"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 4, "prog_name": "detect_cycle", "language": "python", "testcase_num": 6, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 2.881027936935425, "pass_num": 6, "fail_num": 0}, {"run_time": 2.2202742099761963, "pass_num": 6, "fail_num": 0}, {"run_time": 2.052471160888672, "pass_num": 5, "fail_num": 1}]}

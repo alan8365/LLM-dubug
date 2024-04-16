@@ -1,0 +1,1 @@
+{"sample": {"prog_id": 34, "prog_name": "sieve", "language": "python", "testcase_num": 6, "fault_location": 0, "bug_type": ""}, "patchs_eval": [{"run_time": 1.6765649318695068, "pass_num": 6, "fail_num": 0}, {"run_time": 1.7980878353118896, "pass_num": 6, "fail_num": 0}, {"run_time": 1.7730088233947754, "pass_num": 6, "fail_num": 0}]}
