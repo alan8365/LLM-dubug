@@ -41,6 +41,7 @@ class QuixBugsSample:
         self.lib_usage: dict[LIB, str] = self.detect_library_usage()
 
         self.bug_type = prog_info["bug_type"]
+        self.bug_detail_desc = prog_info["bug_detail_desc"]
         self.fault_location = prog_info["fault_location"]
         self.testcase_num = prog_info["testcase_num"]
 
@@ -235,6 +236,7 @@ class QuixBugsSample:
             "testcase_num": self.testcase_num,
             "fault_location": self.fault_location,
             "bug_type": self.bug_type,
+            "bug_detail_desc": self.bug_detail_desc,
         }
 
     def to_json(self) -> str:
@@ -286,6 +288,7 @@ if __name__ == "__main__":
 
     for i in quix_bugs_dataset:
         print(i)
+        print(i.testcase_num)
 
     # a = []
     # for i in quix_bugs_dataset:

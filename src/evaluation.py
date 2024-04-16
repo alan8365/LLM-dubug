@@ -60,7 +60,7 @@ class ExperimentEvaluation:
             prog_id = patch_group.sample.prog_id
             prog_name = patch_group.sample.prog_name
             with open(self.eval_dir / f"{prog_id}. {prog_name}.json", "w") as f:
-                json.dump(eval_patch_group.to_dict(), f)
+                json.dump(eval_patch_group.to_dict(), f, indent=4, ensure_ascii=False)
 
     def run(self):
         pass
@@ -93,11 +93,9 @@ class QuixBugsPytester:
             repaired_code = self.clean_response(patch.raw_code)
             pytest_log = self.validate_patch(repaired_code)
             test_info = self.get_test_info(pytest_log)
-            test_info.update(
-                {"repaired_code": repaired_code}
-            )
+            test_info.update({"repaired_code": repaired_code})
 
-            self.test_result[patch.patch_id] = test_info 
+            self.test_result[patch.patch_id] = test_info
 
     def clean_response(self, response) -> str:
         lang = self.sample.language
@@ -133,32 +131,46 @@ class QuixBugsPytester:
     def get_test_info(self, pytest_log: str):
         pattern = rf"test_{self.prog_name}\.py ([.Fs]*)"
         text_divide = re.compile(pattern)
-        parsed_output = text_divide.findall(pytest_log)[0]
 
-        pass_count = parsed_output.count(".")
-        fail_count = parsed_output.count("F")
-        skip_count = parsed_output.count("s")
+        pass_compile = re.compile(r"=+.*?(\d+) passed.*?=+")
+        fail_compile = re.compile(r"=+.*?(\d+) failed.*?=+")
+
+        pass_match = pass_compile.search(pytest_log)
+        fail_match = fail_compile.search(pytest_log)
+
+        if pass_match:
+            pass_count = int(pass_match.group(1))
+        else:
+            pass_count = 0
+
+        if fail_match:
+            fail_count = int(fail_match.group(1))
+        else:
+            fail_count = 0
 
         return {
             "pass_num": pass_count,
             "fail_num": fail_count,
-            "skip_num": skip_count,
         }
 
 
 if __name__ == "__main__":
-    # exp_name = "gpt35-python-basic"
-    # exp_name = "gpt35-python-with_lib_v2"
-    exp_name = "gpt35-python-with_step"
-    # exp_name = "gpt4-python-basic"
-    # exp_name = "gpt4-python-with_lib_v2"
-    # exp_name = "gemini-python-basic"
-    # exp_name = "gemini-python-with_lib_v2"
-    # exp_name = "gemini-python-with_step"
-    # exp_name = "claude-python-basic"
+    exp_names = [
+        "gpt35-python-basic",
+        "gpt35-python-with_lib_v2",
+        "gpt35-python-with_step",
+        "gpt4-python-basic",
+        "gpt4-python-with_lib_v2",
+        "gemini-python-basic",
+        "gemini-python-with_lib_v2",
+        "gemini-python-with_step",
+        "claude-python-basic",
+    ]
+    # exp_name = exp_names[2]
 
-    print(exp_name)
-    eval = ExperimentEvaluation(exp_name)
+    for exp_name in exp_names:
+        print(exp_name)
+        eval = ExperimentEvaluation(exp_name)
 
     # exp_names = [i.name for i in ExperimentEvaluation.base_dir.glob("*")]
     # exp_names = sorted(exp_names)
