@@ -1,0 +1,34 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield flatten(x)\n\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 7,
+            "prog_name": "flatten",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.8635280132293701,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n",
+            "raw_code": "```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.322751045227051,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            yield from flatten(x)\n        else:\n            yield x",
+            "raw_code": "```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            yield from flatten(x)\n        else:\n            yield x\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.69461989402771,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n\n\n\n",
+            "raw_code": "```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n\n\n\n\n```"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 31,
+        "prog_name": "shortest_path_lengths",
+        "language": "python",
+        "testcase_num": 4,
+        "fault_location": 10,
+        "bug_type": "",
+        "bug_detail_desc": "在計算以k為中繼連結ij的距離時，將i到k、k到j誤寫為i到k、j到k，導致非無向圖結構的輸入結果皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.0499420166015625,
+            "pass_num": 0,
+            "fail_num": 4,
+            "reparied_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for _ in range(n):  # Perform n - 1 iterations\n        for i, j, dist in length_by_edge:\n            # If there is a path from i to j exists\n            if dist != -1:\n                length_by_path[i, j] = min(length_by_path[i, j], dist)\n                length_by_path[j, i] = min(length_by_path[j, i], dist)\n\n    return length_by_path\n\n\n\n"
+        },
+        {
+            "run_time": 4.7145140171051025,
+            "pass_num": 0,
+            "fail_num": 4,
+            "reparied_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                if min(length_by_path[i, k], length_by_path[k, j]) + length_by_edge[(i, j)]:\n                    length_by_path[i. j] = min(\n                        length_by_path[i, j],\n                        length_by_path[i, k] + length_by_path[k, j]\n                    )\n\n    return length_by_path"
+        },
+        {
+            "run_time": 3.6786811351776123,
+            "pass_num": 4,
+            "fail_num": 0,
+            "reparied_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path"
+        }
+    ]
+}

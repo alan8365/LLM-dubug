@@ -1,0 +1,34 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_edge[u, v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 32,
+            "prog_name": "shortest_paths",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.6015889644622803,
+            "repaired_code": "\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n\n",
+            "raw_code": "```python=\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.4920413494110107,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n",
+            "raw_code": "```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.035421133041382,
+            "repaired_code": "\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n\n",
+            "raw_code": "```python=\n\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n\n\n```"
+        }
+    ]
+}

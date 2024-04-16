@@ -1,0 +1,8 @@
+{
+    "name": "gemini-python-basic",
+    "lang": "python",
+    "llm_api": "GeminiApi",
+    "prompt_type": "basic",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/patchs"
+}

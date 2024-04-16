@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 21,
+        "prog_name": "minimum_spanning_tree",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 10,
+        "bug_type": "",
+        "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.79542875289917,
+            "pass_num": 0,
+            "fail_num": 3,
+            "reparied_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[v].update(group_by_node[u])  # Fix the direction of merge\n            for node in group_by_node[u]:\n                group_by_node[node].update(group_by_node[v])\n\n    return mst_edges"
+        },
+        {
+            "run_time": 3.6822831630706787,
+            "pass_num": 0,
+            "fail_num": 3,
+            "reparied_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge, weight in sorted(weight_by_edge.items(), key=lambda item: item[1]):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges"
+        },
+        {
+            "run_time": 3.6015591621398926,
+            "pass_num": 0,
+            "fail_num": 3,
+            "reparied_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):  # Use get() instead of __getitem__ for dictionaries\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bugs in the following code:\n```python=\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 35,
+            "prog_name": "sqrt",
+            "language": "python",
+            "fault_location": 0,
+            "bug_type": ""
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.620395183563232,
+            "repaired_code": "\ndef sqrt(x, epsilon):\n    if x < 0:\n        raise ValueError(\"Sqrt is undefined for negative numbers.\")\n    approx = x / 2\n    while abs(x - approx ** 2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx",
+            "raw_code": "```python\ndef sqrt(x, epsilon):\n    if x < 0:\n        raise ValueError(\"Sqrt is undefined for negative numbers.\")\n    approx = x / 2\n    while abs(x - approx ** 2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.7676331996917725,
+            "repaired_code": "\ndef sqrt(x, epsilon):\n    approx = 0.5 * x\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx",
+            "raw_code": "```python\ndef sqrt(x, epsilon):\n    approx = 0.5 * x\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.222975015640259,
+            "repaired_code": "\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(approx**2 - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n",
+            "raw_code": "```python=\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(approx**2 - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n\n```"
+        }
+    ]
+}

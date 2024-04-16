@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 34,
+        "prog_name": "sieve",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 3,
+        "bug_type": "",
+        "bug_detail_desc": "在判斷n是否不被所有質數整除時，寫成了是否存在質數不能整除n，由於始終不存在質數用於判斷，導致除了max=1以外的狀況全部出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 2.0078790187835693,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        is_prime = True\n        for p in primes:\n            if n % p == 0:\n                is_prime = False\n                break\n        if is_prime:\n            primes.append(n)\n    return primes"
+        },
+        {
+            "run_time": 1.9592080116271973,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if not any(n % p == 0 for p in primes):\n            primes.append(n)\n    return primes"
+        },
+        {
+            "run_time": 1.6623969078063965,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes\n\n\n"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 17,
+        "prog_name": "lis",
+        "language": "python",
+        "testcase_num": 12,
+        "fault_location": 12,
+        "bug_type": "",
+        "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 5.901584148406982,
+            "pass_num": 8,
+            "fail_num": 4,
+            "reparied_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n        if not arr:\n            return 0\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest"
+        },
+        {
+            "run_time": 3.062519073486328,
+            "pass_num": 10,
+            "fail_num": 2,
+            "reparied_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val > arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n"
+        },
+        {
+            "run_time": 5.872197151184082,
+            "pass_num": 8,
+            "fail_num": 4,
+            "reparied_code": "\ndef lis(arr):\n    ends = {}\n    ends[0] = -1  # The first 'ending' value is -1\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest"
+        }
+    ]
+}
