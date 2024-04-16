@@ -1,0 +1,28 @@
+{
+    "sample": {
+        "prog_id": 14,
+        "prog_name": "kth",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 11,
+        "bug_type": "",
+        "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "雖然改正了目標錯誤，但是把>=錯誤的改為>，導致有重複元素的情形出錯"
+        },
+        "patch-2": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "沒有改正原本的錯誤，並且誤以為分割的兩個陣列需要做類似quick sort的處理"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "sample": {
+        "prog_id": 35,
+        "prog_name": "sqrt",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 2,
+        "bug_type": "",
+        "bug_detail_desc": "在誤差計算時，忘記把approx平方，造成誤差計算的是x跟根號x的差，導致除了x=1或epsilon很大的情況外計算都不會停下"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        }
+    }
+}

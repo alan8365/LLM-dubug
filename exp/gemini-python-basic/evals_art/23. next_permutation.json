@@ -1,0 +1,28 @@
+{
+    "sample": {
+        "prog_id": 23,
+        "prog_name": "next_permutation",
+        "language": "python",
+        "testcase_num": 8,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在檢查首元素要置換為哪個元素時，將首元素索引i和比較元素索引j錯誤的置換，導致所有輸出都是錯誤或直接輸出空值"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        }
+    }
+}

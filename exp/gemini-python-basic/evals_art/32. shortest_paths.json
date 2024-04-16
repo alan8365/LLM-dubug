@@ -1,0 +1,28 @@
+{
+    "sample": {
+        "prog_id": 32,
+        "prog_name": "shortest_paths",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        }
+    }
+}

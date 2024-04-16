@@ -1,0 +1,28 @@
+{
+    "sample": {
+        "prog_id": 15,
+        "prog_name": "lcs_length",
+        "language": "python",
+        "testcase_num": 9,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "多了不必要的else判斷"
+        },
+        "patch-2": {
+            "is_correct": "F",
+            "bug_location_predict": 6,
+            "patch_fail_detail": "從錯誤的動態規劃位置+1"
+        }
+    }
+}

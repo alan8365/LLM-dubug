@@ -1,0 +1,28 @@
+{
+    "sample": {
+        "prog_id": 16,
+        "prog_name": "levenshtein",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "沒有有效改動"
+        },
+        "patch-1": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "沒有有效改動"
+        },
+        "patch-2": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "沒有有效改動"
+        }
+    }
+}
