@@ -1,6 +1,9 @@
 import tokenize
 import io
 
+from tokenize import TokenError
+
+
 def remove_comments(source):
     """
     Removes comments and docstrings from a Python source file.
@@ -20,7 +23,7 @@ def remove_comments(source):
         if start_line > last_lineno:
             last_col = 0
         if start_col > last_col:
-            out += (" " * (start_col - last_col))
+            out += " " * (start_col - last_col)
         # Remove comments:
         if token_type == tokenize.COMMENT:
             pass
@@ -36,20 +39,27 @@ def remove_comments(source):
         last_lineno = end_line
     return out
 
+
 def remove_trailing_whitespace(source: str):
-    lines = source.split('\n')
-    
+    lines = source.split("\n")
+
     # Remove trailing whitespace from each line
     cleaned_lines = [line.rstrip() for line in lines]
-    cleaned_lines = [line for line in cleaned_lines if line != '']
+    cleaned_lines = [line for line in cleaned_lines if line != ""]
 
-    return '\n'.join(cleaned_lines)
+    return "\n".join(cleaned_lines)
+
 
 def cleaning_code(source: str) -> str:
-    comments_removed = remove_comments(source)
+    source = source.strip()
+    try:
+        comments_removed = remove_comments(source)
+    except TokenError:
+        comments_removed = source
     whitespace_removed = remove_trailing_whitespace(comments_removed)
 
     return whitespace_removed.strip()
+
 
 if __name__ == "__main__":
     source_code = """def kheapsort(arr, k):
@@ -65,6 +75,6 @@ if __name__ == "__main__":
     while heap:
         yield -heapq.heappop(heap)
     """
-    
+
     clean_code = cleaning_code(source_code)
     print(clean_code)
