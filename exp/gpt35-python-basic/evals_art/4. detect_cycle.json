@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 4,
+        "prog_name": "detect_cycle",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在判斷終止情況時，沒有處理hare也是空值的狀況，只有處理hare的後繼是空值的狀況，導致hare剛好是空值時會觸發AttributeError"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "沒有處理目標問題，但是處理了沒有影響的next.next是否為空值的問題",
+            "patch_correct_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        }
+    }
+}

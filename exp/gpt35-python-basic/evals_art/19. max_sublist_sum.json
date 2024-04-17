@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 19,
+        "prog_name": "max_sublist_sum",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "雖然加上了max，但是比較對象寫成x而不是歸零，導致當陣列為全負陣列時無法回傳0",
+            "patch_correct_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "雖然加上了max，但是比較對象寫成x而不是歸零，導致當陣列為全負陣列時無法回傳0",
+            "patch_correct_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "雖然加上了max，但是比較對象寫成x而不是歸零，導致當陣列為全負陣列時無法回傳0",
+            "patch_correct_detail": ""
+        }
+    }
+}
