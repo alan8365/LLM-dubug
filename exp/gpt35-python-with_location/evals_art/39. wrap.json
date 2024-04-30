@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 39,
+        "prog_name": "wrap",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "沒有有效更動",
+            "patch_correct_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上strip，導致與正確答案相比缺少一個空白",
+            "patch_correct_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        }
+    }
+}
