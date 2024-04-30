@@ -12,9 +12,9 @@ from src_types import LANG, PROMPT_TYPE
 
 class Experiment:
     def __init__(
-        self, name: str, lang: LANG, llm_api: LlmApi, prompt_type: PROMPT_TYPE = "basic"
+        self, version: str, lang: LANG, llm_api: LlmApi, prompt_type: PROMPT_TYPE = "basic"
     ) -> None:
-        self.name = name
+        self.name = f"{llm_api}-{lang}-{prompt_type}{'_' + version}"
         self.lang = lang
         self.llm_api = llm_api
         self.prompt_type = prompt_type
@@ -66,16 +66,16 @@ class Experiment:
 
 
 if __name__ == "__main__":
+    # exp = Experiment(
+    #     "v3", "python", OpenAiApi("gpt-3.5-turbo-0125"), "with_location" 
+    # )
     exp = Experiment(
-        "gpt35-python-with_step", "python", OpenAiApi("gpt-3.5-turbo-0125"), "with_step"
+        "v3", "python", OpenAiApi("gpt-4-turbo-2024-04-09"), "with_lib"
     )
     # exp = Experiment(
-    #     "gpt4-python-with_lib_v2", "python", OpenAiApi("gpt-4"), "with_lib"
+    #     "v3", "python", GeminiApi("gemini-1.0-pro"), "with_location"
     # )
     # exp = Experiment(
-    #     "gemini-python-with_step", "python", GeminiApi("gemini-1.0-pro"), "with_step"
-    # )
-    # exp = Experiment(
-    #     "claude-python-basic", "python", ClaudeApi("claude-3-opus-20240229"), "basic"
+    #     "", "python", ClaudeApi("claude-3-opus-20240229"), "basic"
     # )
     exp.run()

@@ -6,5 +6,5 @@ LANG = Literal["python", "java"]
 CODE_TYPE = Literal["buggy", "correct", "testcase"]
 LIB = Literal["Node", "WeightedEdge"]
 
-MODEL_NAME = Literal["gpt-3.5-turbo-0125", "gpt-4", "gemini-1.0-pro", "claude-3-opus-20240229"]
-PROMPT_TYPE = Literal["basic", "with_lib", "with_step"]
+MODEL_NAME = Literal["gpt-3.5-turbo-0125", "gpt-4-turbo-2024-04-09", "gemini-1.0-pro", "claude-3-opus-20240229"]
+PROMPT_TYPE = Literal["basic", "with_lib", "with_step", "with_location"]

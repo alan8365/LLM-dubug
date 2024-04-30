@@ -8,7 +8,7 @@ from src_types import PROMPT_TYPE
 class Prompt:
     prompt_templates: dict[PROMPT_TYPE, str] = {
         "basic": (
-            "Fix the bugs in the following code:\n"
+            "Fix the bug in the following code:\n"
             "```{lang}=\n"
             "{code}\n"
             "```\n"
@@ -16,7 +16,7 @@ class Prompt:
             "Fixed code:\n"
         ),
         "with_lib": (
-            "Fix the bugs in the following code:\n"
+            "Fix the bug in the following code:\n"
             "```{lang}=\n"
             "{code}\n"
             "```\n"
@@ -27,7 +27,7 @@ class Prompt:
             "Fixed code:\n"
         ),
         "with_step": (
-            "Your task involves two steps: First, identify the bug and its location in the provided code. Second, generate a patch to fix the code by replacing the section containing the bug. Lastly, provide the complete code with the patch applied.\n"
+            "Fix the bug in the following code step by step and show the comepelte fixed code in the end of :\n"
             "```{lang}=\n"
             "{code}\n"
             "```\n"
@@ -35,7 +35,13 @@ class Prompt:
             "```{lang}=\n"
             "{lib_code}\n"
             "```\n"
-        )
+        ),
+        "with_location": (
+            "Fix the bug in the following code. The bug is on the line commented below:\n"
+            "```{lang}=\n"
+            "{code}\n"
+            "```\n"
+        ),
     }
 
     def __init__(
@@ -44,9 +50,19 @@ class Prompt:
         self.sample = sample
         self.prompt_type = prompt_type
 
-        lib_code = "\n".join(sample.lib_usage.values())
+        lib_code = "\n".join(sample.lib_usage.values()).strip()
+        buggy_code = sample.buggy_code.strip()
+        if prompt_type == "with_location":
+            fault_location = int(sample.fault_location)
+
+            buggy_code = sample.buggy_code.split("\n")
+            buggy_code[fault_location] = (
+                buggy_code[fault_location] + " # The bug is here"
+            )
+            buggy_code = "\n".join(buggy_code)
+
         prompt = self.prompt_templates[prompt_type].format(
-            lang=sample.language, code=sample.buggy_code, lib_code=lib_code
+            lang=sample.language, code=buggy_code, lib_code=lib_code
         )
 
         self.prompt = prompt
@@ -70,7 +86,19 @@ class Prompt:
 
 if __name__ == "__main__":
     a = QuixBugsDataset("python")
-    b = a["breadth_first_search"]
-    c = Prompt(b, "basic")
 
-    print(c.prompt)
+    with open("temp.md", "w") as f:
+        for b in a:
+            c = Prompt(b, "with_step")
+
+            text = (
+                f"## {b.prog_id}.{b.prog_name}\n"
+                "\n"
+                f"Bug detail: {b.bug_detail_desc}\n"
+                "\n"
+                "### Prompt\n"
+                f"{c.prompt}\n"
+            )
+
+            f.write(text)
+

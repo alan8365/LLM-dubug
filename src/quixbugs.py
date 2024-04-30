@@ -1,10 +1,11 @@
 from dotenv import load_dotenv
 
 from src_types import LANG, CODE_TYPE, LIB
-
+from utils import remove_comments
 
 from typing import Optional, Union
 from pathlib import Path
+
 import os
 import json
 import re
@@ -34,9 +35,9 @@ class QuixBugsSample:
             self.base_dir = Path(str(os.getenv("QUIX_BUGS_DIR")))
 
         self.org_buggy_code = self.read_code("buggy")
-        self.buggy_code = self.delete_comment(self.org_buggy_code)
+        self.buggy_code = remove_comments(self.org_buggy_code).strip()
         self.correct_code = self.read_code("correct")
-        self.correct_code = self.delete_comment(self.correct_code)
+        self.correct_code = remove_comments(self.correct_code)
 
         self.lib_usage: dict[LIB, str] = self.detect_library_usage()
 

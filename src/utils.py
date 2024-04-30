@@ -2,6 +2,7 @@ import tokenize
 import io
 
 from tokenize import TokenError
+from black import format_str, FileMode
 
 
 def remove_comments(source):
@@ -54,11 +55,18 @@ def cleaning_code(source: str) -> str:
     source = source.strip()
     try:
         comments_removed = remove_comments(source)
-    except TokenError:
+    except (TokenError, IndentationError):
         comments_removed = source
     whitespace_removed = remove_trailing_whitespace(comments_removed)
+    formated = format_code(whitespace_removed)
 
-    return whitespace_removed.strip()
+    return formated.strip()
+
+
+def format_code(source: str) -> str:
+    formated_code = format_str(source, mode=FileMode())
+
+    return formated_code
 
 
 if __name__ == "__main__":

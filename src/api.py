@@ -43,7 +43,7 @@ class LlmApi(ABC):
     # TODO move to eval
     def clean_response(self, prompt: Prompt, response) -> str:
         lang = prompt.sample.language
-        pattern = re.compile(rf"```{lang}=?(.*?)\n```", re.MULTILINE | re.DOTALL)
+        pattern = re.compile(rf"```{lang}=?(.*?)```", re.MULTILINE | re.DOTALL)
         find_all = pattern.findall(response)
 
         if find_all:
@@ -66,10 +66,14 @@ class LlmApi(ABC):
 
         return patch_group
 
+    @abstractmethod
+    def __str__(self):
+        raise NotImplementedError
+
 
 class OpenAiApi(LlmApi):
     def __init__(self, model_name: MODEL_NAME) -> None:
-        model_name_list = ["gpt-3.5-turbo-0125", "gpt-4"]
+        model_name_list = ["gpt-3.5-turbo-0125", "gpt-4-turbo-2024-04-09"]
         if not model_name in model_name_list:
             raise ValueError(
                 f"Invalid model name provided: {model_name}. Please choose from {model_name_list}"
@@ -96,6 +100,12 @@ class OpenAiApi(LlmApi):
             return repaired_code
         else:
             raise ValueError("No response.")
+    
+    def __str__(self):
+        if self.model_name == "gpt-3.5-turbo-0125":
+            return "gpt35"
+        else:
+            return "gpt4"
 
 
 class GeminiApi(LlmApi):
@@ -146,6 +156,8 @@ class GeminiApi(LlmApi):
 
         return convo.last.text
 
+    def __str__(self):
+        return "gemini"
 
 class ClaudeApi(LlmApi):
     def __init__(self, model_name: MODEL_NAME) -> None:
@@ -176,6 +188,9 @@ class ClaudeApi(LlmApi):
         )
 
         return message.content[0].text
+    
+    def __str__(self):
+        return "claude"
 
 
 if __name__ == "__main__":
