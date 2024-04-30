@@ -12,7 +12,7 @@
         {
             "run_time": 3.813944101333618,
             "is_plausible": true,
-            "is_correct": false,
+            "is_correct": true,
             "pass_num": 7,
             "fail_num": 0,
             "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
@@ -20,7 +20,7 @@
         {
             "run_time": 1.6361050605773926,
             "is_plausible": true,
-            "is_correct": false,
+            "is_correct": true,
             "pass_num": 7,
             "fail_num": 0,
             "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx*approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         }
     ]
 }

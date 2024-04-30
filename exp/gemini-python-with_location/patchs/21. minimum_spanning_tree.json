@@ -30,7 +30,9 @@
             "patch_id": 2,
             "run_time": 2.2516160011291504,
             "repaired_code": "\nfor node in group_by_node[v]:\n    group_by_node[node].update(group_by_node[u])",
-            "raw_code": "The bug is fixed by changing the following line:\n```python\nfor node in group_by_node[v]:\n    group_by_node[node].update(group_by_node[u])\n```\nto:\n```python\nfor node in group_by_node.pop(v):\n    group_by_node[node].update(group_by_node[u])\n```"
+            "raw_code": "```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:  # The bug is fixed here\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n```\nThe bug in the original code is that when updating the `group_by_node` dictionary for node `v`, it is incorrectly iterating through the group for node `v` instead of the group for node `u`. This incorrect update leads to incorrect merging of groups in the minimum spanning tree algorithm.\n\nIn the fixed code, the loop iterates through the group for node `v`, adding each node in that group to the group for node `u`. This correctly merges the groups for nodes `u` and `v`."
         }
     ]
 }
+
+

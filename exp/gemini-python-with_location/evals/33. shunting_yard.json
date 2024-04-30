@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 2,
             "fail_num": 4,
-            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] < precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
+            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] < precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
         },
         {
             "run_time": 3.6806161403656006,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]] and token != ')':\n                rpntokens.append(opstack.pop())\n            if token == ')':\n                opstack.pop()\n            else:\n                opstack.append(token)\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
+            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while (\n                opstack\n                and precedence[token] <= precedence[opstack[-1]]\n                and token != \")\"\n            ):\n                rpntokens.append(opstack.pop())\n            if token == \")\":\n                opstack.pop()\n            else:\n                opstack.append(token)\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
         },
         {
             "run_time": 3.4071497917175293,
@@ -31,7 +31,7 @@
             "is_correct": true,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
+            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
         }
     ]
 }
