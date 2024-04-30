@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr: # The bug is here\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u904d\u6b77\u9663\u5217\u6642\u6c92\u6709\u6392\u9664\u5df2\u7d93\u5728heap\u4e2d\u7684\u5143\u7d20\uff0c\u5c0e\u81f4\u9664\u4e86k\u70ba0\u4ee5\u5916\u7684\u8f38\u5165\u7686\u6703\u7522\u751f\u932f\u8aa4"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.2330551147460938,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Fixed bug: iterate over elements from index k\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Fixed bug: iterate over elements from index k\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.3118860721588135,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Fixed bug: iterate starting from index k\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Fixed bug: iterate starting from index k\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.4641380310058594,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Fixed the bug by iterating from index k onwards\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Fixed the bug by iterating from index k onwards\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        }
+    ]
+}

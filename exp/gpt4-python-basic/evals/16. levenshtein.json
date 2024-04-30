@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 6.009766101837158,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 5,
             "fail_num": 1,
-            "reparied_code": "\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n    \n    if source[0] == target[0]:\n        cost = 0\n    else:\n        cost = 1\n\n    return min(\n        levenshtein(source[1:], target) + 1,\n        levenshtein(source, target[1:]) + 1,\n        levenshtein(source[1:], target[1:]) + cost,\n    )"
+            "reparied_code": "def levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n    if source[0] == target[0]:\n        cost = 0\n    else:\n        cost = 1\n    return min(\n        levenshtein(source[1:], target) + 1,\n        levenshtein(source, target[1:]) + 1,\n        levenshtein(source[1:], target[1:]) + cost,\n    )"
         },
         {
             "run_time": 7.697415828704834,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 5,
             "fail_num": 1,
-            "reparied_code": "\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        substitution_cost = 0\n    else:\n        substitution_cost = 1\n\n    return min(levenshtein(source[1:], target) + 1,\n               levenshtein(source, target[1:]) + 1,\n               levenshtein(source[1:], target[1:]) + substitution_cost)"
+            "reparied_code": "def levenshtein(source, target):\n    if source == '':\n        return len(target)\n    elif target == '':\n        return len(source)\n    if source[0] == target[0]:\n        substitution_cost = 0\n    else:\n        substitution_cost = 1\n    return min(levenshtein(source[1:], target) + 1,\n               levenshtein(source, target[1:]) + 1,\n               levenshtein(source[1:], target[1:]) + substitution_cost)"
         },
         {
             "run_time": 4.1975319385528564,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef levenshtein(source, target):\n    if source == '':\n        return len(target)\n    if target == '':\n        return len(source)\n\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )"
+            "reparied_code": "def levenshtein(source, target):\n    if source == '':\n        return len(target)\n    if target == '':\n        return len(source)\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )"
         }
     ]
 }

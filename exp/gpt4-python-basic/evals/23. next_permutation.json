@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 11.326334953308105,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "\n\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # change '<' to '>'\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n"
+            "reparied_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm"
         },
         {
             "run_time": 4.317621946334839,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None # if no next permutation is found, return None"
+            "reparied_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None"
         },
         {
             "run_time": 6.2221879959106445,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "\n\ndef next_permutation(perm):\n    # find the first decreasing element from back\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            # find the first element greater than the above from back\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: \n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i] # swap these two\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:]) # reverse the remaining elements after the first element\n                    return next_perm\n    return None # if there is no next permutation"
+            "reparied_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    return None"
         }
     ]
 }

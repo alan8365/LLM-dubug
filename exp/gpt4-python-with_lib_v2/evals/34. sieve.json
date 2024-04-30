@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 1.8718039989471436,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p != 0 for p in primes):\n            primes.append(n)\n    return primes"
+            "reparied_code": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p != 0 for p in primes):\n            primes.append(n)\n    return primes"
         },
         {
             "run_time": 3.239665985107422,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes"
+            "reparied_code": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes"
         },
         {
             "run_time": 5.122688055038452,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes"
+            "reparied_code": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes):\n            primes.append(n)\n    return primes"
         }
     ]
 }

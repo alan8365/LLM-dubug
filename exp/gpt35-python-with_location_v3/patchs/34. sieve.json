@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if any(n % p > 0 for p in primes): # The bug is here\n            primes.append(n)\n    return primes\n```\n",
+        "sample": {
+            "prog_id": 34,
+            "prog_name": "sieve",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 3,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5224\u65b7n\u662f\u5426\u4e0d\u88ab\u6240\u6709\u8cea\u6578\u6574\u9664\u6642\uff0c\u5beb\u6210\u4e86\u662f\u5426\u5b58\u5728\u8cea\u6578\u4e0d\u80fd\u6574\u9664n\uff0c\u7531\u65bc\u59cb\u7d42\u4e0d\u5b58\u5728\u8cea\u6578\u7528\u65bc\u5224\u65b7\uff0c\u5c0e\u81f4\u9664\u4e86max=1\u4ee5\u5916\u7684\u72c0\u6cc1\u5168\u90e8\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.6429169178009033,
+            "repaired_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes): # Fixed bug by using all() function\n            primes.append(n)\n    return primes\n",
+            "raw_code": "To fix the bug, you need to change the condition in the `if` statement to check if `n` is divisible by any prime number in `primes` rather than checking if `n` modulo `p` is non-zero. Here is the corrected code:\n\n```python\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes): # Fixed bug by using all() function\n            primes.append(n)\n    return primes\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.9015390872955322,
+            "repaired_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p != 0 for p in primes): # Corrected the condition\n            primes.append(n)\n    return primes\n",
+            "raw_code": "The bug in the code is that the condition inside the `any` function is incorrectly checking if `n % p > 0` instead of checking if `n % p == 0`. The correct condition should be checking if the remainder of `n` divided by `p` is equal to 0 in order to identify non-prime numbers.\n\nHere is the corrected code:\n```python\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p != 0 for p in primes): # Corrected the condition\n            primes.append(n)\n    return primes\n``` \n\nNow, the `any` function has been changed to `all` and the condition is checking if `n % p != 0` to ensure that non-prime numbers are correctly identified."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.6821930408477783,
+            "repaired_code": "\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes): # Fixed the bug by changing 'any' to 'all'\n            primes.append(n)\n    return primes\n",
+            "raw_code": "To fix the bug in the code, we need to change the condition in the `if` statement to check if `n` is not divisible by any prime number in the list `primes`. \n\nHere is the corrected code:\n```python\ndef sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p > 0 for p in primes): # Fixed the bug by changing 'any' to 'all'\n            primes.append(n)\n    return primes\n``` \n\nBy changing `any` to `all`, we are now checking that `n` is not divisible by any prime number in `primes` which is the correct condition for checking if `n` is prime."
+        }
+    ]
+}

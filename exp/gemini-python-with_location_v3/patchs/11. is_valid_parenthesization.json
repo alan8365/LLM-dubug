@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return True # The bug is here\n```\n",
+        "sample": {
+            "prog_id": 11,
+            "prog_name": "is_valid_parenthesization",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u904d\u6b77\u5b8c\u5b57\u4e32\u5f8c\u76f4\u63a5\u56de\u50b3True\u800c\u6c92\u6709\u8003\u616e\u5230depth\u5927\u65bc1\u6642\u4ecd\u975e\u5408\u6cd5\u7684\u72c0\u6cc1\uff0c\u5c0e\u81f4\u6700\u5f8cdepth\u5927\u65bc1\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.962502956390381,
+            "repaired_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0 # Fixed the bug",
+            "raw_code": "The bug is that the code returns `True` even if the depth is not zero at the end of the loop. This can happen if the number of closing parentheses is less than the number of opening parentheses. To fix the bug, the code should return `False` if the depth is not zero at the end of the loop:\n```python\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0 # Fixed the bug\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.0603151321411133,
+            "repaired_code": "\ndef is_valid_parenthesization(parens):\n    if depth < 0:\n        return False\n\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return True",
+            "raw_code": "The bug here is that the code doesn't check if the `depth` becomes negative after the first iteration of the loop, which indicates that the number of closing parentheses is greater than the number of opening parentheses. To fix the code, add a check for a negative `depth` before the loop:\n```python\ndef is_valid_parenthesization(parens):\n    if depth < 0:\n        return False\n\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return True\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.7038750648498535,
+            "repaired_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0",
+            "raw_code": "The bug is that, if the loop finishes without `depth` becoming negative, it does not check whether `depth` is equal to 0. To fix this issue, add `return depth == 0` as the last statement in the function, like this:\n```python\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0\n```"
+        }
+    ]
+}

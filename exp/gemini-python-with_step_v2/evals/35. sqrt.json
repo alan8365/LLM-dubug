@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 35,
+        "prog_name": "sqrt",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 2,
+        "bug_type": "",
+        "bug_detail_desc": "在誤差計算時，忘記把approx平方，造成誤差計算的是x跟根號x的差，導致除了x=1或epsilon很大的情況外計算都不會停下"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.4797239303588867,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 6,
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x\n    while abs(x - approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+        },
+        {
+            "run_time": 11.163528203964233,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "def sqrt(x, epsilon):\n    if x <= 0:\n        raise ValueError(\"Input must be a positive number.\")\n    if epsilon <= 0:\n        raise ValueError(\"Epsilon must be a positive number.\")\n    if x >= 1:\n        approx = x / 2\n    else:\n        approx = 1\n    while abs(x - approx) > epsilon and abs(x - approx * approx) > epsilon and approx > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+        },
+        {
+            "run_time": 7.863493919372559,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 6,
+            "reparied_code": "def sqrt(x, epsilon):\n    if x < 0:\n        return None\n    approx = 1\n    while abs(x - approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+        }
+    ]
+}

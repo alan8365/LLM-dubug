@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 1.713022232055664,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 13,
             "fail_num": 0,
-            "reparied_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x <= pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater"
+            "reparied_code": "def quicksort(arr):\n    if not arr:\n        return []\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x <= pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater"
         },
         {
             "run_time": 1.9683911800384521,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 13,
             "fail_num": 0,
-            "reparied_code": "\ndef quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    pivot = arr[0]\n    lesser = [x for x in arr[1:] if x < pivot]\n    greater = [x for x in arr[1:] if x >= pivot]\n    return quicksort(lesser) + [pivot] + quicksort(greater)"
+            "reparied_code": "def quicksort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[0]\n    lesser = [x for x in arr[1:] if x < pivot]\n    greater = [x for x in arr[1:] if x >= pivot]\n    return quicksort(lesser) + [pivot] + quicksort(greater)"
         },
         {
             "run_time": 2.8443310260772705,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 13,
             "fail_num": 0,
-            "reparied_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x <= pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater"
+            "reparied_code": "def quicksort(arr):\n    if not arr:\n        return []\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x <= pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater"
         }
     ]
 }

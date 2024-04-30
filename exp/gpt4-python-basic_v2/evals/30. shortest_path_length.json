@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 30,
+        "prog_name": "shortest_path_length",
+        "language": "python",
+        "testcase_num": 4,
+        "fault_location": 21,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 19.853588819503784,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 3,
+            "reparied_code": "from heapq import heappush, heappop\n\n\nclass Graph:\n    def __init__(self):\n        self.edges = {}\n\n    def add_edge(self, from_node, to_node, length):\n        if from_node in self.edges:\n            self.edges[from_node].append((to_node, length))\n        else:\n            self.edges[from_node] = [(to_node, length)]\n\n    def successors(self, node):\n        return self.edges.get(node, [])\n\n\ndef shortest_path_length(graph, start_node, goal_node):\n    priority_queue = []\n    heappush(priority_queue, (0, start_node))\n    shortest_paths = {start_node: 0}\n    while priority_queue:\n        current_distance, current_node = heappop(priority_queue)\n        if current_node == goal_node:\n            return current_distance\n        if current_distance > shortest_paths[current_node]:\n            continue\n        for neighbor, weight in graph.successors(current_node):\n            distance = current_distance + weight\n            if neighbor not in shortest_paths or distance < shortest_paths[neighbor]:\n                shortest_paths[neighbor] = distance\n                heappush(priority_queue, (distance, neighbor))\n    return float(\"inf\")\n\n\ngraph = Graph()\ngraph.add_edge(\"A\", \"B\", 1)\ngraph.add_edge(\"B\", \"C\", 2)\ngraph.add_edge(\"A\", \"C\", 4)\nprint(shortest_path_length(graph, \"A\", \"C\"))"
+        },
+        {
+            "run_time": 29.209000825881958,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 2,
+            "fail_num": 2,
+            "reparied_code": "import heapq\n\n\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    unvisited_nodes = []\n    heapq.heappush(unvisited_nodes, (0, startnode))\n    visited_nodes = set()\n    shortest_path = {startnode: 0}\n    while unvisited_nodes:\n        current_distance, current_node = heapq.heappop(unvisited_nodes)\n        if current_node == goalnode:\n            return current_distance\n        if current_node in visited_nodes:\n            continue\n        visited_nodes.add(current_node)\n        for nextnode, edge_length in length_by_edge.get(current_node, {}).items():\n            if nextnode in visited_nodes:\n                continue\n            new_distance = current_distance + edge_length\n            if new_distance < shortest_path.get(nextnode, float(\"inf\")):\n                shortest_path[nextnode] = new_distance\n                heapq.heappush(unvisited_nodes, (new_distance, nextnode))\n    return float(\"inf\")\n\n\nlength_by_edge = {(\"A\", \"B\"): 1, (\"B\", \"C\"): 2, (\"A\", \"C\"): 4}\nlength_by_edge.update({(\"B\", \"D\"): 5, (\"C\", \"D\"): 1, (\"D\", \"E\"): 2, (\"C\", \"E\"): 7})\ngraph = {}\nfor (src, dst), length in length_by_edge.items():\n    if src not in graph:\n        graph[src] = {}\n    graph[src][dst] = length\nprint(shortest_path_length(graph, \"A\", \"E\"))"
+        },
+        {
+            "run_time": 17.566418886184692,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 1,
+            "reparied_code": "from heapq import heappush, heappop\n\n\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    unvisited_nodes = []\n    heappush(unvisited_nodes, (0, startnode))\n    visited_nodes = set()\n    distances = {startnode: 0}\n    while unvisited_nodes:\n        current_distance, current_node = heappop(unvisited_nodes)\n        if current_node == goalnode:\n            return current_distance\n        if current_node in visited_nodes:\n            continue\n        visited_nodes.add(current_node)\n        for nextnode in current_node.successors:\n            if nextnode in visited_nodes:\n                continue\n            new_distance = current_distance + length_by_edge[(current_node, nextnode)]\n            if nextnode not in distances or new_distance < distances[nextnode]:\n                distances[nextnode] = new_distance\n                heappush(unvisited_nodes, (new_distance, nextnode))\n    return float(\"inf\")"
+        }
+    ]
+}

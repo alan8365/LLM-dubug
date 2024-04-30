@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(arr): # The bug is here\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 2,
+            "prog_name": "bucketsort",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728for\u8ff4\u5708\u4e2d\u628a\u904d\u6b77\u7684\u76ee\u6a19\u8aa4\u7528\u70ba\u539f\u672c\u7684\u9663\u5217arr\uff0c\u800c\u975e\u6a19\u8a18\u9663\u5217\u4e2d\u5143\u7d20\u6578\u91cf\u7684count\uff0c\u5c0e\u81f4\u9664\u975e\u8981\u6392\u5e8f\u7684\u9663\u5217\u548ccount\u4e00\u6a21\u4e00\u6a23\u5426\u5247\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.068936824798584,
+            "repaired_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # Fixed the loop\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "The bug in the code is that it loops over the array `arr` to get the counts, but it uses the variable `count` to represent the index of the element in the `arr` array. The correct code should loop over the indexes of `arr` instead:\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # Fixed the loop\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.186915159225464,
+            "repaired_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # Fixed the bug here\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "The bug in the code is that it uses `arr` instead of `counts` in the `for` loop. To fix it, replace `for i, count in enumerate(arr)` with `for i, count in enumerate(counts)`.\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # Fixed the bug here\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.738424777984619,
+            "repaired_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # Fixed the bug\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "The bug is on the line `for i, count in enumerate(arr)`. It should be `for i, count in enumerate(counts)`.\nHere is the fixed code:\n```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts): # Fixed the bug\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 33,
+            "prog_name": "shunting_yard",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 16,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8655\u7406\u5230\u904b\u7b97\u7b26\u7684\u6642\u5019\u6c92\u6709\u5c07\u904b\u7b97\u7b26\u653e\u9032opstack\u4e2d\uff0c\u9020\u6210rpntokens\u6c92\u6709\u4efb\u4f55\u904b\u7b97\u7b26\uff0c\u5c0e\u81f4\u6709\u904b\u7b97\u7b26\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.706620216369629,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens",
+            "raw_code": "The bug is in the while loop that handles operators. It should pop the top operator from the stack and append it to the output list. However, the code incorrectly pops the top element from the stack and appends it to the output list. To fix this, the code should be modified as follows:\n```python=\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 8.811946153640747,
+            "repaired_code": "\nwhile opstack and precedence[token] <= precedence[opstack[-1]]:\n    rpntokens.append(opstack.pop())\nrpntokens.append(token)  # Append the token to the output",
+            "raw_code": "**Bug 1:**\nThe code doesn't push the current token onto `rpntokens` after popping operators from the `opstack`. So, the code should look like this:\n\n```python=\nwhile opstack and precedence[token] <= precedence[opstack[-1]]:\n    rpntokens.append(opstack.pop())\nrpntokens.append(token)  # Append the token to the output\n```\n**Bug 2:**\n\nThe code should additionally handle the case when the token is an opening parenthesis by pushing it onto the `opstack`. As well as when the token is a closing parenthesis, it should pop all operators from the `opstack` and add them to the `rpntokens` until it finds the opening parenthesis, which it should discard. The code should look like this:\n\n```python=\nif token == '(':\n    opstack.append(token)\nelif token == ')':\n    while opstack and opstack[-1] != '(':\n        rpntokens.append(opstack.pop())\n    if not opstack:\n        raise ValueError(\"Mismatched parentheses\")\n    else:\n        opstack.pop()  # Discard the opening parenthesis\n```\n**Final code:**\n```python=\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        elif token in precedence:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n        elif token == '(':\n            opstack.append(token)\n        elif token == ')':\n            while opstack and opstack[-1] != '(':\n                rpntokens.append(opstack.pop())\n            if not opstack:\n                raise ValueError(\"Mismatched parentheses\")\n            else:\n                opstack.pop()  # Discard the opening parenthesis\n        else:\n            raise ValueError(\"Invalid token: {}\".format(token))\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.070658206939697,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens",
+            "raw_code": "The code above is missing the actual operation of adding the tokens to the opstack before the precedence conditions are checked. There is only a while loop that only pops the opstack without adding to it. The corrected version of the code is provided below:\n```python=\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```"
+        }
+    ]
+}

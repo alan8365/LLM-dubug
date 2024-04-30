@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1 # The bug is here\n\n    return longest\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u66f4\u6539longest\u8b8a\u6578\u6642\uff0c\u7f3a\u5c11\u4e86max\u51fd\u6578\u5224\u65b7\u65b0\u6578\u503c\u662f\u5426\u6bd4\u539f\u672c\u9577\uff0c\u5c0e\u81f4\u5728\u521d\u671f\u5c31\u627e\u5230\u7b54\u6848\u7684\u60c5\u6cc1\u6703\u5728\u5f8c\u671f\u88ab\u66f4\u65b0\u70ba\u932f\u8aa4\u7b54\u6848"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.8297929763793945,
+            "repaired_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = max(longest, length + 1) # Fix the bug\n\n    return longest",
+            "raw_code": "```python=\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = max(longest, length + 1) # Fix the bug\n\n    return longest\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.7608511447906494,
+            "repaired_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val > arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest",
+            "raw_code": "```python=\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val > arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.9728949069976807,
+            "repaired_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n        if length + 1 > longest:  # Fix the bug by updating longest after updating ends\n            longest = length + 1\n\n    return longest",
+            "raw_code": "```python=\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n        if length + 1 > longest:  # Fix the bug by updating longest after updating ends\n            longest = length + 1\n\n    return longest\n```"
+        }
+    ]
+}

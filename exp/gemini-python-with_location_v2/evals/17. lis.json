@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 17,
+        "prog_name": "lis",
+        "language": "python",
+        "testcase_num": 12,
+        "fault_location": 12,
+        "bug_type": "",
+        "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.2666878700256348,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 2,
+            "fail_num": 10,
+            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends[length + 1]]:\n            longest += 1\n            ends[length] = i\n    return longest"
+        },
+        {
+            "run_time": 4.169970989227295,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 12,
+            "reparied_code": "def lis(arr):\n    ends = {}\n    ends[0] = 0\n    longest = 1\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n    return longest"
+        },
+        {
+            "run_time": 1.2389779090881348,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "longest = max(longest, length + 1)"
+        }
+    ]
+}

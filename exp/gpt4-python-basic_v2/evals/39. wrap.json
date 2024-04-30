@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 39,
+        "prog_name": "wrap",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 12.447846174240112,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 5,
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(\" \", 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    lines.append(text)\n    return lines"
+        },
+        {
+            "run_time": 18.996081113815308,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 5,
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(\" \", 0, cols + 1)\n        if end == -1 and len(text) > cols:\n            end = cols\n        elif end == -1:\n            end = len(text)\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines"
+        },
+        {
+            "run_time": 15.604269027709961,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 5,
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(\" \", 0, cols + 1)\n        if end == -1:\n            end = cols\n        else:\n            end = end + 1\n        line, text = text[:end].strip(), text[end:].strip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines"
+        }
+    ]
+}

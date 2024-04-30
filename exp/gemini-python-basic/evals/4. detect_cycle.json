@@ -4,28 +4,34 @@
         "prog_name": "detect_cycle",
         "language": "python",
         "testcase_num": 6,
-        "fault_location": 5,
+        "fault_location": 4,
         "bug_type": "",
         "bug_detail_desc": "在判斷終止情況時，沒有處理hare也是空值的狀況，只有處理hare的後繼是空值的狀況，導致hare剛好是空值時會觸發AttributeError"
     },
     "patchs_eval": [
         {
             "run_time": 6.790089130401611,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare is None or hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True"
+            "reparied_code": "def detect_cycle(node):\n    hare = tortoise = node\n    while True:\n        if hare is None or hare.successor is None:\n            return False\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n        if hare is tortoise:\n            return True"
         },
         {
             "run_time": 1.9239270687103271,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare is None or hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True"
+            "reparied_code": "def detect_cycle(node):\n    hare = tortoise = node\n    while True:\n        if hare is None or hare.successor is None:\n            return False\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n        if hare is tortoise:\n            return True"
         },
         {
             "run_time": 2.774456739425659,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare is None or hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True"
+            "reparied_code": "def detect_cycle(node):\n    hare = tortoise = node\n    while True:\n        if hare is None or hare.successor is None:\n            return False\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n        if hare is tortoise:\n            return True"
         }
     ]
 }

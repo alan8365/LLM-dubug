@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 1.9556310176849365,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 4.11655592918396,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 1.724480152130127,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx*approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx*approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         }
     ]
 }

@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:] or right[j:])\n        return result\n\n    if len(arr) == 0: # The bug is here\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 20,
+            "prog_name": "mergesort",
+            "language": "python",
+            "testcase_num": 14,
+            "fault_location": 15,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u7684\u7d42\u6b62\u72c0\u6cc1\u5224\u65b7\u4e2d\uff0c\u6c92\u6709\u8003\u616e\u5230\u53ea\u6709\u4e00\u500b\u5143\u7d20\u6642\u4e5f\u7121\u6cd5\u5207\u70ba\u5de6\u53f3\u5169\u500b\u9663\u5217\uff0c\u5c0e\u81f4\u905e\u8ff4\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.0061421394348145,
+            "repaired_code": "\ndef mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:] or right[j:])\n        return result\n\n    if len(arr) <= 1:  # Fixed bug by changing == 0 to <= 1\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)",
+            "raw_code": "```python\ndef mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:] or right[j:])\n        return result\n\n    if len(arr) <= 1:  # Fixed bug by changing == 0 to <= 1\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.375504970550537,
+            "repaired_code": "\ndef mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:] or right[j:])\n        return result\n\n    if len(arr) <= 1: # Fix: changed the condition to check for length less than or equal to 1\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)",
+            "raw_code": "```python\ndef mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:] or right[j:])\n        return result\n\n    if len(arr) <= 1: # Fix: changed the condition to check for length less than or equal to 1\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.164164066314697,
+            "repaired_code": "\ndef mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:] or right[j:])\n        return result\n\n    if len(arr) <= 1:   # Fixed the bug by changing == to <=\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)",
+            "raw_code": "```python=\ndef mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:] or right[j:])\n        return result\n\n    if len(arr) <= 1:   # Fixed the bug by changing == to <=\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)\n```"
+        }
+    ]
+}

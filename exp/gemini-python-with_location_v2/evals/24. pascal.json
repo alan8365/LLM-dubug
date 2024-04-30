@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 24,
+        "prog_name": "pascal",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在控制三角形底邊數量的for loop參數時，缺少將r+1造成底邊長度少一，導致輸出的三角形或者缺少最後一排或者訪問前一排最後元素時觸發IndexError"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.394171953201294,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r + 1):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n    return rows"
+        },
+        {
+            "run_time": 4.516998052597046,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 4,
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(1, r + 1):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n    return rows"
+        },
+        {
+            "run_time": 3.433626890182495,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r+1):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n    return rows"
+        }
+    ]
+}

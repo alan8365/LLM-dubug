@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes: # The bug is here\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n```\n",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5224\u65b7\u7bc0\u9ede\u80fd\u5426\u6392\u9032ordered_nodes\u6642\uff0c\u628aincoming\u5beb\u6210outgoing\uff0c\u9020\u6210\u9664\u4e86\u6c92\u6709incoming\u7bc0\u9ede\u7684\u521d\u59cb\u7bc0\u9ede\u5916\u6c92\u6709\u7bc0\u9ede\u80fd\u88ab\u6392\u5e8f\u9032\u4f86\uff0c\u5c0e\u81f4\u8f38\u5165\u6709\u908a\u5716\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.193102121353149,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes: # The condition is fixed here\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "The condition `if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:` should be changed to `if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes`, as you need to check if the incoming nodes of the next node are a subset of the already ordered nodes.\nHere is the fixed code:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes: # The condition is fixed here\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.408746957778931,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if not set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "The bug is in the condition `if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes`. It should be `if not set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes`. This is because the condition in the original code checks if the outgoing nodes of the next node are a subset of the ordered nodes. This is incorrect because it should instead check if the outgoing nodes of the next node are not a subset of the ordered nodes.\n\nHere is the corrected code:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if not set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.115386009216309,
+            "repaired_code": "\nif set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes: # The bug is here",
+            "raw_code": "The bug in the code is on the line:\n```python=\nif set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes: # The bug is here\n```\nThe bug is that it checks if the set of all ordered nodes is a superset of the nextnode's outgoing nodes. However, a more correct way to check if the nextnode can be added to the ordered nodes is to check if the set of all ordered nodes is a superset of the nextnode's incoming nodes. This is because a node can only be added to the ordered nodes if all of its incoming nodes have already been added.\n\nHere is the fixed code:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes: # Fixed the bug\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        }
+    ]
+}

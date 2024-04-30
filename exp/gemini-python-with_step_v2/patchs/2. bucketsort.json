@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(arr):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 2,
+            "prog_name": "bucketsort",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728for\u8ff4\u5708\u4e2d\u628a\u904d\u6b77\u7684\u76ee\u6a19\u8aa4\u7528\u70ba\u539f\u672c\u7684\u9663\u5217arr\uff0c\u800c\u975e\u6a19\u8a18\u9663\u5217\u4e2d\u5143\u7d20\u6578\u91cf\u7684count\uff0c\u5c0e\u81f4\u9664\u975e\u8981\u6392\u5e8f\u7684\u9663\u5217\u548ccount\u4e00\u6a21\u4e00\u6a23\u5426\u5247\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.560405969619751,
+            "repaired_code": "\nfor i, count in enumerate(arr):",
+            "raw_code": "The code has a bug in the following line:\n\n```python\nfor i, count in enumerate(arr):\n```\nThe looping should be done over the counts array as follows:\n\n```python\nfor i, count in enumerate(counts):\n```\nHere is the fixed code:\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):    # changed this line\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.5994300842285156,
+            "repaired_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr",
+            "raw_code": "There are several issues in the provided code:\n\n1. The code uses `arr` in the second for loop to count the elements instead of using `counts` to retrieve the count of each element. It should use `counts` instead of `arr`.\n\n2. The code iterates over `arr` in the second loop, but it should iterate over the indices of the `counts` list to get the elements' values.\n\nHere is the fixed code:\n```python=\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.7259891033172607,
+            "repaired_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    \n    sorted_arr = []\n    for i in range(k):\n        sorted_arr.extend([i] * counts[i])\n    \n    return sorted_arr",
+            "raw_code": "**1. Iterate Over Counts:**\n   - The `for` loop in the second part of the code should iterate over `counts` instead of `arr`.\n\n**2. Extend Sorted Array:**\n   - Instead of extending `sorted_arr` with `[i] * counts[i]`, it should be extended with `[i] * count`.\n\n**3. Missing Value Error:**\n   - The code assumes that `arr` contains all values from `0` to `k-1`. If this is not the case, an error will occur.\n\n**Revised Code:**\n```python\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    \n    sorted_arr = []\n    for i in range(k):\n        sorted_arr.extend([i] * counts[i])\n    \n    return sorted_arr\n```"
+        }
+    ]
+}

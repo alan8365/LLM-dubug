@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 24,
+            "prog_name": "pascal",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u63a7\u5236\u4e09\u89d2\u5f62\u5e95\u908a\u6578\u91cf\u7684for loop\u53c3\u6578\u6642\uff0c\u7f3a\u5c11\u5c07r+1\u9020\u6210\u5e95\u908a\u9577\u5ea6\u5c11\u4e00\uff0c\u5c0e\u81f4\u8f38\u51fa\u7684\u4e09\u89d2\u5f62\u6216\u8005\u7f3a\u5c11\u6700\u5f8c\u4e00\u6392\u6216\u8005\u8a2a\u554f\u524d\u4e00\u6392\u6700\u5f8c\u5143\u7d20\u6642\u89f8\u767cIndexError"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.830223798751831,
+            "repaired_code": "\ndef pascal(n):\n    if n == 0:\n        return [[1]]\n\n    rows = [[1] for _ in range(n)]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c]\n            row.append(upleft + upright)\n        rows[r] = row\n\n    return rows",
+            "raw_code": "**Bug:** The code fails to handle the case when `r == 0` correctly, as it tries to access `rows[r - 1]`, which is out of bounds.\n\n**Fix:** Add a check to handle the case when `r == 0` and initialize the first row with `[1, 1]` instead of `[1]`.\n\n```python=\ndef pascal(n):\n    if n == 0:\n        return [[1]]\n\n    rows = [[1] for _ in range(n)]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c]\n            row.append(upleft + upright)\n        rows[r] = row\n\n    return rows\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.407276153564453,
+            "repaired_code": "\nupleft = rows[r - 1][c - 1] if c > 0 else 0",
+            "raw_code": "**Bug 1:** The code attempts to access `rows[r - 1][c - 1]` for `c = 0`, which is out of bounds. To fix this, check if `c > 0` before accessing this element:\n```python=\nupleft = rows[r - 1][c - 1] if c > 0 else 0\n```\n\n**Bug 2:** The code initializes the `rows` list with a single row containing the number `1`. However, the algorithm requires the first row to contain two 1s. To fix this, change the initialization to:\n```python=\nrows = [[1, 1]]\n```\n\nWith these changes, the code should correctly generate and return a pascal's triangle up to the `n`th row."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.086183786392212,
+            "repaired_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows",
+            "raw_code": "In the given code, an out of bounds index error occurred because in the inner `for` loop, when `c` is 0, the value of `upleft` becomes `rows[r - 1][c - 1]`, which attempts to access a non-existent index in the `rows` list. To fix this, `upleft` should be initialized to 0 when `c` is 0.\n\nHere's the fixed code:\n```python\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n```"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 27,
+        "prog_name": "quicksort",
+        "language": "python",
+        "testcase_num": 13,
+        "fault_location": 6,
+        "bug_type": "",
+        "bug_detail_desc": "在建立比pivot大的元素組成的陣列時，沒有將和pivot相等的元素包含進去，導致在排序有和pivot相等元素的陣列時會缺少這些元素"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 19.093909740447998,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 13,
+            "fail_num": 0,
+            "reparied_code": "def quicksort(arr):\n    if not arr:\n        return []\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    pivots = [x for x in arr if x == pivot]\n    return lesser + pivots + greater"
+        },
+        {
+            "run_time": 18.42399001121521,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 13,
+            "fail_num": 0,
+            "reparied_code": "def quicksort(arr):\n    if not arr:\n        return []\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    equal = [x for x in arr if x == pivot]\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + equal + greater"
+        },
+        {
+            "run_time": 7.3703742027282715,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 13,
+            "fail_num": 0,
+            "reparied_code": "def quicksort(arr):\n    if not arr:\n        return []\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    equal = [x for x in arr if x == pivot]\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + equal + greater"
+        }
+    ]
+}

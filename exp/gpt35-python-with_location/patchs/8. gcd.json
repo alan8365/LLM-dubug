@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b) # The bug is here\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u547c\u53eb\u6642\uff0c\u6c92\u6709\u4ea4\u63db\u6578\u5b57\u7684\u4f4d\u7f6e\uff0c\u4f7f\u5f97b\u7684\u4f4d\u7f6e\u59cb\u7d42\u4fdd\u6301\u4e0d\u8b8a\uff0c\u5c0e\u81f4\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.8249750137329102,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Fixed bug by swapping a and b",
+            "raw_code": "```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Fixed bug by swapping a and b\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.7712230682373047,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Swapped the arguments to gcd() function",
+            "raw_code": "```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Swapped the arguments to gcd() function\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.6824052333831787,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Fixed bug by switching the order of arguments",
+            "raw_code": "```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Fixed bug by switching the order of arguments\n```"
+        }
+    ]
+}

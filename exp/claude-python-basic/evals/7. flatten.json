@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 19.587436199188232,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\nnested_list = [1, [2, [3, 4], 5], 6, [7, 8]]\nflattened_list = list(flatten(nested_list))\nprint(flattened_list)"
+            "reparied_code": "nested_list = [1, [2, [3, 4], 5], 6, [7, 8]]\nflattened_list = list(flatten(nested_list))\nprint(flattened_list)"
         },
         {
             "run_time": 18.43621826171875,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\nnested_list = [1, [2, 3], [4, [5, 6]], 7, [8, 9]]\nflattened = list(flatten(nested_list))\nprint(flattened)"
+            "reparied_code": "nested_list = [1, [2, 3], [4, [5, 6]], 7, [8, 9]]\nflattened = list(flatten(nested_list))\nprint(flattened)"
         },
         {
             "run_time": 15.1992769241333,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            yield from flatten(x)\n        else:\n            yield x"
+            "reparied_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            yield from flatten(x)\n        else:\n            yield x"
         }
     ]
 }

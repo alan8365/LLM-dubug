@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 2.1626858711242676,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b < 0 or b > len(alphabet):\n        return \"Invalid base\"\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b < 0 or b > len(alphabet):\n        return \"Invalid base\"\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]"
         },
         {
             "run_time": 1.9421441555023193,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b > len(alphabet):\n      return \"invalid base\"\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b > len(alphabet):\n      return \"invalid base\"\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]"
         },
         {
             "run_time": 2.155010223388672,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\n\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b <= 0 or b > len(alphabet):\n        return 'Invalid base'\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]\n\n\n\n\n"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b <= 0 or b > len(alphabet):\n        return 'Invalid base'\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i]\n    return result[::-1]"
         }
     ]
 }

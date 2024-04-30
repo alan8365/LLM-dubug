@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 14,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5982999\u9019\u985e\u9700\u8981\u9032\u4f4d\u7684\u8f38\u5165\u800c\u9032\u5165\u6700\u5f8c\u4e00\u500b\u9032\u4f4d\u8655\u7406\u908f\u8f2f\u6642\uff0c\u6c92\u6709\u5c07\u539f\u59cb\u4f4d\u6578-1\u9020\u6210\u56de\u50b3\u7d50\u679c\u591a\u4e00\u4f4d\uff0c\u5c0e\u81f4\u985e\u4f3c\u908a\u7de3\u60c5\u6cc1\u7684\u8f38\u5165\u7121\u6cd5\u7372\u5f97\u6b63\u78ba\u8f38\u51fa"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.8771679401397705,
+            "repaired_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid and low_mid >= 0:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]",
+            "raw_code": "**1. Incorrect Assignment:**\nIn the line `if low_mid != high_mid`, the conditional check should be `if low_mid >= 0`.\n\n**2. Missing Return:**\nThe function is missing a return statement outside the while loop to handle cases where the loop ends without making any changes.\n\n**Here's the corrected code:**\n\n```python\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid and low_mid >= 0:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.155030012130737,
+            "repaired_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n    return [1] + (len(digit_list)) * [0] + [1]",
+            "raw_code": "**The Bug:**\nThe bug in the code is that the `return` statement is inside the `else` statement, so when the `if` condition is true (i.e., `digit_list[high_mid] == 9`), the function will immediately return without incrementing the digits.\n\n**The Fix:**\nTo fix this, the `return` statement should be moved outside of the `else` statement.\n\n**Corrected Code:**\n```python\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n    return [1] + (len(digit_list)) * [0] + [1]\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.840974807739258,
+            "repaired_code": "\n    idx = low_mid - 1\n    while idx >= 0:\n        digit_list[idx] = 0\n        digit_list[len(digit_list) - 1 - idx] = 0\n        idx -= 1\n    digit_list.append(1)\n    digit_list.insert(0, 1)\n    return digit_list",
+            "raw_code": "The issue is that the function does not handle the case when the digit list is exhausted and the next palindrome is larger than the current one. To fix this issue, the following lines can be appended to the end of the function:\n```python\n    idx = low_mid - 1\n    while idx >= 0:\n        digit_list[idx] = 0\n        digit_list[len(digit_list) - 1 - idx] = 0\n        idx -= 1\n    digit_list.append(1)\n    digit_list.insert(0, 1)\n    return digit_list\n```\nThe updated function should look like this:\n```python\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    idx = low_mid - 1\n    while idx >= 0:\n        digit_list[idx] = 0\n        digit_list[len(digit_list) - 1 - idx] = 0\n        idx -= 1\n    digit_list.append(1)\n    digit_list.insert(0, 1)\n    return digit_list\n```"
+        }
+    ]
+}

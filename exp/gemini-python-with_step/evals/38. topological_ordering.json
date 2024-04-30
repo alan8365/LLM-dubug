@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.972033977508545,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 3,
-            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(set(nextnode.outgoing_nodes)) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\n"
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(set(nextnode.outgoing_nodes)) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n    return ordered_nodes"
         },
         {
             "run_time": 5.470156669616699,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 3,
-            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    if not _is_dag(nodes):\n        raise ValueError(\"Graph contains cycles\")\n    \n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n\n\ndef _is_dag(nodes):\n    visited = set()\n    for node in nodes:\n        if node not in visited:\n            if _has_cycle(node, visited, set()):\n                return False\n    return True\n\n\ndef _has_cycle(node, visited, stack):\n    visited.add(node)\n    stack.add(node)\n    for nextnode in node.outgoing_nodes:\n        if nextnode in stack:\n            return True\n        if nextnode not in visited and _has_cycle(nextnode, visited, stack):\n            return True\n    stack.remove(node)\n    return False"
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    if not _is_dag(nodes):\n        raise ValueError(\"Graph contains cycles\")\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n    return ordered_nodes\ndef _is_dag(nodes):\n    visited = set()\n    for node in nodes:\n        if node not in visited:\n            if _has_cycle(node, visited, set()):\n                return False\n    return True\ndef _has_cycle(node, visited, stack):\n    visited.add(node)\n    stack.add(node)\n    for nextnode in node.outgoing_nodes:\n        if nextnode in stack:\n            return True\n        if nextnode not in visited and _has_cycle(nextnode, visited, stack):\n            return True\n    stack.remove(node)\n    return False"
         },
         {
             "run_time": 5.020772695541382,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 3,
-            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(set(nextnode.outgoing_nodes) - {nextnode}) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes"
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(set(nextnode.outgoing_nodes) - {nextnode}) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n    return ordered_nodes"
         }
     ]
 }

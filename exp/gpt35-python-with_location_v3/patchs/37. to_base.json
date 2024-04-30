@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = result + alphabet[i] # The bug is here\n    return result\n```\n",
+        "sample": {
+            "prog_id": 37,
+            "prog_name": "to_base",
+            "language": "python",
+            "testcase_num": 10,
+            "fault_location": 7,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u7d50\u679c\u8a08\u7b97\u6642\uff0c\u5148\u8a08\u7b97\u51fa\u7684\u662f\u4f4e\u4f4d\u7684\u7d50\u679c\uff0c\u4f46\u662f\u5b57\u4e32\u62fc\u63a5\u6642\u932f\u7f6e\u4e86result\u8ddf\u65b0\u4f4d\u7684\u4f4d\u7f6e\uff0c\u9020\u6210\u5f97\u5230\u7684\u7d50\u679c\u90fd\u662f\u76f8\u53cd\u7684\uff0c\u5c0e\u81f4\u9664\u8ff4\u6587\u6578\u5916\u7684\u7d50\u679c\u90fd\u662f\u932f\u8aa4\u7684"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.102046966552734,
+            "repaired_code": "\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result  # Fixed line\n    return result\n",
+            "raw_code": "The bug in the code is that the characters are being added to the `result` string in reverse order. To fix this, you can add the characters to the beginning of the `result` string using string concatenation:\n\n```python\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result  # Fixed line\n    return result\n``` \n\nThis change will ensure that the characters are added in the correct order when converting a number to a different base."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.067093849182129,
+            "repaired_code": "\nresult = alphabet[i] + result\n",
+            "raw_code": "The bug in the code is that the characters are being added to the 'result' variable in reverse order. To fix this bug, you can update the line with the following code:\n```python=\nresult = alphabet[i] + result\n``` \n\nThis change will ensure that the characters are added in the correct order when converting the number to a different base."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.288454055786133,
+            "repaired_code": "\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result\n",
+            "raw_code": "The bug in the code is that the characters are being added to the `result` string in reverse order. To fix the bug, we need to prepend the characters to the `result` string instead of appending them. This can be done using string concatenation or by using the `insert` method of strings.\n\nHere is the corrected code using string concatenation:\n```python=\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result\n```\n\nAnd here is the corrected code using the `insert` method:\n```python=\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result\n```"
+        }
+    ]
+}

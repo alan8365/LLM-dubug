@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )\n\n    return length_by_path\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8a08\u7b97\u4ee5k\u70ba\u4e2d\u7e7c\u9023\u7d50ij\u7684\u8ddd\u96e2\u6642\uff0c\u5c07i\u5230k\u3001k\u5230j\u8aa4\u5beb\u70bai\u5230k\u3001j\u5230k\uff0c\u5c0e\u81f4\u975e\u7121\u5411\u5716\u7d50\u69cb\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.413068771362305,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )\n                length_by_path[j, i] = min(\n                    length_by_path[j, i],\n                    length_by_path[j, k] + length_by_path[i, k]\n                )\n\n    return length_by_path",
+            "raw_code": "The code above doesn't modify the edge lengths. The nested loops traverse all edges, so any edge can be used as an intermediate to all others, but the lengths are not updated to reflect such paths. To fix the issue, the code needs to update `length_by_path[i, j]` when the shortest path from `i` to `j` goes through `k`.\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )\n                length_by_path[j, i] = min(\n                    length_by_path[j, i],\n                    length_by_path[j, k] + length_by_path[i, k]\n                )\n\n    return length_by_path\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 7.75401496887207,
+            "repaired_code": "\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path",
+            "raw_code": "**1. Incorrect syntax.** In Python, tuple keys should be enclosed in parentheses instead of curly braces. Correct the code to:\n```python\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path\n```\n\n**2. Missing argument.** The `shortest_path_lengths` function expects two arguments: `n` and `length_by_edge`. However, only `n` is being passed in the example usage. Add the missing `length_by_edge` argument:\n```python\nlength_by_path = shortest_path_lengths(n, length_by_edge)\n```\n\n**3. Incorrect use of `update`.** The `update` method is used to add multiple key-value pairs to a dictionary. However, the code is trying to add a single key-value pair using `update`. Correct the code to:\n```python\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[k, j]\n)\n```\n\n**4. Unbound variable.** The `shortest_path_lengths` function does not define the `length_by_edge` variable. Add the `length_by_edge` argument to the function definition:\n```python\ndef shortest_path_lengths(n, length_by_edge):\n    # ...\n```\n\nAfter making these corrections, the code should work properly to calculate the shortest path lengths between all pairs of nodes in a graph."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.094220876693726,
+            "repaired_code": "\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )",
+            "raw_code": "This code finds the shortest path between 2 nodes in a graph. It's using the Floyd-Warshall algorithm to find the shortest path between any 2 vertices. The algorithm first initializes a distance matrix with the distance between every 2 vertices being infinity, and it then sets the distance between every vertex to itself as 0.\n\nHowever, there is an error here:\n```python=\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k]\n                )\n```\n\nThe shortest path between 2 nodes doesn't have to go through a node k. Therefore, this code should be:\n```python=\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n```"
+        }
+    ]
+}

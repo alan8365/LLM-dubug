@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step and show the comepelte fixed code in the end:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n```\n",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5224\u65b7\u7bc0\u9ede\u80fd\u5426\u6392\u9032ordered_nodes\u6642\uff0c\u628aincoming\u5beb\u6210outgoing\uff0c\u9020\u6210\u9664\u4e86\u6c92\u6709incoming\u7bc0\u9ede\u7684\u521d\u59cb\u7bc0\u9ede\u5916\u6c92\u6709\u7bc0\u9ede\u80fd\u88ab\u6392\u5e8f\u9032\u4f86\uff0c\u5c0e\u81f4\u8f38\u5165\u6709\u908a\u5716\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.347342014312744,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "**Step 1: Identify the bug** \n\nThe bug here is in the check if the next node is not already in ordered_nodes. \nThis condition will always be false since the next node must be a successor of a node in ordered_nodes that has just been processed\n\n**Step 2: Fix the bug** \n\nThe check whether the next node is not already in ordered_nodes should be done with the `not in` operator instead of `issuperset`\n\n**The fixed code:**\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.67429780960083,
+            "repaired_code": "\nif set(ordered_nodes).issuperset(nextnode.incoming_nodes)",
+            "raw_code": "**Bug 1:** The condition `if set(ordered_nodes).issuperset(nextnode.outgoing_nodes)` checks if all of the outgoing nodes of the current node are already in the `ordered_nodes` list. This is incorrect because it should check if all of the incoming nodes of the `nextnode` are already in the `ordered_nodes` list.\n```python=\nif set(ordered_nodes).issuperset(nextnode.incoming_nodes)\n```\n\n**Bug 2:** The code does not handle the case where the graph contains cycles. If there is a cycle in the graph, the code will enter an infinite loop and never terminate. To handle this case, the code should use a visited set to keep track of the nodes that have already been processed.\n```python=\nvisited = set()\n```\n\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    visited = set()\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes and nextnode not in visited:\n                ordered_nodes.append(nextnode)\n                visited.add(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.846343040466309,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    while True:\n        new_ordered_nodes = []\n\n        for node in ordered_nodes:\n            for nextnode in node.outgoing_nodes:\n                if set(nextnode.outgoing_nodes).issuperset(ordered_nodes) and nextnode not in ordered_nodes:\n                    new_ordered_nodes.append(nextnode)\n\n        if set(ordered_nodes) == set(new_ordered_nodes):\n            break\n\n        ordered_nodes.extend(new_ordered_nodes)\n\n    return ordered_nodes",
+            "raw_code": "**Bug 1:** The line `if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes` is wrong as it checks if the outgoing nodes of `nextnode` is a superset of the ordered nodes, but it should be the inverse. To fix it, change it to `if set(nextnode.outgoing_nodes).issuperset(ordered_nodes) and nextnode not in ordered_nodes`.\n\n**Bug 2:** The function will not terminate as the ordered nodes only get updated if their successors all have ordered nodes. However, this means that nodes might not get ordered until they appear as successors of other nodes. This issue can be fixed by making the function iterative and updating the ordered nodes as long as there are changes in each iteration.\n\nHere is the fixed code:\n```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    while True:\n        new_ordered_nodes = []\n\n        for node in ordered_nodes:\n            for nextnode in node.outgoing_nodes:\n                if set(nextnode.outgoing_nodes).issuperset(ordered_nodes) and nextnode not in ordered_nodes:\n                    new_ordered_nodes.append(nextnode)\n\n        if set(ordered_nodes) == set(new_ordered_nodes):\n            break\n\n        ordered_nodes.extend(new_ordered_nodes)\n\n    return ordered_nodes\n```"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 18,
+        "prog_name": "longest_common_subsequence",
+        "language": "python",
+        "testcase_num": 10,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在兩字串首字一致呼叫遞迴式的情況下，字串b沒有移除首字便直接輸入，導致不斷重複比較輸出錯誤答案"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 31.051979064941406,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 10,
+            "fail_num": 0,
+            "reparied_code": "def longest_common_subsequence(a, b):\n    memo = {}\n\n    def lcs_recursive(i, j):\n        if (i, j) in memo:\n            return memo[(i, j)]\n        if i == len(a) or j == len(b):\n            result = \"\"\n        elif a[i] == b[j]:\n            result = a[i] + lcs_recursive(i + 1, j + 1)\n        else:\n            result = max(lcs_recursive(i, j + 1), lcs_recursive(i + 1, j), key=len)\n        memo[(i, j)] = result\n        return result\n\n    return lcs_recursive(0, 0)\n\n\na = \"AGGTAB\"\nb = \"GXTXAYB\"\nprint(longest_common_subsequence(a, b))"
+        },
+        {
+            "run_time": 11.124810934066772,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 10,
+            "fail_num": 0,
+            "reparied_code": "def longest_common_subsequence(a, b):\n    if not a or not b:\n        return \"\"\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len,\n        )"
+        },
+        {
+            "run_time": 9.899473905563354,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 10,
+            "fail_num": 0,
+            "reparied_code": "def longest_common_subsequence(a, b):\n    if not a or not b:\n        return \"\"\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len,\n        )"
+        }
+    ]
+}

@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 11.04538893699646,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef bucketsort(arr, k):\n    counts = [0] * (k+1)\n    for x in arr:\n        if x >= k+1:\n            raise ValueError(\"Array contains values out of range\")\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr"
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * (k+1)\n    for x in arr:\n        if x >= k+1:\n            raise ValueError(\"Array contains values out of range\")\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
         },
         {
             "run_time": 4.640480041503906,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        if x < k:\n            counts[x] += 1\n        else:\n            return \"Error: Array contains element larger than k\"\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr"
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        if x < k:\n            counts[x] += 1\n        else:\n            return \"Error: Array contains element larger than k\"\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
         },
         {
             "run_time": 4.179264068603516,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef bucketsort(arr, k):\n    counts = [0] * (k+1)\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr"
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * (k+1)\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
         }
     ]
 }

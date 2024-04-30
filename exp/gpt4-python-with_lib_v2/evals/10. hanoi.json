@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.9907541275024414,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps"
+            "reparied_code": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps"
         },
         {
             "run_time": 5.241480112075806,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))  # Fix here, move from start to end, not helper\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps"
+            "reparied_code": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps"
         },
         {
             "run_time": 5.847337007522583,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start, end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end)) # bug fix: move disk from start to end, not start to helper\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps"
+            "reparied_code": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start, end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps"
         }
     ]
 }

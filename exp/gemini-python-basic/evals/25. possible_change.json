@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 2.227470874786377,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 9,
-            "reparied_code": "\n# Python 3\ndef possible_change(coins, total):\n    if total < 0:\n        return 0\n    if total == 0:\n        return 1\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n\n\n\n\n"
+            "reparied_code": "def possible_change(coins, total):\n    if total < 0:\n        return 0\n    if total == 0:\n        return 1\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
         },
         {
             "run_time": 2.683242082595825,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or len(coins) == 0:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or len(coins) == 0:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
         },
         {
             "run_time": 1.9910430908203125,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or len(coins) == 0:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n\n"
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or len(coins) == 0:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
         }
     ]
 }

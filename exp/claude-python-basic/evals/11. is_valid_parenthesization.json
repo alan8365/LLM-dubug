@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 21.078176021575928,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n        else:\n            return False\n\n    return depth == 0"
+            "reparied_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n        else:\n            return False\n    return depth == 0"
         },
         {
             "run_time": 19.46456003189087,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n        else:\n            return False\n\n    return depth == 0"
+            "reparied_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n        else:\n            return False\n    return depth == 0"
         },
         {
             "run_time": 16.082767724990845,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0"
+            "reparied_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth == 0"
         }
     ]
 }

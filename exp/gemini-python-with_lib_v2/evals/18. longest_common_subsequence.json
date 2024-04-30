@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 2.3621339797973633,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\ndef longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )\n\n\n\n\n"
+            "reparied_code": "def longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )"
         },
         {
             "run_time": 2.382779121398926,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\ndef longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )\n\n\n\n\n"
+            "reparied_code": "def longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )"
         },
         {
             "run_time": 2.5271999835968018,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\ndef longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )"
+            "reparied_code": "def longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )"
         }
     ]
 }

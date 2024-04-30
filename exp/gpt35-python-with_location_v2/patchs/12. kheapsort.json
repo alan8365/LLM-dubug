@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr: # The bug is here\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u904d\u6b77\u9663\u5217\u6642\u6c92\u6709\u6392\u9664\u5df2\u7d93\u5728heap\u4e2d\u7684\u5143\u7d20\uff0c\u5c0e\u81f4\u9664\u4e86k\u70ba0\u4ee5\u5916\u7684\u8f38\u5165\u7686\u6703\u7522\u751f\u932f\u8aa4"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.503844976425171,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Fixed the bug here\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n",
+            "raw_code": "The bug in the code is that the loop is iterating over the original array `arr` instead of the elements after the first `k` elements. To fix this, the loop should iterate over `arr[k:]` instead of `arr`.\n\nHere is the corrected code:\n```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Fixed the bug here\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.4292118549346924,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Iterate from the k-th element onwards\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n",
+            "raw_code": "The bug in the code is on the line `for x in arr:` where it should be iterating over the elements of the array `arr` starting from the k-th element, as the first k elements are already in the heap. \n\nHere is the fixed code:\n\n```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]: # Iterate from the k-th element onwards\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n``` \n\nWith this fix, the code will iterate over the elements of the array `arr` starting from the k-th element, as intended."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 14.245841979980469,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:  # Fix the bug here\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n# Test the function\narr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]\nk = 4\nsorted_arr = list(kheapsort(arr, k))\nprint(sorted_arr)\n",
+            "raw_code": "To fix the bug in the code, change the for loop to iterate over the remaining elements in the array after the initial k elements are added to the heap. Here is the corrected code:\n\n```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:  # Fix the bug here\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n# Test the function\narr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]\nk = 4\nsorted_arr = list(kheapsort(arr, k))\nprint(sorted_arr)\n```\n\nNow the code will correctly iterate over the remaining elements in the array after the initial k elements and perform the heap operations accordingly."
+        }
+    ]
+}

@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.221380949020386,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result"
         },
         {
             "run_time": 5.020642280578613,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b > len(alphabet) or b < 2:\n        raise ValueError(\"Base must be between 2 and \" + str(len(alphabet)))\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    if b > len(alphabet) or b < 2:\n        raise ValueError(\"Base must be between 2 and \" + str(len(alphabet)))\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result"
         },
         {
             "run_time": 4.603417158126831,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\ndef to_base(num, b):\n    if num == 0: # You should account for the case when num is 0, to avoid infinite loops.\n        return '0'\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result  # This should be prefix, not suffix, to get the correct order of digits.\n    return result"
+            "reparied_code": "import string\ndef to_base(num, b):\n    if num == 0:\n        return '0'\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result"
         }
     ]
 }

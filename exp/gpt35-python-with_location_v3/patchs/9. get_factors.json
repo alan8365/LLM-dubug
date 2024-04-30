@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [] # The bug is here\n```\n",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8f38\u5165\u662f\u8cea\u6578\u6642\u50c5\u56de\u50b3\u7a7a\u9663\u5217\u800c\u975e\u5305\u542b\u6578\u5b57\u672c\u8eab\u7684\u9663\u5217\uff0c\u5c0e\u81f4\u8cea\u6578\u7684\u5206\u89e3\u51fa\u932f\u4e14\u905e\u8ff4\u7684\u5f71\u97ff\u5e7e\u4e4e\u6240\u6709\u8f38\u5165"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.0743751525878906,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n] # Fix: Return [n] if no factors are found\n",
+            "raw_code": "The bug in the code is that it returns an empty list when no factors are found in the loop. To fix this, you can modify the return statement to return `[n]` instead of an empty list.\nHere is the corrected code:\n```python=\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n] # Fix: Return [n] if no factors are found\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.060301065444946,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]  # Fix: Return [n] instead of []\n\n# Test the function\nprint(get_factors(12))  # Output: [2, 2, 3]\n",
+            "raw_code": "The bug in the code is that it returns an empty list when it should return the n itself if the loop reaches the end without finding any factors. To fix this, we can return [n] instead of an empty list at the end of the function when no factors are found. \n\nHere is the corrected code:\n\n```python\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]  # Fix: Return [n] instead of []\n\n# Test the function\nprint(get_factors(12))  # Output: [2, 2, 3]\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.0207719802856445,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]  # Corrected line\n",
+            "raw_code": "The bug in the code is that the function is returning an empty list `[]` when it should actually return `[n]` when the number `n` itself is a prime number. \n\nHere's the corrected code:\n```python\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]  # Corrected line\n```\n\nNow, the function will return `[n]` when the input number `n` is prime, instead of returning an empty list."
+        }
+    ]
+}

@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.284276247024536,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list) - 1) * [0] + [1]"
+            "reparied_code": "def next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list) - 1) * [0] + [1]"
         },
         {
             "run_time": 4.3947508335113525,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list) - 1) * [0] + [1]"
+            "reparied_code": "def next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list) - 1) * [0] + [1]"
         },
         {
             "run_time": 4.415440797805786,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n\n    return [1] + (len(digit_list) - 1) * [0] + [1]"
+            "reparied_code": "def next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] += 1\n            return digit_list\n    return [1] + (len(digit_list) - 1) * [0] + [1]"
         }
     ]
 }

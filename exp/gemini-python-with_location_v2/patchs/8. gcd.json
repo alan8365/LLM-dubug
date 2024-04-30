@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b) # The bug is here\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u547c\u53eb\u6642\uff0c\u6c92\u6709\u4ea4\u63db\u6578\u5b57\u7684\u4f4d\u7f6e\uff0c\u4f7f\u5f97b\u7684\u4f4d\u7f6e\u59cb\u7d42\u4fdd\u6301\u4e0d\u8b8a\uff0c\u5c0e\u81f4\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.6357219219207764,
+            "repaired_code": "\nreturn gcd(b % a, a)",
+            "raw_code": "The bug is that the code uses `a % b` instead of `b % a`. To fix the bug, replace the line with the following:\n```python=\nreturn gcd(b % a, a)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.2552902698516846,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)",
+            "raw_code": "The bug is in the recursive call to `gcd`. It should be `gcd(b, a % b)` instead of `gcd(a % b, b)`. Here is the correct code:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.482017993927002,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b) # The bug is here",
+            "raw_code": "The bug is that the function is calling itself passing `b` instead of `a % b` for the first parameter in the recursive call:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b) # The bug is here\n```\nTo fix it, we should pass `a % b` instead of `b` to the recursive call:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, a) # Fixed the bug\n```"
+        }
+    ]
+}

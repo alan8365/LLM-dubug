@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 32,
+        "prog_name": "shortest_paths",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 18.33378314971924,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    weight_by_node = {}\n    for u, v in weight_by_edge.keys():\n        weight_by_node[u] = float(\"inf\")\n        weight_by_node[v] = float(\"inf\")\n    weight_by_node[source] = 0\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node"
+        },
+        {
+            "run_time": 30.735753774642944,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    nodes = set(u for u, _ in weight_by_edge) | set(v for _, v in weight_by_edge)\n    weight_by_node = {node: float(\"inf\") for node in nodes}\n    weight_by_node[source] = 0\n    for _ in range(len(nodes) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node"
+        },
+        {
+            "run_time": 16.642475128173828,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    weight_by_node = {}\n    for u, v in weight_by_edge:\n        weight_by_node[u] = float(\"inf\")\n        weight_by_node[v] = float(\"inf\")\n    weight_by_node[source] = 0\n    for _ in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node"
+        }
+    ]
+}

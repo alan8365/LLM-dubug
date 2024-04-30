@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.834681987762451,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 9,
             "fail_num": 0,
-            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0\n\n\n\n\n"
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n    return max(dp.values()) if dp else 0"
         },
         {
             "run_time": 3.414038896560669,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 5,
             "fail_num": 4,
-            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = [[0 for _ in range(len(t) + 1)] for _ in range(len(s) + 1)]\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i + 1][j + 1] = dp[i][j] + 1\n            else:\n                dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])\n\n    return max(max(row) for row in dp)\n\n"
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = [[0 for _ in range(len(t) + 1)] for _ in range(len(s) + 1)]\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i + 1][j + 1] = dp[i][j] + 1\n            else:\n                dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])\n    return max(max(row) for row in dp)"
         },
         {
             "run_time": 4.024961948394775,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 7,
-            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1]) + 1\n\n    return max(dp.values()) if dp else 0"
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1]) + 1\n    return max(dp.values()) if dp else 0"
         }
     ]
 }

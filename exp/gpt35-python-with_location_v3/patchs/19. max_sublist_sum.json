@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max_ending_here + x # The bug is here\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n```\n",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u66f4\u6539max_ending_here\u6642\uff0c\u6c92\u6709\u52a0\u4e0amax\u51fd\u6578\uff0c\u9020\u6210\u8a08\u7b97\u7e3d\u662f\u8003\u616e\u5230\u6574\u500blist\u800c\u6c92\u6709\u6b78\u96f6\u6a5f\u5236\uff0c\u5c0e\u81f4\u53ea\u80fd\u8655\u7406\u7b54\u6848\u662f\u6574\u500blist\u76f8\u52a0\u6216sublist\u5728\u524d\u671f\u51fa\u73fe\u7684\u72c0\u6cc1"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.5224151611328125,
+            "repaired_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n",
+            "raw_code": "To fix the bug in the code, you need to update the `max_ending_here` to either `x` or `0`, whichever is greater. This is because if adding the current element `x` to `max_ending_here` results in a negative sum, it means that it's better to start a new subarray from the current element `x`.\n\nHere is the corrected code:\n\n```python\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n```\n\nWith this change, the code should now correctly calculate the maximum sum of a contiguous subarray within the input array."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.515374183654785,
+            "repaired_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(0, max_ending_here + x)  # Fix the bug by resetting to 0 if negative\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n",
+            "raw_code": "To fix the bug on the line `max_ending_here = max_ending_here + x`, the code should be updated to reset `max_ending_here` to 0 if it becomes negative after adding the current element `x`. Here is the corrected code:\n\n```python\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(0, max_ending_here + x)  # Fix the bug by resetting to 0 if negative\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n``` \n\nWith this correction, the code will correctly calculate the maximum sum of a sublist within the input array."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.0795509815216064,
+            "repaired_code": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(max_ending_here + x, 0)  # Fix: Reset max_ending_here to 0 if it's negative\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n",
+            "raw_code": "To fix the bug in the code, we need to reset `max_ending_here` to 0 whenever it becomes negative. This is because once the sum drops below 0, keeping it in the sum could only decrease the maximum sum. Here is the corrected code:\n\n```python\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(max_ending_here + x, 0)  # Fix: Reset max_ending_here to 0 if it's negative\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n```"
+        }
+    ]
+}

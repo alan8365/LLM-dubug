@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode # The bug is here\n    return prevnode\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n```\n",
+        "sample": {
+            "prog_id": 28,
+            "prog_name": "reverse_linked_list",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u7f6e\u63dbnode\u7684successor\u6642\uff0c\u6c92\u6709\u5c07node\u8ce6\u503c\u7d66prevnode\uff0c\u9020\u6210prevnode\u4e00\u76f4\u662f\u7a7a\u503c\u4e14\u6240\u6709node\u7684\u65b0successor\u90fd\u662f\u7a7a\u503c\uff0c\u5c0e\u81f4\u9664\u4e86\u8f38\u5165\u7a7a\u503c\u5916\u7684\u6240\u6709\u60c5\u6cc1\u90fd\u6703\u932f\u8aa4"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.6142520904541016,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node # The correct statement\n        node = nextnode\n    return prevnode",
+            "raw_code": "The bug is that the `node` variable is not updated correctly. Instead of updating it to the next node, it is set to the next node's successor. To fix the code, change the line `node = nextnode` to `node = prevnode`.\n```python\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node # The correct statement\n        node = nextnode\n    return prevnode\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.8269617557525635,
+            "repaired_code": "\n        prevnode = node\n        node = nextnode",
+            "raw_code": "The bug is that after reversing the `node.successor` pointer, the code doesn't update the `node` to point to the next node in the list. This should be fixed by changing the last line to:\n```python\n        prevnode = node\n        node = nextnode\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.2541542053222656,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = nextnode # Fix the bug here\n    return prevnode",
+            "raw_code": "The bug is in the line `node = nextnode`. It should be `prevnode = nextnode`\n```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = nextnode # Fix the bug here\n    return prevnode\n```"
+        }
+    ]
+}

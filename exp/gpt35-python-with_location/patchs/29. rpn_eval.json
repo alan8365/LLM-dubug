@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b) # The bug is here\n            )\n\n    return stack.pop()\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 29,
+            "prog_name": "rpn_eval",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 18,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u904b\u7b97\u4e26\u653e\u56destack\u6642\uff0c\u5ffd\u7565\u4e86stack\u4e2d\u7b2c\u4e00\u500bpop\u7684\u5143\u7d20\u662f\u64fa\u5728\u904b\u7b97\u5f0f\u5f8c\u7684\u5143\u7d20\uff0c\u5c0e\u81f4\u904b\u7b97\u4e0d\u7b26\u5408\u4ea4\u63db\u5f8b\u7684\u8f38\u5165\u6642\u7686\u6703\u932f\u8aa4"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.6444430351257324,
+            "repaired_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](b, a) # Fixed bug by changing the order of operands a and b\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b) # The bug is here\n            )\n\n    return stack.pop()",
+            "raw_code": "```python=\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](b, a) # Fixed bug by changing the order of operands a and b\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b) # The bug is here\n            )\n\n    return stack.pop()\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.4145820140838623,
+            "repaired_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](b, a)  # Fixed the bug here by changing the order of a and b\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(op(token, a, b))\n\n    return stack.pop()",
+            "raw_code": "```python\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](b, a)  # Fixed the bug here by changing the order of a and b\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(op(token, a, b))\n\n    return stack.pop()\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.404766082763672,
+            "repaired_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](b, a)  # Fixed bug: swapped the order of operands for subtraction and division\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()",
+            "raw_code": "```python\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](b, a)  # Fixed bug: swapped the order of operands for subtraction and division\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n```"
+        }
+    ]
+}

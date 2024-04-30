@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u]) # The bug is here\n\n    return mst_edges\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u66f4\u65b0group_by_node\u8b8a\u6578\u6642\uff0c\u8aa4\u7528update\u51fd\u6578\u5728for loop\u4e2d\u66f4\u65b0set\u5f15\u767cRuntimeError\uff0c\u5c0e\u81f4\u5e7e\u4e4e\u6240\u6709\u8f38\u5165\u90fd\u7121\u6cd5\u904b\u884c"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.5154502391815186,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u] # Fixed bug\n\n    return mst_edges",
+            "raw_code": "```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u] # Fixed bug\n\n    return mst_edges\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.5843558311462402,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]  # Fixed bug by assigning the value instead of updating\n\n    return mst_edges",
+            "raw_code": "```python=\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]  # Fixed bug by assigning the value instead of updating\n\n    return mst_edges\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.8895010948181152,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            temp_nodes = set(group_by_node[v])  # Fix: Create a temporary set to avoid modifying the set being iterated\n            for node in temp_nodes:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges",
+            "raw_code": "```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            temp_nodes = set(group_by_node[v])  # Fix: Create a temporary set to avoid modifying the set being iterated\n            for node in temp_nodes:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n```"
+        }
+    ]
+}

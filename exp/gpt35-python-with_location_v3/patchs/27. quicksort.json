@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot]) # The bug is here\n    return lesser + [pivot] + greater\n```\n",
+        "sample": {
+            "prog_id": 27,
+            "prog_name": "quicksort",
+            "language": "python",
+            "testcase_num": 13,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5efa\u7acb\u6bd4pivot\u5927\u7684\u5143\u7d20\u7d44\u6210\u7684\u9663\u5217\u6642\uff0c\u6c92\u6709\u5c07\u548cpivot\u76f8\u7b49\u7684\u5143\u7d20\u5305\u542b\u9032\u53bb\uff0c\u5c0e\u81f4\u5728\u6392\u5e8f\u6709\u548cpivot\u76f8\u7b49\u5143\u7d20\u7684\u9663\u5217\u6642\u6703\u7f3a\u5c11\u9019\u4e9b\u5143\u7d20"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.042669057846069,
+            "repaired_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x <= pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater\n",
+            "raw_code": "The bug in the code is that it does not include values that are equal to the pivot in either the \"lesser\" or \"greater\" lists. To fix this bug, we should include values equal to the pivot in the \"lesser\" list. Here is the corrected code:\n\n```python\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x <= pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    return lesser + [pivot] + greater\n```\n\nNow the code will properly include values equal to the pivot in the \"lesser\" list."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.8532018661499023,
+            "repaired_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot]) # Fixed bug\n    return lesser + [pivot] + greater\n",
+            "raw_code": "The bug in the code is that the condition for checking if x is greater than pivot (`if x > pivot`) should be changed to `if x >= pivot` to include elements equal to pivot in the `greater` list.\n\n```python=\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot]) # Fixed bug\n    return lesser + [pivot] + greater\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.4943807125091553,
+            "repaired_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x <= pivot])\n    return lesser + [pivot] + greater\n",
+            "raw_code": "The bug in the code is that the condition in the list comprehension for finding elements greater than the pivot should be `x <= pivot` instead of `x > pivot`. Here is the corrected code:\n\n```python\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x <= pivot])\n    return lesser + [pivot] + greater\n```"
+        }
+    ]
+}

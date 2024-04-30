@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b) # The bug is here\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u547c\u53eb\u6642\uff0c\u6c92\u6709\u4ea4\u63db\u6578\u5b57\u7684\u4f4d\u7f6e\uff0c\u4f7f\u5f97b\u7684\u4f4d\u7f6e\u59cb\u7d42\u4fdd\u6301\u4e0d\u8b8a\uff0c\u5c0e\u81f4\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.223910093307495,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Fix the bug by swapping the order of arguments\n",
+            "raw_code": "To fix the bug in the code, you need to swap the order of arguments in the recursive call to `gcd`, passing `b` first and `a % b` as the second argument. Here is the corrected code:\n\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Fix the bug by swapping the order of arguments\n``` \n\nBy swapping the order of arguments in the recursive call, the code will now calculate the greatest common divisor correctly."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.522148847579956,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Swap a % b with b\n",
+            "raw_code": "To fix the bug in the code, we need to swap `a % b` with `b` in the recursive call to `gcd` function. Here is the corrected code:\n\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Swap a % b with b\n``` \n\nBy swapping `a % b` with `b` in the recursive call, the code will calculate the greatest common divisor correctly."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.891211986541748,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Swapped positions of a % b and b\n",
+            "raw_code": "To fix the bug in the code, we need to swap the positions of `a % b` and `b` in the recursive call to `gcd`. Here is the corrected code:\n\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Swapped positions of a % b and b\n``` \n\nNow, the code should work correctly and find the greatest common divisor (GCD) of two numbers `a` and `b`."
+        }
+    ]
+}

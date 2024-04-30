@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 1.9322140216827393,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n\n\n"
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n    while heap:\n        yield heapq.heappop(heap)"
         },
         {
             "run_time": 3.566681146621704,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 3,
-            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    if k > len(arr):\n        raise ValueError(\"k cannot be greater than the length of the input list\")\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n"
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    if k > len(arr):\n        raise ValueError(\"k cannot be greater than the length of the input list\")\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n    while heap:\n        yield heapq.heappop(heap)"
         },
         {
             "run_time": 1.7664260864257812,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n\n\n"
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n    while heap:\n        yield heapq.heappop(heap)"
         }
     ]
 }

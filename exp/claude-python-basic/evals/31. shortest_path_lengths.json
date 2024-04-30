@@ -4,28 +4,34 @@
         "prog_name": "shortest_path_lengths",
         "language": "python",
         "testcase_num": 4,
-        "fault_location": 10,
+        "fault_location": 12,
         "bug_type": "",
         "bug_detail_desc": "在計算以k為中繼連結ij的距離時，將i到k、k到j誤寫為i到k、j到k，導致非無向圖結構的輸入結果皆會出錯"
     },
     "patchs_eval": [
         {
             "run_time": 18.503839254379272,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[j, k]\n)"
+            "reparied_code": "length_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[j, k]\n)"
         },
         {
             "run_time": 16.984596967697144,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[k, j]\n)"
+            "reparied_code": "length_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[k, j]\n)"
         },
         {
             "run_time": 16.3853018283844,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[j, k]\n)"
+            "reparied_code": "length_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[j, k]\n)"
         }
     ]
 }

@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 2.100720167160034,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
+            "reparied_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
         },
         {
             "run_time": 2.892683982849121,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
+            "reparied_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
         },
         {
             "run_time": 2.5710411071777344,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
+            "reparied_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
         }
     ]
 }

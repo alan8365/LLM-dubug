@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid, end) # The bug is here\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 6,
+            "prog_name": "find_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u76ee\u6a19\u5927\u65bc\u4e2d\u9ede\u6642\uff0c\u65b0\u9663\u5217\u8d77\u59cb\u5e8f\u865fmid\u6c92\u6709+1\uff0c\u5c0e\u81f4\u908a\u7de3\u60c5\u6cc1\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.900862216949463,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)  # Fixed bug by adding 1 to mid\n        else:\n            return mid\n\n    return binsearch(0, len(arr))",
+            "raw_code": "```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)  # Fixed bug by adding 1 to mid\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.664594888687134,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)  # Fixed bug here\n        else:\n            return mid\n\n    return binsearch(0, len(arr))",
+            "raw_code": "```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)  # Fixed bug here\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.1000149250030518,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)  # Fixed bug by adding 1 to mid\n        else:\n            return mid\n\n    return binsearch(0, len(arr))",
+            "raw_code": "```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)  # Fixed bug by adding 1 to mid\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```"
+        }
+    ]
+}

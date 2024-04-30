@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k] # The bug is here\n                )\n\n    return length_by_path\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8a08\u7b97\u4ee5k\u70ba\u4e2d\u7e7c\u9023\u7d50ij\u7684\u8ddd\u96e2\u6642\uff0c\u5c07i\u5230k\u3001k\u5230j\u8aa4\u5beb\u70bai\u5230k\u3001j\u5230k\uff0c\u5c0e\u81f4\u975e\u7121\u5411\u5716\u7d50\u69cb\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.8477509021759033,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed bug here\n                )\n\n    return length_by_path",
+            "raw_code": "```python\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed bug here\n                )\n\n    return length_by_path\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.6082522869110107,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed bug here\n                )\n\n    return length_by_path",
+            "raw_code": "```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed bug here\n                )\n\n    return length_by_path\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.875575065612793,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed bug: changed j to k\n                )\n\n    return length_by_path",
+            "raw_code": "```python\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed bug: changed j to k\n                )\n\n    return length_by_path\n```"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n```\n",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5411\u6df1\u8655\u641c\u5c0b\u6642\uff0c\u6c92\u6709\u7d00\u9304\u5df2\u7d93\u9020\u8a2a\u904e\u7684\u7bc0\u9ede\uff0c\u5c0e\u81f4\u9664\u99ac\u4e0a\u627e\u5230goalnode\u4ee5\u5916\u7684\u72c0\u6cc1\u905e\u8ff4\u90fd\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.161250114440918,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)  # Add the node to the visited set\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)",
+            "raw_code": "The bug is caused by an issue in the code where it's checking if the current node is equal to the goal node before checking if it's already been visited. This can lead to incorrect results if the goal node is accidentally visited before the current node.\n\nTo fix this, you should check if the current node is already in the set of visited nodes before checking if it's the goal node. Here's the corrected code:\n\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)  # Add the node to the visited set\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.5811798572540283,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        nodesvisited.add(node)  # Add this line\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)",
+            "raw_code": "The issue in the code is that the `nodesvisited` set isn't updated when a node is visited. To fix this, add the line `nodesvisited.add(node)` at the start of the `search_from` function. Here is the fixed code:\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        nodesvisited.add(node)  # Add this line\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.789080858230591,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is not None and node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            nodesvisited.add(node)\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)",
+            "raw_code": "The code above has a bug where it doesn't add the current node to the `nodesvisited` set before recursively searching its successors. This can lead to infinite recursion if the graph contains cycles. To fix this bug, the line `if node in nodesvisited:` should be replaced with `if node is not None and node in nodesvisited:`. The fixed code should look like this:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is not None and node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            nodesvisited.add(node)\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        }
+    ]
+}

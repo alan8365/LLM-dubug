@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.901584148406982,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 8,
             "fail_num": 4,
-            "reparied_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n        if not arr:\n            return 0\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest"
+            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        if not arr:\n            return 0\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n    return longest"
         },
         {
             "run_time": 3.062519073486328,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 2,
-            "reparied_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val > arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n"
+            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val > arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n    return longest"
         },
         {
             "run_time": 5.872197151184082,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 8,
             "fail_num": 4,
-            "reparied_code": "\ndef lis(arr):\n    ends = {}\n    ends[0] = -1  # The first 'ending' value is -1\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest"
+            "reparied_code": "def lis(arr):\n    ends = {}\n    ends[0] = -1\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n    return longest"
         }
     ]
 }

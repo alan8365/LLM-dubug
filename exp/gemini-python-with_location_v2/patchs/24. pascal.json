@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r): # The bug is here\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 24,
+            "prog_name": "pascal",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u63a7\u5236\u4e09\u89d2\u5f62\u5e95\u908a\u6578\u91cf\u7684for loop\u53c3\u6578\u6642\uff0c\u7f3a\u5c11\u5c07r+1\u9020\u6210\u5e95\u908a\u9577\u5ea6\u5c11\u4e00\uff0c\u5c0e\u81f4\u8f38\u51fa\u7684\u4e09\u89d2\u5f62\u6216\u8005\u7f3a\u5c11\u6700\u5f8c\u4e00\u6392\u6216\u8005\u8a2a\u554f\u524d\u4e00\u6392\u6700\u5f8c\u5143\u7d20\u6642\u89f8\u767cIndexError"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.394171953201294,
+            "repaired_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r + 1): # Corrected the range\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows",
+            "raw_code": "The bug is on line 8, where the range of the `c` variable should be `range(0, r + 1)` instead of `range(0, r)`. Here is the corrected code:\n```python=\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r + 1): # Corrected the range\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.516998052597046,
+            "repaired_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(1, r + 1): # Change the range here\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows",
+            "raw_code": "The bug in the provided code is in the line `for c in range(0, r):`. It tries to access `rows[r - 1][c - 1]` and `rows[r - 1][c]`, which can cause an `IndexError` when `c` is 0. To fix this, the condition of the loop should be changed to `range(1, r + 1)` to avoid indexing negative values.\n\nHere's the corrected code:\n```python\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(1, r + 1): # Change the range here\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n```\nWith this correction, the code should work correctly without causing `IndexError`."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.433626890182495,
+            "repaired_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r+1):  # Fix: Changed loop range\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows",
+            "raw_code": "The bug in the provided code is in the range of the loop that iterates over the columns in the current row. The loop should run from `0` to `r+1` instead of `0` to `r`. Here's the corrected code:\n\n```python=\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r+1):  # Fix: Changed loop range\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n```"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef powerset(arr):\n    if arr:\n        first, *rest = arr \n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] # The bug is here\n    else:\n        return [[]]\n```\n",
+        "sample": {
+            "prog_id": 26,
+            "prog_name": "powerset",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u7684\u56de\u50b3\u503c\u4e2d\u6c92\u6709\u628arest_subsets\u4e5f\u52a0\u5165\uff0c\u9020\u6210\u6bcf\u6b21\u905e\u8ff4\u90fd\u4e0d\u5b58\u5728\u7a7a\u96c6\u5408\uff0c\u5c0e\u81f4\u6240\u6709\u8f38\u51fa\u90fd\u53ea\u6703\u8f38\u51fa\u8f38\u5165\u9663\u5217\u672c\u8eab\u6240\u4ee5\u90fd\u662f\u932f\u8aa4\u7684"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 85.85658979415894,
+            "repaired_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr \n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] + rest_subsets # The bug was here\n    else:\n        return [[]]",
+            "raw_code": "The bug is that the `rest_subsets` contains only the subsets of `rest` array, but it needs to include the empty subset as well. The code below fixes the bug:\n```python\ndef powerset(arr):\n    if arr:\n        first, *rest = arr \n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] + rest_subsets # The bug was here\n    else:\n        return [[]]\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.219755172729492,
+            "repaired_code": "\nreturn [[first] + subset for subset in rest_subsets] + rest_subsets",
+            "raw_code": "The bug is in the line where the subsets are being created. The line should be:\n```python\nreturn [[first] + subset for subset in rest_subsets] + rest_subsets\n```\nThis line ensures that the original subset (without the first element) is also included in the result. The original subset is important because it represents the subset that does not include the first element. Without it, the powerset would not be complete."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.5978548526763916,
+            "repaired_code": "\nreturn [[first] + subset for subset in rest_subsets] + [[]]",
+            "raw_code": "The code doesn't consider the case of an empty `subset`. To fix the issue, add `[]` to the list of subsets:\n```python\nreturn [[first] + subset for subset in rest_subsets] + [[]]\n```"
+        }
+    ]
+}

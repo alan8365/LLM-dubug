@@ -4,28 +4,34 @@
         "prog_name": "shortest_path_lengths",
         "language": "python",
         "testcase_num": 4,
-        "fault_location": 10,
+        "fault_location": 12,
         "bug_type": "",
         "bug_detail_desc": "在計算以k為中繼連結ij的距離時，將i到k、k到j誤寫為i到k、j到k，導致非無向圖結構的輸入結果皆會出錯"
     },
     "patchs_eval": [
         {
             "run_time": 2.4839539527893066,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]  # Fixed the index in length_by_path\n                )\n\n    return length_by_path"
+            "reparied_code": "from collections import defaultdict\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n    return length_by_path"
         },
         {
             "run_time": 3.1159629821777344,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]  # Fixed indexing\n                )\n\n    return length_by_path"
+            "reparied_code": "from collections import defaultdict\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n    return length_by_path"
         },
         {
             "run_time": 3.9139719009399414,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed the index in the second term\n                )\n\n    return length_by_path"
+            "reparied_code": "from collections import defaultdict\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n    return length_by_path"
         }
     ]
 }

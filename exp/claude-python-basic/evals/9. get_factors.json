@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 20.76841902732849,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 10,
-            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return [1]\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if i != n // i:\n                factors.append(n // i)\n\n    factors.sort()\n    return factors"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return [1]\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if i != n // i:\n                factors.append(n // i)\n    factors.sort()\n    return factors"
         },
         {
             "run_time": 18.333989143371582,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 1,
-            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return [1]\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.extend([i] + get_factors(n // i))\n            return factors\n\n    return [n]"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return [1]\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.extend([i] + get_factors(n // i))\n            return factors\n    return [n]"
         },
         {
             "run_time": 17.82193899154663,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 1,
-            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return [1]\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.extend([i] + get_factors(n // i))\n            break\n\n    if not factors:\n        factors.append(n)\n\n    return factors"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return [1]\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.extend([i] + get_factors(n // i))\n            break\n    if not factors:\n        factors.append(n)\n    return factors"
         }
     ]
 }

@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 38,
+        "prog_name": "topological_ordering",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 18.874939918518066,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def topological_ordering(nodes):\n    incoming_edge_count = {node: len(node.incoming_nodes) for node in nodes}\n    queue = [node for node in nodes if incoming_edge_count[node] == 0]\n    ordered_nodes = []\n    while queue:\n        current_node = queue.pop(0)\n        ordered_nodes.append(current_node)\n        for nextnode in current_node.outgoing_nodes:\n            incoming_edge_count[nextnode] -= 1\n            if incoming_edge_count[nextnode] == 0:\n                queue.append(nextnode)\n    if len(ordered_nodes) != len(nodes):\n        raise Exception(\"Graph has a cycle and cannot be topologically sorted.\")\n    return ordered_nodes"
+        },
+        {
+            "run_time": 25.791304111480713,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.incoming_nodes = []\n        self.outgoing_nodes = []\n\n    def __repr__(self):\n        return f\"Node({self.value})\"\n\n\ndef topological_ordering(nodes):\n    in_degree = {node: len(node.incoming_nodes) for node in nodes}\n    queue = [node for node in nodes if in_degree[node] == 0]\n    ordered_nodes = []\n    while queue:\n        node = queue.pop(0)\n        ordered_nodes.append(node)\n        for next_node in node.outgoing_nodes:\n            in_degree[next_node] -= 1\n            if in_degree[next_node] == 0:\n                queue.append(next_node)\n    if len(ordered_nodes) != len(nodes):\n        raise ValueError(\"Graph has a cycle and cannot be topologically sorted\")\n    return ordered_nodes\n\n\nif __name__ == \"__main__\":\n    nodeA = Node(\"A\")\n    nodeB = Node(\"B\")\n    nodeC = Node(\"C\")\n    nodeD = Node(\"D\")\n    nodeE = Node(\"E\")\n    nodeA.outgoing_nodes = [nodeB, nodeD]\n    nodeB.incoming_nodes = [nodeA]\n    nodeB.outgoing_nodes = [nodeD]\n    nodeC.outgoing_nodes = [nodeA, nodeB]\n    nodeD.incoming_nodes = [nodeA, nodeB]\n    nodeE.outgoing_nodes = [nodeD]\n    nodeD.incoming_nodes.append(nodeE)\n    nodes = [nodeA, nodeB, nodeC, nodeD, nodeE]\n    ordered_nodes = topological_ordering(nodes)\n    print(\"Topologically sorted nodes:\", ordered_nodes)"
+        },
+        {
+            "run_time": 22.227328062057495,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = []\n    nodes_with_no_incoming = [node for node in nodes if not node.incoming_nodes]\n    while nodes_with_no_incoming:\n        node = nodes_with_no_incoming.pop()\n        ordered_nodes.append(node)\n        temp_outgoing_nodes = list(node.outgoing_nodes)\n        for nextnode in temp_outgoing_nodes:\n            nextnode.incoming_nodes.remove(node)\n            if not nextnode.incoming_nodes:\n                nodes_with_no_incoming.append(nextnode)\n    if len(ordered_nodes) != len(nodes):\n        raise Exception(\"There is at least one cycle in the graph\")\n    return ordered_nodes"
+        }
+    ]
+}

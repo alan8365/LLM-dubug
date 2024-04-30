@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n # The bug is here\n    return lines\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u56de\u50b3\u524d\u7f3a\u5c11append text\uff0c\u9020\u6210\u56de\u50b3\u7d50\u679c\u7f3a\u5c11\u6700\u5f8c\u4e00\u6bb5\uff0c\u5c0e\u81f4\u7a7a\u503c\u4ee5\u5916\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.4608561992645264,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    \n    if text:\n        lines.append(text)\n    \n    return lines\n",
+            "raw_code": "The bug in the code is that it is missing the code to handle the remaining text after the while loop. The lines are being appended to the `lines` list only inside the while loop. Here's the fixed code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    \n    if text:\n        lines.append(text)\n    \n    return lines\n``` \n\nThis fix ensures that any remaining text after the while loop is also appended to the `lines` list."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.2371151447296143,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    # Add the remaining text after the while loop completes\n    lines.append(text)\n    \n    return lines\n",
+            "raw_code": "The bug in the code is that it is missing the last line after the while loop is completed. To fix this, you can add the remaining text after the while loop to the lines list before returning it. Here's the fixed code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    # Add the remaining text after the while loop completes\n    lines.append(text)\n    \n    return lines\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.753369092941284,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)  # Add the remaining text after the loop\n    return lines\n",
+            "raw_code": "The bug in the code is that it is not considering the remaining text after the loop ends. To fix this issue, we can add the remaining text after the loop to the `lines` list before returning it. Here is the corrected code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)  # Add the remaining text after the loop\n    return lines\n```"
+        }
+    ]
+}

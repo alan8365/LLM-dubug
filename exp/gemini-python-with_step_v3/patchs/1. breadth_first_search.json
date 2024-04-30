@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step and show the comepelte fixed code in the end:\n```python=\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while True:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n```\n",
+        "sample": {
+            "prog_id": 1,
+            "prog_name": "breadth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728while\u8ff4\u5708\u7684\u5224\u65b7\u5f0f\u4e2d\uff0c\u61c9\u8a72\u4f7f\u7528while queue\u8b93\u4f47\u5217\u6578\u91cf\u70ba0\u6642\u812b\u96e2\u8ff4\u5708\u537b\u932f\u7528\u70bawhile True\uff0c\u5c0e\u81f4\u8ff4\u5708\u7121\u9650\u5faa\u74b0\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 6.981860160827637,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False",
+            "raw_code": "1.  The bug in the code is that the `while` loop does not terminate if the `goalnode` is not found. To fix this, we can add a condition to the `while` loop that checks if the queue is empty. If the queue is empty, it means that there are no more nodes to explore, and we can return `False`.\n```python=\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n```\n\n2. The code above is correct, but it can be simplified by using the `in` operator to check if a node is in the `nodesseen` set.\n```python=\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            for node in node.successors:\n                if node not in nodesseen:\n                    queue.append(node)\n                    nodesseen.add(node)\n\n    return False\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.725621938705444,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while True:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            for node in node.successors:\n                if node not in nodesseen:\n                    queue.append(node)\n            nodesseen.update(node.successors)\n\n    return False",
+            "raw_code": "The bug is in the way successors are added to the queue. The code adds a generator expression to the queue, which is not what we want. We want to add the successors to the queue one by one.\n\nThe line `queue.extend(node for node in node.successors if node not in nodesseen)` should be replaced with the following code instead:\n```\nfor node in node.successors:\n    if node not in nodesseen:\n        queue.append(node)\n```\n\nThe complete fixed code:\n```python=\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while True:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            for node in node.successors:\n                if node not in nodesseen:\n                    queue.append(node)\n            nodesseen.update(node.successors)\n\n    return False\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.4365270137786865,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False",
+            "raw_code": "**Step 1:** The bug in the code is that it will never finish running because the while loop condition is always True. It should be `while queue`.\n\n**Step 2:** The modified code:\n```python=\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n```"
+        }
+    ]
+}

@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.5516879558563232,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 10,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k > b - a:\n        return []\n    if k == 0:\n        return []\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret\n\n\n\n\n\n"
+            "reparied_code": "def subsequences(a, b, k):\n    if k > b - a:\n        return []\n    if k == 0:\n        return []\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n    return ret"
         },
         {
             "run_time": 3.881103038787842,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 10,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0 and a >= k and b >= k:\n        return []\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0 and a >= k and b >= k:\n        return []\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n    return ret"
         },
         {
             "run_time": 3.410957098007202,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 12,
             "fail_num": 0,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n    ret = []\n    for i in range(a, b + 1 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n    return ret"
         }
     ]
 }

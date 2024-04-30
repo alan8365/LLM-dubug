@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.4224488735198975,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 5,
-            "reparied_code": "\ndef kth(arr, k):\n    pivot = arr[len(arr) // 2]  # Choose the middle element as the pivot\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k)\n    else:\n        return pivot"
+            "reparied_code": "def kth(arr, k):\n    pivot = arr[len(arr) // 2]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k)\n    else:\n        return pivot"
         },
         {
             "run_time": 4.302186965942383,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 4,
-            "reparied_code": "\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k > num_lessoreq:\n        return kth(above, k)\n    else:\n        return pivot\n\n\n\n\n"
+            "reparied_code": "def kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n    if k < num_less:\n        return kth(below, k)\n    elif k > num_lessoreq:\n        return kth(above, k)\n    else:\n        return pivot"
         },
         {
             "run_time": 5.014571666717529,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 7,
-            "reparied_code": "\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_lessoreq:\n        return kth(below, k)\n    elif k >= num_less:\n        return kth(above, k - num_less)\n    else:\n        return pivot"
+            "reparied_code": "def kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n    if k < num_lessoreq:\n        return kth(below, k)\n    elif k >= num_less:\n        return kth(above, k - num_less)\n    else:\n        return pivot"
         }
     ]
 }

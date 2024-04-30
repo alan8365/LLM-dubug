@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.733077049255371,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result += alphabet[i]\n    return result[::-1]"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result += alphabet[i]\n    return result[::-1]"
         },
         {
             "run_time": 4.439443111419678,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result  # Fix: Change the order of concatenation\n    return result"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result"
         },
         {
             "run_time": 3.8107151985168457,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result  # Prepend instead of append\n    return result"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result"
         }
     ]
 }

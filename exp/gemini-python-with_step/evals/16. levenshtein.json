@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.32806396484375,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 5,
-            "reparied_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target[1:])\n        )\n\n\n"
+            "reparied_code": "def levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target[1:])\n        )"
         },
         {
             "run_time": 3.8034770488739014,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 5,
-            "reparied_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n\n\n\n"
+            "reparied_code": "def levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )"
         },
         {
             "run_time": 3.8446929454803467,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 5,
-            "reparied_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target[1:])\n        )"
+            "reparied_code": "def levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target[1:])\n        )"
         }
     ]
 }

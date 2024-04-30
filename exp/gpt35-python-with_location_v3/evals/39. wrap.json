@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 39,
+        "prog_name": "wrap",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.483855962753296,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)\n    return lines"
+        },
+        {
+            "run_time": 2.1778829097747803,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "lines.append(text)"
+        },
+        {
+            "run_time": 5.41188907623291,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)\n    return lines"
+        }
+    ]
+}

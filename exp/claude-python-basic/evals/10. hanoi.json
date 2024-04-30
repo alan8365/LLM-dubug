@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 11.732389211654663,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))  # Fixed: Changed helper to end\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps"
+            "reparied_code": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps"
         },
         {
             "run_time": 13.71201205253601,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\nsteps.append((start, end))"
+            "reparied_code": "steps.append((start, end))"
         },
         {
             "run_time": 28.005011081695557,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps"
+            "reparied_code": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps"
         }
     ]
 }

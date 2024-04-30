@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any( # The bug is here\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\n\n```\n",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5411\u6df1\u8655\u641c\u5c0b\u6642\uff0c\u6c92\u6709\u7d00\u9304\u5df2\u7d93\u9020\u8a2a\u904e\u7684\u7bc0\u9ede\uff0c\u5c0e\u81f4\u9664\u99ac\u4e0a\u627e\u5230goalnode\u4ee5\u5916\u7684\u72c0\u6cc1\u905e\u8ff4\u90fd\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.165043354034424,
+            "repaired_code": "\nreturn search_from(startnode)",
+            "raw_code": "The bug is in the `any` function call. `any` expects an iterable, but in this case, it is given a generator expression. The fix is to wrap the generator expression in a list comprehension:\n```python\nreturn search_from(startnode)\n```\nBecomes:\n```python\nreturn search_from(startnode)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.277832984924316,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)",
+            "raw_code": "The issue with the code is that it doesn't mark the `node` as visited before checking if it is the goal node. If `node` is the goal node, it will be marked as visited, but if it isn't, it won't be marked as visited, and the search will continue from that node again.\n\nThis can lead to infinite loops if the graph contains cycles. To fix the issue, the `node` should be marked as visited before checking if it is the goal node. Here is the fixed code:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.22067403793335,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            ) and node is goalnode\n\n    return search_from(startnode)",
+            "raw_code": "The code has a small bug that involves a logical error. It should return `False` when `node` is not equal to `goalnode` and `any` function is not able to find a goal node among the successors of `node`. The way it's structured currently, it will return `True` if any of the successors are equal to `goalnode`, even if `node` is not equal to `goalnode`. The correct code should be as follows:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            ) and node is goalnode\n\n    return search_from(startnode)\n```"
+        }
+    ]
+}

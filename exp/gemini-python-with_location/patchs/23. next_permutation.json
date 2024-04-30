@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]: # The bug is here\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 23,
+            "prog_name": "next_permutation",
+            "language": "python",
+            "testcase_num": 8,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u6aa2\u67e5\u9996\u5143\u7d20\u8981\u7f6e\u63db\u70ba\u54ea\u500b\u5143\u7d20\u6642\uff0c\u5c07\u9996\u5143\u7d20\u7d22\u5f15i\u548c\u6bd4\u8f03\u5143\u7d20\u7d22\u5f15j\u932f\u8aa4\u7684\u7f6e\u63db\uff0c\u5c0e\u81f4\u6240\u6709\u8f38\u51fa\u90fd\u662f\u932f\u8aa4\u6216\u76f4\u63a5\u8f38\u51fa\u7a7a\u503c"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.9048829078674316,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: # Fixed the bug\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm",
+            "raw_code": "```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: # Fixed the bug\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```\nIn the original code, the bug was that the condition `perm[j] < perm[i]` was incorrect. It should have been `perm[j] > perm[i]` because we want to find the smallest element greater than `perm[i]` to swap with."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.1775729656219482,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: # Fix the bug by changing the comparison from < to >\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm",
+            "raw_code": "```python=\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: # Fix the bug by changing the comparison from < to >\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.93062686920166,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: # Fixed the bug here\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm",
+            "raw_code": "```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: # Fixed the bug here\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```"
+        }
+    ]
+}

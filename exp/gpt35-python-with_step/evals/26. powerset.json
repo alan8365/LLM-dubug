@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.2772421836853027,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] + rest_subsets\n    else:\n        return [[]]\n"
+            "reparied_code": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets] + rest_subsets\n    else:\n        return [[]]"
         },
         {
             "run_time": 3.5798730850219727,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 4,
-            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr \n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+            "reparied_code": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
         },
         {
             "run_time": 87.04235982894897,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 4,
-            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+            "reparied_code": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
         }
     ]
 }

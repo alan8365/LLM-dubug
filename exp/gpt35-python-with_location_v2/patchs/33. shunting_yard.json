@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n # The bug is here\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 33,
+            "prog_name": "shunting_yard",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 16,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8655\u7406\u5230\u904b\u7b97\u7b26\u7684\u6642\u5019\u6c92\u6709\u5c07\u904b\u7b97\u7b26\u653e\u9032opstack\u4e2d\uff0c\u9020\u6210rpntokens\u6c92\u6709\u4efb\u4f55\u904b\u7b97\u7b26\uff0c\u5c0e\u81f4\u6709\u904b\u7b97\u7b26\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.154115200042725,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and isinstance(opstack[-1], str) and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n        while opstack:\n            rpntokens.append(opstack.pop())\n\n    return rpntokens\n",
+            "raw_code": "The bug in the code is that it is not checking if the token is an operator before trying to compare precedence. This can cause an error when trying to access the precedence of a token that is not an operator. To fix this, we need to update the condition in the while loop to also check if the token is an operator:\n\n```python\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and isinstance(opstack[-1], str) and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n        while opstack:\n            rpntokens.append(opstack.pop())\n\n    return rpntokens\n``` \n\nBy adding the `isinstance(opstack[-1], str)` check in the while loop condition, we ensure that we only try to access the precedence if the token is an operator."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.844183921813965,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n            opstack.append(token)  # Fixed the bug\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n",
+            "raw_code": "The issue in the code is that the operator stack `opstack` is being popped without checking if the token is an operator. This can lead to trying to pop from an empty stack which throws an error. \n\nTo fix this, we need to check if the token is an operator before trying to compare its precedence with the operators in the stack. Here is the corrected code:\n\n```python\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n            opstack.append(token)  # Fixed the bug\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n``` \n\nThis fix ensures that the token is an operator before trying to compare its precedence with the operators in the stack."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.713667154312134,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence.get(token, 0) <= precedence.get(opstack[-1], 0):\n                rpntokens.append(opstack.pop())\n\n        opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n",
+            "raw_code": "The bug in the code is that it tries to access the precedence of the token without checking if it exists in the precedence dictionary. This can lead to a KeyError if the token is not in the dictionary. To fix the bug, you can update the code as follows:\n\n```python\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence.get(token, 0) <= precedence.get(opstack[-1], 0):\n                rpntokens.append(opstack.pop())\n\n        opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```\n\nThis fix ensures that the code checks if the token exists in the precedence dictionary before comparing its precedence values. If the token is not in the dictionary, it defaults to 0."
+        }
+    ]
+}

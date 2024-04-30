@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 18.568999767303467,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\n\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result if result else '0'"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result if result else '0'"
         },
         {
             "run_time": 13.555338859558105,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\n\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result if result else '0'"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result if result else '0'"
         },
         {
             "run_time": 14.21055269241333,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\nimport string\n\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result if result else '0'"
+            "reparied_code": "import string\ndef to_base(num, b):\n    result = ''\n    alphabet = string.digits + string.ascii_uppercase\n    while num > 0:\n        i = num % b\n        num = num // b\n        result = alphabet[i] + result\n    return result if result else '0'"
         }
     ]
 }

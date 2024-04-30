@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 25,
+        "prog_name": "possible_change",
+        "language": "python",
+        "testcase_num": 10,
+        "fault_location": 3,
+        "bug_type": "",
+        "bug_detail_desc": "在處理邊界狀況時，缺少處理硬幣沒有輸入的邊界狀況，導致沒有輸入硬幣種類時由於無法unpack coins變數觸發ValueError"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.1070430278778076,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 9,
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total) + (total == first)"
+        },
+        {
+            "run_time": 2.7658400535583496,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 9,
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
+        },
+        {
+            "run_time": 2.8680849075317383,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 10,
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if len(coins) == 0:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b) # The bug is here\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u547c\u53eb\u6642\uff0c\u6c92\u6709\u4ea4\u63db\u6578\u5b57\u7684\u4f4d\u7f6e\uff0c\u4f7f\u5f97b\u7684\u4f4d\u7f6e\u59cb\u7d42\u4fdd\u6301\u4e0d\u8b8a\uff0c\u5c0e\u81f4\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.4435608386993408,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)",
+            "raw_code": "```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.4811327457427979,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b) # The bug is here",
+            "raw_code": "```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b) # The bug is here\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.8634779453277588,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)",
+            "raw_code": "The bug is that the code doesn't return the result of the recursive call. To fix it, one needs to change the code to:\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```"
+        }
+    ]
+}

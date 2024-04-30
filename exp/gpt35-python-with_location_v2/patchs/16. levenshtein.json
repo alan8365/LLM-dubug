@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:]) # The bug is here\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5169\u500b\u5b57\u4e32\u9996\u5b57\u76f8\u540c\u7684\u60c5\u6cc1\u4e0b\uff0c\u5728\u905e\u8ff4\u5f0f\u524d\u932f\u8aa4\u7684+1\uff0c\u7531\u65bc\u5169\u5b57\u4e00\u81f4\u6240\u4ee5\u5c0d\u65bc\u7d50\u679c\u7684\u5f71\u97ff\u61c9\u8a72\u662f0\u800c\u975e1\uff0c\u5c0e\u81f4\u9664\u7a7a\u5b57\u4e32\u4ee5\u5916\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.4608988761901855,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        if len(source) > 0 and len(target) > 0:\n            return 1 + levenshtein(source[1:], target[1:])\n        else:\n            return 0\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n",
+            "raw_code": "The bug in the code is that it is not checking if the source string or target string is empty before trying to access the first character. This can lead to an \"IndexError\" when the source or target string is empty. To fix this bug, we need to add a check for empty strings before checking the first character. Here is the corrected code:\n\n```python\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        if len(source) > 0 and len(target) > 0:\n            return 1 + levenshtein(source[1:], target[1:])\n        else:\n            return 0\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```\n\nWith this correction, the code will first check if the source or target string is empty before trying to access the first character, avoiding the \"IndexError\" that could occur."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.237206697463989,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return max(len(source), len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source, target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n",
+            "raw_code": "The issue in the code is with how the length of the source and target strings are being calculated in the base case. Instead of using `or` inside the return statement, you should use `max` to correctly determine the length of the non-empty string.\n\nHere is the corrected code:\n```python\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return max(len(source), len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source, target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```\n\nWith this fix, the code should work correctly and calculate the Levenshtein distance between two strings."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.739444017410278,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n",
+            "raw_code": "The bug in the code is on the line `return 1 + levenshtein(source[1:], target[1:])`. It should be checking the characters at index 0 and comparing them for equality to determine if a substitution (cost of 0) or an addition/removal (cost of 1) is needed.\n\nHere is the corrected code:\n```python\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n``` \n\nThis code fixes the bug by removing the +1 from the return statement in the case where source[0] is equal to target[0]."
+        }
+    ]
+}

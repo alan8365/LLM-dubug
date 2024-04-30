@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 4.137997150421143,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 2,
-            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return all(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)"
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return all(\n                search_from(nextnode) for nextnode in node.successors\n            )\n    return search_from(startnode)"
         },
         {
             "run_time": 4.021220922470093,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return True\n        elif node is goalnode:\n            return True\n        else:\n            nodesvisited.add(node)\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)"
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return True\n        elif node is goalnode:\n            return True\n        else:\n            nodesvisited.add(node)\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n    return search_from(startnode)"
         },
         {
             "run_time": 3.941234827041626,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n\n\n\n\n"
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n    return search_from(startnode)"
         }
     ]
 }

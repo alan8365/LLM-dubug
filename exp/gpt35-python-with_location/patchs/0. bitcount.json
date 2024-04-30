@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef bitcount(n):\n    count = 0\n    while n:\n        n ^= n - 1 # The bug is here\n        count += 1\n    return count\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 0,
+            "prog_name": "bitcount",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 3,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u904b\u7b97\u6d88\u9664n\u4e2d\u76841\u6642\uff0c\u61c9\u8a72\u7528and\u904b\u7b97\u537b\u7528\u6210xor\uff0c\u9020\u6210\u539f\u672c\u61c9\u8a72\u80fd\u6d88\u63891\u7684\u6b65\u9a5f\u8b8a\u6210n\u53ea\u80fd\u4fdd\u6301\u4e0d\u8b8a\uff0c\u5c0e\u81f4while\u8ff4\u5708\u7121\u9650\u5faa\u74b0"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.230955123901367,
+            "repaired_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1  # Fixed the bug by using \"&=\" operator instead of \"^=\"\n        count += 1\n    return count",
+            "raw_code": "```python\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1  # Fixed the bug by using \"&=\" operator instead of \"^=\"\n        count += 1\n    return count\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.159363031387329,
+            "repaired_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1 # Fixed the bug by using the bitwise AND operator\n        count += 1\n    return count",
+            "raw_code": "```python\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1 # Fixed the bug by using the bitwise AND operator\n        count += 1\n    return count\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.9413957595825195,
+            "repaired_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1  # Fixed the bug by using the bitwise AND operator instead of XOR\n        count += 1\n    return count",
+            "raw_code": "```python=\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1  # Fixed the bug by using the bitwise AND operator instead of XOR\n        count += 1\n    return count\n```"
+        }
+    ]
+}

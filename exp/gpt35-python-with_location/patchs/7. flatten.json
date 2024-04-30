@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield flatten(x) # The bug is here\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 7,
+            "prog_name": "flatten",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u56de\u7684\u7d42\u6b62\u689d\u4ef6\u56de\u50b3\u6642\uff0c\u5c0d\u65bc\u4e0d\u662flist\u7684\u8f38\u5165\u4f9d\u820a\u4f7f\u7528\u905e\u8ff4\uff0c\u5c0e\u81f4\u5927\u90e8\u5206\u8f38\u51fa\u4e0d\u662f\u9810\u671f\u7684\u5143\u7d20"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.8346638679504395,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.6157512664794922,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.7268452644348145,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        }
+    ]
+}

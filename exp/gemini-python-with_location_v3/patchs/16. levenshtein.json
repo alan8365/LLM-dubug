@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:]) # The bug is here\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```\n",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5169\u500b\u5b57\u4e32\u9996\u5b57\u76f8\u540c\u7684\u60c5\u6cc1\u4e0b\uff0c\u5728\u905e\u8ff4\u5f0f\u524d\u932f\u8aa4\u7684+1\uff0c\u7531\u65bc\u5169\u5b57\u4e00\u81f4\u6240\u4ee5\u5c0d\u65bc\u7d50\u679c\u7684\u5f71\u97ff\u61c9\u8a72\u662f0\u800c\u975e1\uff0c\u5c0e\u81f4\u9664\u7a7a\u5b57\u4e32\u4ee5\u5916\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.6265661716461182,
+            "repaired_code": "\nlevenshtein(source[1:], target)",
+            "raw_code": "The bug is that the second call to the `levenshtein` function is the same as the third call. To fix this, replace the second call with the following line:\n```python\nlevenshtein(source[1:], target)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.103610992431641,
+            "repaired_code": "\nreturn 1 + min(\n            levenshtein(source[1:], target), # Assume the first character of source is removed\n            levenshtein(source,     target[1:]), # Assume the first character of target is removed\n            levenshtein(source[1:], target[1:]) # Assume the first characters of both source and target are removed\n        )",
+            "raw_code": "The bug is that the recursive call to `levenshtein` on line 10 uses `source[1:]` and `target[1:]`. This is incorrect as it assumes that the first characters of `source` and `target` are equal. However, this is not always the case. The correct recursive call should be:\n\n```python\nreturn 1 + min(\n            levenshtein(source[1:], target), # Assume the first character of source is removed\n            levenshtein(source,     target[1:]), # Assume the first character of target is removed\n            levenshtein(source[1:], target[1:]) # Assume the first characters of both source and target are removed\n        )\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.6655099391937256,
+            "repaired_code": "\nelif source[0] == target[0]:\n    return 1 + levenshtein(source[1:], target) # Corrected the line",
+            "raw_code": "The bug is in the recursive call `levenshtein(source[1:], target[1:])` where both source and target are sliced by one. This leads to incorrect results as it ignores the first character of both strings. To fix this, only the source string should be sliced by one as the first character of the target string is different from the first character of the source string. \n\nHere is the corrected line:\n```python\nelif source[0] == target[0]:\n    return 1 + levenshtein(source[1:], target) # Corrected the line\n```"
+        }
+    ]
+}

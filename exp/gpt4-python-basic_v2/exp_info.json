@@ -1,0 +1,8 @@
+{
+    "name": "gpt4-python-basic_v2",
+    "lang": "python",
+    "llm_api": "OpenAiApi",
+    "prompt_type": "basic",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2/patchs"
+}

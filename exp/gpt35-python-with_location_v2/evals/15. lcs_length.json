@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 15,
+        "prog_name": "lcs_length",
+        "language": "python",
+        "testcase_num": 9,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 5.563736915588379,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 9,
+            "fail_num": 0,
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1 if (i - 1, j - 1) in dp else 1\n    return max(dp.values()) if dp else 0"
+        },
+        {
+            "run_time": 2.9766268730163574,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 9,
+            "fail_num": 0,
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n    return max(dp.values()) if dp else 0"
+        },
+        {
+            "run_time": 4.420668840408325,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 9,
+            "fail_num": 0,
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1 if (i - 1, j - 1) in dp else 1\n    return max(dp.values()) if dp else 0"
+        }
+    ]
+}

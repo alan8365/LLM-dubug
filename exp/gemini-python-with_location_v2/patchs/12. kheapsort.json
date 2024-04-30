@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr: # The bug is here\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u904d\u6b77\u9663\u5217\u6642\u6c92\u6709\u6392\u9664\u5df2\u7d93\u5728heap\u4e2d\u7684\u5143\u7d20\uff0c\u5c0e\u81f4\u9664\u4e86k\u70ba0\u4ee5\u5916\u7684\u8f38\u5165\u7686\u6703\u7522\u751f\u932f\u8aa4"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.328571081161499,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        x = heapq.heappop(heap)\n        if arr:\n            heapq.heappush(heap, arr.pop(0))\n        yield x\n",
+            "raw_code": "The bug is that when an element `x` is popped from the heap using `heappop` in the `while` loop, it is not updated with the next element from the input array. To fix this, the element `x` should be replaced with the next element in the array. Here is the fixed code:\n```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        x = heapq.heappop(heap)\n        if arr:\n            heapq.heappush(heap, arr.pop(0))\n        yield x\n\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.897045850753784,
+            "repaired_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n\n    heapq.heapify(heap)  # Fix: Clear the heap\n\n    while heap:\n        yield heapq.heappop(heap)",
+            "raw_code": "The `heap` used is never cleared in the code. In the second for loop, a new array element is added to the heap in each iteration. Hence, the size of the heap increases by one in each iteration. Because of this, the number of elements in the heap will eventually exceed the heap size `k` (unless `arr` is small and `k` is large), resulting in a `heapq.heappop` error. The fix is to clear the heap after the first for loop by using `heapq.heapify(heap)`.\n```python\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n\n    heapq.heapify(heap)  # Fix: Clear the heap\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.2286627292633057,
+            "repaired_code": "\nfor x in arr:  ",
+            "raw_code": "The bug is on the following line:\n```python=\nfor x in arr:  \n```\nSpecifically, the bug occurs because the loop variable `x` is not used and this is a potential source of confusion. To fix it, change the loop variable to `current_element`:\n```python=\nfor current_element in arr:  \n```\nHere is the fixed code:\n```python=\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for current_element in arr:  \n        yield heapq.heappushpop(heap, current_element)\n\n    while heap:\n        yield heapq.heappop(heap)\n```"
+        }
+    ]
+}

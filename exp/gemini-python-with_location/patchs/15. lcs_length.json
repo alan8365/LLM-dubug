@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j] + 1 # The bug is here\n\n    return max(dp.values()) if dp else 0\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 15,
+            "prog_name": "lcs_length",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u52d5\u614b\u898f\u5283\u9663\u5217\u8a08\u7b97\u4e2d\uff0c\u5b50\u554f\u984c\u7684\u9078\u64c7\u6642j\u6c92\u6709\u6e1b\u4e00\uff0c\u9020\u6210\u52d5\u614b\u898f\u5283\u53ea\u6703\u5728\u4e00\u500b\u7dad\u5ea6\u4e2d\u53d6\u503c\uff0c\u5c0e\u81f4\u9664\u4e86\u7b54\u6848\u5c0f\u65bc1\u4ee5\u5916\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.5540387630462646,
+            "repaired_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1 # Fix the bug\n\n    return max(dp.values()) if dp else 0",
+            "raw_code": "```python\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1 # Fix the bug\n\n    return max(dp.values()) if dp else 0\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.5513222217559814,
+            "repaired_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i + 1, j + 1] = dp[i, j] + 1 # The bug is here\n\n    return max(dp.values()) if dp else 0",
+            "raw_code": "```python=\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i + 1, j + 1] = dp[i, j] + 1 # The bug is here\n\n    return max(dp.values()) if dp else 0\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.5765419006347656,
+            "repaired_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1 # Fixing the bug\n\n    return max(dp.values()) if dp else 0",
+            "raw_code": "```python\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1 # Fixing the bug\n\n    return max(dp.values()) if dp else 0\n```"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step and show the comepelte fixed code in the end:\n```python=\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return True\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 11,
+            "prog_name": "is_valid_parenthesization",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u904d\u6b77\u5b8c\u5b57\u4e32\u5f8c\u76f4\u63a5\u56de\u50b3True\u800c\u6c92\u6709\u8003\u616e\u5230depth\u5927\u65bc1\u6642\u4ecd\u975e\u5408\u6cd5\u7684\u72c0\u6cc1\uff0c\u5c0e\u81f4\u6700\u5f8cdepth\u5927\u65bc1\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.769181966781616,
+            "repaired_code": "\n            if depth < 0:\n                return False\n            depth -= 1",
+            "raw_code": "**Step 1:** The code has a bug in the logic of checking the validity of the parentheses. If the depth becomes negative, it should return `False` immediately, instead of checking for further parentheses.\n\n**Step 2:** Here is the corrected portion of the code:\n```python=\n            if depth < 0:\n                return False\n            depth -= 1\n```\n\n**Complete Fixed Code:**\n```python=\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth < 0:\n                return False\n            depth -= 1\n\n    return True\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.5632011890411377,
+            "repaired_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return True",
+            "raw_code": "**Bug 1**: The function doesn't check if the depth becomes negative after decrementing it, which may lead to incorrect results.\n```python=\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return True\n```\n**Fixed code**:\n```python=\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        elif paren == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.054403066635132,
+            "repaired_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth == 0:\n                return False\n            depth -= 1\n\n    return depth == 0",
+            "raw_code": "The bug in the code is that it does not check if the depth is negative before decrementing it. This can lead to an index out of bounds error. The correct code should be:\n```python=\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth == 0:\n                return False\n            depth -= 1\n\n    return depth == 0\n```\nHere is the complete fixed code:\n```python=\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth == 0:\n                return False\n            depth -= 1\n\n    return depth == 0\n```"
+        }
+    ]
+}

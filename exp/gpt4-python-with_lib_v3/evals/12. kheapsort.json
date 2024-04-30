@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 12,
+        "prog_name": "kheapsort",
+        "language": "python",
+        "testcase_num": 4,
+        "fault_location": 6,
+        "bug_type": "",
+        "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 19.76193404197693,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 4,
+            "fail_num": 0,
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n    while heap:\n        yield heapq.heappop(heap)\narr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]\nk = 4\nprint(list(kheapsort(arr, k)))"
+        },
+        {
+            "run_time": 17.168624877929688,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 1,
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    if k < 1:\n        raise ValueError(\"k must be at least 1\")\n    heap = arr[:k]\n    heapq.heapify(heap)\n    output = []\n    for x in arr[k:]:\n        output.append(heapq.heappushpop(heap, x))\n    while heap:\n        output.append(heapq.heappop(heap))\n    return output"
+        },
+        {
+            "run_time": 14.58858871459961,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 4,
+            "fail_num": 0,
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for i in range(k, len(arr)):\n        yield heapq.heappushpop(heap, arr[i])\n    while heap:\n        yield heapq.heappop(heap)"
+        }
+    ]
+}

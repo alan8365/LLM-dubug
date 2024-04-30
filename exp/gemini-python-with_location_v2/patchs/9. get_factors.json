@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [] # The bug is here\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8f38\u5165\u662f\u8cea\u6578\u6642\u50c5\u56de\u50b3\u7a7a\u9663\u5217\u800c\u975e\u5305\u542b\u6578\u5b57\u672c\u8eab\u7684\u9663\u5217\uff0c\u5c0e\u81f4\u8cea\u6578\u7684\u5206\u89e3\u51fa\u932f\u4e14\u905e\u8ff4\u7684\u5f71\u97ff\u5e7e\u4e4e\u6240\u6709\u8f38\u5165"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.4627950191497803,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n] # Fixed the bug",
+            "raw_code": "The bug occurs because the code is returning an empty list when it should be returning [n]. The correct code should be:\n```python=\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n] # Fixed the bug\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.5773911476135254,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n] # Fix: Append n to the list of factors",
+            "raw_code": "The bug in the code is that it doesn't append the number `n` itself to the list of factors. The correct code should be:\n```python=\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n] # Fix: Append n to the list of factors\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.8900721073150635,
+            "repaired_code": "\nreturn [n]",
+            "raw_code": "The bug is that the code returns an empty list when `n` is prime, but it should return a list containing only `n`. To fix this, change the last line to:\n```python=\nreturn [n]\n```\nThat way, it will always return a list of factors, even if `n` is prime."
+        }
+    ]
+}

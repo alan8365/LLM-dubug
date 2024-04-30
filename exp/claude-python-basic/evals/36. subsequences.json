@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 21.051494121551514,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\n[[1, 2, 3], [1, 2, 4], [1, 2, 5], [1, 3, 4], [1, 3, 5], [1, 4, 5], [2, 3, 4], [2, 3, 5], [2, 4, 5], [3, 4, 5]]"
+            "reparied_code": "[[1, 2, 3], [1, 2, 4], [1, 2, 5], [1, 3, 4], [1, 3, 5], [1, 4, 5], [2, 3, 4], [2, 3, 5], [2, 4, 5], [3, 4, 5]]"
         },
         {
             "run_time": 17.12770390510559,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 4,
             "fail_num": 8,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k + 1):\n        ret.extend(\n            [[i] + rest for rest in subsequences(i + 1, b, k - 1)]\n        )\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n    ret = []\n    for i in range(a, b + 1 - k + 1):\n        ret.extend(\n            [[i] + rest for rest in subsequences(i + 1, b, k - 1)]\n        )\n    return ret"
         },
         {
             "run_time": 19.35312294960022,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 4,
             "fail_num": 8,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1 - k + 1):\n        ret.extend(\n            [[i] + rest for rest in subsequences(i + 1, b, k - 1)]\n        )\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n    ret = []\n    for i in range(a, b + 1 - k + 1):\n        ret.extend(\n            [[i] + rest for rest in subsequences(i + 1, b, k - 1)]\n        )\n    return ret"
         }
     ]
 }

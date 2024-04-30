@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 17.501713037490845,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)"
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n    while heap:\n        yield heapq.heappop(heap)"
         },
         {
             "run_time": 16.404648065567017,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)"
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n    while heap:\n        yield heapq.heappop(heap)"
         },
         {
             "run_time": 19.377073049545288,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "\ndef kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)"
+            "reparied_code": "def kheapsort(arr, k):\n    import heapq\n    heap = arr[:k]\n    heapq.heapify(heap)\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n    while heap:\n        yield heapq.heappop(heap)"
         }
     ]
 }

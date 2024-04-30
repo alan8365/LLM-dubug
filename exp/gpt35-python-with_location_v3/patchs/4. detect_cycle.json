@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None: # The bug is here\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n```\n",
+        "sample": {
+            "prog_id": 4,
+            "prog_name": "detect_cycle",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5224\u65b7\u7d42\u6b62\u60c5\u6cc1\u6642\uff0c\u6c92\u6709\u8655\u7406hare\u4e5f\u662f\u7a7a\u503c\u7684\u72c0\u6cc1\uff0c\u53ea\u6709\u8655\u7406hare\u7684\u5f8c\u7e7c\u662f\u7a7a\u503c\u7684\u72c0\u6cc1\uff0c\u5c0e\u81f4hare\u525b\u597d\u662f\u7a7a\u503c\u6642\u6703\u89f8\u767cAttributeError"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.9562289714813232,
+            "repaired_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None or hare.successor.successor is None: # Fixing the bug\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n",
+            "raw_code": "To fix the bug, we need to check if either `hare` or `hare.successor` is `None` before trying to access `hare.successor`. Here's the corrected code:\n```python=\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None or hare.successor.successor is None: # Fixing the bug\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.772571086883545,
+            "repaired_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare is None or hare.successor is None:  # Check if hare or hare.successor is None\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n",
+            "raw_code": "To fix the bug, we need to check if hare or hare.successor is None before accessing the successor attribute. Here's the corrected code:\n\n```python\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare is None or hare.successor is None:  # Check if hare or hare.successor is None\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.151493072509766,
+            "repaired_code": "\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None or hare.successor.successor is None: # Fix the bug here\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n",
+            "raw_code": "The bug in the code is that it is trying to access the `successor` attribute of the `hare` node without checking if `hare.successor` is None. To fix this, we need to first check if `hare.successor` is None before trying to access the `successor` attribute. Here is the corrected code:\n```python=\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None or hare.successor.successor is None: # Fix the bug here\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n```"
+        }
+    ]
+}

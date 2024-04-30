@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k] # The bug is here\n                )\n\n    return length_by_path\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8a08\u7b97\u4ee5k\u70ba\u4e2d\u7e7c\u9023\u7d50ij\u7684\u8ddd\u96e2\u6642\uff0c\u5c07i\u5230k\u3001k\u5230j\u8aa4\u5beb\u70bai\u5230k\u3001j\u5230k\uff0c\u5c0e\u81f4\u975e\u7121\u5411\u5716\u7d50\u69cb\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.36397910118103,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed bug\n                )\n\n    return length_by_path\n",
+            "raw_code": "To fix the bug in the code, change the line `length_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[j, k])` to `length_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[k, j])`.\n\nHere is the corrected code:\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed bug\n                )\n\n    return length_by_path\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.58479905128479,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed the bug\n                )\n\n    return length_by_path\n",
+            "raw_code": "To fix the bug in the code, the assignment of `length_by_path[i, j]` should be changed to correctly calculate the shortest path from `i` to `j` through `k`. Here is the corrected code:\n\n```python\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # Fixed the bug\n                )\n\n    return length_by_path\n``` \n\nThe bug was fixed by changing `length_by_path[j, k]` to `length_by_path[k, j]`, which correctly calculates the shortest path from `i` to `j` through `k`."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.5450639724731445,
+            "repaired_code": "\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[k, j]\n)\n",
+            "raw_code": "To fix the bug in the provided code, the calculation of the shortest path lengths needs to be corrected. The correct formula for updating the shortest path length between nodes i and j through node k is:\n\n```python\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[k, j]\n)\n```\n\nHere is the corrected version of the code with the bug fixed:\n\n```python\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]  # Bug fixed here\n                )\n\n    return length_by_path\n```\n\nWith this correction, the code should now correctly calculate the shortest path lengths using the Floyd-Warshall algorithm."
+        }
+    ]
+}

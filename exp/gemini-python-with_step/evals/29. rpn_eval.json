@@ -4,28 +4,34 @@
         "prog_name": "rpn_eval",
         "language": "python",
         "testcase_num": 6,
-        "fault_location": 19,
+        "fault_location": 18,
         "bug_type": "",
         "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
     },
     "patchs_eval": [
         {
             "run_time": 6.437420129776001,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 3,
-            "reparied_code": "\n\n\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            try:\n                a = stack.pop()\n                b = stack.pop()\n            except IndexError:\n                raise Exception(\"Invalid expression: not enough operands\")\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n\n\n\n\n"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            try:\n                a = stack.pop()\n                b = stack.pop()\n            except IndexError:\n                raise Exception(\"Invalid expression: not enough operands\")\n            stack.append(\n                op(token, a, b)\n            )\n    return stack.pop()"
         },
         {
             "run_time": 5.2034690380096436,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 3,
-            "reparied_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            if len(stack) >= 2:\n                a = stack.pop()\n                b = stack.pop()\n                stack.append(\n                    op(token, a, b)\n                )\n            else:\n                return None\n\n    return stack.pop()"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            if len(stack) >= 2:\n                a = stack.pop()\n                b = stack.pop()\n                stack.append(\n                    op(token, a, b)\n                )\n            else:\n                return None\n    return stack.pop()"
         },
         {
             "run_time": 4.915297031402588,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\n\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b if b != 0 else raise ZeroDivisionError(\"Division by zero is not allowed\")\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n\n\n\n\n"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b if b != 0 else raise ZeroDivisionError(\"Division by zero is not allowed\")\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n    return stack.pop()"
         }
     ]
 }

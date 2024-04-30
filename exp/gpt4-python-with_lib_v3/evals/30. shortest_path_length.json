@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 30,
+        "prog_name": "shortest_path_length",
+        "language": "python",
+        "testcase_num": 4,
+        "fault_location": 21,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 30.550167083740234,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 2,
+            "fail_num": 2,
+            "reparied_code": "from heapq import heappop, heappush\nimport sys\nclass Node:\n    def __init__(self, successors=[]):\n        self.successors = successors\n    def add_successor(self, node, weight):\n        self.successors.append((node, weight))\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    unvisited_nodes = []\n    heappush(unvisited_nodes, (0, startnode))\n    distances = {startnode: 0}\n    while unvisited_nodes:\n        current_distance, current_node = heappop(unvisited_nodes)\n        if current_node == goalnode:\n            return current_distance\n        if current_distance > distances[current_node]:\n            continue\n        for successor, weight in current_node.successors:\n            distance = current_distance + weight\n            if distance < distances.get(successor, sys.maxsize):\n                distances[successor] = distance\n                heappush(unvisited_nodes, (distance, successor))\n    return float('inf')\nnode_a = Node()\nnode_b = Node()\nnode_c = Node()\nnode_a.add_successor(node_b, 1)\nnode_b.add_successor(node_c, 2)\nlength_by_edge = { ... }"
+        },
+        {
+            "run_time": 26.570889949798584,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 1,
+            "reparied_code": "import heapq\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    heap = []\n    heapq.heappush(heap, (0, startnode))\n    distances = {startnode: 0}\n    visited = set()\n    while heap:\n        current_distance, current_node = heapq.heappop(heap)\n        if current_node == goalnode:\n            return current_distance\n        if current_node in visited:\n            continue\n        visited.add(current_node)\n        for next_node in current_node.successors:\n            if next_node in visited:\n                continue\n            new_distance = current_distance + length_by_edge[(current_node, next_node)]\n            if next_node not in distances or new_distance < distances[next_node]:\n                distances[next_node] = new_distance\n                heapq.heappush(heap, (new_distance, next_node))\n    return float('inf')\nclass Node:\n    def __init__(self, successors=None):\n        self.successors = successors if successors else []"
+        },
+        {
+            "run_time": 60.69611430168152,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 1,
+            "reparied_code": "from heapq import heappush, heappop\nclass Node:\n    def __init__(self, value=None, successors=[]):\n        self.value = value\n        self.successors = successors\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    unvisited_nodes = []\n    heappush(unvisited_nodes, (0, startnode))\n    distances = {startnode: 0}\n    visited_nodes = set()\n    while unvisited_nodes:\n        current_distance, current_node = heappop(unvisited_nodes)\n        if current_node in visited_nodes:\n            continue\n        if current_node == goalnode:\n            return current_distance\n        visited_nodes.add(current_node)\n        for nextnode in current_node.successors:\n            if nextnode in visited_nodes:\n                continue\n            new_distance = current_distance + length_by_edge[(current_node, nextnode)]\n            if nextnode not in distances or new_distance < distances[nextnode]:\n                distances[nextnode] = new_distance\n                heappush(unvisited_nodes, (new_distance, nextnode))\n    return float('inf')\nnode_a = Node('A')\nnode_b = Node('B')\nnode_c = Node('C')\nnode_a.successors = [node_b, node_c]\nnode_b.successors = [node_c]\nnode_c.successors = []\nlength_by_edge = {\n    (node_a, node_b): 1,\n    (node_a, node_c): 4,\n    (node_b, node_c): 2,\n}\nprint(shortest_path_length(length_by_edge, node_a, node_c))"
+        }
+    ]
+}

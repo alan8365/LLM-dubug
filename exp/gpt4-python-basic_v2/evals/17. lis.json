@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 17,
+        "prog_name": "lis",
+        "language": "python",
+        "testcase_num": 12,
+        "fault_location": 12,
+        "bug_type": "",
+        "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 18.196070194244385,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 12,
+            "fail_num": 0,
+            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        length = 0\n        for j in range(1, longest + 1):\n            if arr[ends[j]] < val:\n                length = j\n        if length == longest or arr[ends[length + 1]] > val:\n            ends[length + 1] = i\n            longest = max(longest, length + 1)\n    return longest"
+        },
+        {
+            "run_time": 19.16104292869568,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 12,
+            "fail_num": 0,
+            "reparied_code": "def lis(arr):\n    if not arr:\n        return 0\n    ends = []\n    longest = 0\n    for val in arr:\n        low, high = 0, longest\n        while low < high:\n            mid = (low + high) // 2\n            if ends[mid] >= val:\n                high = mid\n            else:\n                low = mid + 1\n        if low == longest:\n            ends.append(val)\n            longest += 1\n        else:\n            ends[low] = val\n    return longest"
+        },
+        {
+            "run_time": 21.776010990142822,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 12,
+            "fail_num": 0,
+            "reparied_code": "def lis(arr):\n    from bisect import bisect_left\n\n    if not arr:\n        return 0\n    sub = []\n    for val in arr:\n        pos = bisect_left(sub, val)\n        if pos == len(sub):\n            sub.append(val)\n        else:\n            sub[pos] = val\n    return len(sub)\n\n\narr = [10, 9, 2, 5, 3, 7, 101, 18]\nprint(lis(arr))"
+        }
+    ]
+}

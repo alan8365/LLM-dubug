@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode # The bug is here\n    return prevnode\n```\n",
+        "sample": {
+            "prog_id": 28,
+            "prog_name": "reverse_linked_list",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u7f6e\u63dbnode\u7684successor\u6642\uff0c\u6c92\u6709\u5c07node\u8ce6\u503c\u7d66prevnode\uff0c\u9020\u6210prevnode\u4e00\u76f4\u662f\u7a7a\u503c\u4e14\u6240\u6709node\u7684\u65b0successor\u90fd\u662f\u7a7a\u503c\uff0c\u5c0e\u81f4\u9664\u4e86\u8f38\u5165\u7a7a\u503c\u5916\u7684\u6240\u6709\u60c5\u6cc1\u90fd\u6703\u932f\u8aa4"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.724436044692993,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode",
+            "raw_code": "The bug is that the last node in the original linked list will have its `successor` attribute set to `None` after the `while` loop. This will break the reversed linked list. To fix the bug, the `node` variable should be assigned to `prevnode` at the end of the loop.  \n```python\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.523189067840576,
+            "repaired_code": "\nnode = nextnode",
+            "raw_code": "The bug in the code is on the line \n```python\nnode = nextnode\n```\nThe issue here is that it assigns the `nextnode` to the `node` variable, which causes an infinite loop if there is more than one element in the linked list. To fix this, the last line of the while loop should be:\n```python\nprevnode = node\n```\nThis will store the current node as the previous node, and then the loop will continue to the next node. The correct code should be:\n```python\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node # Fix the bug here\n        node = nextnode\n    return prevnode\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.474824905395508,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node  # Fix the bug here\n        node = nextnode\n    return prevnode",
+            "raw_code": "The bug is on the line `node = nextnode`. It should be changed to `prevnode = node` to correctly reverse the linked list. The correct code is:\n\n```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node  # Fix the bug here\n        node = nextnode\n    return prevnode\n```"
+        }
+    ]
+}

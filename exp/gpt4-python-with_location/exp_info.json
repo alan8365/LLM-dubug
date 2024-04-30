@@ -1,0 +1,8 @@
+{
+    "name": "gpt4-python-with_location_",
+    "lang": "python",
+    "llm_api": "OpenAiApi",
+    "prompt_type": "with_location",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location_",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location_/patchs"
+}

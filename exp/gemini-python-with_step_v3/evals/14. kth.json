@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 14,
+        "prog_name": "kth",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 11,
+        "bug_type": "",
+        "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.850421905517578,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 6,
+            "reparied_code": "def kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n    if pivot == arr[k]:\n        return pivot\n    elif k < num_less:\n        return kth(below, k)\n    elif k == num_lessoreq:\n        return pivot\n    else:\n        return kth(above, k)"
+        },
+        {
+            "run_time": 4.537743806838989,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 6,
+            "reparied_code": "def kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n    if k <= num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k)\n    else:\n        return pivot"
+        },
+        {
+            "run_time": 3.9723262786865234,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 4,
+            "reparied_code": "def kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n    if k < num_less:\n        return kth(below, k)\n    elif k == num_less:\n        return pivot\n    elif k >= num_lessoreq:\n        return kth(above, k)\n    else:\n        return pivot"
+        }
+    ]
+}

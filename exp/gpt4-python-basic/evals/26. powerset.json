@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.292511940002441,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr #python3 syntax for getting first element and the rest\n        rest_subsets = powerset(rest)\n        # missed including subsets without first\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+            "reparied_code": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
         },
         {
             "run_time": 3.5705819129943848,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr \n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+            "reparied_code": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
         },
         {
             "run_time": 3.2464427947998047,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr #python3 just like car and cdr (in this case anyway..)\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+            "reparied_code": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
         }
     ]
 }

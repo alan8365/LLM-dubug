@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 21,
+        "prog_name": "minimum_spanning_tree",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 10,
+        "bug_type": "",
+        "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 19.442212104797363,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def minimum_spanning_tree(weight_by_edge):\n    parent = {}\n\n    def find(node):\n        if parent[node] != node:\n            parent[node] = find(parent[node])\n        return parent[node]\n\n    def union(node1, node2):\n        root1 = find(node1)\n        root2 = find(node2)\n        if root1 != root2:\n            parent[root2] = root1\n\n    mst_edges = set()\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if u not in parent:\n            parent[u] = u\n        if v not in parent:\n            parent[v] = v\n        if find(u) != find(v):\n            mst_edges.add(edge)\n            union(u, v)\n    return mst_edges"
+        },
+        {
+            "run_time": 26.791398763656616,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def find(parent, i):\n    if parent[i] == i:\n        return i\n    else:\n        parent[i] = find(parent, parent[i])\n        return parent[i]\n\n\ndef union(parent, rank, x, y):\n    rootX = find(parent, x)\n    rootY = find(parent, y)\n    if rootX != rootY:\n        if rank[rootX] > rank[rootY]:\n            parent[rootY] = rootX\n        elif rank[rootX] < rank[rootY]:\n            parent[rootX] = rootY\n        else:\n            parent[rootY] = rootX\n            rank[rootX] += 1\n\n\ndef minimum_spanning_tree(weight_by_edge):\n    nodes = set()\n    for edge in weight_by_edge:\n        nodes.update(edge)\n    parent = {node: node for node in nodes}\n    rank = {node: 0 for node in nodes}\n    mst_edges = set()\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if find(parent, u) != find(parent, v):\n            mst_edges.add(edge)\n            union(parent, rank, u, v)\n    return mst_edges"
+        },
+        {
+            "run_time": 20.020106077194214,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def minimum_spanning_tree(weight_by_edge):\n    parent = {}\n    rank = {}\n\n    def find(node):\n        if parent[node] != node:\n            parent[node] = find(parent[node])\n        return parent[node]\n\n    def union(node1, node2):\n        root1 = find(node1)\n        root2 = find(node2)\n        if root1 != root2:\n            if rank[root1] > rank[root2]:\n                parent[root2] = root1\n            elif rank[root1] < rank[root2]:\n                parent[root1] = root2\n            else:\n                parent[root2] = root1\n                rank[root1] += 1\n\n    for u, v in weight_by_edge:\n        if u not in parent:\n            parent[u] = u\n            rank[u] = 0\n        if v not in parent:\n            parent[v] = v\n            rank[v] = 0\n    mst_edges = set()\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if find(u) != find(v):\n            mst_edges.add(edge)\n            union(u, v)\n    return mst_edges"
+        }
+    ]
+}

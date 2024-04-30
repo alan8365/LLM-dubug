@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.204068899154663,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 4,
-            "reparied_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n\n"
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n    return rows"
         },
         {
             "run_time": 4.829875946044922,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "\n\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n+1):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n\n\n\n"
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n+1):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n    return rows"
         },
         {
             "run_time": 3.6850779056549072,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 4,
-            "reparied_code": "\n\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 1\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n\n\n\n"
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 1\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n    return rows"
         }
     ]
 }

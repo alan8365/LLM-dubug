@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 29,
+        "prog_name": "rpn_eval",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 18,
+        "bug_type": "",
+        "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 17.640787839889526,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            \"+\": lambda a, b: a + b,\n            \"-\": lambda a, b: a - b,\n            \"*\": lambda a, b: a * b,\n            \"/\": lambda a, b: a / b,\n        }[symbol](a, b)\n\n    stack = []\n    for token in tokens:\n        if isinstance(token, float) or isinstance(token, int):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(op(token, a, b))\n    return stack.pop()"
+        },
+        {
+            "run_time": 21.457508087158203,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            \"+\": lambda a, b: a + b,\n            \"-\": lambda a, b: a - b,\n            \"*\": lambda a, b: a * b,\n            \"/\": lambda a, b: a / b if b != 0 else float(\"inf\"),\n        }[symbol](a, b)\n\n    stack = []\n    for token in tokens:\n        if isinstance(token, float) or isinstance(token, int):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            result = op(token, a, b)\n            stack.append(result)\n    return stack.pop()"
+        },
+        {
+            "run_time": 20.929090976715088,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            \"+\": lambda a, b: a + b,\n            \"-\": lambda a, b: a - b,\n            \"*\": lambda a, b: a * b,\n            \"/\": lambda a, b: a / b,\n        }[symbol](a, b)\n\n    stack = []\n    for token in tokens:\n        if isinstance(token, float) or isinstance(token, int):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            result = op(token, a, b)\n            stack.append(result)\n    return stack.pop()\n\n\ntokens = [5, 1, 2, \"+\", 4, \"*\", \"+\", 3, \"-\"]\nprint(rpn_eval(tokens))"
+        }
+    ]
+}

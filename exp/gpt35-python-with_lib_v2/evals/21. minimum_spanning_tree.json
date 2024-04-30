@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.035590171813965,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges"
+            "reparied_code": "def minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n    return mst_edges"
         },
         {
             "run_time": 2.3436532020568848,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\n\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges\n"
+            "reparied_code": "def minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n    return mst_edges"
         },
         {
             "run_time": 2.5537428855895996,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n\n    return mst_edges"
+            "reparied_code": "def minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n    for edge in sorted(weight_by_edge, key=weight_by_edge.get):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[u]\n    return mst_edges"
         }
     ]
 }

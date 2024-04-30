@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 33,
+        "prog_name": "shunting_yard",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 16,
+        "bug_type": "",
+        "bug_detail_desc": "在處理到運算符的時候沒有將運算符放進opstack中，造成rpntokens沒有任何運算符，導致有運算符的輸入皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 14.018840789794922,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        elif token in precedence:\n            while (\n                opstack\n                and opstack[-1] in precedence\n                and precedence[token] <= precedence[opstack[-1]]\n            ):\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
+        },
+        {
+            "run_time": 18.694371223449707,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\n    left_associative = {\"+\", \"-\", \"*\", \"/\"}\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        elif token in precedence:\n            while (\n                opstack\n                and opstack[-1] != \"(\"\n                and (\n                    precedence[token] < precedence[opstack[-1]]\n                    or (\n                        precedence[token] == precedence[opstack[-1]]\n                        and token in left_associative\n                    )\n                )\n            ):\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n        elif token == \"(\":\n            opstack.append(token)\n        elif token == \")\":\n            while opstack and opstack[-1] != \"(\":\n                rpntokens.append(opstack.pop())\n            opstack.pop()\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
+        },
+        {
+            "run_time": 22.191460132598877,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "def shunting_yard(tokens):\n    precedence = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\n    associativity = {\"+\": \"L\", \"-\": \"L\", \"*\": \"L\", \"/\": \"L\"}\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        elif token in precedence:\n            while (\n                opstack\n                and opstack[-1] != \"(\"\n                and (\n                    precedence[opstack[-1]] > precedence[token]\n                    or (\n                        precedence[opstack[-1]] == precedence[token]\n                        and associativity[token] == \"L\"\n                    )\n                )\n            ):\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n        elif token == \"(\":\n            opstack.append(token)\n        elif token == \")\":\n            while opstack and opstack[-1] != \"(\":\n                rpntokens.append(opstack.pop())\n            if opstack and opstack[-1] == \"(\":\n                opstack.pop()\n    while opstack:\n        rpntokens.append(opstack.pop())\n    return rpntokens"
+        }
+    ]
+}

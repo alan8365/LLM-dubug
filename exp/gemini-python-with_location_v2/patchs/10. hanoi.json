@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, helper)) # The bug is here\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 10,
+            "prog_name": "hanoi",
+            "language": "python",
+            "testcase_num": 8,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u6b65\u9a5f\u4e8c\u4e2d\u7684\u4ea4\u63db\u628aend\u5beb\u6210helper\uff0c\u4f7ffunc\u7121\u6cd5\u4ea4\u63db\u5230\u6700\u5f8c\u76ee\u6a19\u4e0a\uff0c\u5c0e\u81f4\u5927\u90e8\u5206\u60c5\u6cc1\u90fd\u53ea\u80fd\u7d66\u51fa\u932f\u8aa4\u7b54\u6848"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.867521047592163,
+            "repaired_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, 4)) # The bug is here\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps",
+            "raw_code": "The problem with the code is that the parameter for `start` is the same as the value for `helper` in the line below it. This means that the value of `start` is changed in the recursive call, which causes incorrect results. To fix this, the value for `helper` should be changed to a different value, such as 4 or 5.\n\nHere is the code with the fix:\n```python=\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, 4)) # The bug is here\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.399401903152466,
+            "repaired_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps",
+            "raw_code": "The bug in the code is that the line `steps.append((start, helper))` should be changed to `steps.append((start, end))` because the disk must be moved from the start position to the end position. \nHere is the code with the bug fixed:\n```python=\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, end))\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.2175819873809814,
+            "repaired_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, end))\n        steps.append((start, end)) # Corrected\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps",
+            "raw_code": "The bug in the code is that the step of moving the disk from start to helper is reversed. The correct order is to first move the disk from start to end, then from start to helper, and finally from end to helper. Here is the corrected code:\n```python=\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, end))\n        steps.append((start, end)) # Corrected\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps\n```"
+        }
+    ]
+}

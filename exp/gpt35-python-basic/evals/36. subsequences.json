@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 1.623311996459961,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 4,
             "fail_num": 8,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        for subseq in subsequences(i + 1, b, k - 1):\n            ret.append([i] + subseq)\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n    ret = []\n    for i in range(a, b + 1):\n        for subseq in subsequences(i + 1, b, k - 1):\n            ret.append([i] + subseq)\n    return ret"
         },
         {
             "run_time": 1.9560797214508057,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 4,
             "fail_num": 8,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n    return ret"
         },
         {
             "run_time": 2.24113392829895,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 4,
             "fail_num": 8,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return [[]]\n    ret = []\n    for i in range(a, b + 1):\n        for rest in subsequences(i + 1, b, k - 1):\n            ret.append([i] + rest)\n    return ret"
         }
     ]
 }

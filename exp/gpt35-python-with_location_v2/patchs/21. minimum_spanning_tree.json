@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u]) # The bug is here\n\n    return mst_edges\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u66f4\u65b0group_by_node\u8b8a\u6578\u6642\uff0c\u8aa4\u7528update\u51fd\u6578\u5728for loop\u4e2d\u66f4\u65b0set\u5f15\u767cRuntimeError\uff0c\u5c0e\u81f4\u5e7e\u4e4e\u6240\u6709\u8f38\u5165\u90fd\u7121\u6cd5\u904b\u884c"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.232442855834961,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            group_v = group_by_node.pop(v)  # Removed the original group of node v\n            for node in group_v:  # Update the group for each node in the original group of v\n                group_by_node[node].update(group_by_node[u]) \n\n    return mst_edges\n",
+            "raw_code": "The bug in the code is that when updating the group of nodes for each node in `group_by_node[v]`, we need to remove the original group of node v before updating with group u. This is to prevent adding duplicate nodes in the group.\n\nHere is the fixed code:\n```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            group_v = group_by_node.pop(v)  # Removed the original group of node v\n            for node in group_v:  # Update the group for each node in the original group of v\n                group_by_node[node].update(group_by_node[u]) \n\n    return mst_edges\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.606656789779663,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            nodes_to_update = list(group_by_node[v])  # Copy the set to avoid modifying while iterating\n            for node in nodes_to_update:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n",
+            "raw_code": "The issue in the code is that when updating the group_by_node dictionary with the union of two sets, it is modifying the dictionary while iterating over it. This can lead to unexpected behavior. To fix this issue, we can create a copy of the set before updating the dictionary. Here's the corrected code:\n\n```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            nodes_to_update = list(group_by_node[v])  # Copy the set to avoid modifying while iterating\n            for node in nodes_to_update:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n``` \n\nBy creating a copy of the set before iterating and updating the dictionary, we prevent the issue of modifying the dictionary while iterating over it."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.025672912597656,
+            "repaired_code": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges\n",
+            "raw_code": "To fix the bug in the code, we need to update the group_by_node mappings properly when merging the groups. Here's the corrected code:\n\n```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            group_u.update(group_v)\n            for node in group_v:\n                group_by_node[node] = group_u\n\n    return mst_edges\n```\n\nIn this corrected version, we retrieve the group sets for the nodes `u` and `v` before merging them. Then, we update the group mappings for all nodes in the merged group to point to the updated set. This ensures that all nodes in the merged group are correctly mapped to the same set."
+        }
+    ]
+}

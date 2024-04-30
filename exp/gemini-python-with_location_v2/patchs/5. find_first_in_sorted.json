@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi: # The bug is here\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 5,
+            "prog_name": "find_first_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728whlie\u5224\u65b7\u5f0f\u4e2d\uff0c\u932f\u8aa4\u8003\u616e\u4e86lo==hi\u7684\u72c0\u6cc1\uff0c\u5c0e\u81f4\u5982\u76ee\u6a19\u4e0d\u5728\u9663\u5217\u4e2d\u7684\u60c5\u6cc1\u6703\u7121\u7aae\u8ff4\u5708"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.50026798248291,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo < hi: # Fix the condition to while lo < hi\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1",
+            "raw_code": "The bug is in the condition `while lo <= hi` because in the case where `lo` equals `hi`, the code doesn't check the value at index `hi`. To fix this, the condition should be changed to `while lo < hi`.\n\nHere is the fixed code:\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo < hi: # Fix the condition to while lo < hi\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.481239080429077,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x < arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1",
+            "raw_code": "The bug in the code is that it doesn't check correctly if the current element is the first occurrence of the element in the array. It should also check that the current element is not equal to the previous element if the current element is not the first element in the array.\nHere is the fixed code:\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x < arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.8764500617980957,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo < hi: # The bug is fixed here\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1",
+            "raw_code": "The bug is on the line `while lo <= hi`. To fix it, it should be changed to `while lo < hi`. This is because if `lo` is equal to `hi`, then there is no middle element to check.\n\nHere is the corrected code:\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo < hi: # The bug is fixed here\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n```"
+        }
+    ]
+}

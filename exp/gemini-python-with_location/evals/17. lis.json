@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 17,
+        "prog_name": "lis",
+        "language": "python",
+        "testcase_num": 12,
+        "fault_location": 12,
+        "bug_type": "",
+        "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 2.8297929763793945,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 12,
+            "fail_num": 0,
+            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = max(longest, length + 1)\n    return longest"
+        },
+        {
+            "run_time": 2.7608511447906494,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 10,
+            "fail_num": 2,
+            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val > arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n    return longest"
+        },
+        {
+            "run_time": 2.9728949069976807,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 12,
+            "fail_num": 0,
+            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n        if length + 1 > longest:\n            longest = length + 1\n    return longest"
+        }
+    ]
+}

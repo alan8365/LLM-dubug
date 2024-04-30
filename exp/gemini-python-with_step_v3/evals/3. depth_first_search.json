@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 3,
+        "prog_name": "depth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.98064112663269,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 4,
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        nodesvisited.add(node)\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors if nextnode is not None\n            )\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 5.333030939102173,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        else:\n            nodesvisited.add(node)\n            if node is goalnode:\n                return True\n            else:\n                return any(\n                    search_from(nextnode) for nextnode in node.successors\n                )\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 7.2161619663238525,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "node1 = Node(\"A\")\nnode2 = Node(\"B\")\nnode3 = Node(\"C\")\nnode4 = Node(\"D\")\nnode5 = Node(\"E\")\nnode1.successors = [node2, node3]\nnode2.successors = [node4]\nnode3.successors = [node5]\nnode4.successors = []\nnode5.successors = []\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            nodesvisited.add(node)\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n    return search_from(startnode)\nprint(depth_first_search(node1, node5))"
+        }
+    ]
+}

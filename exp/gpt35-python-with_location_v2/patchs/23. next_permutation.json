@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]: # The bug is here\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 23,
+            "prog_name": "next_permutation",
+            "language": "python",
+            "testcase_num": 8,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u6aa2\u67e5\u9996\u5143\u7d20\u8981\u7f6e\u63db\u70ba\u54ea\u500b\u5143\u7d20\u6642\uff0c\u5c07\u9996\u5143\u7d20\u7d22\u5f15i\u548c\u6bd4\u8f03\u5143\u7d20\u7d22\u5f15j\u932f\u8aa4\u7684\u7f6e\u63db\uff0c\u5c0e\u81f4\u6240\u6709\u8f38\u51fa\u90fd\u662f\u932f\u8aa4\u6216\u76f4\u63a5\u8f38\u51fa\u7a7a\u503c"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.716334819793701,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: # Fixed bug: changed '<' to '>'\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n",
+            "raw_code": "```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]: # Fixed bug: changed '<' to '>'\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.754617691040039,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # Corrected bug\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n",
+            "raw_code": "The bug in the code is on the line `if perm[j] < perm[i]:`. It should be `if perm[j] > perm[i]:` instead. \n\nHere is the corrected code:\n\n```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # Corrected bug\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.578334808349609,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # Corrected the comparison operator\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n",
+            "raw_code": "To fix the bug in the code, the comparison in the inner loop condition should be corrected from `perm[j] < perm[i]` to `perm[j] > perm[i]`. This will ensure that the correct element is selected for swapping.\n\nHere is the corrected code:\n\n```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:  # Corrected the comparison operator\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 22,
+        "prog_name": "next_palindrome",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 14,
+        "bug_type": "",
+        "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 30.61777687072754,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 5,
+            "reparied_code": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    high_mid = n // 2\n    low_mid = (n - 1) // 2\n    while high_mid < n and low_mid >= 0:\n        digit_list[high_mid] = digit_list[low_mid]\n        high_mid += 1\n        low_mid -= 1\n    if all(digit_list[i] >= digit_list[n - 1 - i] for i in range(n // 2)):\n        return digit_list\n    increment_pos = (n - 1) // 2\n    while increment_pos >= 0 and digit_list[increment_pos] == 9:\n        digit_list[increment_pos] = 0\n        digit_list[n - 1 - increment_pos] = 0\n        increment_pos -= 1\n    if increment_pos >= 0:\n        digit_list[increment_pos] += 1\n        digit_list[n - 1 - increment_pos] = digit_list[increment_pos]\n    else:\n        return [1] + [0] * (n - 1) + [1]\n    return digit_list\n\n\nprint(next_palindrome([1, 2, 3]))\nprint(next_palindrome([9, 4, 1]))\nprint(next_palindrome([2, 9, 9]))\nprint(next_palindrome([9, 9, 9]))"
+        },
+        {
+            "run_time": 34.88866996765137,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    if n == 1 and digit_list[0] < 9:\n        return [digit_list[0] + 1]\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while low_mid >= 0:\n        digit_list[high_mid] = digit_list[low_mid]\n        high_mid += 1\n        low_mid -= 1\n    if all(x == 9 for x in digit_list):\n        return [1] + [0] * (len(digit_list) - 1) + [1]\n    if int(\"\".join(map(str, digit_list))) > int(\"\".join(map(str, digit_list[::-1]))):\n        return digit_list\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    carry = 1\n    while carry > 0 and low_mid >= 0:\n        new_value = digit_list[low_mid] + carry\n        if new_value > 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n        else:\n            digit_list[high_mid] = new_value\n            digit_list[low_mid] = new_value\n            carry = 0\n        high_mid += 1\n        low_mid -= 1\n    if carry > 0:\n        return [1] + [0] * (len(digit_list) - 1) + [1]\n    return digit_list"
+        },
+        {
+            "run_time": 30.771440029144287,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 4,
+            "reparied_code": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    if n == 1:\n        return [1, 0, 1] if digit_list[0] == 9 else [digit_list[0] + 1]\n    high_mid = (n + 1) // 2\n    low_mid = (n - 1) // 2\n    for i in range(low_mid, -1, -1):\n        digit_list[n - i - 1] = digit_list[i]\n    if all(x == 9 for x in digit_list):\n        return [1] + [0] * (n - 1) + [1]\n    overflow = False\n    original = digit_list[:]\n    for i in range(low_mid + 1):\n        if digit_list[i] < original[i]:\n            overflow = False\n            break\n        if digit_list[i] > original[i]:\n            overflow = True\n            break\n    if overflow:\n        while low_mid >= 0:\n            digit_list[low_mid] += 1\n            digit_list[n - low_mid - 1] = digit_list[low_mid]\n            if digit_list[low_mid] == 10:\n                digit_list[low_mid] = 0\n                digit_list[n - low_mid - 1] = 0\n                low_mid -= 1\n            else:\n                break\n    return digit_list"
+        }
+    ]
+}

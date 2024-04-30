@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 3,
+        "prog_name": "depth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.720909118652344,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node, search_func):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_func(nextnode, search_func) for nextnode in node.successors\n            )\n    return search_from(startnode, search_from)"
+        },
+        {
+            "run_time": 4.747028112411499,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in get_successors(node)\n            )\n    return search_from(startnode)\ndef get_successors(node):\n    return node.successors"
+        },
+        {
+            "run_time": 3.556898832321167,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node == goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n    return search_from(startnode)"
+        }
+    ]
+}

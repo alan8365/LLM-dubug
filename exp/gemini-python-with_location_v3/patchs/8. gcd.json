@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b) # The bug is here\n```\n",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u547c\u53eb\u6642\uff0c\u6c92\u6709\u4ea4\u63db\u6578\u5b57\u7684\u4f4d\u7f6e\uff0c\u4f7f\u5f97b\u7684\u4f4d\u7f6e\u59cb\u7d42\u4fdd\u6301\u4e0d\u8b8a\uff0c\u5c0e\u81f4\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.1368227005004883,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)",
+            "raw_code": "The bug in the code is that the arguments of the recursive call to `gcd` are swapped. It should be `gcd(b, a % b)` instead of `gcd(a % b, b)`:\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.197361946105957,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b) # Fixed the bug",
+            "raw_code": "The bug is that the function `gcd` is called with `a % b` and `b` as arguments, but it should be called with `b` and `a % b` as arguments. The correct code should be:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b) # Fixed the bug\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.645218849182129,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        if a < b:\n            a, b = b, a\n        return gcd(a % b, b)",
+            "raw_code": "The bug is that the code doesn't handle the case when `a` is less than `b`, in this case, the algorithm will not terminate and will result in a stack overflow. This bug can be fixed by swapping `a` and `b` if `a` is less than `b`. The fixed code should be as follows:\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        if a < b:\n            a, b = b, a\n        return gcd(a % b, b)\n```"
+        }
+    ]
+}

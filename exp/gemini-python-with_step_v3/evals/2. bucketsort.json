@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 2,
+        "prog_name": "bucketsort",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 6,
+        "bug_type": "",
+        "bug_detail_desc": "在for迴圈中把遍歷的目標誤用為原本的陣列arr，而非標記陣列中元素數量的count，導致除非要排序的陣列和count一模一樣否則皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.019562005996704,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
+        },
+        {
+            "run_time": 3.486222267150879,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
+        },
+        {
+            "run_time": 5.048516035079956,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 6,
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(arr):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
+        }
+    ]
+}

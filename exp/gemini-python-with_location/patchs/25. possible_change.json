@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0: # The bug is here\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 25,
+            "prog_name": "possible_change",
+            "language": "python",
+            "testcase_num": 10,
+            "fault_location": 3,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8655\u7406\u908a\u754c\u72c0\u6cc1\u6642\uff0c\u7f3a\u5c11\u8655\u7406\u786c\u5e63\u6c92\u6709\u8f38\u5165\u7684\u908a\u754c\u72c0\u6cc1\uff0c\u5c0e\u81f4\u6c92\u6709\u8f38\u5165\u786c\u5e63\u7a2e\u985e\u6642\u7531\u65bc\u7121\u6cd5unpack coins\u8b8a\u6578\u89f8\u767cValueError"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.0497498512268066,
+            "repaired_code": "\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins: # The bug was fixed\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)",
+            "raw_code": "```python=\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins: # The bug was fixed\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.9401719570159912,
+            "repaired_code": "\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins: # Fixed the bug\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)",
+            "raw_code": "```python\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins: # Fixed the bug\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.5930240154266357,
+            "repaired_code": "\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)",
+            "raw_code": "```python\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n```\nThe bug in the original code was that it didn't consider the case when the total was negative. In this case, the function should return 0, as it's not possible to make change for a negative amount."
+        }
+    ]
+}

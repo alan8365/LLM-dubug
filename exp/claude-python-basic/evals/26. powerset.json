@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 21.97631287574768,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\narr = [1, 2, 3]\nresult = powerset(arr)\nprint(result)"
+            "reparied_code": "arr = [1, 2, 3]\nresult = powerset(arr)\nprint(result)"
         },
         {
             "run_time": 24.88656497001648,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        # Destructure the list into the first element and the rest of the list\n        first, *rest = arr\n        \n        # Recursively generate the powerset of the rest of the list\n        rest_subsets = powerset(rest)\n        \n        # Combine the first element with each subset of the rest of the list\n        # and create a new list of subsets that include the first element\n        subsets_with_first = [[first] + subset for subset in rest_subsets]\n        \n        # Combine the subsets that include the first element with the subsets that don't\n        return rest_subsets + subsets_with_first\n    else:\n        # Base case: an empty list has only one subset, which is an empty list\n        return [[]]"
+            "reparied_code": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        subsets_with_first = [[first] + subset for subset in rest_subsets]\n        return rest_subsets + subsets_with_first\n    else:\n        return [[]]"
         },
         {
             "run_time": 19.550922870635986,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
+            "reparied_code": "def powerset(arr):\n    if arr:\n        first, *rest = arr\n        rest_subsets = powerset(rest)\n        return rest_subsets + [[first] + subset for subset in rest_subsets]\n    else:\n        return [[]]"
         }
     ]
 }

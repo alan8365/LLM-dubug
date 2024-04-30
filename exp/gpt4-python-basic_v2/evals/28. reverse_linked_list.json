@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 28,
+        "prog_name": "reverse_linked_list",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 5,
+        "bug_type": "",
+        "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 23.254897832870483,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 2,
+            "reparied_code": "class ListNode:\n    def __init__(self, value=0, next=None):\n        self.value = value\n        self.next = next\n\n\ndef reverse_linked_list(head):\n    prev_node = None\n    current_node = head\n    while current_node:\n        next_node = current_node.next\n        current_node.next = prev_node\n        prev_node = current_node\n        current_node = next_node\n    return prev_node"
+        },
+        {
+            "run_time": 14.442951202392578,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 2,
+            "reparied_code": "class ListNode:\n    def __init__(self, value=0, next=None):\n        self.value = value\n        self.next = next\n\n\ndef reverse_linked_list(node):\n    previous_node = None\n    current_node = node\n    while current_node:\n        next_node = current_node.next\n        current_node.next = previous_node\n        previous_node = current_node\n        current_node = next_node\n    return previous_node"
+        },
+        {
+            "run_time": 14.662419080734253,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 1,
+            "fail_num": 2,
+            "reparied_code": "class ListNode:\n    def __init__(self, value=0, next=None):\n        self.value = value\n        self.next = next\n\n\ndef reverse_linked_list(node):\n    prevnode = None\n    current = node\n    while current:\n        nextnode = current.next\n        current.next = prevnode\n        prevnode = current\n        current = nextnode\n    return prevnode\n\n\na = ListNode(\"a\")\nb = ListNode(\"b\")\nc = ListNode(\"c\")\na.next = b\nb.next = c\nreversed_head = reverse_linked_list(a)"
+        }
+    ]
+}

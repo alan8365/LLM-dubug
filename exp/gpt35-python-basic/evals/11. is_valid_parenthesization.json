@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 2.147006034851074,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth <= 0:  # fixed this condition to <= instead of <\n                return False\n            depth -= 1\n\n    if depth == 0:  # added this condition to check if all parentheses are properly closed\n        return True\n    else:\n        return False"
+            "reparied_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth <= 0:\n                return False\n            depth -= 1\n    if depth == 0:\n        return True\n    else:\n        return False"
         },
         {
             "run_time": 2.357623815536499,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n    \n    if depth != 0:\n        return False\n\n    return True"
+            "reparied_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n    if depth != 0:\n        return False\n    return True"
         },
         {
             "run_time": 2.150623083114624,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth == 0:  # Check if there are extra closing parentheses\n                return False\n            depth -= 1\n\n    return depth == 0  # Check if the depth is zero at the end"
+            "reparied_code": "def is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            if depth == 0:\n                return False\n            depth -= 1\n    return depth == 0"
         }
     ]
 }

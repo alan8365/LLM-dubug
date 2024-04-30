@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\nfrom heapq import *\n\ndef shortest_path_length(length_by_edge, startnode, goalnode):\n    unvisited_nodes = [] \n    heappush(unvisited_nodes, (0, startnode))\n    visited_nodes = set()\n\n    while len(unvisited_nodes) > 0:\n        distance, node = heappop(unvisited_nodes)\n        if node is goalnode:\n            return distance\n\n        visited_nodes.add(node)\n\n        for nextnode in node.successors:\n            if nextnode in visited_nodes:\n                continue\n\n            insert_or_update(unvisited_nodes,\n                (min(\n                    get(unvisited_nodes, nextnode) or float('inf'),\n                    get(unvisited_nodes, nextnode) + length_by_edge[node, nextnode] # The bug is here\n                ),\n                nextnode)\n            )\n\n    return float('inf')\n\n\ndef get(node_heap, wanted_node):\n    for dist, node in node_heap:\n        if node == wanted_node:\n            return dist\n    return 0\n\ndef insert_or_update(node_heap, dist_node):\n    dist, node = dist_node\n    for i, tpl in enumerate(node_heap):\n        a, b = tpl\n        if b == node:\n            node_heap[i] = dist_node \n            return None\n\n    heappush(node_heap, dist_node)\n    return None\n```\n",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u52d5\u614b\u898f\u5283\u66f4\u65b0\u7bc0\u9ede\u8ddd\u96e2\u6642\uff0c\u6c92\u6709\u52a0\u4e0a\u8d77\u9ede\u5230\u524d\u4e00\u7bc0\u9ede\u7684\u8ddd\u96e2\uff0c\u5c0e\u81f4\u9664\u4e86\u8d77\u9ede\u7d42\u9ede\u76f8\u540c\u548c\u8d77\u9ede\u7d42\u9ede\u4e0d\u53ef\u9054\u7b49\u7279\u6b8a\u60c5\u6cc1\u4ee5\u5916\u7684\u8f38\u5165\u90fd\u7121\u6cd5\u7372\u5f97\u6b63\u78ba\u7d50\u679c"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.610957145690918,
+            "repaired_code": "\ndef insert_or_update(node_heap, dist_node):\n    dist, node = dist_node\n    for i, tpl in enumerate(node_heap):\n        a, b = tpl\n        if b == node:\n            node_heap[i] = dist_node \n            heapify(node_heap) \n            return None\n\n    heappush(node_heap, dist_node)\n    return None",
+            "raw_code": "The error in the code is that the key of the heap is the distance to the node, not the node itself. To fix this, the `insert_or_update` function should be modified to update the key of the node in the heap, if it exists. \nHere is the updated code:\n```python=\ndef insert_or_update(node_heap, dist_node):\n    dist, node = dist_node\n    for i, tpl in enumerate(node_heap):\n        a, b = tpl\n        if b == node:\n            node_heap[i] = dist_node \n            heapify(node_heap) \n            return None\n\n    heappush(node_heap, dist_node)\n    return None\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 1.9168117046356201,
+            "repaired_code": "\nget(unvisited_nodes, nextnode) + length_by_edge[node, nextnode] ",
+            "raw_code": "The bug is on the line: \n```python\nget(unvisited_nodes, nextnode) + length_by_edge[node, nextnode] \n```\n\nThe correct line should be:\n```python\ndistance + length_by_edge[node, nextnode]\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.378208875656128,
+            "repaired_code": "\n    insert_or_update(unvisited_nodes,\n        (min(\n            get(unvisited_nodes, nextnode) or float('inf'),\n            get(unvisited_nodes, node) + length_by_edge[node, nextnode] or float('inf'), # This line was changed\n        ),\n        nextnode)\n    )",
+            "raw_code": "The bug in the code is that the lookup in the `length_by_edge` is not symmetric. That is, The code raises a `KeyError` if `nextnode` is the origin of the edge and `node` is the destination. To fix this, the code should look up the length in both directions:\n\n```python\n    insert_or_update(unvisited_nodes,\n        (min(\n            get(unvisited_nodes, nextnode) or float('inf'),\n            get(unvisited_nodes, node) + length_by_edge[node, nextnode] or float('inf'), # This line was changed\n        ),\n        nextnode)\n    )\n```"
+        }
+    ]
+}

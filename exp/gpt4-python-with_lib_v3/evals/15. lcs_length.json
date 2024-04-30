@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 15,
+        "prog_name": "lcs_length",
+        "language": "python",
+        "testcase_num": 9,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 18.95603895187378,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 4,
+            "reparied_code": "def lcs_length(s, t):\n    dp = [[0] * (len(t) + 1) for _ in range(len(s) + 1)]\n    for i in range(1, len(s) + 1):\n        for j in range(1, len(t) + 1):\n            if s[i - 1] == t[j - 1]:\n                dp[i][j] = dp[i - 1][j - 1] + 1\n            else:\n                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])\n    return dp[-1][-1]"
+        },
+        {
+            "run_time": 36.97960090637207,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 4,
+            "reparied_code": "def lcs_length(s, t):\n    from collections import defaultdict\n    dp = defaultdict(int)\n    for i in range(1, len(s) + 1):\n        for j in range(1, len(t) + 1):\n            if s[i - 1] == t[j - 1]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n    return dp[len(s), len(t)]\ns = \"ABCBDAB\"\nt = \"BDCAB\"\nprint(\"Length of LCS:\", lcs_length(s, t))"
+        },
+        {
+            "run_time": 22.821683168411255,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 4,
+            "reparied_code": "def lcs_length(s, t):\n    dp = [[0] * (len(t) + 1) for _ in range(len(s) + 1)]\n    for i in range(1, len(s) + 1):\n        for j in range(1, len(t) + 1):\n            if s[i - 1] == t[j - 1]:\n                dp[i][j] = dp[i - 1][j - 1] + 1\n            else:\n                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])\n    return dp[len(s)][len(t)]"
+        }
+    ]
+}

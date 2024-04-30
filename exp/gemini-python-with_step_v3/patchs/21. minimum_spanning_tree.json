@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step and show the comepelte fixed code in the end:\n```python=\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u66f4\u65b0group_by_node\u8b8a\u6578\u6642\uff0c\u8aa4\u7528update\u51fd\u6578\u5728for loop\u4e2d\u66f4\u65b0set\u5f15\u767cRuntimeError\uff0c\u5c0e\u81f4\u5e7e\u4e4e\u6240\u6709\u8f38\u5165\u90fd\u7121\u6cd5\u904b\u884c"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 6.801613092422485,
+            "repaired_code": "\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}) and group_by_node[u] != group_by_node[v]:",
+            "raw_code": "**Bug #1:** The code doesn't handle the case where `u` and `v` are already in the same group. This can lead to incorrect results.\n\n**Fix:** Check if the groups for `u` and `v` are the same before adding the edge to the MST.\n\n```python\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}) and group_by_node[u] != group_by_node[v]:\n```\n\n**Bug #2:** The code doesn't update the groups for all of the nodes in the group of `v` when it merges the groups of `u` and `v`. This can lead to incorrect results.\n\n**Fix:** Update the groups for all of the nodes in the group of `v` when merging the groups.\n\n```python\nfor node in group_by_node[v]:\n    group_by_node[node].update(group_by_node[u])\n```\n\n**Complete Fixed Code:**\n\n```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}) and group_by_node[u] != group_by_node[v]:\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 6.867618083953857,
+            "repaired_code": "\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n    mst_edges.add(edge)\n    group_by_node[u] = group_by_node[u].union(group_by_node[v])\n    for node in group_by_node[v]:\n        group_by_node[node] = group_by_node[node].union(group_by_node[u])",
+            "raw_code": "The bug in the given code is in the `if` condition. Each time when the condition is met, it should update the `group_by_node` dictionary to merge the two groups (represented by `group_by_node[u]` and `group_by_node[v]`) into a single group. However, the code incorrectly updates both groups to have the same elements, which doesn't represent merging them.\n\nHere's the corrected part of the code:\n```python\nif group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n    mst_edges.add(edge)\n    group_by_node[u] = group_by_node[u].union(group_by_node[v])\n    for node in group_by_node[v]:\n        group_by_node[node] = group_by_node[node].union(group_by_node[u])\n```\n\nHere's the complete fixed code:\n```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u] = group_by_node[u].union(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[node].union(group_by_node[u])\n\n    return mst_edges\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.79318904876709,
+            "repaired_code": "\ngroup_by_node.setdefault(u, set()).add(u)\ngroup_by_node.setdefault(v, set()).add(v)",
+            "raw_code": "**1. Bug 1:** The `setdefault` function in Python returns the existing value if the key already exists. However, in this code, it returns a new set. To fix this, use the `get` function to retrieve the existing value, or create a new set if it doesn't exist.\n```python\ngroup_by_node.setdefault(u, set()).add(u)\ngroup_by_node.setdefault(v, set()).add(v)\n```\n\n**2. Bug 2:** The `update` function in Python updates the dictionary with the key-value pairs from another dictionary. However, in this code, it's used to update sets with other sets. To fix this, use the `union` function to combine sets.\n```python\ngroup_by_node[u].union(group_by_node[v])\nfor node in group_by_node[v]:\n    group_by_node[node].union(group_by_node[u])\n```\n\nThe fixed code:\n```python\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.get(u, set()).add(u) != group_by_node.get(v, set()).add(v):\n            mst_edges.add(edge)\n            group_by_node[u] = group_by_node[u].union(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node] = group_by_node[node].union(group_by_node[u])\n\n    return mst_edges\n```"
+        }
+    ]
+}

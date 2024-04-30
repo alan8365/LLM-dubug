@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.0291121006011963,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 4,
-            "reparied_code": "\ndef gcd(a, b):\n    if a == 0:\n        return b\n    elif b == 0:\n        return a\n    else:\n        return gcd(a % b, b)"
+            "reparied_code": "def gcd(a, b):\n    if a == 0:\n        return b\n    elif b == 0:\n        return a\n    else:\n        return gcd(a % b, b)"
         },
         {
             "run_time": 3.404345750808716,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef gcd(a, b):\n    if a < b:\n        return gcd(b,a)\n    elif b == 0:\n        return a\n    else:\n        return gcd(a % b, b)\n\n\n\n"
+            "reparied_code": "def gcd(a, b):\n    if a < b:\n        return gcd(b,a)\n    elif b == 0:\n        return a\n    else:\n        return gcd(a % b, b)"
         },
         {
             "run_time": 4.207337856292725,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 5,
-            "reparied_code": "\ndef gcd(a, b):\n    if a == 0 and b == 0:\n        return 0\n    elif b == 0:\n        return a\n    else:\n        return gcd(a % b, b)"
+            "reparied_code": "def gcd(a, b):\n    if a == 0 and b == 0:\n        return 0\n    elif b == 0:\n        return a\n    else:\n        return gcd(a % b, b)"
         }
     ]
 }

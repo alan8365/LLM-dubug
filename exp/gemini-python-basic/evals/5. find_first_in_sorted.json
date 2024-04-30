@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 6.346804857254028,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 1,
-            "reparied_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid]:\n            if mid == 0 or x != arr[mid - 1]:\n                return mid\n            else:\n                hi = mid - 1\n        elif x < arr[mid]:\n            hi = mid - 1\n        else:\n            lo = mid + 1\n\n    return -1"
+            "reparied_code": "def find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if x == arr[mid]:\n            if mid == 0 or x != arr[mid - 1]:\n                return mid\n            else:\n                hi = mid - 1\n        elif x < arr[mid]:\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return -1"
         },
         {
             "run_time": 3.2666797637939453,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1"
+            "reparied_code": "def find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n        elif x <= arr[mid]:\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return -1"
         },
         {
             "run_time": 2.411921977996826,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1"
+            "reparied_code": "def find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n        elif x <= arr[mid]:\n            hi = mid - 1\n        else:\n            lo = mid + 1\n    return -1"
         }
     ]
 }

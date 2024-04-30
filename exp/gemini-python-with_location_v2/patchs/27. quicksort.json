@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot]) # The bug is here\n    return lesser + [pivot] + greater\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 27,
+            "prog_name": "quicksort",
+            "language": "python",
+            "testcase_num": 13,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5efa\u7acb\u6bd4pivot\u5927\u7684\u5143\u7d20\u7d44\u6210\u7684\u9663\u5217\u6642\uff0c\u6c92\u6709\u5c07\u548cpivot\u76f8\u7b49\u7684\u5143\u7d20\u5305\u542b\u9032\u53bb\uff0c\u5c0e\u81f4\u5728\u6392\u5e8f\u6709\u548cpivot\u76f8\u7b49\u5143\u7d20\u7684\u9663\u5217\u6642\u6703\u7f3a\u5c11\u9019\u4e9b\u5143\u7d20"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.661012887954712,
+            "repaired_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    equal = [x for x in arr[1:] if x == pivot] # Added this line\n    return lesser + equal + [pivot] + greater",
+            "raw_code": "The bug is that the code doesn't sort elements equal to the pivot. The correct code is:\n```python\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot])\n    equal = [x for x in arr[1:] if x == pivot] # Added this line\n    return lesser + equal + [pivot] + greater\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.071895122528076,
+            "repaired_code": "\ngreater = quicksort([x for x in arr[1:] if x > pivot])",
+            "raw_code": "The bug in the provided code occurs in the line that is commented with \"The bug is here\". The issue is that in the recursive calls to `quicksort`, the list `arr[1:]` is used rather than the entire list `arr`. This means that the first element of the list is omitted from the subsequent recursive calls, and the sorting will not be performed correctly.\n\nTo fix the issue, replace the line:\n```python=\ngreater = quicksort([x for x in arr[1:] if x > pivot])\n```\nwith:\n```python=\ngreater = quicksort([x for x in arr if x > pivot])\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.440688133239746,
+            "repaired_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot])\n    return lesser + [pivot] + greater",
+            "raw_code": "The bug is in the line `greater = quicksort([x for x in arr[1:] if x > pivot])`. It should instead be:\n`greater = quicksort([x for x in arr[1:] if x >= pivot])`. This is because we want the `greater` list to include numbers that are equal to the pivot as well. With the original code, equal numbers would have been excluded from the `greater` list.\nHere is the corrected code:\n```python=\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot])\n    return lesser + [pivot] + greater\n```"
+        }
+    ]
+}

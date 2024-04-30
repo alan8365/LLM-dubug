@@ -1,0 +1,8 @@
+{
+    "name": "gpt4-python-with_lib_v3",
+    "lang": "python",
+    "llm_api": "OpenAiApi",
+    "prompt_type": "with_lib",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/patchs"
+}

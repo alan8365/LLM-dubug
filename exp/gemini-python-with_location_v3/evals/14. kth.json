@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 14,
+        "prog_name": "kth",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 11,
+        "bug_type": "",
+        "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 2.4537110328674316,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)"
+        },
+        {
+            "run_time": 1.822342872619629,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "num_lessoreq = len(arr) - len(above)"
+        },
+        {
+            "run_time": 4.011574029922485,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "def kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)\n    else:\n        return pivot"
+        }
+    ]
+}

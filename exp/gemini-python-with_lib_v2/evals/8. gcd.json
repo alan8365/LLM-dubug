@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 1.346336841583252,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n\n\n\n"
+            "reparied_code": "def gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)"
         },
         {
             "run_time": 1.407116174697876,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef gcd(a, b):\n    if b == 0:\n        return abs(a)\n    else:\n        return gcd(b, a % b)\n\n\n\n"
+            "reparied_code": "def gcd(a, b):\n    if b == 0:\n        return abs(a)\n    else:\n        return gcd(b, a % b)"
         },
         {
             "run_time": 1.3376801013946533,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a\n\n\n\n"
+            "reparied_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a"
         }
     ]
 }

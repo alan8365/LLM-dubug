@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 23,
+        "prog_name": "next_permutation",
+        "language": "python",
+        "testcase_num": 8,
+        "fault_location": 4,
+        "bug_type": "",
+        "bug_detail_desc": "在檢查首元素要置換為哪個元素時，將首元素索引i和比較元素索引j錯誤的置換，導致所有輸出都是錯誤或直接輸出空值"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 17.34549593925476,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 8,
+            "fail_num": 0,
+            "reparied_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    perm[i], perm[j] = perm[j], perm[i]\n                    perm[i + 1 :] = reversed(perm[i + 1 :])\n                    return perm\n    perm.sort()\n    return perm"
+        },
+        {
+            "run_time": 27.37442421913147,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 8,
+            "fail_num": 0,
+            "reparied_code": "def next_permutation(perm):\n    n = len(perm)\n    for i in range(n - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            break\n    else:\n        return perm[::-1]\n    for j in range(n - 1, i, -1):\n        if perm[j] > perm[i]:\n            break\n    perm[i], perm[j] = perm[j], perm[i]\n    perm[i + 1 :] = perm[i + 1 :][::-1]\n    return perm"
+        },
+        {
+            "run_time": 25.35591197013855,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 8,
+            "fail_num": 0,
+            "reparied_code": "def next_permutation(perm):\n    n = len(perm)\n    if n <= 1:\n        return perm\n    i = n - 2\n    while i >= 0 and perm[i] >= perm[i + 1]:\n        i -= 1\n    if i == -1:\n        return perm[::-1]\n    j = n - 1\n    while perm[j] <= perm[i]:\n        j -= 1\n    perm[i], perm[j] = perm[j], perm[i]\n    perm[i + 1 :] = perm[i + 1 :][::-1]\n    return perm"
+        }
+    ]
+}

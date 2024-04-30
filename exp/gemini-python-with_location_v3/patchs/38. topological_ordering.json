@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes: # The bug is here\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```\n",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5224\u65b7\u7bc0\u9ede\u80fd\u5426\u6392\u9032ordered_nodes\u6642\uff0c\u628aincoming\u5beb\u6210outgoing\uff0c\u9020\u6210\u9664\u4e86\u6c92\u6709incoming\u7bc0\u9ede\u7684\u521d\u59cb\u7bc0\u9ede\u5916\u6c92\u6709\u7bc0\u9ede\u80fd\u88ab\u6392\u5e8f\u9032\u4f86\uff0c\u5c0e\u81f4\u8f38\u5165\u6709\u908a\u5716\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.1105740070343018,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if ordered_nodes.count(nextnode) == 0 and nextnode not in ordered_nodes: # The bug fixed\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "To correctly ensure that `nextnode` has no cycles with the nodes that came before it in the ordering, the code should use `ordered_nodes.count(nextnode)` to check if the node is already in the list. The fixed code would be:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if ordered_nodes.count(nextnode) == 0 and nextnode not in ordered_nodes: # The bug fixed\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.5630578994750977,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                # Create a copy of the list to avoid RuntimeErrors\n                temp = ordered_nodes.copy()\n                temp.append(nextnode)\n                ordered_nodes = temp\n\n    return ordered_nodes",
+            "raw_code": "The issue with the code is that it tries to append to the already constructed list of ordered nodes while iterating through it, which raises a `RuntimeError`. To fix the issue, we can create a copy of the list and append to that copy instead. Here is the updated code:\n```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                # Create a copy of the list to avoid RuntimeErrors\n                temp = ordered_nodes.copy()\n                temp.append(nextnode)\n                ordered_nodes = temp\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.186547040939331,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "The bug is that it tries to check if all the outgoing nodes of the `nextnode` are in the `ordered_nodes`, which is not correct. The correct condition is to check if all the incoming nodes of the `nextnode` are in the `ordered_nodes`.\n```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        }
+    ]
+}

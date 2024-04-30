@@ -4,28 +4,34 @@
         "prog_name": "rpn_eval",
         "language": "python",
         "testcase_num": 6,
-        "fault_location": 19,
+        "fault_location": 18,
         "bug_type": "",
         "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
     },
     "patchs_eval": [
         {
             "run_time": 10.453364372253418,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, (int, float)):    # Check for int as well as float\n            stack.append(token)\n        else: \n            if len(stack) < 2:    # Check if there are at least two numbers to perform operation\n                return \"Error: not enough numbers\"\n            b = stack.pop()    # Swap the order of popping, so that the numbers are in the correct order for the operation\n            a = stack.pop()\n            if token == '/' and b == 0:    # Check for division by zero\n                return \"Error: division by zero\"\n            stack.append(\n                op(token, a, b)\n            )\n\n    if len(stack) != 1:    # Check if there is only one number left in the stack\n        return \"Error: too many numbers\"\n\n    return stack.pop()"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, (int, float)):\n            stack.append(token)\n        else:\n            if len(stack) < 2:\n                return \"Error: not enough numbers\"\n            b = stack.pop()\n            a = stack.pop()\n            if token == '/' and b == 0:\n                return \"Error: division by zero\"\n            stack.append(\n                op(token, a, b)\n            )\n    if len(stack) != 1:\n        return \"Error: too many numbers\"\n    return stack.pop()"
         },
         {
             "run_time": 10.002093076705933,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\n\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, (float,int, str)):\n            if token in ['+', '-', '*', '/']:\n                b = stack.pop()\n                a = stack.pop()\n                stack.append(\n                    op(token, a, b)\n                )\n            else:\n                stack.append(float(token))\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n    stack = []\n    for token in tokens:\n        if isinstance(token, (float,int, str)):\n            if token in ['+', '-', '*', '/']:\n                b = stack.pop()\n                a = stack.pop()\n                stack.append(\n                    op(token, a, b)\n                )\n            else:\n                stack.append(float(token))\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n    return stack.pop()"
         },
         {
             "run_time": 4.423020839691162,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, (float, int)):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, b, a)\n            )\n\n    return stack.pop()"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda: a + b,\n            '-': lambda: a - b,\n            '*': lambda: a * b,\n            '/': lambda: a / b\n        }[symbol]()\n    stack = []\n    for token in tokens:\n        if isinstance(token, (float, int)):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, b, a)\n            )\n    return stack.pop()"
         }
     ]
 }

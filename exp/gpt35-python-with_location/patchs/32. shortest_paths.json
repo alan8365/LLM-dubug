@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_edge[u, v] = min( # The bug is here\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 32,
+            "prog_name": "shortest_paths",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u52d5\u614b\u898f\u5283weight_by_node\u8b8a\u6578\u6642\uff0c\u8aa4\u5beb\u70baweight_by_edge\uff0c\u9020\u6210\u6700\u5f8c\u56de\u50b3\u7684\u7d50\u679c\u8ddf\u521d\u59cb\u5316\u7684\u4e00\u6a23\uff0c\u5c0e\u81f4\u9664\u4e86\u6240\u6709\u7bc0\u9ede\u90fd\u7121\u6cd5\u5230\u9054\u4ee5\u5916\u7684\u60c5\u6cc1\u7686\u8f38\u51fa\u932f\u8aa4"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.3789830207824707,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min( \n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node",
+            "raw_code": "```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min( \n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.330324172973633,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min( \n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node",
+            "raw_code": "```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min( \n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.429567337036133,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min( \n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node",
+            "raw_code": "```python=\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min( \n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```"
+        }
+    ]
+}

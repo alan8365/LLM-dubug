@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n # The bug is here\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```\n",
+        "sample": {
+            "prog_id": 33,
+            "prog_name": "shunting_yard",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 16,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8655\u7406\u5230\u904b\u7b97\u7b26\u7684\u6642\u5019\u6c92\u6709\u5c07\u904b\u7b97\u7b26\u653e\u9032opstack\u4e2d\uff0c\u9020\u6210rpntokens\u6c92\u6709\u4efb\u4f55\u904b\u7b97\u7b26\uff0c\u5c0e\u81f4\u6709\u904b\u7b97\u7b26\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.415046215057373,
+            "repaired_code": "\nwhile opstack and precedence[token] <= precedence[opstack[-1]]:\n",
+            "raw_code": "The bug in the code is on the line:\n```python\nwhile opstack and precedence[token] <= precedence[opstack[-1]]:\n```\n\nTo fix this bug, we need to check if the token is in the precedence dictionary before accessing its value. This can be done using the `get` method of dictionaries, which allows us to provide a default value if the key is not found. Here is the corrected line:\n```python\nwhile opstack and precedence.get(token, 0) <= precedence[opstack[-1]]:\n``` \n\nBy using `precedence.get(token, 0)` we ensure that if the token is not found in the `precedence` dictionary, it defaults to a precedence value of 0."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.198084115982056,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and token in precedence and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n",
+            "raw_code": "The bug in the code is on the line where the comment indicates. The issue is that the code is trying to access the precedence of the current token without checking if it is an operator. To fix this bug, we need to check if the token is an operator before accessing its precedence.\n\nHere is the corrected code:\n```python\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and token in precedence and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n``` \n\nNow, the code will first check if the token is an operator before trying to access its precedence, which fixes the bug."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.488248825073242,
+            "repaired_code": "\nwhile opstack and precedence[token] <= precedence[opstack[-1]]:\n",
+            "raw_code": "The bug is in the line:\n```python\nwhile opstack and precedence[token] <= precedence[opstack[-1]]:\n```\n\nTo fix this bug and avoid the \"list index out of range\" error, you can modify the condition to check if the opstack is not empty before trying to access its last element. Here is the corrected line:\n\n```python\nwhile opstack and precedence[token] <= precedence[opstack[-1]]:\n```"
+        }
+    ]
+}

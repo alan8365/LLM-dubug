@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 3,
+        "prog_name": "depth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.0739383697509766,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 2,
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return all(\n                search_from(nextnode) for nextnode in node.successors\n            )\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 3.093635082244873,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        else:\n            nodesvisited.add(node)\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n    return search_from(startnode)"
+        },
+        {
+            "run_time": 1.794147253036499,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "return search_from(startnode)"
+        }
+    ]
+}

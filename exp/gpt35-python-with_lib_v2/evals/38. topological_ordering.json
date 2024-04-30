@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.9486260414123535,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes"
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n    return ordered_nodes"
         },
         {
             "run_time": 1.7220401763916016,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 1,
-            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.predecessors]\n\n    for node in ordered_nodes:\n        for nextnode in node.successors:\n            if set(ordered_nodes).issuperset(nextnode.predecessors) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes"
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.predecessors]\n    for node in ordered_nodes:\n        for nextnode in node.successors:\n            if set(ordered_nodes).issuperset(nextnode.predecessors) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n    return ordered_nodes"
         },
         {
             "run_time": 2.0844712257385254,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 1,
-            "reparied_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if all(nextnode.outgoing_nodes in ordered_nodes for nextnode in nextnode.predecessors) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes"
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if all(nextnode.outgoing_nodes in ordered_nodes for nextnode in nextnode.predecessors) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n    return ordered_nodes"
         }
     ]
 }

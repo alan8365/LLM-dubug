@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.123104095458984,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef sqrt(x, epsilon):\n    if x < 0 or epsilon <= 0:\n        return \"Invalid input\"\n        \n    approx = x / 2.0\n    while abs(x - (approx ** 2)) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    if x < 0 or epsilon <= 0:\n        return \"Invalid input\"\n    approx = x / 2.0\n    while abs(x - (approx ** 2)) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 3.99626088142395,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef sqrt(x, epsilon):\n    if x < 0 or epsilon <= 0:\n        print(\"x must be non-negative, epsilon must be greater than zero\")\n        return\n    approx = x / 2.0\n    while abs(approx*approx - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    if x < 0 or epsilon <= 0:\n        print(\"x must be non-negative, epsilon must be greater than zero\")\n        return\n    approx = x / 2.0\n    while abs(approx*approx - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 2.686490058898926,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         }
     ]
 }

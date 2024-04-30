@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 2.781487226486206,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
         },
         {
             "run_time": 4.649850130081177,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
         },
         {
             "run_time": 4.051265001296997,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "\n# Python 3\ndef possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins: \n        return 0\n\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)"
         }
     ]
 }

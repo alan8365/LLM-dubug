@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid, end) # The bug is here\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```\n",
+        "sample": {
+            "prog_id": 6,
+            "prog_name": "find_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u76ee\u6a19\u5927\u65bc\u4e2d\u9ede\u6642\uff0c\u65b0\u9663\u5217\u8d77\u59cb\u5e8f\u865fmid\u6c92\u6709+1\uff0c\u5c0e\u81f4\u908a\u7de3\u60c5\u6cc1\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.5937540531158447,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end) # This line was corrected\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n",
+            "raw_code": "The bug is on the line `return binsearch(mid, end)`. This should be `return binsearch(mid + 1, end)` to account for the case when `x` is greater than `arr[mid]`. \n\nHere is the corrected code:\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end) # This line was corrected\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.410526275634766,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)  # Fixed bug here\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n",
+            "raw_code": "To fix the bug, we need to update the indices passed to the recursive calls to `binsearch` in the `elif` condition. Instead of passing `mid` as the first argument, we should pass `mid+1` to consider elements beyond the middle element.\n\nHere is the corrected code:\n\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)  # Fixed bug here\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n``` \n\nThis change ensures that we consider the elements after the middle element when searching in the right half of the array."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.115738868713379,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end) # The bug is fixed here\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n",
+            "raw_code": "To fix the bug, change the line `return binsearch(mid, end)` to `return binsearch(mid + 1, end)`. This will ensure that the binary search algorithm searches in the correct half of the array. \n\nThe corrected code is as follows:\n\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end) # The bug is fixed here\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```"
+        }
+    ]
+}

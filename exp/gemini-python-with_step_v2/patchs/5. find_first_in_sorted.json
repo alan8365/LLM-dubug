@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 5,
+            "prog_name": "find_first_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728whlie\u5224\u65b7\u5f0f\u4e2d\uff0c\u932f\u8aa4\u8003\u616e\u4e86lo==hi\u7684\u72c0\u6cc1\uff0c\u5c0e\u81f4\u5982\u76ee\u6a19\u4e0d\u5728\u9663\u5217\u4e2d\u7684\u60c5\u6cc1\u6703\u7121\u7aae\u8ff4\u5708"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.614934206008911,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x < arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1",
+            "raw_code": "1. The initial value of `hi` should be `len(arr) - 1` instead of `len(arr)`.\n2. The second condition in the `if` statement should be `x < arr[mid - 1]` instead of `x != arr[mid - 1]`.\n\nThe corrected code:\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x < arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.651258707046509,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    if not arr:\n        return -1\n\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1",
+            "raw_code": "The issue with this code is that it doesn't include a base case for when the list is empty.  This means that if the input list is empty, the function will enter an infinite loop. To fix this, we can add a base case that checks if the list is empty and returns -1 if it is:\n```python=\ndef find_first_in_sorted(arr, x):\n    if not arr:\n        return -1\n\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.4846127033233643,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1",
+            "raw_code": "The issue in the provided code is that it doesn't handle the case when the target element `x` is greater than all elements in the sorted array `arr`. In such a case, it should return `-1` to indicate that the target element is not found.\n\nHere's the corrected code:\n\n```python\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1\n```"
+        }
+    ]
+}

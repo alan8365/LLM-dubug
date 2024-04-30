@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k) # The bug is here\n    else:\n        return pivot\n```\n",
+        "sample": {
+            "prog_id": 14,
+            "prog_name": "kth",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 11,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8655\u7406\u5230k\u5b58\u5728\u65bc\u5927\u65bcpivot\u7684\u9663\u5217above\u6642\uff0c\u905e\u8ff4\u547c\u53eb\u6c92\u6709\u5c07k\u7684\u8f38\u5165\u6839\u64danum_lessoreq\u91cd\u7f6e\uff0c\u5c0e\u81f4\u5728\u8a72\u985e\u72c0\u6cc1\u4e2dk\u7e3d\u662f\u4ee3\u8868\u8d85\u904e\u9663\u5217\u7684\u4f4d\u7f6e"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.569726943969727,
+            "repaired_code": "\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_less)  # Fixed the bug\n    else:\n        return pivot\n",
+            "raw_code": "To fix the bug, we need to adjust the `k` value passed to the recursive call when `k` is in the range between `num_less` and `num_lessoreq`. In this case, we need to subtract `num_less` from `k` before passing it to the recursive call for the `above` list. Here is the corrected code:\n\n```python\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_less)  # Fixed the bug\n    else:\n        return pivot\n```\n\nWith this change, the code will correctly handle the case when `k` is in the range between `num_less` and `num_lessoreq`."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.8112339973449707,
+            "repaired_code": "\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)  # Fixed the bug by subtracting num_lessoreq from k\n    else:\n        return pivot\n",
+            "raw_code": "```python\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)  # Fixed the bug by subtracting num_lessoreq from k\n    else:\n        return pivot\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.4904677867889404,
+            "repaired_code": "\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq) # Fixed bug by subtracting num_lessoreq\n    else:\n        return pivot\n",
+            "raw_code": "```python\ndef kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n\n    num_less = len(below)\n    num_lessoreq = len(arr) - len(above)\n\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq) # Fixed bug by subtracting num_lessoreq\n    else:\n        return pivot\n```"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any( # The bug is here\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```\n",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5411\u6df1\u8655\u641c\u5c0b\u6642\uff0c\u6c92\u6709\u7d00\u9304\u5df2\u7d93\u9020\u8a2a\u904e\u7684\u7bc0\u9ede\uff0c\u5c0e\u81f4\u9664\u99ac\u4e0a\u627e\u5230goalnode\u4ee5\u5916\u7684\u72c0\u6cc1\u905e\u8ff4\u90fd\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.720909118652344,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node, search_func):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_func(nextnode, search_func) for nextnode in node.successors\n            )\n\n    return search_from(startnode, search_from)\n",
+            "raw_code": "The bug in the code is on the line where `search_from(nextnode)` is called within the `any()` function. This will result in a `NameError` as `search_from` is defined within the `depth_first_search` function and is not accessible in the inner function `search_from`.\n\nTo fix this issue, you can pass the `search_from` function as an argument to `search_from` itself. Here's the updated code:\n\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node, search_func):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_func(nextnode, search_func) for nextnode in node.successors\n            )\n\n    return search_from(startnode, search_from)\n```\n\nBy passing `search_func` as an argument to `search_from` and updating the recursive call to `search_func(nextnode, search_func)`, you can now use the inner function `search_from` within itself."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.747028112411499,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in get_successors(node)\n            )\n\n    return search_from(startnode)\n\ndef get_successors(node):\n    # Define the successors for the node here\n    # This is just a placeholder for demonstration\n    return node.successors\n",
+            "raw_code": "The bug is that the `successors` attribute is not defined for the `node` object. To fix this, we need to ensure that the `node` object has a `successors` attribute that contains the nodes reachable from it. Here is the corrected code:\n\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in get_successors(node)\n            )\n\n    return search_from(startnode)\n\ndef get_successors(node):\n    # Define the successors for the node here\n    # This is just a placeholder for demonstration\n    return node.successors\n```\n\nIn this corrected code, I have added a `get_successors` function that defines the successors for a given `node`. You need to replace the placeholder `return node.successors` with your actual logic to get the successors of the `node`."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.556898832321167,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node == goalnode:  # Fixed the bug here\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n",
+            "raw_code": "The bug is in the line where we are checking if the current node is equal to the goal node using `is` keyword, which checks for object identity. We should be using the equality operator `==` to compare values. \n\nHere is the corrected code:\n\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node == goalnode:  # Fixed the bug here\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        }
+    ]
+}

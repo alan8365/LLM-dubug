@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any( # The bug is here\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```\n",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5411\u6df1\u8655\u641c\u5c0b\u6642\uff0c\u6c92\u6709\u7d00\u9304\u5df2\u7d93\u9020\u8a2a\u904e\u7684\u7bc0\u9ede\uff0c\u5c0e\u81f4\u9664\u99ac\u4e0a\u627e\u5230goalnode\u4ee5\u5916\u7684\u72c0\u6cc1\u905e\u8ff4\u90fd\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.0739383697509766,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return all(  # The bug is here\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)",
+            "raw_code": "The problem of the code is the stopping criterion. Namely, `any` function works as `or` operator, and to implement the proper stopping criterion one should use `all` function instead. The function should look as follows:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return all(  # The bug is here\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.093635082244873,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        else:\n            nodesvisited.add(node)\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)",
+            "raw_code": "The bug is that the function does not update the list of visited nodes with the current node. To fix that, add `nodesvisited.add(node)` after `if node in nodesvisited:`:\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        else:\n            nodesvisited.add(node)\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.794147253036499,
+            "repaired_code": "\nreturn search_from(startnode)",
+            "raw_code": "The bug in the code is that `any()` function expects an iterable as an argument, but in this case, the argument is a generator expression. To fix the bug, convert the generator expression to a list:\n```python=\nreturn search_from(startnode)\n```"
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 20,
+        "prog_name": "mergesort",
+        "language": "python",
+        "testcase_num": 14,
+        "fault_location": 15,
+        "bug_type": "",
+        "bug_detail_desc": "在遞迴的終止狀況判斷中，沒有考慮到只有一個元素時也無法切為左右兩個陣列，導致遞迴無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 15.181424140930176,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 14,
+            "fail_num": 0,
+            "reparied_code": "def mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n\n    if len(arr) <= 1:\n        return arr\n    middle = len(arr) // 2\n    left = mergesort(arr[:middle])\n    right = mergesort(arr[middle:])\n    return merge(left, right)"
+        },
+        {
+            "run_time": 18.587735891342163,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 14,
+            "fail_num": 0,
+            "reparied_code": "def mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n\n    if len(arr) <= 1:\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)"
+        },
+        {
+            "run_time": 14.5622079372406,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 14,
+            "fail_num": 0,
+            "reparied_code": "def mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n\n    if len(arr) <= 1:\n        return arr\n    middle = len(arr) // 2\n    left = mergesort(arr[:middle])\n    right = mergesort(arr[middle:])\n    return merge(left, right)\n\n\narr = [38, 27, 43, 3, 9, 82, 10]\nsorted_arr = mergesort(arr)\nprint(sorted_arr)"
+        }
+    ]
+}

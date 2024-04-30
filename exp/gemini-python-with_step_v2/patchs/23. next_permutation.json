@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 23,
+            "prog_name": "next_permutation",
+            "language": "python",
+            "testcase_num": 8,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u6aa2\u67e5\u9996\u5143\u7d20\u8981\u7f6e\u63db\u70ba\u54ea\u500b\u5143\u7d20\u6642\uff0c\u5c07\u9996\u5143\u7d20\u7d22\u5f15i\u548c\u6bd4\u8f03\u5143\u7d20\u7d22\u5f15j\u932f\u8aa4\u7684\u7f6e\u63db\uff0c\u5c0e\u81f4\u6240\u6709\u8f38\u51fa\u90fd\u662f\u932f\u8aa4\u6216\u76f4\u63a5\u8f38\u51fa\u7a7a\u503c"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.558459043502808,
+            "repaired_code": "\nnext_perm[i + 1:] = list(reversed(next_perm[i + 1:]))",
+            "raw_code": "The bug in the code is in the line `next_perm[i + 1:] = reversed(next_perm[i + 1:])`. `perm` and `next_perm` point to the same list object, so reversing `next_perm` will also reverse `perm`. To fix this issue, the line should be replaced with:\n```python\nnext_perm[i + 1:] = list(reversed(next_perm[i + 1:]))\n```\nHere's the full updated code:\n```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = list(reversed(next_perm[i + 1:]))\n                    return next_perm\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.601906776428223,
+            "repaired_code": "\nfor j in range(len(perm) - 1, i + 1, -1):",
+            "raw_code": "**Bug 1: Off-by-one error**\n\nThe issue here is that the loop range for `j` is off by one. It should go from `len(perm) - 1` to `i + 1` (inclusive) to find the element to swap with `perm[i]`.\n\n**Fixed code:**\n\n```python\nfor j in range(len(perm) - 1, i + 1, -1):\n```\n\n**Bug 2: Returning the original permutation**\n\nIf you don't find a suitable `j`, the code doesn't return a new permutation. Instead, it returns the original permutation.\n\n**Fixed code:**\n\n```python\nif not next_perm:\n    return perm\n```\n\nHere's the corrected code:\n\n```python\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i + 1, -1):\n                if perm[j] < perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1:] = reversed(next_perm[i + 1:])\n                    return next_perm\n    if not next_perm:\n        return perm\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.672757863998413,
+            "repaired_code": "\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] > perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1: j + 1] = reversed(next_perm[i + 1: j + 1])\n                    return next_perm",
+            "raw_code": "**1. Incorrect if condition:**\n\nIn the provided code, the `if` condition checks if `perm[i] < perm[i + 1]`. However, this condition is incorrect for finding the next permutation. Instead, you should check whether `perm[i] > perm[i + 1]`.\n\n**2. Incorrect reversed range:**\n\nAfter finding the swap positions `i` and `j`, the code incorrectly reverses the range `next_perm[i + 1:]` using `reversed()`. The range should instead be reversed from `[i + 1: j + 1]`.\n\nHere's the corrected code:\n\n```python=\ndef next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] > perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    next_perm = list(perm)\n                    next_perm[i], next_perm[j] = perm[j], perm[i]\n                    next_perm[i + 1: j + 1] = reversed(next_perm[i + 1: j + 1])\n                    return next_perm\n```\n\nWith these changes, the `next_permutation` function will now correctly compute the next permutation of the input array `perm`."
+        }
+    ]
+}

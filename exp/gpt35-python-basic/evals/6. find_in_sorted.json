@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 2.157431125640869,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid+1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))"
+            "reparied_code": "def find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid+1, end)\n        else:\n            return mid\n    return binsearch(0, len(arr))"
         },
         {
             "run_time": 1.9682271480560303,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))"
+            "reparied_code": "def find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n    return binsearch(0, len(arr))"
         },
         {
             "run_time": 2.775296688079834,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid+1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))"
+            "reparied_code": "def find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid+1, end)\n        else:\n            return mid\n    return binsearch(0, len(arr))"
         }
     ]
 }

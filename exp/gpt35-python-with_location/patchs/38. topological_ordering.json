@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes: # The bug is here\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5224\u65b7\u7bc0\u9ede\u80fd\u5426\u6392\u9032ordered_nodes\u6642\uff0c\u628aincoming\u5beb\u6210outgoing\uff0c\u9020\u6210\u9664\u4e86\u6c92\u6709incoming\u7bc0\u9ede\u7684\u521d\u59cb\u7bc0\u9ede\u5916\u6c92\u6709\u7bc0\u9ede\u80fd\u88ab\u6392\u5e8f\u9032\u4f86\uff0c\u5c0e\u81f4\u8f38\u5165\u6709\u908a\u5716\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.456939935684204,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes: # Bug fixed\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes: # Bug fixed\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.762850046157837,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "```python\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.6705269813537598,
+            "repaired_code": "\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes: # The bug is fixed\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes",
+            "raw_code": "```python=\ndef topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n\n    for node in ordered_nodes:\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes: # The bug is fixed\n                ordered_nodes.append(nextnode)\n\n    return ordered_nodes\n```"
+        }
+    ]
+}

@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 1.7972650527954102,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 9,
             "fail_num": 0,
-            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0"
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n    return max(dp.values()) if dp else 0"
         },
         {
             "run_time": 2.3327248096466064,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 9,
             "fail_num": 0,
-            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0"
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n    return max(dp.values()) if dp else 0"
         },
         {
             "run_time": 2.60453200340271,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 9,
             "fail_num": 0,
-            "reparied_code": "\ndef lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0"
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n    return max(dp.values()) if dp else 0"
         }
     ]
 }

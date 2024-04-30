@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 4.797282695770264,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 10,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return []\n\n    ret = []\n    for i in range(a, b + 1):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return []\n    ret = []\n    for i in range(a, b + 1):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n    return ret"
         },
         {
             "run_time": 3.4801859855651855,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 10,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return []\n\n    ret = []\n    for i in range(a, b - k + 1):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return []\n    ret = []\n    for i in range(a, b - k + 1):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n    return ret"
         },
         {
             "run_time": 4.969842195510864,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 10,
-            "reparied_code": "\ndef subsequences(a, b, k):\n    if k == 0:\n        return []\n\n    ret = []\n    for i in range(a, b + 2 - k):  # Fixed the range to include the last element\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return []\n    ret = []\n    for i in range(a, b + 2 - k):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n    return ret"
         }
     ]
 }

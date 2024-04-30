@@ -4,28 +4,34 @@
         "prog_name": "detect_cycle",
         "language": "python",
         "testcase_num": 6,
-        "fault_location": 5,
+        "fault_location": 4,
         "bug_type": "",
         "bug_detail_desc": "在判斷終止情況時，沒有處理hare也是空值的狀況，只有處理hare的後繼是空值的狀況，導致hare剛好是空值時會觸發AttributeError"
     },
     "patchs_eval": [
         {
             "run_time": 6.885513782501221,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 5,
             "fail_num": 1,
-            "reparied_code": "\nclass Node:\n    def __init__(self, value=None, successor=None, successor_list=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successor_list = successor_list\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successor_list\n\n    def predecessors(self):\n        return self.predecessors\n\n\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor is None:\n            return False\n\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n\n        if hare is tortoise:\n            return True\n"
+            "reparied_code": "class Node:\n    def __init__(self, value=None, successor=None, successor_list=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successor_list = successor_list\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n    def successor(self):\n        return self.successor\n    def successors(self):\n        return self.successor_list\n    def predecessors(self):\n        return self.predecessors\ndef detect_cycle(node):\n    hare = tortoise = node\n    while True:\n        if hare.successor is None:\n            return False\n        tortoise = tortoise.successor\n        hare = hare.successor.successor\n        if hare is tortoise:\n            return True"
         },
         {
             "run_time": 4.928133964538574,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 0,
-            "reparied_code": "\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors"
+            "reparied_code": "class Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n    def successor(self):\n        return self.successor\n    def successors(self):\n        return self.successors\n    def predecessors(self):\n        return self.predecessors"
         },
         {
             "run_time": 4.774684906005859,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 6,
-            "reparied_code": "\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n\ndef detect_cycle(node):\n    hare = tortoise = node\n\n    while True:\n        if hare.successor() is None:\n            return False\n\n        tortoise = tortoise.successor()\n        hare = hare.successor().successor()\n\n        if hare is tortoise:\n            return True"
+            "reparied_code": "class Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n    def successor(self):\n        return self.successor\n    def successors(self):\n        return self.successors\n    def predecessors(self):\n        return self.predecessors\ndef detect_cycle(node):\n    hare = tortoise = node\n    while True:\n        if hare.successor() is None:\n            return False\n        tortoise = tortoise.successor()\n        hare = hare.successor().successor()\n        if hare is tortoise:\n            return True"
         }
     ]
 }

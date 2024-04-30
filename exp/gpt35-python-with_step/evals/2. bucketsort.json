@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.899610996246338,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr"
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
         },
         {
             "run_time": 2.7086551189422607,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):  # Corrected to enumerate over counts instead of arr\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr"
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
         },
         {
             "run_time": 2.8129920959472656,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n\n    return sorted_arr"
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
         }
     ]
 }

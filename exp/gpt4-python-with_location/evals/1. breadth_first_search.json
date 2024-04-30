@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 1,
+        "prog_name": "breadth_first_search",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 9,
+        "bug_type": "",
+        "bug_detail_desc": "在while迴圈的判斷式中，應該使用while queue讓佇列數量為0時脫離迴圈卻錯用為while True，導致迴圈無限循環無法停止"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 15.255588054656982,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "from collections import deque as Queue\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_successors = [successor for successor in node.successors if successor not in nodesseen]\n            queue.extend(new_successors)\n            nodesseen.update(new_successors)\n    return False"
+        },
+        {
+            "run_time": 15.445406198501587,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "from collections import deque as Queue\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_nodes = [node for node in node.successors if node not in nodesseen]\n            queue.extend(new_nodes)\n            nodesseen.update(new_nodes)\n    return False"
+        },
+        {
+            "run_time": 20.260878801345825,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "from collections import deque as Queue\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_successors = [node for node in node.successors if node not in nodesseen]\n            queue.extend(new_successors)\n            nodesseen.update(new_successors)\n    return False"
+        }
+    ]
+}

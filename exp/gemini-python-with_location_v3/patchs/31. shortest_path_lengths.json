@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[j, k] # The bug is here\n                )\n\n    return length_by_path\n```\n",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u8a08\u7b97\u4ee5k\u70ba\u4e2d\u7e7c\u9023\u7d50ij\u7684\u8ddd\u96e2\u6642\uff0c\u5c07i\u5230k\u3001k\u5230j\u8aa4\u5beb\u70bai\u5230k\u3001j\u5230k\uff0c\u5c0e\u81f4\u975e\u7121\u5411\u5716\u7d50\u69cb\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.302159070968628,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path",
+            "raw_code": "The bug in the code is a syntax error. The line should be `length_by_path[i, k] + length_by_path[k, j]` instead of `length_by_path[i, k] + length_by_path[j, k]`. The correct code is:\n\n```python\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.080862998962402,
+            "repaired_code": "\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # fixed the bug here\n                )\n\n    return length_by_path",
+            "raw_code": "The bug is in the line `length_by_path[i, j] = min(length_by_path[i, j],  length_by_path[i, k] + length_by_path[j, k])`. It should be `length_by_path[i, j] = min(length_by_path[i, j],  length_by_path[i, k] + length_by_path[k, j])` instead. \n\nHere's the fixed code:\n```python=\nfrom collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j] # fixed the bug here\n                )\n\n    return length_by_path\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.2427899837493896,
+            "repaired_code": "\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[k, j]\n)",
+            "raw_code": "The bug is that the code is trying to minimize the length of the path from `i` to `j` by considering the path that goes through `k`. However, the code is using `length_by_path[j, k]` instead of `length_by_path[k, j]` to calculate the length of the path from `k` to `j`. The correct code is:\n```python=\nlength_by_path[i, j] = min(\n    length_by_path[i, j],\n    length_by_path[i, k] + length_by_path[k, j]\n)\n```"
+        }
+    ]
+}

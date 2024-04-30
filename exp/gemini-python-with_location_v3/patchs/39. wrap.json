@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n # The bug is here\n    return lines\n```\n",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u56de\u50b3\u524d\u7f3a\u5c11append text\uff0c\u9020\u6210\u56de\u50b3\u7d50\u679c\u7f3a\u5c11\u6700\u5f8c\u4e00\u6bb5\uff0c\u5c0e\u81f4\u7a7a\u503c\u4ee5\u5916\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 1.4881699085235596,
+            "repaired_code": "\n    lines.append(text)",
+            "raw_code": "The bug is on the line where the code appends the last line to the list of lines. The code should be changed to the following:\n```python\n    lines.append(text)\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.783379316329956,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)\n    return lines",
+            "raw_code": "The bug is that the last line of the text is not added to the `lines` list. To fix it, add the last line to the `lines` list outside of the `while` loop:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)\n    return lines\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.4311678409576416,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    if text:\n        lines.append(text)  # Append the remaining text as the last line\n    return lines",
+            "raw_code": "The bug in the provided code is in the last line. The code doesn't append the remaining text to the `lines` list when `len(text) <= cols`. To fix this, you should add the remaining text as the last line before returning the `lines` list. Here's the corrected code:\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    if text:\n        lines.append(text)  # Append the remaining text as the last line\n    return lines\n```"
+        }
+    ]
+}

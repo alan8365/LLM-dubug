@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step and show the comepelte fixed code in the end:\n```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield flatten(x)\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 7,
+            "prog_name": "flatten",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u56de\u7684\u7d42\u6b62\u689d\u4ef6\u56de\u50b3\u6642\uff0c\u5c0d\u65bc\u4e0d\u662flist\u7684\u8f38\u5165\u4f9d\u820a\u4f7f\u7528\u905e\u8ff4\uff0c\u5c0e\u81f4\u5927\u90e8\u5206\u8f38\u51fa\u4e0d\u662f\u9810\u671f\u7684\u5143\u7d20"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.78371524810791,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "**Step 1:** Identify the bug.\nThe bug in the code is that it tries to yield the result of calling `flatten(x)` when `x` is not a list. This will result in an error because `flatten` is only defined for lists.\n\n**Step 2:** Fix the bug.\nTo fix the bug, we need to check if `x` is a list before calling `flatten(x)`. If it is not a list, we can simply yield `x`.\n\nHere is the fixed code:\n```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.9912760257720947,
+            "repaired_code": "\n            yield x",
+            "raw_code": "### Bug 1\nInstead of `yield flatten(x)` it should be `yield x`.\n\n### Bug 2\nThe code doesn't yield the element if it's not a list, the correct line should be:\n```python=\n            yield x\n```\n\n### Fixed code\n```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.8700931072235107,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x",
+            "raw_code": "**Step 1: Identify the bug**\nThe bug in the code is that the `else` branch is incorrect. It should be `yield x` instead of `yield flatten(x)` because `x` is not a list in this branch.\n\n**Step 2: Fix the bug**\nChange the `else` branch to `yield x`.\n\n**Complete fixed code**\n```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```"
+        }
+    ]
+}

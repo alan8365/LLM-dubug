@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.797944068908691,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid] #Copy the value from high_mid to low_mid to maintain palindrome.\n            return digit_list\n    return [1] + [0] * (len(digit_list) - 1) + [1] #Updated the multiplication with a list in the return statement."
+            "reparied_code": "def next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + [0] * (len(digit_list) - 1) + [1]"
         },
         {
             "run_time": 5.190029859542847,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 4,
             "fail_num": 1,
-            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]"
+            "reparied_code": "def next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + (len(digit_list)) * [0] + [1]"
         },
         {
             "run_time": 8.913727045059204,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 4,
             "fail_num": 1,
-            "reparied_code": "\ndef next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + [0] * (len(digit_list)) + [1]"
+            "reparied_code": "def next_palindrome(digit_list):\n    high_mid = len(digit_list) // 2\n    low_mid = (len(digit_list) - 1) // 2\n    while high_mid < len(digit_list) and low_mid >= 0:\n        if digit_list[high_mid] == 9:\n            digit_list[high_mid] = 0\n            digit_list[low_mid] = 0\n            high_mid += 1\n            low_mid -= 1\n        else:\n            digit_list[high_mid] += 1\n            if low_mid != high_mid:\n                digit_list[low_mid] = digit_list[high_mid]\n            return digit_list\n    return [1] + [0] * (len(digit_list)) + [1]"
         }
     ]
 }

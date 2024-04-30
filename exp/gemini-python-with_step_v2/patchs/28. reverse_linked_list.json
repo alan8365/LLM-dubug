@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step:\n```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode\n    return prevnode\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\nclass Node:\n    def __init__(self, value=None, successor=None, successors=[], predecessors=[], incoming_nodes=[], outgoing_nodes=[]):\n        self.value = value\n        self.successor = successor\n        self.successors = successors\n        self.predecessors = predecessors\n        self.incoming_nodes = incoming_nodes\n        self.outgoing_nodes = outgoing_nodes\n\n    def successor(self):\n        return self.successor\n\n    def successors(self):\n        return self.successors\n\n    def predecessors(self):\n        return self.predecessors\n```\n",
+        "sample": {
+            "prog_id": 28,
+            "prog_name": "reverse_linked_list",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u7f6e\u63dbnode\u7684successor\u6642\uff0c\u6c92\u6709\u5c07node\u8ce6\u503c\u7d66prevnode\uff0c\u9020\u6210prevnode\u4e00\u76f4\u662f\u7a7a\u503c\u4e14\u6240\u6709node\u7684\u65b0successor\u90fd\u662f\u7a7a\u503c\uff0c\u5c0e\u81f4\u9664\u4e86\u8f38\u5165\u7a7a\u503c\u5916\u7684\u6240\u6709\u60c5\u6cc1\u90fd\u6703\u932f\u8aa4"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.2709896564483643,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node  # Fix: update prevnode, not node\n        node = nextnode\n    return prevnode",
+            "raw_code": "**Bug:** The bug is in the line where `node` is updated: `node = nextnode`. This line should update `prevnode` instead.\n\n**Fix:**\n```python\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node  # Fix: update prevnode, not node\n        node = nextnode\n    return prevnode\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.279801845550537,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode\n    # Set the successor of the last node to None\n    node.successor = None\n    return prevnode",
+            "raw_code": "**Bug:** The `successor` attribute of the last node in the linked list is not set to `None` when the list is reversed. This can cause the program to crash when attempting to access the successor of the last node.\n\n**Fix:** Set the `successor` attribute of the last node to `None` after the loop.\n\n```python\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode\n    # Set the successor of the last node to None\n    node.successor = None\n    return prevnode\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.8151450157165527,
+            "repaired_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode\n    return prevnode",
+            "raw_code": "The bug in the code is that the `node` variable is not updated correctly. It should be updated to `nextnode` after the `node`'s `successor` is set to `prevnode`.\n\nHere is the fixed code:\n```python=\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        node = nextnode\n    return prevnode\n```"
+        }
+    ]
+}

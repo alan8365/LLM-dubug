@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 1.5149579048156738,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 1.7663722038269043,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\n\ndef sqrt(x, epsilon):\n    if x < 0:\n        raise ValueError(\"Cannot compute square root of a negative number\")\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n"
+            "reparied_code": "def sqrt(x, epsilon):\n    if x < 0:\n        raise ValueError(\"Cannot compute square root of a negative number\")\n    approx = x / 2\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 1.5967812538146973,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\n\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\n"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         }
     ]
 }

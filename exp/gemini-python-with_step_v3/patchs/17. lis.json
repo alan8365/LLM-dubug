@@ -1,0 +1,36 @@
+{
+    "model_name": "gemini-1.0-pro",
+    "prompt": {
+        "prompt": "Fix the bug in the following code step by step and show the comepelte fixed code in the end:\n```python=\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\n",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u66f4\u6539longest\u8b8a\u6578\u6642\uff0c\u7f3a\u5c11\u4e86max\u51fd\u6578\u5224\u65b7\u65b0\u6578\u503c\u662f\u5426\u6bd4\u539f\u672c\u9577\uff0c\u5c0e\u81f4\u5728\u521d\u671f\u5c31\u627e\u5230\u7b54\u6848\u7684\u60c5\u6cc1\u6703\u5728\u5f8c\u671f\u88ab\u66f4\u65b0\u70ba\u932f\u8aa4\u7b54\u6848"
+        },
+        "prompt_type": "with_step"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.976662874221802,
+            "repaired_code": "\nends[length + 1] = i",
+            "raw_code": "**Bug 1**:\nThe code uses `length + 1` to access `ends`, but the `ends` dictionary doesn't have a key for `length + 1`. It should use `length` instead.\n\n**Fix**:\n```python=\nends[length + 1] = i\n```\n**Bug 2**:\nThe code checks if `length == longest or val < arr[ends[length + 1]]` to update `ends` and `longest`. However, `ends[length + 1]` is not guaranteed to exist, so it can cause an error.\n\n**Fix**:\n```python=\nends[length + 1] = i if length + 1 not in ends or val < arr[ends[length + 1]] else ends[length + 1]\n```\n\n**Complete Fixed Code**:\n```python=\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]] if length + 1 in ends else True:\n            ends[length + 1] = i if length + 1 not in ends or val < arr[ends[length + 1]] else ends[length + 1]\n            longest = length + 1\n\n    return longest\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.79325270652771,
+            "repaired_code": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest",
+            "raw_code": "**Step 1:** The line `prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]` is missing the closing square bracket.\n\n**Step 2:** The line `ends[length + 1] = i` is missing the square brackets around the key.\n\nThe fixed code is as follows:\n```python=\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.763740062713623,
+            "repaired_code": "\nif length == longest or val < arr[ends[length + 1]]:",
+            "raw_code": "**Step 1: Identify the bug**\n\nThe bug in the code is in the line:\n```python\nif length == longest or val < arr[ends[length + 1]]:\n```\nIt should be:\n```python\nif length == longest or val < arr[ends[length]]:\n```\n**Step 2: Fix the bug**\n\n```python\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n```\n**Step 3: Complete fixed code**\n\n```python\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length]]:\n            ends[length + 1] = i\n            longest = length + 1\n\n    return longest\n```"
+        }
+    ]
+}

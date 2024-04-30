@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 22.430680751800537,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 9,
             "fail_num": 0,
-            "reparied_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count"
+            "reparied_code": "def bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count"
         },
         {
             "run_time": 19.522934913635254,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 9,
             "fail_num": 0,
-            "reparied_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count"
+            "reparied_code": "def bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count"
         },
         {
             "run_time": 16.67516016960144,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 9,
             "fail_num": 0,
-            "reparied_code": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count"
+            "reparied_code": "def bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count"
         }
     ]
 }

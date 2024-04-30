@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while True: # The bug is here\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n```\n",
+        "sample": {
+            "prog_id": 1,
+            "prog_name": "breadth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728while\u8ff4\u5708\u7684\u5224\u65b7\u5f0f\u4e2d\uff0c\u61c9\u8a72\u4f7f\u7528while queue\u8b93\u4f47\u5217\u6578\u91cf\u70ba0\u6642\u812b\u96e2\u8ff4\u5708\u537b\u932f\u7528\u70bawhile True\uff0c\u5c0e\u81f4\u8ff4\u5708\u7121\u9650\u5faa\u74b0\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.8978490829467773,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:  # Corrected the condition here\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n",
+            "raw_code": "The bug in the code is on the line `while True:`. This will create an infinite loop. The correct way to check if the queue is not empty is `while queue:`.\n\nHere is the corrected code:\n\n```python\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:  # Corrected the condition here\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n``` \n\nNow the code will run correctly without getting stuck in an infinite loop."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.425736904144287,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue: # Check if queue is not empty\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n",
+            "raw_code": "The bug in the code is on the line \"while True:\". It should be checking if the queue is empty instead. Here is the corrected code:\n\n```python\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue: # Check if queue is not empty\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.783073902130127,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:  # Fix: Check if the queue is not empty\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n",
+            "raw_code": "To fix the bug in the code, the while loop condition should be changed to check if the queue is empty. Here is the corrected code:\n\n```python\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:  # Fix: Check if the queue is not empty\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n```\n\nBy changing the while loop condition to `while queue:`, the code will now continue the breadth-first search loop until there are no more nodes in the queue to explore."
+        }
+    ]
+}

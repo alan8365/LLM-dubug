@@ -4,28 +4,34 @@
         "prog_name": "wrap",
         "language": "python",
         "testcase_num": 5,
-        "fault_location": 9,
+        "fault_location": 8,
         "bug_type": "",
         "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
     },
     "patchs_eval": [
         {
             "run_time": 3.4443552494049072,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n\n    lines.append(text)\n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    lines.append(text)\n    return lines"
         },
         {
             "run_time": 3.091521978378296,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    lines.append(text)\n    \n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end+1:]\n        lines.append(line)\n    lines.append(text)\n    return lines"
         },
         {
             "run_time": 2.029780864715576,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    lines.append(text)\n\n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    lines.append(text)\n    return lines"
         }
     ]
 }

@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 3.240381956100464,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 7,
-            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height == 0:\n        return []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, helper))\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps\n\n\n\n"
+            "reparied_code": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height == 0:\n        return []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, helper))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps"
         },
         {
             "run_time": 5.664334774017334,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 7,
-            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        if helper == start:\n            helper = {1, 2, 3} - {start} - {end}\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, helper))\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps\n\n\n\n"
+            "reparied_code": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        if helper == start:\n            helper = {1, 2, 3} - {start} - {end}\n        steps.extend(hanoi(height - 1, start, helper))\n        steps.append((start, helper))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps"
         },
         {
             "run_time": 3.845428943634033,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 7,
-            "reparied_code": "\ndef hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(reversed(hanoi(height - 1, start, helper)))\n        steps.append((start, helper))\n        steps.extend(hanoi(height - 1, helper, end))\n\n    return steps\n\n\n\n"
+            "reparied_code": "def hanoi(height, start=1, end=3):\n    steps = []\n    if height > 0:\n        helper = ({1, 2, 3} - {start} - {end}).pop()\n        steps.extend(reversed(hanoi(height - 1, start, helper)))\n        steps.append((start, helper))\n        steps.extend(hanoi(height - 1, helper, end))\n    return steps"
         }
     ]
 }

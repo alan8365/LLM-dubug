@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x > pivot]) # The bug is here\n    return lesser + [pivot] + greater\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 27,
+            "prog_name": "quicksort",
+            "language": "python",
+            "testcase_num": 13,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5efa\u7acb\u6bd4pivot\u5927\u7684\u5143\u7d20\u7d44\u6210\u7684\u9663\u5217\u6642\uff0c\u6c92\u6709\u5c07\u548cpivot\u76f8\u7b49\u7684\u5143\u7d20\u5305\u542b\u9032\u53bb\uff0c\u5c0e\u81f4\u5728\u6392\u5e8f\u6709\u548cpivot\u76f8\u7b49\u5143\u7d20\u7684\u9663\u5217\u6642\u6703\u7f3a\u5c11\u9019\u4e9b\u5143\u7d20"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.2422711849212646,
+            "repaired_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot]) # Fixed bug. Changed from \">\" to \">=\"\n    return lesser + [pivot] + greater",
+            "raw_code": "```python\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot]) # Fixed bug. Changed from \">\" to \">=\"\n    return lesser + [pivot] + greater\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.8528172969818115,
+            "repaired_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot]) # Fixed bug: changed '>' to '>='\n    return lesser + [pivot] + greater",
+            "raw_code": "```python\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot]) # Fixed bug: changed '>' to '>='\n    return lesser + [pivot] + greater\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.2736809253692627,
+            "repaired_code": "\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot]) # Fixed bug\n    return lesser + [pivot] + greater",
+            "raw_code": "```python\ndef quicksort(arr):\n    if not arr:\n        return []\n\n    pivot = arr[0]\n    lesser = quicksort([x for x in arr[1:] if x < pivot])\n    greater = quicksort([x for x in arr[1:] if x >= pivot]) # Fixed bug\n    return lesser + [pivot] + greater\n```"
+        }
+    ]
+}

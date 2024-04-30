@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 29,
+        "prog_name": "rpn_eval",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 18,
+        "bug_type": "",
+        "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 4.670071125030518,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 3,
+            "reparied_code": "import operator\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': operator.add,\n            '-': operator.sub,\n            '*': operator.mul,\n            '/': operator.truediv\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            if len(stack) < 2:\n                raise ValueError(\"Not enough operands in the stack\")\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n    return stack.pop()"
+        },
+        {
+            "run_time": 6.145859718322754,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 3,
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            if token == '/':\n                if b == 0:\n                    raise ZeroDivisionError(\"Division by zero\")\n                stack.append(op(token, a, b))\n            else:\n                stack.append(op(token, a, b))\n    return stack.pop()"
+        },
+        {
+            "run_time": 6.134858131408691,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 3,
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            stack.append(\n                op(token, stack.pop(), stack.pop())\n            )\n    return stack.pop()"
+        }
+    ]
+}

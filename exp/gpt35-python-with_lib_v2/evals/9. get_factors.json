@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 2.1590490341186523,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 11,
             "fail_num": 0,
-            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]  # Added this line to return the last prime factor if n itself is a prime number\n\n\n# Test the function\nprint(get_factors(12))  # Output: [2, 2, 3]"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n    return [n]\nprint(get_factors(12))"
         },
         {
             "run_time": 3.7303340435028076,
+            "is_plausible": true,
+            "is_correct": true,
             "pass_num": 11,
             "fail_num": 0,
-            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n    return [n]"
         },
         {
             "run_time": 3.164626121520996,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 2,
             "fail_num": 9,
-            "reparied_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if n // i != i:\n                factors.append(n // i)\n\n    return factors"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return []\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            if n // i != i:\n                factors.append(n // i)\n    return factors"
         }
     ]
 }

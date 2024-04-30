@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 5.731282949447632,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef sqrt(x, epsilon):\n    if x < 0 or epsilon <= 0:\n        return None\n    approx = x / 2.0\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    if x < 0 or epsilon <= 0:\n        return None\n    approx = x / 2.0\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 2.2114598751068115,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2.0\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2.0\n    while abs(x - approx * approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 3.482897996902466,
+            "is_plausible": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "\n\ndef sqrt(x, epsilon):\n    approx = x / 2.0\n    while abs(x - approx*approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n"
+            "reparied_code": "def sqrt(x, epsilon):\n    approx = x / 2.0\n    while abs(x - approx*approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         }
     ]
 }

@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n # The bug is here\n    return lines\n```\n",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u56de\u50b3\u524d\u7f3a\u5c11append text\uff0c\u9020\u6210\u56de\u50b3\u7d50\u679c\u7f3a\u5c11\u6700\u5f8c\u4e00\u6bb5\uff0c\u5c0e\u81f4\u7a7a\u503c\u4ee5\u5916\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 3.483855962753296,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)  # Fix for the bug\n    return lines\n",
+            "raw_code": "The bug is that the last line is not being added to the `lines` list. To fix this, you can add the text that remains after the while loop ends to the `lines` list before returning it. Here is the corrected code:\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)  # Fix for the bug\n    return lines\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.1778829097747803,
+            "repaired_code": "\nlines.append(text)\n",
+            "raw_code": "The bug in the code is that the last line of text is not being added to the `lines` list after the while loop exits. To fix the bug, you can add the following line after the while loop:\n\n```python\nlines.append(text)\n``` \n\nThis will ensure that the final line of text is added to the `lines` list before returning it."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.41188907623291,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)  # Add the remaining text to the lines list\n    return lines\n",
+            "raw_code": "The bug in the code is that it does not add the last line (which is less than `cols` characters long) to the `lines` list. \n\nTo fix this, you can add the remaining `text` after the while loop ends to the `lines` list. Here's the corrected code:\n\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n    lines.append(text)  # Add the remaining text to the lines list\n    return lines\n```"
+        }
+    ]
+}

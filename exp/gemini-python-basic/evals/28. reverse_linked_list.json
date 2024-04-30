@@ -11,21 +11,27 @@
     "patchs_eval": [
         {
             "run_time": 4.8765270709991455,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 2,
-            "reparied_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.next\n        node.next = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode"
+            "reparied_code": "def reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.next\n        node.next = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode"
         },
         {
             "run_time": 1.8761589527130127,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 2,
-            "reparied_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node is not None:   # while node exists\n        nextnode = node.next  \n        node.next = prevnode \n        prevnode = node\n        node = nextnode\n    return prevnode"
+            "reparied_code": "def reverse_linked_list(node):\n    prevnode = None\n    while node is not None:\n        nextnode = node.next\n        node.next = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode"
         },
         {
             "run_time": 3.6281850337982178,
+            "is_plausible": false,
+            "is_correct": false,
             "pass_num": 1,
             "fail_num": 2,
-            "reparied_code": "\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.next\n        node.next = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode"
+            "reparied_code": "def reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.next\n        node.next = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode"
         }
     ]
 }

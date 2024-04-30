@@ -1,0 +1,8 @@
+{
+    "name": "gemini-python-with_location_v3",
+    "lang": "python",
+    "llm_api": "GeminiApi",
+    "prompt_type": "with_location",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location_v3",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location_v3/patchs"
+}

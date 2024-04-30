@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 32,
+        "prog_name": "shortest_paths",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.2828140258789062,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n    return weight_by_node"
+        },
+        {
+            "run_time": 1.5703926086425781,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "weight_by_node[v] = min("
+        },
+        {
+            "run_time": 2.764948844909668,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[v],\n                weight_by_node[u] + weight\n            )\n    return weight_by_node"
+        }
+    ]
+}

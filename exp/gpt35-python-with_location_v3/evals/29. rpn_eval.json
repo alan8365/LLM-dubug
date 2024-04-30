@@ -1,0 +1,37 @@
+{
+    "sample": {
+        "prog_id": 29,
+        "prog_name": "rpn_eval",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 18,
+        "bug_type": "",
+        "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 3.8658571243286133,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 6,
+            "fail_num": 0,
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, b, a)\n            )\n    return stack.pop()"
+        },
+        {
+            "run_time": 1.6630399227142334,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "op(token, b, a)"
+        },
+        {
+            "run_time": 2.3851981163024902,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 0,
+            "fail_num": 0,
+            "reparied_code": "stack.append(\n    op(token, b, a)\n)"
+        }
+    ]
+}

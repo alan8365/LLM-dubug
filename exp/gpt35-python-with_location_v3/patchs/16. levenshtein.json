@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:]) # The bug is here\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```\n",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u5169\u500b\u5b57\u4e32\u9996\u5b57\u76f8\u540c\u7684\u60c5\u6cc1\u4e0b\uff0c\u5728\u905e\u8ff4\u5f0f\u524d\u932f\u8aa4\u7684+1\uff0c\u7531\u65bc\u5169\u5b57\u4e00\u81f4\u6240\u4ee5\u5c0d\u65bc\u7d50\u679c\u7684\u5f71\u97ff\u61c9\u8a72\u662f0\u800c\u975e1\uff0c\u5c0e\u81f4\u9664\u7a7a\u5b57\u4e32\u4ee5\u5916\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.14621114730835,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n",
+            "raw_code": "The bug in the code is that the recursive call to `levenshtein` function is missing the correct arguments. It should be passing `source[1:]` and `target[1:]` as arguments instead of `source[1:]` and `target`. \n\nHere is the corrected code:\n```python\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return 1 + levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.601294040679932,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n",
+            "raw_code": "The bug is that the code is not correctly checking the distance if the first characters of the source and target are different. It should be calculating the distance as 1 + the minimum of the distances when characters are mismatched.\n\nHere's the corrected code:\n\n```python\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```"
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.055511951446533,
+            "repaired_code": "\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n",
+            "raw_code": "The bug in the code is that the recursion does not consider the case where the characters at index 0 in both strings are different. In that case, the distance should be increased by 1 and all three possible edits (insert, delete, replace) should be considered.\n\nHere is the corrected code:\n\n```python\ndef levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n```\n\nThis code properly handles cases where the first characters of both strings are different by recursively considering all possible edit operations."
+        }
+    ]
+}

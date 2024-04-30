@@ -1,0 +1,36 @@
+{
+    "model_name": "gpt-3.5-turbo-0125",
+    "prompt": {
+        "prompt": "Fix the bug in the following code. The bug is on the line commented below:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b) # The bug is here\n```\n",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u547c\u53eb\u6642\uff0c\u6c92\u6709\u4ea4\u63db\u6578\u5b57\u7684\u4f4d\u7f6e\uff0c\u4f7f\u5f97b\u7684\u4f4d\u7f6e\u59cb\u7d42\u4fdd\u6301\u4e0d\u8b8a\uff0c\u5c0e\u81f4\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "with_location"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.01548957824707,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Swapped the order of a % b and b\n",
+            "raw_code": "To fix the bug in the code, you need to swap the order of `a % b` and `b` in the recursive call to `gcd`. This will ensure that `b` is always the smaller number being passed to the function. Here is the corrected code:\n\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Swapped the order of a % b and b\n``` \n\nNow, the code makes the recursive call with `b` as the first parameter and `a % b` as the second parameter, which ensures that the smaller number is always passed as the second argument to the `gcd` function."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.894915819168091,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Corrected call to gcd function\n",
+            "raw_code": "To fix the bug in the code, we need to swap the order of arguments when calling the `gcd` function recursively. Here's the corrected code:\n\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)  # Corrected call to gcd function\n```\n\nNow, when calling the `gcd` function recursively, `b` should be passed as the first argument followed by `a % b`. This change ensures that the `gcd` function works correctly and calculates the greatest common divisor of the two numbers `a` and `b`."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 1.8931171894073486,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n",
+            "raw_code": "To fix the bug, we need to swap the order of the arguments in the recursive call to gcd(a % b, b). The correct order should be gcd(b, a % b):\n\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```"
+        }
+    ]
+}
