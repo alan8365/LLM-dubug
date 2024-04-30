@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 8,
             "fail_num": 4,
-            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends.get(length + 1, -float('inf'))]:\n            ends[length + 1] = i\n            longest = length + 1\n    return longest"
+            "reparied_code": "def lis(arr):\n    ends = {}\n    longest = 0\n    for i, val in enumerate(arr):\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n        length = max(prefix_lengths) if prefix_lengths else 0\n        if length == longest or val < arr[ends.get(length + 1, -float(\"inf\"))]:\n            ends[length + 1] = i\n            longest = length + 1\n    return longest"
         },
         {
             "run_time": 2.4481749534606934,

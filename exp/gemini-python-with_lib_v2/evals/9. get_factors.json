@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 10,
             "fail_num": 1,
-            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return [1]\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n    return [n]"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return [1]\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n    return [n]"
         },
         {
             "run_time": 2.0486719608306885,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 1,
             "fail_num": 10,
-            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return []\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            factors.extend(get_factors(n // i))\n            break\n    return factors"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return []\n    factors = []\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            factors.append(i)\n            factors.extend(get_factors(n // i))\n            break\n    return factors"
         },
         {
             "run_time": 1.841188907623291,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 11,
-            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return [1]\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n    return [1, n]"
+            "reparied_code": "def get_factors(n):\n    if n == 1:\n        return [1]\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n    return [1, n]"
         }
     ]
 }

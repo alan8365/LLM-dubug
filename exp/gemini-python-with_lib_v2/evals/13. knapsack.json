@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 9,
             "fail_num": 0,
-            "reparied_code": "def knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n    for i in range(len(items)):\n        weight, value = items[i]\n        for j in range(capacity, -1, -1):\n            if weight <= j:\n                memo[i + 1, j] = max(\n                    memo[i, j],\n                    value + memo[i, j - weight]\n                )\n            else:\n                memo[i + 1, j] = memo[i, j]\n    return memo[len(items), capacity]"
+            "reparied_code": "def knapsack(capacity, items):\n    from collections import defaultdict\n\n    memo = defaultdict(int)\n    for i in range(len(items)):\n        weight, value = items[i]\n        for j in range(capacity, -1, -1):\n            if weight <= j:\n                memo[i + 1, j] = max(memo[i, j], value + memo[i, j - weight])\n            else:\n                memo[i + 1, j] = memo[i, j]\n    return memo[len(items), capacity]"
         },
         {
             "run_time": 2.4675750732421875,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 3,
-            "reparied_code": "def knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n        for j in range(capacity, weight - 1, -1):\n            memo[i, j] = max(\n                memo[i - 1, j],\n                value + memo[i - 1, j - weight]\n            )\n    return memo[len(items), capacity]"
+            "reparied_code": "def knapsack(capacity, items):\n    from collections import defaultdict\n\n    memo = defaultdict(int)\n    for i in range(1, len(items) + 1):\n        weight, value = items[i - 1]\n        for j in range(capacity, weight - 1, -1):\n            memo[i, j] = max(memo[i - 1, j], value + memo[i - 1, j - weight])\n    return memo[len(items), capacity]"
         },
         {
             "run_time": 2.7599258422851562,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 2,
             "fail_num": 7,
-            "reparied_code": "def knapsack(capacity, items):\n    from collections import defaultdict\n    memo = defaultdict(int)\n    for i in range(len(items)):\n        weight, value = items[i]\n        for j in range(capacity, weight - 1, -1):\n            memo[i, j] = memo[i - 1, j]\n            if weight < j:\n                memo[i, j] = max(\n                    memo[i, j],\n                    value + memo[i - 1, j - weight]\n                )\n    return memo[len(items) - 1, capacity]"
+            "reparied_code": "def knapsack(capacity, items):\n    from collections import defaultdict\n\n    memo = defaultdict(int)\n    for i in range(len(items)):\n        weight, value = items[i]\n        for j in range(capacity, weight - 1, -1):\n            memo[i, j] = memo[i - 1, j]\n            if weight < j:\n                memo[i, j] = max(memo[i, j], value + memo[i - 1, j - weight])\n    return memo[len(items) - 1, capacity]"
         }
     ]
 }

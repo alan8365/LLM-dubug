@@ -19,11 +19,11 @@
         },
         {
             "run_time": 2.4502179622650146,
-            "is_plausible": false,
-            "is_correct": false,
-            "pass_num": 0,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": ""
+            "reparied_code": "def bucketsort(arr, k):\n    counts = [0] * k\n    for x in arr:\n        counts[x] += 1\n    sorted_arr = []\n    for i, count in enumerate(counts):\n        sorted_arr.extend([i] * count)\n    return sorted_arr"
         },
         {
             "run_time": 1.9414558410644531,

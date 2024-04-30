@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 13,
+        "prog_name": "knapsack",
+        "language": "python",
+        "testcase_num": 9,
+        "fault_location": 10,
+        "bug_type": "",
+        "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，導致該類邊緣狀況輸出錯誤答案"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "正確修正目標問題，但是刪除了j小於weight時的動態規劃，導致部分情況出錯",
+            "patch_correct_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "沒有有效更動",
+            "patch_correct_detail": ""
+        }
+    }
+}

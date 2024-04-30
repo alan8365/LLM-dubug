@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 3,
-            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    while ordered_nodes:\n        node = ordered_nodes.pop(0)\n        for nextnode in node.outgoing_nodes:\n            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:\n                ordered_nodes.append(nextnode)\n    return ordered_nodes"
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    while ordered_nodes:\n        node = ordered_nodes.pop(0)\n        for nextnode in node.outgoing_nodes:\n            if (\n                set(ordered_nodes).issuperset(nextnode.outgoing_nodes)\n                and nextnode not in ordered_nodes\n            ):\n                ordered_nodes.append(nextnode)\n    return ordered_nodes"
         },
         {
             "run_time": 2.4326062202453613,
