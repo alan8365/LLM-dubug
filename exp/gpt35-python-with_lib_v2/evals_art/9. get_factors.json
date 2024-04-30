@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 9,
+        "prog_name": "get_factors",
+        "language": "python",
+        "testcase_num": 11,
+        "fault_location": 8,
+        "bug_type": "",
+        "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "錯誤理解題目為因數分解",
+            "patch_correct_detail": ""
+        }
+    }
+}

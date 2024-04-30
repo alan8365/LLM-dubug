@@ -12,19 +12,19 @@
         "patch-0": {
             "is_correct": "F",
             "bug_location_predict": 0,
-            "patch_fail_detail": "成功修改目標問題，但是比較對象寫成x而不是歸零，導致當陣列為全負陣列時無法回傳0",
+            "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負無限大而非歸0，導致當陣列為全負陣列時無法回傳0",
             "patch_correct_detail": ""
         },
         "patch-1": {
             "is_correct": "F",
             "bug_location_predict": 0,
-            "patch_fail_detail": "成功修改目標問題，但是比較對象寫成x而不是歸零，導致當陣列為全負陣列時無法回傳0",
+            "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負無限大而非歸0，導致當陣列為全負陣列時無法回傳0",
             "patch_correct_detail": ""
         },
         "patch-2": {
             "is_correct": "F",
             "bug_location_predict": 0,
-            "patch_fail_detail": "成功修改目標問題，但是比較對象寫成x而不是歸零，導致當陣列為全負陣列時無法回傳0",
+            "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負無限大而非歸0，導致當陣列為全負陣列時無法回傳0",
             "patch_correct_detail": ""
         }
     }

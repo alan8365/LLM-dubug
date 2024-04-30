@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "def sqrt(x, epsilon):\n    if x < 0:\n        raise ValueError(\"Sqrt is undefined for negative numbers.\")\n    approx = x / 2\n    while abs(x - approx ** 2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
+            "reparied_code": "def sqrt(x, epsilon):\n    if x < 0:\n        raise ValueError(\"Sqrt is undefined for negative numbers.\")\n    approx = x / 2\n    while abs(x - approx**2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx"
         },
         {
             "run_time": 2.7676331996917725,

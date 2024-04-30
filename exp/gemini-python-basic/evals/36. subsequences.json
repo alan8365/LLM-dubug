@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 2,
             "fail_num": 10,
-            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return []\n    ret = []\n    for i in range(a, b + 1 - k + 1):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b, k - 1)\n        )\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return []\n    ret = []\n    for i in range(a, b + 1 - k + 1):\n        ret.extend([i] + rest for rest in subsequences(i + 1, b, k - 1))\n    return ret"
         },
         {
             "run_time": 4.865142107009888,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 2,
             "fail_num": 10,
-            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return []\n    ret = []\n    for i in range(a, b):\n        ret.extend(\n            [i] + rest for rest in subsequences(i + 1, b + 1, k - 1)\n        )\n    return ret"
+            "reparied_code": "def subsequences(a, b, k):\n    if k == 0:\n        return []\n    ret = []\n    for i in range(a, b):\n        ret.extend([i] + rest for rest in subsequences(i + 1, b + 1, k - 1))\n    return ret"
         }
     ]
 }
