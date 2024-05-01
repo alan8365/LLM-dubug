@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.successor = None\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\nhead = Node(1)\nhead.successor = Node(2)\nhead.successor.successor = Node(3)\nnew_head = reverse_linked_list(head)\ncurrent = new_head\nwhile current:\n    print(current.value)\n    current = current.successor"
+            "reparied_code": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.successor = None\n\n\ndef reverse_linked_list(node):\n    prevnode = None\n    while node:\n        nextnode = node.successor\n        node.successor = prevnode\n        prevnode = node\n        node = nextnode\n    return prevnode\n\n\nhead = Node(1)\nhead.successor = Node(2)\nhead.successor.successor = Node(3)\nnew_head = reverse_linked_list(head)\ncurrent = new_head\nwhile current:\n    print(current.value)\n    current = current.successor"
         },
         {
             "run_time": 20.424371004104614,

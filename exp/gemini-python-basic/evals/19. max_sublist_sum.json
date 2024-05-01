@@ -28,7 +28,7 @@
         {
             "run_time": 2.56141996383667,
             "is_plausible": true,
-            "is_correct": true,
+            "is_correct": false,
             "pass_num": 7,
             "fail_num": 0,
             "reparied_code": "def max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n    for x in arr:\n        max_ending_here = max(x, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n    return max_so_far"

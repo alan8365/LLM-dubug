@@ -27,11 +27,11 @@
         },
         {
             "run_time": 15.61716890335083,
-            "is_plausible": false,
-            "is_correct": false,
-            "pass_num": 0,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "nested_list = [1, [2, [3, 4], [5, 6]], 7, [8, 9]]\nprint(list(flatten(nested_list)))"
+            "reparied_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
         }
     ]
 }

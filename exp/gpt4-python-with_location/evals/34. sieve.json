@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p != 0 for p in primes):\n            primes.append(n)\n    return primes\nmax_val = 30\nprint(f\"Primes up to {max_val}:\", sieve(max_val))"
+            "reparied_code": "def sieve(max):\n    primes = []\n    for n in range(2, max + 1):\n        if all(n % p != 0 for p in primes):\n            primes.append(n)\n    return primes\n\n\nmax_val = 30\nprint(f\"Primes up to {max_val}:\", sieve(max_val))"
         },
         {
             "run_time": 15.308001041412354,

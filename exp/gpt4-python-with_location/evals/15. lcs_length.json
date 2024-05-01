@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 4,
-            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n    return max(dp.values()) if dp else 0"
+            "reparied_code": "def lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n    return max(dp.values()) if dp else 0"
         },
         {
             "run_time": 33.960771799087524,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 4,
-            "reparied_code": "def lcs_length(s, t):\n    dp = {}\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp.get((i - 1, j - 1), 0) + 1\n            else:\n                dp[i, j] = max(dp.get((i - 1, j), 0), dp.get((i, j - 1), 0))\n    return max(dp.values(), default=0)\nprint(lcs_length(\"abcde\", \"acde\"))"
+            "reparied_code": "def lcs_length(s, t):\n    dp = {}\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp.get((i - 1, j - 1), 0) + 1\n            else:\n                dp[i, j] = max(dp.get((i - 1, j), 0), dp.get((i, j - 1), 0))\n    return max(dp.values(), default=0)\n\n\nprint(lcs_length(\"abcde\", \"acde\"))"
         },
         {
             "run_time": 23.897762060165405,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 4,
-            "reparied_code": "def lcs_length(s, t):\n    from collections import defaultdict\n    dp = defaultdict(int)\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i-1, j], dp[i, j-1])\n    return dp[len(s) - 1, len(t) - 1] if s and t else 0"
+            "reparied_code": "def lcs_length(s, t):\n    from collections import defaultdict\n\n    dp = defaultdict(int)\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n            else:\n                dp[i, j] = max(dp[i - 1, j], dp[i, j - 1])\n    return dp[len(s) - 1, len(t) - 1] if s and t else 0"
         }
     ]
 }

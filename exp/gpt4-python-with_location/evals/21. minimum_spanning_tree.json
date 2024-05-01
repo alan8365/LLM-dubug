@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 3,
-            "reparied_code": "def minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n    def find(node):\n        if group_by_node[node] is not node:\n            group_by_node[node] = find(group_by_node[node])\n        return group_by_node[node]\n    def union(node1, node2):\n        root1 = find(node1)\n        root2 = find(node2)\n        if root1 != root2:\n            group_by_node[root2] = root1\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if find(u) != find(v):\n            mst_edges.add(edge)\n            union(u, v)\n    return mst_edges"
+            "reparied_code": "def minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    def find(node):\n        if group_by_node[node] is not node:\n            group_by_node[node] = find(group_by_node[node])\n        return group_by_node[node]\n\n    def union(node1, node2):\n        root1 = find(node1)\n        root2 = find(node2)\n        if root1 != root2:\n            group_by_node[root2] = root1\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if find(u) != find(v):\n            mst_edges.add(edge)\n            union(u, v)\n    return mst_edges"
         }
     ]
 }

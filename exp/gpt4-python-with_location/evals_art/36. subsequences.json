@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 36,
+        "prog_name": "subsequences",
+        "language": "python",
+        "testcase_num": 12,
+        "fault_location": 2,
+        "bug_type": "",
+        "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "正確更動目標問題，但是在for迴圈的終止條件錯誤的+1，導致大部分輸出都錯誤",
+            "patch_correct_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "正確更動目標問題，但是在for迴圈的終止條件錯誤的+1，導致大部分輸出都錯誤",
+            "patch_correct_detail": ""
+        }
+    }
+}

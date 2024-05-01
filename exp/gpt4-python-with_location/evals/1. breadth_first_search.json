@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "from collections import deque as Queue\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_successors = [successor for successor in node.successors if successor not in nodesseen]\n            queue.extend(new_successors)\n            nodesseen.update(new_successors)\n    return False"
+            "reparied_code": "from collections import deque as Queue\n\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_successors = [\n                successor for successor in node.successors if successor not in nodesseen\n            ]\n            queue.extend(new_successors)\n            nodesseen.update(new_successors)\n    return False"
         },
         {
             "run_time": 15.445406198501587,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "from collections import deque as Queue\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_nodes = [node for node in node.successors if node not in nodesseen]\n            queue.extend(new_nodes)\n            nodesseen.update(new_nodes)\n    return False"
+            "reparied_code": "from collections import deque as Queue\n\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_nodes = [node for node in node.successors if node not in nodesseen]\n            queue.extend(new_nodes)\n            nodesseen.update(new_nodes)\n    return False"
         },
         {
             "run_time": 20.260878801345825,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "from collections import deque as Queue\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_successors = [node for node in node.successors if node not in nodesseen]\n            queue.extend(new_successors)\n            nodesseen.update(new_successors)\n    return False"
+            "reparied_code": "from collections import deque as Queue\n\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node is goalnode:\n            return True\n        else:\n            new_successors = [node for node in node.successors if node not in nodesseen]\n            queue.extend(new_successors)\n            nodesseen.update(new_successors)\n    return False"
         }
     ]
 }

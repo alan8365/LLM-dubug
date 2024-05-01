@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        else:\n            end += 1\n        line, text = text[:end].rstrip(), text[end:].lstrip()\n        lines.append(line)\n    lines.append(text)\n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(\" \", 0, cols)\n        if end == -1:\n            end = cols\n        else:\n            end += 1\n        line, text = text[:end].rstrip(), text[end:].lstrip()\n        lines.append(line)\n    lines.append(text)\n    return lines"
         },
         {
             "run_time": 19.867292881011963,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(\" \", 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines"
         },
         {
             "run_time": 21.48732304573059,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        else:\n            end += 1\n        line, text = text[:end].rstrip(), text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text.strip())\n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(\" \", 0, cols + 1)\n        if end == -1:\n            end = cols\n        else:\n            end += 1\n        line, text = text[:end].rstrip(), text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text.strip())\n    return lines"
         }
     ]
 }
