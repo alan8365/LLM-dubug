@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    perm[i], perm[j] = perm[j], perm[i]\n                    perm[i + 1:] = reversed(perm[i + 1:])\n                    return perm\n    perm.reverse()\n    return perm"
+            "reparied_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    perm[i], perm[j] = perm[j], perm[i]\n                    perm[i + 1 :] = reversed(perm[i + 1 :])\n                    return perm\n    perm.reverse()\n    return perm"
         },
         {
             "run_time": 13.810992956161499,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    perm[i], perm[j] = perm[j], perm[i]\n                    perm[i + 1:] = reversed(perm[i + 1:])\n                    return perm\n    return sorted(perm)"
+            "reparied_code": "def next_permutation(perm):\n    for i in range(len(perm) - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(len(perm) - 1, i, -1):\n                if perm[j] > perm[i]:\n                    perm[i], perm[j] = perm[j], perm[i]\n                    perm[i + 1 :] = reversed(perm[i + 1 :])\n                    return perm\n    return sorted(perm)"
         },
         {
             "run_time": 19.36308789253235,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 8,
             "fail_num": 0,
-            "reparied_code": "def next_permutation(perm):\n    n = len(perm)\n    for i in range(n - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(n - 1, i, -1):\n                if perm[j] > perm[i]:\n                    perm[i], perm[j] = perm[j], perm[i]\n                    perm[i + 1:] = reversed(perm[i + 1:])\n                    return perm\n    return None"
+            "reparied_code": "def next_permutation(perm):\n    n = len(perm)\n    for i in range(n - 2, -1, -1):\n        if perm[i] < perm[i + 1]:\n            for j in range(n - 1, i, -1):\n                if perm[j] > perm[i]:\n                    perm[i], perm[j] = perm[j], perm[i]\n                    perm[i + 1 :] = reversed(perm[i + 1 :])\n                    return perm\n    return None"
         }
     ]
 }

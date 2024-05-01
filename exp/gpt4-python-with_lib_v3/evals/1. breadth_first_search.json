@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "from collections import deque as Queue\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node.value == goalnode.value:\n            return True\n        for successor in node.successors:\n            if successor not in nodesseen:\n                queue.append(successor)\n                nodesseen.add(successor)\n    return False"
+            "reparied_code": "from collections import deque as Queue\n\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node.value == goalnode.value:\n            return True\n        for successor in node.successors:\n            if successor not in nodesseen:\n                queue.append(successor)\n                nodesseen.add(successor)\n    return False"
         },
         {
             "run_time": 32.63478708267212,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "from collections import deque as Queue\nclass Node:\n    def __init__(self, value=None, successors=[]):\n        self.value = value\n        self.successors = successors\n    def __repr__(self):\n        return f\"Node({self.value})\"\ndef breadth_first_search(startnode, goalnode):\n    if startnode == goalnode:\n        return True\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node == goalnode:\n            return True\n        else:\n            for successor in node.successors:\n                if successor not in nodesseen:\n                    queue.append(successor)\n                    nodesseen.add(successor)\n    return False"
+            "reparied_code": "from collections import deque as Queue\n\n\nclass Node:\n    def __init__(self, value=None, successors=[]):\n        self.value = value\n        self.successors = successors\n\n    def __repr__(self):\n        return f\"Node({self.value})\"\n\n\ndef breadth_first_search(startnode, goalnode):\n    if startnode == goalnode:\n        return True\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node == goalnode:\n            return True\n        else:\n            for successor in node.successors:\n                if successor not in nodesseen:\n                    queue.append(successor)\n                    nodesseen.add(successor)\n    return False"
         },
         {
             "run_time": 20.60046100616455,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 5,
             "fail_num": 0,
-            "reparied_code": "from collections import deque as Queue\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node == goalnode:\n            return True\n        for neighbor in node.successors:\n            if neighbor not in nodesseen:\n                queue.append(neighbor)\n                nodesseen.add(neighbor)\n    return False"
+            "reparied_code": "from collections import deque as Queue\n\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n    nodesseen = set()\n    nodesseen.add(startnode)\n    while queue:\n        node = queue.popleft()\n        if node == goalnode:\n            return True\n        for neighbor in node.successors:\n            if neighbor not in nodesseen:\n                queue.append(neighbor)\n                nodesseen.add(neighbor)\n    return False"
         }
     ]
 }

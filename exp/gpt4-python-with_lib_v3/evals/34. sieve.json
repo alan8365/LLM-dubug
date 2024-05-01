@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def sieve(max):\n    is_prime = [True] * (max + 1)\n    p = 2\n    while (p * p <= max):\n        if is_prime[p] == True:\n            for i in range(p * p, max + 1, p):\n                is_prime[i] = False\n        p += 1\n    primes = []\n    for p in range(2, max + 1):\n        if is_prime[p]:\n            primes.append(p)\n    return primes"
+            "reparied_code": "def sieve(max):\n    is_prime = [True] * (max + 1)\n    p = 2\n    while p * p <= max:\n        if is_prime[p] == True:\n            for i in range(p * p, max + 1, p):\n                is_prime[i] = False\n        p += 1\n    primes = []\n    for p in range(2, max + 1):\n        if is_prime[p]:\n            primes.append(p)\n    return primes"
         },
         {
             "run_time": 29.140676021575928,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def sieve(max):\n    is_prime = [True] * (max + 1)\n    p = 2\n    while (p * p <= max):\n        if is_prime[p] == True:\n            for i in range(p * p, max + 1, p):\n                is_prime[i] = False\n        p += 1\n    primes = []\n    for p in range(2, max + 1):\n        if is_prime[p]:\n            primes.append(p)\n    return primes"
+            "reparied_code": "def sieve(max):\n    is_prime = [True] * (max + 1)\n    p = 2\n    while p * p <= max:\n        if is_prime[p] == True:\n            for i in range(p * p, max + 1, p):\n                is_prime[i] = False\n        p += 1\n    primes = []\n    for p in range(2, max + 1):\n        if is_prime[p]:\n            primes.append(p)\n    return primes"
         }
     ]
 }

@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        else:\n            line = text[:end].strip()\n            text = text[end:].strip()\n        lines.append(line)\n    if text:\n        lines.append(text.strip())\n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(\" \", 0, cols)\n        if end == -1:\n            end = cols\n        else:\n            line = text[:end].strip()\n            text = text[end:].strip()\n        lines.append(line)\n    if text:\n        lines.append(text.strip())\n    return lines"
         },
         {
             "run_time": 22.208243131637573,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n            if cols < len(text):\n                next_space = text.find(' ', end)\n                if next_space != -1:\n                    end = next_space\n        line, text = text[:end].strip(), text[end:].strip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(\" \", 0, cols + 1)\n        if end == -1:\n            end = cols\n            if cols < len(text):\n                next_space = text.find(\" \", end)\n                if next_space != -1:\n                    end = next_space\n        line, text = text[:end].strip(), text[end:].strip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines"
         },
         {
             "run_time": 31.6526882648468,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 5,
-            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while text:\n        if len(text) <= cols:\n            lines.append(text)\n            break\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        else:\n            end += 1\n        line, text = text[:end].strip(), text[end:].strip()\n        lines.append(line)\n    return lines"
+            "reparied_code": "def wrap(text, cols):\n    lines = []\n    while text:\n        if len(text) <= cols:\n            lines.append(text)\n            break\n        end = text.rfind(\" \", 0, cols + 1)\n        if end == -1:\n            end = cols\n        else:\n            end += 1\n        line, text = text[:end].strip(), text[end:].strip()\n        lines.append(line)\n    return lines"
         }
     ]
 }

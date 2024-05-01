@@ -11,11 +11,11 @@
     "patchs_eval": [
         {
             "run_time": 15.84770131111145,
-            "is_plausible": false,
-            "is_correct": false,
-            "pass_num": 0,
+            "is_plausible": true,
+            "is_correct": true,
+            "pass_num": 7,
             "fail_num": 0,
-            "reparied_code": "flat_list = list(flatten([1, [2, 3], [4, [5, 6]], 7]))\nprint(flat_list)"
+            "reparied_code": "def flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x"
         },
         {
             "run_time": 9.093378067016602,

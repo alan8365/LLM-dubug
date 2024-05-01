@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:])\n        )"
+            "reparied_code": "def levenshtein(source, target):\n    if source == \"\" or target == \"\":\n        return len(source) or len(target)\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source, target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:]),\n        )"
         },
         {
             "run_time": 19.519933938980103,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source, target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:])\n        )"
+            "reparied_code": "def levenshtein(source, target):\n    if source == \"\" or target == \"\":\n        return len(source) or len(target)\n    if source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n    else:\n        return 1 + min(\n            levenshtein(source, target[1:]),\n            levenshtein(source[1:], target),\n            levenshtein(source[1:], target[1:]),\n        )"
         },
         {
             "run_time": 38.18143630027771,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def levenshtein(source, target, memo={}):\n    if (source, target) in memo:\n        return memo[(source, target)]\n    if source == '' or target == '':\n        memo[(source, target)] = len(source) or len(target)\n        return memo[(source, target)]\n    if source[0] == target[0]:\n        result = levenshtein(source[1:], target[1:], memo)\n    else:\n        delete_cost = levenshtein(source[1:], target, memo)\n        substitute_cost = levenshtein(source[1:], target[1:], memo)\n        insert_cost = levenshtein(source, target[1:], memo)\n        result = 1 + min(delete_cost, substitute_cost, insert_cost)\n    memo[(source, target)] = result\n    return result\nprint(levenshtein(\"kitchen\", \"kitten\"))"
+            "reparied_code": "def levenshtein(source, target, memo={}):\n    if (source, target) in memo:\n        return memo[(source, target)]\n    if source == \"\" or target == \"\":\n        memo[(source, target)] = len(source) or len(target)\n        return memo[(source, target)]\n    if source[0] == target[0]:\n        result = levenshtein(source[1:], target[1:], memo)\n    else:\n        delete_cost = levenshtein(source[1:], target, memo)\n        substitute_cost = levenshtein(source[1:], target[1:], memo)\n        insert_cost = levenshtein(source, target[1:], memo)\n        result = 1 + min(delete_cost, substitute_cost, insert_cost)\n    memo[(source, target)] = result\n    return result\n\n\nprint(levenshtein(\"kitchen\", \"kitten\"))"
         }
     ]
 }

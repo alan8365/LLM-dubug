@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    nodes = set()\n    for u, v in weight_by_edge.keys():\n        nodes.add(u)\n        nodes.add(v)\n    weight_by_node = {node: float('inf') for node in nodes}\n    weight_by_node[source] = 0\n    n = len(weight_by_node)\n    for i in range(n - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node"
+            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    nodes = set()\n    for u, v in weight_by_edge.keys():\n        nodes.add(u)\n        nodes.add(v)\n    weight_by_node = {node: float(\"inf\") for node in nodes}\n    weight_by_node[source] = 0\n    n = len(weight_by_node)\n    for i in range(n - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node"
         },
         {
             "run_time": 23.96461009979248,
@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    weight_by_node = {}\n    for u, v in weight_by_edge.keys():\n        weight_by_node[u] = float('inf')\n        weight_by_node[v] = float('inf')\n    weight_by_node[source] = 0\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node\nedges = {\n    ('A', 'B'): 1,\n    ('B', 'C'): 2,\n    ('A', 'C'): 4\n}\nprint(shortest_paths('A', edges))"
+            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    weight_by_node = {}\n    for u, v in weight_by_edge.keys():\n        weight_by_node[u] = float(\"inf\")\n        weight_by_node[v] = float(\"inf\")\n    weight_by_node[source] = 0\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node\n\n\nedges = {(\"A\", \"B\"): 1, (\"B\", \"C\"): 2, (\"A\", \"C\"): 4}\nprint(shortest_paths(\"A\", edges))"
         },
         {
             "run_time": 27.852030992507935,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 3,
             "fail_num": 0,
-            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        node: float('inf') for edge in weight_by_edge for node in edge\n    }\n    weight_by_node[source] = 0\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node"
+            "reparied_code": "def shortest_paths(source, weight_by_edge):\n    weight_by_node = {node: float(\"inf\") for edge in weight_by_edge for node in edge}\n    weight_by_node[source] = 0\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            if weight_by_node[u] + weight < weight_by_node[v]:\n                weight_by_node[v] = weight_by_node[u] + weight\n    return weight_by_node"
         }
     ]
 }

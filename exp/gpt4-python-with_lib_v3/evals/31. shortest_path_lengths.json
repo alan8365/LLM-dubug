@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "from collections import defaultdict\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                if length_by_path[i, k] + length_by_path[k, j] < length_by_path[i, j]:\n                    length_by_path[i, j] = length_by_path[i, k] + length_by_path[k, j]\n    return length_by_path"
+            "reparied_code": "from collections import defaultdict\n\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float(\"inf\"))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                if length_by_path[i, k] + length_by_path[k, j] < length_by_path[i, j]:\n                    length_by_path[i, j] = length_by_path[i, k] + length_by_path[k, j]\n    return length_by_path"
         },
         {
             "run_time": 15.884460926055908,
@@ -23,7 +23,7 @@
             "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "from collections import defaultdict\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n    return length_by_path"
+            "reparied_code": "from collections import defaultdict\n\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float(\"inf\"))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j], length_by_path[i, k] + length_by_path[k, j]\n                )\n    return length_by_path"
         },
         {
             "run_time": 24.051985025405884,
@@ -31,7 +31,7 @@
             "is_correct": true,
             "pass_num": 4,
             "fail_num": 0,
-            "reparied_code": "from collections import defaultdict\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n    return length_by_path"
+            "reparied_code": "from collections import defaultdict\n\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float(\"inf\"))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j], length_by_path[i, k] + length_by_path[k, j]\n                )\n    return length_by_path"
         }
     ]
 }

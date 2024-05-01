@@ -15,7 +15,7 @@
             "is_correct": false,
             "pass_num": 2,
             "fail_num": 3,
-            "reparied_code": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    low_mid = (n - 1) // 2\n    high_mid = (n + 1) // 2\n    digit_list[high_mid:] = digit_list[:low_mid + 1][::-1]\n    if digit_list > digit_list[::-1]:\n        return digit_list\n    i = low_mid\n    while i >= 0 and digit_list[i] == 9:\n        digit_list[i] = 0\n        digit_list[n - i - 1] = 0\n        i -= 1\n    if i < 0:\n        return [1] + [0] * (n - 1) + [1]\n    digit_list[i] += 1\n    digit_list[n - i - 1] = digit_list[i]\n    return digit_list"
+            "reparied_code": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    low_mid = (n - 1) // 2\n    high_mid = (n + 1) // 2\n    digit_list[high_mid:] = digit_list[: low_mid + 1][::-1]\n    if digit_list > digit_list[::-1]:\n        return digit_list\n    i = low_mid\n    while i >= 0 and digit_list[i] == 9:\n        digit_list[i] = 0\n        digit_list[n - i - 1] = 0\n        i -= 1\n    if i < 0:\n        return [1] + [0] * (n - 1) + [1]\n    digit_list[i] += 1\n    digit_list[n - i - 1] = digit_list[i]\n    return digit_list"
         },
         {
             "run_time": 25.48409104347229,

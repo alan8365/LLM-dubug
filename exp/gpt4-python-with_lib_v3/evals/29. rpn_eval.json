@@ -15,15 +15,15 @@
             "is_correct": false,
             "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if isinstance(token, (int, float)):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n    return stack.pop()"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            \"+\": lambda a, b: a + b,\n            \"-\": lambda a, b: a - b,\n            \"*\": lambda a, b: a * b,\n            \"/\": lambda a, b: a / b,\n        }[symbol](a, b)\n\n    stack = []\n    for token in tokens:\n        if isinstance(token, (int, float)):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(op(token, a, b))\n    return stack.pop()"
         },
         {
             "run_time": 17.5899338722229,
-            "is_plausible": false,
+            "is_plausible": true,
             "is_correct": false,
-            "pass_num": 0,
+            "pass_num": 6,
             "fail_num": 0,
-            "reparied_code": "tokens = [5, 3, '+', 2, '*']\nresult = rpn_eval(tokens)\nprint(result)"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            \"+\": lambda a, b: a + b,\n            \"-\": lambda a, b: a - b,\n            \"*\": lambda a, b: a * b,\n            \"/\": lambda a, b: a / b,\n        }[symbol](a, b)\n\n    stack = []\n    for token in tokens:\n        if isinstance(token, (int, float)):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            result = op(token, a, b)\n            stack.append(result)\n    return stack.pop()"
         },
         {
             "run_time": 23.419053077697754,
@@ -31,7 +31,7 @@
             "is_correct": false,
             "pass_num": 0,
             "fail_num": 6,
-            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        operations = {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: b / a if a != 0 else float('inf')\n        }\n        return operations[symbol](a, b)\n    stack = []\n    for token in tokens:\n        if token.lstrip('-').isdigit():\n            stack.append(float(token))\n        elif token in {'+', '-', '*', '/'}:\n            if len(stack) < 2:\n                raise ValueError(\"Insufficient values in the expression\")\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(op(token, a, b))\n        else:\n            raise ValueError(f\"Unexpected token: {token}\")\n    if len(stack) != 1:\n        raise ValueError(\"The user input has too many values for the number of operators.\")\n    return stack.pop()\ntokens = [\"3\", \"4\", \"+\", \"2\", \"*\"]\nprint(rpn_eval(tokens))"
+            "reparied_code": "def rpn_eval(tokens):\n    def op(symbol, a, b):\n        operations = {\n            \"+\": lambda a, b: a + b,\n            \"-\": lambda a, b: a - b,\n            \"*\": lambda a, b: a * b,\n            \"/\": lambda a, b: b / a if a != 0 else float(\"inf\"),\n        }\n        return operations[symbol](a, b)\n\n    stack = []\n    for token in tokens:\n        if token.lstrip(\"-\").isdigit():\n            stack.append(float(token))\n        elif token in {\"+\", \"-\", \"*\", \"/\"}:\n            if len(stack) < 2:\n                raise ValueError(\"Insufficient values in the expression\")\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(op(token, a, b))\n        else:\n            raise ValueError(f\"Unexpected token: {token}\")\n    if len(stack) != 1:\n        raise ValueError(\n            \"The user input has too many values for the number of operators.\"\n        )\n    return stack.pop()\n\n\ntokens = [\"3\", \"4\", \"+\", \"2\", \"*\"]\nprint(rpn_eval(tokens))"
         }
     ]
 }

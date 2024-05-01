@@ -23,7 +23,7 @@
             "is_correct": false,
             "pass_num": 10,
             "fail_num": 0,
-            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\ncoins = [1, 2, 5]\ntotal = 5\nprint(possible_change(coins, total))"
+            "reparied_code": "def possible_change(coins, total):\n    if total == 0:\n        return 1\n    if total < 0 or not coins:\n        return 0\n    first, *rest = coins\n    return possible_change(coins, total - first) + possible_change(rest, total)\n\n\ncoins = [1, 2, 5]\ntotal = 5\nprint(possible_change(coins, total))"
         },
         {
             "run_time": 15.22654914855957,
