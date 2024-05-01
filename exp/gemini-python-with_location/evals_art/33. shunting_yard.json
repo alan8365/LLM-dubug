@@ -1,0 +1,31 @@
+{
+    "sample": {
+        "prog_id": 33,
+        "prog_name": "shunting_yard",
+        "language": "python",
+        "testcase_num": 6,
+        "fault_location": 16,
+        "bug_type": "",
+        "bug_detail_desc": "在處理到運算符的時候沒有將運算符放進opstack中，造成rpntokens沒有任何運算符，導致有運算符的輸入皆會出錯"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "沒有有效更動",
+            "patch_correct_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        },
+        "patch-2": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        }
+    }
+}
