@@ -15,12 +15,12 @@
             "patch_fail_detail": "試圖保留lo<=hi卻沒有跟其他兩個patch一樣hi=len(arr)-1，導致IndexError"
         },
         "patch-1": {
-            "is_correct": "U",
+            "is_correct": "T",
             "bug_location_predict": 0,
             "patch_fail_detail": ""
         },
         "patch-2": {
-            "is_correct": "U",
+            "is_correct": "T",
             "bug_location_predict": 0,
             "patch_fail_detail": ""
         }
