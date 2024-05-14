@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 7,
         "fault_location": 11,
-        "bug_type": "",
+        "bug_type": "變數賦值錯誤",
         "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
     },
     "patchs_eval": [

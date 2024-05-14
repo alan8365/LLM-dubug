@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 7,
         "fault_location": 4,
-        "bug_type": "",
+        "bug_type": "判斷式錯誤",
         "bug_detail_desc": "在whlie判斷式中，錯誤考慮了lo==hi的狀況，導致如目標不在陣列中的情況會無窮迴圈"
     },
     "patchs_eval": [

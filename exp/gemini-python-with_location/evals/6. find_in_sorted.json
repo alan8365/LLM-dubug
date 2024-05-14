@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 7,
         "fault_location": 8,
-        "bug_type": "",
+        "bug_type": "索引錯誤",
         "bug_detail_desc": "在目標大於中點時，新陣列起始序號mid沒有+1，導致邊緣情況遞迴不會停止"
     },
     "patchs_eval": [

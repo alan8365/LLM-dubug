@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 8,
         "fault_location": 5,
-        "bug_type": "",
+        "bug_type": "變數調用錯誤",
         "bug_detail_desc": "在步驟二中的交換把end寫成helper，使func無法交換到最後目標上，導致大部分情況都只能給出錯誤答案"
     },
     "patchs_eval": [

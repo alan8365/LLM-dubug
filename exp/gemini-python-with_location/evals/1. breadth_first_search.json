@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 5,
         "fault_location": 9,
-        "bug_type": "",
+        "bug_type": "判斷式錯誤",
         "bug_detail_desc": "在while迴圈的判斷式中，應該使用while queue讓佇列數量為0時脫離迴圈卻錯用為while True，導致迴圈無限循環無法停止"
     },
     "patchs_eval": [

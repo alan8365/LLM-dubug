@@ -5,8 +5,8 @@
         "language": "python",
         "testcase_num": 7,
         "fault_location": 6,
-        "bug_type": "",
-        "bug_detail_desc": "在遞回的終止條件回傳時，對於不是list的輸入依舊使用遞迴，導致大部分輸出不是預期的元素"
+        "bug_type": "函式誤用",
+        "bug_detail_desc": "在遞回的終止條件回傳時，對於不是list的輸入依舊使用遞迴，導致大部分輸出不是預期的格式"
     },
     "patchs_eval": [
         {

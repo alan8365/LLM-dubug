@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 6,
         "fault_location": 4,
-        "bug_type": "",
+        "bug_type": "變數調用錯誤",
         "bug_detail_desc": "在遞迴呼叫時，沒有交換數字的位置，使得b的位置始終保持不變，導致遞迴不會停止"
     },
     "patchs_eval": [

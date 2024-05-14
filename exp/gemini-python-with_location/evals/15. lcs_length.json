@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 9,
         "fault_location": 8,
-        "bug_type": "",
+        "bug_type": "索引錯誤",
         "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
     },
     "patchs_eval": [

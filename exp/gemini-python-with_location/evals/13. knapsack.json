@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 9,
         "fault_location": 10,
-        "bug_type": "",
+        "bug_type": "判斷式錯誤",
         "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，導致該類邊緣狀況輸出錯誤答案"
     },
     "patchs_eval": [

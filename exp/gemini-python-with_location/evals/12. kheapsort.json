@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 4,
         "fault_location": 6,
-        "bug_type": "",
+        "bug_type": "索引錯誤",
         "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
     },
     "patchs_eval": [

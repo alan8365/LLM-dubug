@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 5,
         "fault_location": 9,
-        "bug_type": "",
+        "bug_type": "紀錄缺失錯誤",
         "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
     },
     "patchs_eval": [

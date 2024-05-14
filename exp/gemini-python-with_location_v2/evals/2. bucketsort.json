@@ -5,7 +5,7 @@
         "language": "python",
         "testcase_num": 7,
         "fault_location": 6,
-        "bug_type": "",
+        "bug_type": "變數調用錯誤",
         "bug_detail_desc": "在for迴圈中把遍歷的目標誤用為原本的陣列arr，而非標記陣列中元素數量的count，導致除非要排序的陣列和count一模一樣否則皆會出錯"
     },
     "patchs_eval": [
