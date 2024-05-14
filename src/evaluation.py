@@ -195,13 +195,13 @@ if __name__ == "__main__":
         "claude-python-basic",
     ]
 
-    exp_name = exp_names[7]
-    print(exp_name)
+    # exp_name = exp_names[10]
+    # print(exp_name)
 
-    eval = ExperimentEvaluation(exp_name)
-    eval.run()
+    # eval = ExperimentEvaluation(exp_name)
+    # eval.run()
 
-    # for exp_name in exp_names[-6:]:
-    #     print(exp_name)
-    #     eval = ExperimentEvaluation(exp_name)
-    #     eval.run()
+    for exp_name in exp_names[:]:
+        print(exp_name)
+        eval = ExperimentEvaluation(exp_name)
+        eval.run()

@@ -1,13 +1,12 @@
 from dotenv import load_dotenv
-
-from src_types import LANG, CODE_TYPE, LIB
-from utils import remove_comments
-
-from typing import Optional, Union
 from pathlib import Path
+from rich import print
+from typing import Optional, Union
+from utils import remove_comments
+from src_types import LANG, CODE_TYPE, LIB
 
-import os
 import json
+import os
 import re
 
 load_dotenv()
@@ -286,10 +285,13 @@ class QuixBugsDataset:
 
 if __name__ == "__main__":
     quix_bugs_dataset = QuixBugsDataset("python")
+    print(quix_bugs_dataset.prog_info)
 
-    for i in quix_bugs_dataset:
-        print(i)
-        print(i.testcase_num)
+    
+
+
+    # for i in quix_bugs_dataset:
+    #     print(i)
 
     # a = []
     # for i in quix_bugs_dataset:
