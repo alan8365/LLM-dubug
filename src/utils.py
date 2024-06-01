@@ -1,8 +1,13 @@
 import tokenize
 import io
+import os
+import re
+import json
 
+from pathlib import Path
 from tokenize import TokenError
 from black import format_str, FileMode
+from typing import Literal
 
 
 def remove_comments(source):
@@ -86,3 +91,51 @@ if __name__ == "__main__":
 
     clean_code = cleaning_code(source_code)
     print(clean_code)
+
+
+def get_pass_ratio(patch_info):
+    testcase_num = patch_info["sample"]["testcase_num"]
+    patchs_eval = patch_info["patchs_eval"]
+
+    pass_ratio = sum([i["pass_num"] for i in patchs_eval]) / (testcase_num * 3)
+
+    return pass_ratio
+
+
+def get_correct_ratio(patch_info):
+    eval_values = patch_info["patchs_art_evals"].values()
+    correct_ratio = [v["is_correct"] == "T" for v in eval_values]
+    correct_ratio = sum(correct_ratio) / 3
+
+    return correct_ratio
+
+
+def calculate_ratio(
+    exp_name: str, calc_type: Literal["plausible", "correct"]
+) -> dict[str, float]:
+    base_dir = Path(str(os.getenv("EXPS_DIR")))
+    result = {}
+
+    if calc_type == "plausible":
+        eval_dir = base_dir / exp_name / "evals"
+    elif calc_type == "correct":
+        eval_dir = base_dir / exp_name / "evals_art"
+
+    if not eval_dir.exists():
+        return {}
+
+    all_eval_path = list(eval_dir.glob("*"))
+    all_eval_path = sorted(all_eval_path, key=lambda p: int(p.name.split(".")[0]))
+
+    for eval_path in all_eval_path:
+        with open(eval_path, "r") as f:
+            patch_info = json.load(f)
+
+        prog_name = patch_info["sample"]["prog_name"]
+
+        if calc_type == "plausible":
+            result[prog_name] = get_pass_ratio(patch_info)
+        elif calc_type == "correct":
+            result[prog_name] = get_correct_ratio(patch_info)
+
+    return result
