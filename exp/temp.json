@@ -1,0 +1,3447 @@
+[
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 1,
+            "prog_name": "breadth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "在while迴圈的判斷式中，應該使用while queue讓佇列數量為0時脫離迴圈卻錯用為while True，導致迴圈無限循環無法停止"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更正目標問題，但是錯誤刪除必要引用，導致NameError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 13,
+            "prog_name": "knapsack",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，導致該類邊緣狀況輸出錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 14,
+            "prog_name": "kth",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 11,
+            "bug_type": "",
+            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是流程控制判斷式錯誤修改，導致部分結果出錯",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為陣列第一個數而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負99999而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 14,
+            "bug_type": "",
+            "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "錯誤修正目標問題",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 29,
+            "prog_name": "rpn_eval",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 18,
+            "bug_type": "",
+            "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更正目標問題，但是錯誤刪除必要引用，導致NameError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 32,
+            "prog_name": "shortest_paths",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 33,
+            "prog_name": "shunting_yard",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 16,
+            "bug_type": "",
+            "bug_detail_desc": "在處理到運算符的時候沒有將運算符放進opstack中，造成rpntokens沒有任何運算符，導致有運算符的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_location",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_lib_v2",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "錯誤理解題目為因數分解",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_lib_v2",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修復目標問題，但是少寫一個括號，導致syntax error",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_lib_v2",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有修正目標問題",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "邏輯幾乎重寫，但是忽略輸入空值的可能，導致IndexError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有修正目標問題",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_lib_v2",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有更動目標問題",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_lib_v2",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 2,
+            "bug_type": "",
+            "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是for迴圈中的終止條件少減去k，導致多出大量多餘的輸出",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是for迴圈中的終止條件少減去k，導致多出大量多餘的輸出",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是for迴圈中的終止條件多了+1，導致多出部分多餘的輸出",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_lib_v2",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是錯誤更改資料結構，導致AttributeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是錯誤更改資料結構，導致AttributeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_lib_v2",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上lstrip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是把+1錯誤的移動位置，導致與正確答案相比差了一點",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上lstrip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_location",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_location",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負無限大而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_location",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_location",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動，而且缺少一個引號，導致SyntaxError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動，而且缺少一個括號，導致SyntaxError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-with_location",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上strip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_location",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是在處理k=0的邊界情況時錯誤回傳None，導致k=0時輸出錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_location",
+        "sample": {
+            "prog_id": 15,
+            "prog_name": "lcs_length",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但錯誤理解題目為subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但錯誤理解題目為subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但錯誤理解題目為subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_location",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "邏輯幾乎全部重寫，但是find函數沒有實作setdefault，導致KeyError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_location",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 14,
+            "bug_type": "",
+            "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_location",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是在開頭引用時缺少heapify，導致NameError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_location",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 2,
+            "bug_type": "",
+            "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在for迴圈的終止條件錯誤的+1，導致大部分輸出都錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在for迴圈的終止條件錯誤的+1，導致大部分輸出都錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_location",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上strip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上lstrip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上strip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 4,
+            "prog_name": "detect_cycle",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "在判斷終止情況時，沒有處理hare也是空值的狀況，只有處理hare的後繼是空值的狀況，導致hare剛好是空值時會觸發AttributeError"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修復目標問題，但是hare賦值跟判斷的順序錯置，導致部分輸入會判斷錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 6,
+            "prog_name": "find_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在目標大於中點時，新陣列起始序號mid沒有+1，導致邊緣情況遞迴不會停止"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是同時也在目標小於中點時mid -1，導致邊緣情況遞迴不會停止",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修復目標問題，但是把1當作1的因數，導致所有輸出都錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修復目標問題，但是把1當作1的因數，導致所有輸出都錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 10,
+            "prog_name": "hanoi",
+            "language": "python",
+            "testcase_num": 8,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在步驟二中的交換把end寫成helper，使func無法交換到最後目標上，導致大部分情況都只能給出錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 13,
+            "prog_name": "knapsack",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，導致該類邊緣狀況輸出錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是刪除了j小於weight時的動態規劃，導致部分情況出錯",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 14,
+            "prog_name": "kth",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 11,
+            "bug_type": "",
+            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是above變數初始化寫成大於等於，造成樞紐值被包括進去，導致全部結果出錯",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是流程控制判斷式錯誤修改，導致部分結果出錯",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是num_lessoreq的初始值設定錯誤，導致部分結果出錯",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但是max_so_far的更新順序錯位，導致部分輸出錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為陣列第一個數而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far的初始值設為負無限大，導致應該為0時為負無限大",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 14,
+            "bug_type": "",
+            "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 27,
+            "prog_name": "quicksort",
+            "language": "python",
+            "testcase_num": 13,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "在建立比pivot大的元素組成的陣列時，沒有將和pivot相等的元素包含進去，導致在排序有和pivot相等元素的陣列時會缺少這些元素"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 29,
+            "prog_name": "rpn_eval",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 18,
+            "bug_type": "",
+            "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "在計算以k為中繼連結ij的距離時，將i到k、k到j誤寫為i到k、j到k，導致非無向圖結構的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是錯誤將負無限改成-1，導致大部分輸出都會出錯",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 32,
+            "prog_name": "shortest_paths",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "判斷是有修改，但是修改後仍錯誤，總之沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "判斷是有修改，但是修改後仍錯誤，總之沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-with_lib_v2",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標錯誤，但是在rfind中錯誤移除+1，導致結果皆出現些微偏差",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標錯誤，但是在rfind中錯誤移除+1，導致結果皆出現些微偏差",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功解決目標問題，但是錯誤使用node資料結構，導致TypeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功解決目標問題，但是錯誤使用node資料結構，導致TypeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是k的判斷式錯誤拒絕小於1的輸入，導致ValueError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 15,
+            "prog_name": "lcs_length",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但將題目理解為找最長的subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但將題目理解為找最長的subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但將題目理解為找最長的subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效改動，並且因為end的錯誤控制，導致IndexError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為陣列第一個數而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為陣列第一個數而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為陣列第一個數而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 14,
+            "bug_type": "",
+            "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是開頭加入確保輸入是回文數的程式碼造成輸出位數多一位，導致部分情況輸出錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 29,
+            "prog_name": "rpn_eval",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 18,
+            "bug_type": "",
+            "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動，並且錯誤使用node的資料結構，導致TypeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是忽略node之間沒有實作比較方法，導致TypeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是忽略node之間沒有實作比較方法，導致TypeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 2,
+            "bug_type": "",
+            "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是k=1時的回傳值b錯誤的+1，導致大部分輸出錯誤",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是for迴圈中的終止條件少減去k，導致多出大量多餘的輸出",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是for迴圈中的終止條件少減去k，導致多出大量多餘的輸出",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-with_lib_v3",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上strip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上strip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上strip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-basic",
+        "sample": {
+            "prog_id": 4,
+            "prog_name": "detect_cycle",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在判斷終止情況時，沒有處理hare也是空值的狀況，只有處理hare的後繼是空值的狀況，導致hare剛好是空值時會觸發AttributeError"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有處理目標問題，但是處理了沒有影響的next.next是否為空值的問題",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-basic",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "錯誤理解題目為因數分解",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "在處理到最後一個質因數時，結尾的回傳值內沒有填入自身，導致所有輸出都會缺少一個元素",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "錯誤理解題目為因數分解",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-basic",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是在不必要的地方修改並且少了一個括號，導致產生SyntaxError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-basic",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-basic",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負無限大而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負無限大而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負無限大而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-basic",
+        "sample": {
+            "prog_id": 28,
+            "prog_name": "reverse_linked_list",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "錯把原本的successor改成next，導致AttributeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-basic",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 2,
+            "bug_type": "",
+            "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是由於認為subsequence在原先的序列中不需要保持順序，導致輸出包含許多不連續的序列",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是由於認為subsequence在原先的序列中不需要保持順序，導致輸出包含許多不連續的序列",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是由於認為subsequence在原先的序列中不需要保持順序，導致輸出包含許多不連續的序列",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt35-python-basic",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上lstrip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在計算字串拆分結尾時將+1去除，導致與正確答案相比多出文字",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上lstrip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-basic_v2",
+        "sample": {
+            "prog_id": 15,
+            "prog_name": "lcs_length",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但錯誤理解題目為subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但錯誤理解題目為subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功更動目標問題，但錯誤理解題目為subsequence，導致輸出與解答要找的substring不同",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-basic_v2",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為陣列第一個數而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為陣列第一個數而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為陣列第一個數而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-basic_v2",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 14,
+            "bug_type": "",
+            "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修改目標問題，但是有一行意義不明的判斷式，導致只會原封不動回傳輸入",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修改目標問題，但是有一些意義不明的判斷式，導致只會原封不動回傳輸入",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-basic_v2",
+        "sample": {
+            "prog_id": 28,
+            "prog_name": "reverse_linked_list",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是擅自修改資料結構，導致AttributeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是擅自修改資料結構，導致AttributeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是擅自修改資料結構，導致AttributeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-basic_v2",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是擅自修改資料結構，導致AttributeError",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是在新距離大於時沒有將原本紀錄的加入變數中，導致部分輸入被認為距離無限遠",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標問題，但是在新距離大於時沒有將原本紀錄的加入變數中，導致部分輸入被認為距離無限遠",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-basic_v2",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 2,
+            "bug_type": "",
+            "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是for迴圈中的終止條件少減去k，導致多出大量多餘的輸出",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是for迴圈中的終止條件少減去k，導致多出大量多餘的輸出",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確修正目標問題，但是for迴圈中的終止條件少減去k，導致多出大量多餘的輸出",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gpt4-python-basic_v2",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上lstrip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上lstrip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在拆分字串時錯誤加上strip，導致與正確答案相比缺少一個空白",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "有加上已造訪節點紀錄，但是錯誤刪除已造訪節點的判斷",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 5,
+            "prog_name": "find_first_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "在whlie判斷式中，錯誤考慮了lo==hi的狀況，導致如目標不在陣列中的情況會無窮迴圈"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "試圖保留lo<=hi卻沒有跟其他兩個patch一樣hi=len(arr)-1，導致IndexError",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "factors初始化的時候沒有將n考慮進去",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "把1當成質數回傳了",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "factors初始化的時候沒有將n考慮進去",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 12,
+            "prog_name": "kheapsort",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "一開始的heap沒有依據k分成兩段處理，並且後面的補救措施沒有跟上",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 13,
+            "prog_name": "knapsack",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，導致該類邊緣狀況輸出錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "缺少weight是否小於j的判斷",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 14,
+            "prog_name": "kth",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 11,
+            "bug_type": "",
+            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "雖然改正了目標錯誤，但是把>=錯誤的改為>，導致有重複元素的情形出錯",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有改正原本的錯誤，並且誤以為分割的兩個陣列需要做類似quick sort的處理",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 15,
+            "prog_name": "lcs_length",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 8,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "多了不必要的else判斷",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 6,
+                    "patch_fail_detail": "從錯誤的動態規劃位置+1",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 16,
+            "prog_name": "levenshtein",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效改動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效改動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效改動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效改動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "原本的錯誤沒有改，還把<改成>，只要跑進回圈的輸入都會有錯誤輸出",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效改動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負無限大而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修改目標問題，但是max_so_far設為負9999999而非歸0，導致當陣列為全負陣列時無法回傳0",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 21,
+            "prog_name": "minimum_spanning_tree",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修正",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 14,
+            "bug_type": "",
+            "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修改",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修改",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修改",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 25,
+            "prog_name": "possible_change",
+            "language": "python",
+            "testcase_num": 10,
+            "fault_location": 3,
+            "bug_type": "",
+            "bug_detail_desc": "在處理邊界狀況時，缺少處理硬幣沒有輸入的邊界狀況，導致沒有輸入硬幣種類時由於無法unpack coins變數觸發ValueError"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效修改",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 27,
+            "prog_name": "quicksort",
+            "language": "python",
+            "testcase_num": 13,
+            "fault_location": 6,
+            "bug_type": "",
+            "bug_detail_desc": "在建立比pivot大的元素組成的陣列時，沒有將和pivot相等的元素包含進去，導致在排序有和pivot相等元素的陣列時會缺少這些元素"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "試圖用一個新的list來解決pivot重複元素無法納入的問題，但是新的list卻把pivot排除在外，導致每遞迴一次就會少一個元素",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 28,
+            "prog_name": "reverse_linked_list",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "把node lib中的successor改為next，導致AttributeError",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "把node lib中的successor改為next，導致AttributeError",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "把node lib中的successor改為next，導致AttributeError",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 29,
+            "prog_name": "rpn_eval",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 19,
+            "bug_type": "",
+            "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 19,
+            "bug_type": "",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "改錯的東西有點多，總之沒有有效更動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "有改到問題，但是min被刪除了，失去動態規劃中比較前次節點的功能了，導致程式退化為貪心演算法",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 10,
+            "bug_type": "",
+            "bug_detail_desc": "在計算以k為中繼連結ij的距離時，將i到k、k到j誤寫為i到k、j到k，導致非無向圖結構的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "直接刪除對中間節點的遍歷，但是沒有相應的修正",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確改動目標問題，但是多了一層不必要的判斷，導致部分情況出錯",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 2,
+            "bug_type": "",
+            "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "正確更動目標問題，但是在for迴圈中錯誤的+1",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 38,
+            "prog_name": "topological_ordering",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 5,
+            "bug_type": "",
+            "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "使用將incoming移除的方法檢測，但是錯誤的使用不存在的method discard並且將回傳值pop為空陣列，導致AttributeError或只能回傳空陣列",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "gemini-python-basic",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "成功修正目標錯誤，但是在奇怪的地方錯誤的更動+1或-1，導致結果皆出現些微偏差",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    }
+]
