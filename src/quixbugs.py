@@ -41,6 +41,9 @@ class QuixBugsSample:
         self.lib_usage: dict[LIB, str] = self.detect_library_usage()
 
         self.bug_type = prog_info["bug_type"]
+        self.bug_consequence = prog_info["bug_consequence"]
+        self.bug_impact = prog_info["bug_impact"]
+
         self.bug_detail_desc = prog_info["bug_detail_desc"]
         self.fault_location = prog_info["fault_location"]
         self.testcase_num = prog_info["testcase_num"]
@@ -236,6 +239,8 @@ class QuixBugsSample:
             "testcase_num": self.testcase_num,
             "fault_location": self.fault_location,
             "bug_type": self.bug_type,
+            "bug_consequence": self.bug_consequence,
+            "bug_impact": self.bug_impact,
             "bug_detail_desc": self.bug_detail_desc,
         }
 

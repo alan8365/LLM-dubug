@@ -4,7 +4,7 @@ from pathlib import Path
 
 from tqdm import tqdm  # type: ignore
 
-from api import LlmApi, OpenAiApi, GeminiApi, ClaudeApi
+from api import LlmApi, OpenAiApi, GeminiApi, ClaudeApi, OllamaApi
 from prompt import Prompt
 from quixbugs import QuixBugsDataset
 from src_types import LANG, PROMPT_TYPE
@@ -12,9 +12,14 @@ from src_types import LANG, PROMPT_TYPE
 
 class Experiment:
     def __init__(
-        self, version: str, lang: LANG, llm_api: LlmApi, prompt_type: PROMPT_TYPE = "basic"
+        self,
+        version: str,
+        lang: LANG,
+        llm_api: LlmApi,
+        prompt_type: PROMPT_TYPE = "basic",
     ) -> None:
-        self.name = f"{llm_api}-{lang}-{prompt_type}{'_' + version}"
+        version = "" if version == "" else f"_{version}"
+        self.name = f"{llm_api}-{lang}-{prompt_type}{version}"
         self.lang = lang
         self.llm_api = llm_api
         self.prompt_type = prompt_type
@@ -64,18 +69,27 @@ class Experiment:
     def to_json(self):
         return json.dumps(self.to_dict(), indent=4)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 if __name__ == "__main__":
     # exp = Experiment(
-    #     "v3", "python", OpenAiApi("gpt-3.5-turbo-0125"), "with_location" 
+    #     "v3", "python", OpenAiApi("gpt-3.5-turbo-0125"), "with_location"
+    # )
+    # exp = Experiment(
+    #     "v3", "python", OpenAiApi("gpt-4-turbo-2024-04-09"), "with_lib"
+    # )
+    # exp = Experiment(
+    #     "", "python", OpenAiApi("gpt-4o"), "basic"
+    # )
+    # exp = Experiment("", "python", GeminiApi("gemini-1.5-pro"), "with_location")
+    # exp = Experiment(
+    #     "", "python", ClaudeApi("claude-3-opus-20240229"), "with_lib"
     # )
     exp = Experiment(
-        "v3", "python", OpenAiApi("gpt-4-turbo-2024-04-09"), "with_lib"
+        "", "python", OllamaApi("llama3"), "with_location"
     )
-    # exp = Experiment(
-    #     "v3", "python", GeminiApi("gemini-1.0-pro"), "with_location"
-    # )
-    # exp = Experiment(
-    #     "", "python", ClaudeApi("claude-3-opus-20240229"), "basic"
-    # )
+
+    print(exp)
     exp.run()

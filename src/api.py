@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from google import generativeai as genai  # type: ignore
 from anthropic import Anthropic
 
+import ollama
+
 
 from prompt import Prompt
 from quixbugs import QuixBugsDataset, QuixBugsSample
@@ -73,7 +75,7 @@ class LlmApi(ABC):
 
 class OpenAiApi(LlmApi):
     def __init__(self, model_name: MODEL_NAME) -> None:
-        model_name_list = ["gpt-3.5-turbo-0125", "gpt-4-turbo-2024-04-09"]
+        model_name_list = ["gpt-3.5-turbo-0125", "gpt-4-turbo-2024-04-09", "gpt-4o"]
         if not model_name in model_name_list:
             raise ValueError(
                 f"Invalid model name provided: {model_name}. Please choose from {model_name_list}"
@@ -100,17 +102,20 @@ class OpenAiApi(LlmApi):
             return repaired_code
         else:
             raise ValueError("No response.")
-    
+
     def __str__(self):
-        if self.model_name == "gpt-3.5-turbo-0125":
-            return "gpt35"
-        else:
-            return "gpt4"
+        name_dict = {
+            "gpt-3.5-turbo-0125": "gpt35",
+            "gpt-4-turbo-2024-04-09": "gpt4",
+            "gpt-4o": "gpt4o",
+        }
+
+        return name_dict[self.model_name]
 
 
 class GeminiApi(LlmApi):
     def __init__(self, model_name: MODEL_NAME) -> None:
-        model_name_list = ["gemini-1.0-pro"]
+        model_name_list = ["gemini-1.0-pro", "gemini-1.5-pro"]
         if not model_name in model_name_list:
             raise ValueError(
                 f"Invalid model name provided: {model_name}. Please choose from {model_name_list}"
@@ -157,7 +162,10 @@ class GeminiApi(LlmApi):
         return convo.last.text
 
     def __str__(self):
-        return "gemini"
+        name_dict = {"gemini-1.0-pro": "gemini", "gemini-1.5-pro": "gemini15"}
+
+        return name_dict[self.model_name]
+
 
 class ClaudeApi(LlmApi):
     def __init__(self, model_name: MODEL_NAME) -> None:
@@ -188,9 +196,36 @@ class ClaudeApi(LlmApi):
         )
 
         return message.content[0].text
-    
+
     def __str__(self):
         return "claude"
+
+
+class OllamaApi(LlmApi):
+    def __init__(self, model_name: MODEL_NAME) -> None:
+        model_name_list = ["llama3"]
+        if not model_name in model_name_list:
+            raise ValueError(
+                f"Invalid model name provided: {model_name}. Please choose from {model_name_list}"
+            )
+
+        self.model_name = model_name
+
+    def get_repaired_response(self, prompt: Prompt):
+        message = ollama.chat(
+            model=self.model_name,
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt.prompt,
+                },
+            ],
+        )
+
+        return message["message"]["content"]
+
+    def __str__(self):
+        return "llama3"
 
 
 if __name__ == "__main__":

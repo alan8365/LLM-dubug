@@ -184,6 +184,7 @@ if __name__ == "__main__":
         "gpt4-python-with_lib_v2",
         "gpt4-python-with_lib_v3",
         "gpt4-python-with_location",
+        "gpt4o-python-basic",
         "gemini-python-basic",
         "gemini-python-with_lib_v2",
         "gemini-python-with_location",
@@ -193,15 +194,17 @@ if __name__ == "__main__":
         "gemini-python-with_step_v2",
         "gemini-python-with_step_v3",
         "claude-python-basic",
+        "claude-python-with_lib",
+        "claude-python-with_location",
     ]
 
-    # exp_name = exp_names[10]
-    # print(exp_name)
+    exp_name = exp_names[-2]
+    print(exp_name)
 
-    # eval = ExperimentEvaluation(exp_name)
-    # eval.run()
+    eval = ExperimentEvaluation(exp_name)
+    eval.run()
 
-    for exp_name in exp_names[:]:
-        print(exp_name)
-        eval = ExperimentEvaluation(exp_name)
-        eval.run()
+    # for exp_name in exp_names[:]:
+    #     print(exp_name)
+    #     eval = ExperimentEvaluation(exp_name)
+    #     eval.run()

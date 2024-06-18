@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
     with open("temp.md", "w") as f:
         for b in a:
-            c = Prompt(b, "with_step")
+            c = Prompt(b, "with_location")
 
             text = (
                 f"## {b.prog_id}.{b.prog_name}\n"
