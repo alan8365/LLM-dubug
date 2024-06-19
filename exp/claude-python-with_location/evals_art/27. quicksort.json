@@ -1,0 +1,33 @@
+{
+    "sample": {
+        "prog_id": 27,
+        "prog_name": "quicksort",
+        "language": "python",
+        "testcase_num": 13,
+        "fault_location": 6,
+        "bug_type": "condition fault",
+        "bug_consequence": "output error",
+        "bug_impact": "edge-case impact",
+        "bug_detail_desc": "在建立比pivot大的元素組成的陣列時，沒有將和pivot相等的元素包含進去，導致在排序有和pivot相等元素的陣列時會缺少這些元素"
+    },
+    "patchs_art_evals": {
+        "patch-0": {
+            "is_correct": "F",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "在最後回傳結果時，錯誤的將greater做[1:]切片",
+            "patch_correct_detail": ""
+        },
+        "patch-1": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": "新增一個equal陣列而非改動運算符"
+        },
+        "patch-2": {
+            "is_correct": "T",
+            "bug_location_predict": 0,
+            "patch_fail_detail": "",
+            "patch_correct_detail": ""
+        }
+    }
+}
