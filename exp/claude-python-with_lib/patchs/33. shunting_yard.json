@@ -1,0 +1,38 @@
+{
+    "model_name": "claude-3-opus-20240229",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 33,
+            "prog_name": "shunting_yard",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 16,
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "\u5728\u8655\u7406\u5230\u904b\u7b97\u7b26\u7684\u6642\u5019\u6c92\u6709\u5c07\u904b\u7b97\u7b26\u653e\u9032opstack\u4e2d\uff0c\u9020\u6210rpntokens\u6c92\u6709\u4efb\u4f55\u904b\u7b97\u7b26\uff0c\u5c0e\u81f4\u6709\u904b\u7b97\u7b26\u7684\u8f38\u5165\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 13.36323595046997,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n",
+            "raw_code": "Here's the fixed code:\n\n```python\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```\n\nThe bug in the original code was that it was not appending the current operator token to the `opstack` after processing the stack. This caused the operators to be missing from the final output.\n\nTo fix the bug, I added the following line inside the `else` block:\n\n```python\nopstack.append(token)\n```\n\nThis line appends the current operator token to the `opstack` after processing the stack. This ensures that the operators are properly included in the final output.\n\nNow, the `shunting_yard` function should correctly convert the infix expression tokens to Reverse Polish Notation (RPN) tokens."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 15.951092958450317,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)  # Add this line\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n",
+            "raw_code": "Here's the fixed version of the code:\n\n```python\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)  # Add this line\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```\n\nThe bug in the original code was that after the `while` loop inside the `for` loop, the current `token` was not being pushed onto the `opstack`. This caused the operator tokens to be missed and not included in the final `rpntokens` list.\n\nTo fix the bug, I added the line `opstack.append(token)` after the `while` loop inside the `for` loop. This ensures that after comparing the precedence and popping any operators with higher or equal precedence from the `opstack`, the current operator token is pushed onto the `opstack`.\n\nWith this fix, the `shunting_yard` function should correctly convert the infix expression tokens to reverse Polish notation (RPN) tokens."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 14.405326128005981,
+            "repaired_code": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n",
+            "raw_code": "Here's the fixed version of the code:\n\n```python=\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n```\n\nThe bug in the original code was that it didn't append the current operator token to the `opstack` after the while loop finished. This caused the operator tokens to be missing from the final `rpntokens` list.\n\nTo fix the bug, I added the line `opstack.append(token)` after the while loop inside the `else` block. This ensures that the current operator token is pushed onto the `opstack` after comparing its precedence with the operators already in the stack.\n\nWith this fix, the `shunting_yard` function should correctly convert the infix expression tokens to Reverse Polish Notation (RPN) tokens."
+        }
+    ]
+}

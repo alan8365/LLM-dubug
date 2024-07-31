@@ -5,7 +5,9 @@
         "language": "python",
         "testcase_num": 5,
         "fault_location": 9,
-        "bug_type": "",
+        "bug_type": "condition fault",
+        "bug_consequence": "infinite loop error",
+        "bug_impact": "edge-case impact",
         "bug_detail_desc": "在while迴圈的判斷式中，應該使用while queue讓佇列數量為0時脫離迴圈卻錯用為while True，導致迴圈無限循環無法停止"
     },
     "patchs_art_evals": {
@@ -25,7 +27,9 @@
             "is_correct": "F",
             "bug_location_predict": 0,
             "patch_fail_detail": "正確更正目標問題，但是錯誤刪除必要引用，導致NameError",
-            "patch_correct_detail": ""
+            "patch_correct_detail": "",
+            "patch_repair_area": "",
+            "patch_fail_type": ""
         }
     }
 }

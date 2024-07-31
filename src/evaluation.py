@@ -113,7 +113,8 @@ class QuixBugsPytester:
         if find_all:
             cleaned_code = find_all[-1]
         else:
-            raise ValueError(f"Pattern error:\n {response}")
+            cleaned_code = ""
+            # raise ValueError(f"Pattern error:\n {response}")
 
         return cleaned_code
 

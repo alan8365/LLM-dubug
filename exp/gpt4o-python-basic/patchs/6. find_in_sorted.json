@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 6,
+            "prog_name": "find_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 8,
+            "bug_type": "indexing fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "\u5728\u76ee\u6a19\u5927\u65bc\u4e2d\u9ede\u6642\uff0c\u65b0\u9663\u5217\u8d77\u59cb\u5e8f\u865fmid\u6c92\u6709+1\uff0c\u5c0e\u81f4\u908a\u7de3\u60c5\u6cc1\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 7.26787805557251,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n",
+            "raw_code": "The provided code has a slight issue in the boundary conditions. Specifically, the `binsearch` function should handle the case when `start` is equal to `mid` or `mid` is equal to `end - 1` to avoid infinite recursion. Additionally, the algorithm should handle the case when the start and end indices are the same correctly.\n\nHere's the corrected code:\n\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```\n\nChanges:\n1. Adjusted the condition in the base case `if start >= end:` to handle the case when the subarray becomes empty.\n2. Modified the `elif x > arr[mid]:` to call `binsearch(mid + 1, end)` to ensure proper subarray bounds and avoid infinite recursion.\n\nWith these changes, the binary search should work correctly for a sorted array."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 8.596437692642212,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n",
+            "raw_code": "The issue in your code lies in the handling of the `mid` index and the base case of the recursive binary search. Specifically:\n\n1. When the target `x` is greater than `arr[mid]`, the next search should start from `mid + 1` to avoid infinite recursion.\n2. The base case should check if `start` is greater than or equal to `end` to properly terminate the recursion.\n3. If `x` is not found, the function should return `-1`.\n\nHere's the corrected version of your code:\n\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```\n\nKey changes:\n1. Updated the base case: `if start >= end` to handle the termination condition correctly.\n2. Adjusted the recursive call for the case when `x > arr[mid]` to `return binsearch(mid + 1, end)` to avoid revisiting the middle element again.\n\nThis fixed version ensures correct binary search behavior within a sorted array."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.150911092758179,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start > end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid - 1)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr) - 1)\n",
+            "raw_code": "The given code has a bug in the binary search function. Specifically, the condition `if start == end` should be `if start >= end` to properly handle the termination of the recursion. Additionally, in the recursive calls to `binsearch`, the end of the range should be `mid - 1` and the start of the range should be `mid + 1` to avoid infinite recursion when the element is not found.\n\nHere is the fixed code:\n\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start > end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid - 1)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr) - 1)\n```\n\nExplanation of the fixes:\n1. **Termination condition**: Changed `if start == end` to `if start > end` to correctly terminate the recursion when the search range is invalid.\n2. **Adjust recursive calls**: Changed `binsearch(start, mid)` to `binsearch(start, mid - 1)` when `x < arr[mid]`, and `binsearch(mid, end)` to `binsearch(mid + 1, end)` when `x > arr[mid]` to avoid redundant checks and potential infinite recursion."
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "sample": {
+        "prog_id": 38,
+        "prog_name": "topological_ordering",
+        "language": "python",
+        "testcase_num": 3,
+        "fault_location": 5,
+        "bug_type": "condition fault",
+        "bug_consequence": "output error",
+        "bug_impact": "all-case impact",
+        "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 19.429743766784668,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    remaining_nodes = set(nodes) - set(ordered_nodes)\n    while remaining_nodes:\n        for node in list(remaining_nodes):\n            if set(node.incoming_nodes).issubset(ordered_nodes):\n                ordered_nodes.append(node)\n                remaining_nodes.remove(node)\n    return ordered_nodes"
+        },
+        {
+            "run_time": 16.057342052459717,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    visited = set(ordered_nodes)\n    i = 0\n    while i < len(ordered_nodes):\n        node = ordered_nodes[i]\n        for nextnode in node.outgoing_nodes:\n            if nextnode not in visited and set(nextnode.incoming_nodes).issubset(\n                visited\n            ):\n                ordered_nodes.append(nextnode)\n                visited.add(nextnode)\n        i += 1\n    return ordered_nodes"
+        },
+        {
+            "run_time": 16.284196853637695,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 3,
+            "fail_num": 0,
+            "reparied_code": "def topological_ordering(nodes):\n    ordered_nodes = [node for node in nodes if not node.incoming_nodes]\n    visited_nodes = set(ordered_nodes)\n    i = 0\n    while i < len(ordered_nodes):\n        node = ordered_nodes[i]\n        for nextnode in node.outgoing_nodes:\n            if nextnode not in visited_nodes and all(\n                n in visited_nodes for n in nextnode.incoming_nodes\n            ):\n                ordered_nodes.append(nextnode)\n                visited_nodes.add(nextnode)\n        i += 1\n    return ordered_nodes"
+        }
+    ]
+}

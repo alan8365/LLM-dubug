@@ -1,0 +1,39 @@
+{
+    "sample": {
+        "prog_id": 14,
+        "prog_name": "kth",
+        "language": "python",
+        "testcase_num": 7,
+        "fault_location": 11,
+        "bug_type": "variable assign fault",
+        "bug_consequence": "runtime error",
+        "bug_impact": "base-case impact",
+        "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置觸發IndexError"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 8.68315601348877,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "def kth(arr, k):\n    if len(arr) == 1:\n        return arr[0]\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(below) + len([x for x in arr if x == pivot])\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)\n    else:\n        return pivot\n\n\narr = [3, 1, 2, 5, 4]\nk = 2\nprint(kth(arr, k))"
+        },
+        {
+            "run_time": 5.408715009689331,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "def kth(arr, k):\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    num_less = len(below)\n    num_lessoreq = len(below) + arr.count(pivot)\n    if k < num_less:\n        return kth(below, k)\n    elif k >= num_lessoreq:\n        return kth(above, k - num_lessoreq)\n    else:\n        return pivot"
+        },
+        {
+            "run_time": 10.242110013961792,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 7,
+            "fail_num": 0,
+            "reparied_code": "def kth(arr, k):\n    if len(arr) == 1:\n        return arr[0]\n    pivot = arr[0]\n    below = [x for x in arr if x < pivot]\n    above = [x for x in arr if x > pivot]\n    pivots = [x for x in arr if x == pivot]\n    num_less = len(below)\n    num_lessoreq = len(below) + len(pivots)\n    if k < num_less:\n        return kth(below, k)\n    elif k < num_lessoreq:\n        return pivot\n    else:\n        return kth(above, k - num_lessoreq)\n\n\narr = [3, 6, 2, 1, 8, 4, 7]\nk = 4\nprint(kth(arr, k))"
+        }
+    ]
+}

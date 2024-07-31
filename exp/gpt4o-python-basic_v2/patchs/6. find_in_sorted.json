@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start == end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 6,
+            "prog_name": "find_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 8,
+            "bug_type": "indexing fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "\u5728\u76ee\u6a19\u5927\u65bc\u4e2d\u9ede\u6642\uff0c\u65b0\u9663\u5217\u8d77\u59cb\u5e8f\u865fmid\u6c92\u6709+1\uff0c\u5c0e\u81f4\u908a\u7de3\u60c5\u6cc1\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 8.494479179382324,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start > end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid - 1)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr) - 1)\n",
+            "raw_code": "The issue in the code is that the binary search function does not correctly handle the case where `start` is equal to `end - 1`, which can lead to an infinite loop. Additionally, the comparison boundaries should be inclusive when narrowing down the search range. Here is the fixed code:\n\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start > end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid - 1)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr) - 1)\n```\n\nThe changes are:\n1. The base condition in `binsearch` is changed to `if start > end` to handle the case when the element is not found.\n2. The `binsearch` call for the left half of the array is corrected to `binsearch(start, mid - 1)`.\n3. The `binsearch` call for the right half of the array is corrected to `binsearch(mid + 1, end)`.\n4. The initial call to `binsearch` is updated to `binsearch(0, len(arr) - 1)` to ensure the entire array is considered."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 20.208172082901,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n",
+            "raw_code": "The original code for binary search has a couple of issues that need to be fixed:\n\n1. The condition `if start == end` should be `if start >= end`. When start equals end, it means there is only one element left to check, and the function should continue searching.\n2. When `x > arr[mid]`, the new search should start from `mid + 1` instead of `mid` because `mid` has already been checked and doesn't hold `x`.\n\nHere's the corrected code:\n\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start >= end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr))\n```\n\nThis corrected version properly handles the edge cases and performs the binary search correctly."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.323158025741577,
+            "repaired_code": "\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start > end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid - 1)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr) - 1)\n",
+            "raw_code": "The issue in your code is that the `binsearch` function doesn't properly handle the scenario where `start` is equal to `end - 1`. In this case, it should return -1 if the element is not found. Additionally, the `mid` value should be calculated correctly, and the range `binsearch` function is called should be adjusted to either `mid-1` or `mid+1` to prevent infinite recursion.\n\nHere is the fixed code:\n```python\ndef find_in_sorted(arr, x):\n    def binsearch(start, end):\n        if start > end:\n            return -1\n        mid = start + (end - start) // 2\n        if x < arr[mid]:\n            return binsearch(start, mid - 1)\n        elif x > arr[mid]:\n            return binsearch(mid + 1, end)\n        else:\n            return mid\n\n    return binsearch(0, len(arr) - 1)\n```\n\nExplanation of the changes:\n1. Fixed the base case to `if start > end` to return `-1`. This ensures that the function terminates when the search space is exhausted.\n2. Correctly updated the recursive calls to `binsearch` with `mid - 1` for the left half and `mid + 1` for the right half in order to prevent infinite recursion.\n3. Adjusted the initial call to `binsearch` with `len(arr) - 1` as the end parameter to correctly cover the entire array."
+        }
+    ]
+}

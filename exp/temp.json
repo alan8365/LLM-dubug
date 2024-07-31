@@ -1,13 +1,16 @@
 [
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/1. breadth_first_search.json",
         "sample": {
             "prog_id": 1,
             "prog_name": "breadth_first_search",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 9,
-            "bug_type": "",
+            "bug_type": "condition fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在while迴圈的判斷式中，應該使用while queue讓佇列數量為0時脫離迴圈卻錯用為while True，導致迴圈無限循環無法停止"
         },
         "patchs": [
@@ -26,14 +29,17 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/13. knapsack.json",
         "sample": {
             "prog_id": 13,
             "prog_name": "knapsack",
             "language": "python",
             "testcase_num": 9,
             "fault_location": 10,
-            "bug_type": "",
-            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，導致該類邊緣狀況輸出錯誤答案"
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，造成輸出比預期小一點，導致輸出內有機會觸發該類邊緣狀況時輸出錯誤答案"
         },
         "patchs": [
             {
@@ -73,14 +79,17 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/14. kth.json",
         "sample": {
             "prog_id": 14,
             "prog_name": "kth",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 11,
-            "bug_type": "",
-            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+            "bug_type": "variable assign fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置觸發IndexError"
         },
         "patchs": [
             {
@@ -98,13 +107,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/17. lis.json",
         "sample": {
             "prog_id": 17,
             "prog_name": "lis",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 12,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
         },
         "patchs": [
@@ -123,13 +135,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/19. max_sublist_sum.json",
         "sample": {
             "prog_id": 19,
             "prog_name": "max_sublist_sum",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
         },
         "patchs": [
@@ -159,13 +174,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/21. minimum_spanning_tree.json",
         "sample": {
             "prog_id": 21,
             "prog_name": "minimum_spanning_tree",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 10,
-            "bug_type": "",
+            "bug_type": "function misuse fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
         },
         "patchs": [
@@ -206,13 +224,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/22. next_palindrome.json",
         "sample": {
             "prog_id": 22,
             "prog_name": "next_palindrome",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 14,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "format error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
         },
         "patchs": [
@@ -253,13 +274,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/29. rpn_eval.json",
         "sample": {
             "prog_id": 29,
             "prog_name": "rpn_eval",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 18,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
         },
         "patchs": [
@@ -278,13 +302,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/30. shortest_path_length.json",
         "sample": {
             "prog_id": 30,
             "prog_name": "shortest_path_length",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 21,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
         },
         "patchs": [
@@ -303,13 +330,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/32. shortest_paths.json",
         "sample": {
             "prog_id": 32,
             "prog_name": "shortest_paths",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
         },
         "patchs": [
@@ -328,13 +358,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/33. shunting_yard.json",
         "sample": {
             "prog_id": 33,
             "prog_name": "shunting_yard",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 16,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在處理到運算符的時候沒有將運算符放進opstack中，造成rpntokens沒有任何運算符，導致有運算符的輸入皆會出錯"
         },
         "patchs": [
@@ -353,13 +386,16 @@
     },
     {
         "exp_name": "gemini-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_location/evals_art/38. topological_ordering.json",
         "sample": {
             "prog_id": 38,
             "prog_name": "topological_ordering",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
         },
         "patchs": [
@@ -389,14 +425,17 @@
     },
     {
         "exp_name": "gpt35-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_lib_v2/evals_art/9. get_factors.json",
         "sample": {
             "prog_id": 9,
             "prog_name": "get_factors",
             "language": "python",
             "testcase_num": 11,
             "fault_location": 8,
-            "bug_type": "",
-            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，造成輸出總是少了最後一個數，導致質數的分解出錯且遞迴的影響除1以外的所有輸入"
         },
         "patchs": [
             {
@@ -414,13 +453,16 @@
     },
     {
         "exp_name": "gpt35-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_lib_v2/evals_art/16. levenshtein.json",
         "sample": {
             "prog_id": 16,
             "prog_name": "levenshtein",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
         },
         "patchs": [
@@ -439,13 +481,16 @@
     },
     {
         "exp_name": "gpt35-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_lib_v2/evals_art/17. lis.json",
         "sample": {
             "prog_id": 17,
             "prog_name": "lis",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 12,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
         },
         "patchs": [
@@ -486,13 +531,16 @@
     },
     {
         "exp_name": "gpt35-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_lib_v2/evals_art/30. shortest_path_length.json",
         "sample": {
             "prog_id": 30,
             "prog_name": "shortest_path_length",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 21,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
         },
         "patchs": [
@@ -511,13 +559,16 @@
     },
     {
         "exp_name": "gpt35-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_lib_v2/evals_art/36. subsequences.json",
         "sample": {
             "prog_id": 36,
             "prog_name": "subsequences",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 2,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
         },
         "patchs": [
@@ -558,13 +609,16 @@
     },
     {
         "exp_name": "gpt35-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_lib_v2/evals_art/38. topological_ordering.json",
         "sample": {
             "prog_id": 38,
             "prog_name": "topological_ordering",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
         },
         "patchs": [
@@ -594,13 +648,16 @@
     },
     {
         "exp_name": "gpt35-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_lib_v2/evals_art/39. wrap.json",
         "sample": {
             "prog_id": 39,
             "prog_name": "wrap",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
         },
         "patchs": [
@@ -641,13 +698,16 @@
     },
     {
         "exp_name": "gpt35-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_location/evals_art/17. lis.json",
         "sample": {
             "prog_id": 17,
             "prog_name": "lis",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 12,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
         },
         "patchs": [
@@ -688,13 +748,16 @@
     },
     {
         "exp_name": "gpt35-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_location/evals_art/19. max_sublist_sum.json",
         "sample": {
             "prog_id": 19,
             "prog_name": "max_sublist_sum",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
         },
         "patchs": [
@@ -713,13 +776,16 @@
     },
     {
         "exp_name": "gpt35-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_location/evals_art/21. minimum_spanning_tree.json",
         "sample": {
             "prog_id": 21,
             "prog_name": "minimum_spanning_tree",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 10,
-            "bug_type": "",
+            "bug_type": "function misuse fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
         },
         "patchs": [
@@ -738,13 +804,16 @@
     },
     {
         "exp_name": "gpt35-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_location/evals_art/30. shortest_path_length.json",
         "sample": {
             "prog_id": 30,
             "prog_name": "shortest_path_length",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 21,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
         },
         "patchs": [
@@ -785,13 +854,16 @@
     },
     {
         "exp_name": "gpt35-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-with_location/evals_art/39. wrap.json",
         "sample": {
             "prog_id": 39,
             "prog_name": "wrap",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
         },
         "patchs": [
@@ -820,15 +892,720 @@
         ]
     },
     {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/3. depth_first_search.json",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "record missing fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/5. find_first_in_sorted.json",
+        "sample": {
+            "prog_id": 5,
+            "prog_name": "find_first_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 4,
+            "bug_type": "condition fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在whlie判斷式中，錯誤考慮了lo==hi的狀況，導致如目標不在陣列中的情況會無窮迴圈"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/7. flatten.json",
+        "sample": {
+            "prog_id": 7,
+            "prog_name": "flatten",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 6,
+            "bug_type": "function misuse fault",
+            "bug_consequence": "format error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在遞回的終止條件回傳時，對於不是list的輸入依舊使用遞迴，導致大部分輸出不是預期的格式"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/8. gcd.json",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在遞迴呼叫時，沒有交換數字的位置，使得b的位置始終保持不變，導致除b=0外的情況外遞迴不會停止"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/9. get_factors.json",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，造成輸出總是少了最後一個數，導致質數的分解出錯且遞迴的影響除1以外的所有輸入"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/10. hanoi.json",
+        "sample": {
+            "prog_id": 10,
+            "prog_name": "hanoi",
+            "language": "python",
+            "testcase_num": 8,
+            "fault_location": 5,
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "在步驟二中的交換把end寫成helper，使func無法交換到最後目標上，導致height=0之外的情況只能給出錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/15. lcs_length.json",
+        "sample": {
+            "prog_id": 15,
+            "prog_name": "lcs_length",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 8,
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/17. lis.json",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/18. longest_common_subsequence.json",
+        "sample": {
+            "prog_id": 18,
+            "prog_name": "longest_common_subsequence",
+            "language": "python",
+            "testcase_num": 10,
+            "fault_location": 5,
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在兩字串首字一致呼叫遞迴式的情況下，字串b沒有移除首字便直接輸入，導致不斷重複比較輸出錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/19. max_sublist_sum.json",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/26. powerset.json",
+        "sample": {
+            "prog_id": 26,
+            "prog_name": "powerset",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 4,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在遞迴的回傳值中沒有把rest_subsets也加入，造成每次遞迴都不存在空集合，導致所有輸出都只會輸出輸入陣列本身所以都是錯誤的"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/27. quicksort.json",
+        "sample": {
+            "prog_id": 27,
+            "prog_name": "quicksort",
+            "language": "python",
+            "testcase_num": 13,
+            "fault_location": 6,
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在建立比pivot大的元素組成的陣列時，沒有將和pivot相等的元素包含進去，導致在排序有和pivot相等元素的陣列時會缺少這些元素"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/29. rpn_eval.json",
+        "sample": {
+            "prog_id": 29,
+            "prog_name": "rpn_eval",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 18,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/30. shortest_path_length.json",
+        "sample": {
+            "prog_id": 30,
+            "prog_name": "shortest_path_length",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 21,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/31. shortest_path_lengths.json",
+        "sample": {
+            "prog_id": 31,
+            "prog_name": "shortest_path_lengths",
+            "language": "python",
+            "testcase_num": 4,
+            "fault_location": 12,
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "在計算以k為中繼連結ij的距離時，將i到k、k到j誤寫為i到k、j到k，導致非無向圖結構的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/32. shortest_paths.json",
+        "sample": {
+            "prog_id": 32,
+            "prog_name": "shortest_paths",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 8,
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/36. subsequences.json",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 2,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-basic/evals_art/39. wrap.json",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
         "exp_name": "gpt4-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location/evals_art/12. kheapsort.json",
         "sample": {
             "prog_id": 12,
             "prog_name": "kheapsort",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 6,
-            "bug_type": "",
-            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，造成輸出比輸入多出3個元素且排序失效，導致除了k為0以外的輸入皆會產生錯誤"
         },
         "patchs": [
             {
@@ -846,13 +1623,16 @@
     },
     {
         "exp_name": "gpt4-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location/evals_art/15. lcs_length.json",
         "sample": {
             "prog_id": 15,
             "prog_name": "lcs_length",
             "language": "python",
             "testcase_num": 9,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
         },
         "patchs": [
@@ -893,13 +1673,16 @@
     },
     {
         "exp_name": "gpt4-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location/evals_art/21. minimum_spanning_tree.json",
         "sample": {
             "prog_id": 21,
             "prog_name": "minimum_spanning_tree",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 10,
-            "bug_type": "",
+            "bug_type": "function misuse fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
         },
         "patchs": [
@@ -918,13 +1701,16 @@
     },
     {
         "exp_name": "gpt4-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location/evals_art/22. next_palindrome.json",
         "sample": {
             "prog_id": 22,
             "prog_name": "next_palindrome",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 14,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "format error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
         },
         "patchs": [
@@ -954,13 +1740,16 @@
     },
     {
         "exp_name": "gpt4-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location/evals_art/30. shortest_path_length.json",
         "sample": {
             "prog_id": 30,
             "prog_name": "shortest_path_length",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 21,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
         },
         "patchs": [
@@ -979,13 +1768,16 @@
     },
     {
         "exp_name": "gpt4-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location/evals_art/36. subsequences.json",
         "sample": {
             "prog_id": 36,
             "prog_name": "subsequences",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 2,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
         },
         "patchs": [
@@ -1015,13 +1807,16 @@
     },
     {
         "exp_name": "gpt4-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_location/evals_art/39. wrap.json",
         "sample": {
             "prog_id": 39,
             "prog_name": "wrap",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
         },
         "patchs": [
@@ -1062,13 +1857,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/4. detect_cycle.json",
         "sample": {
             "prog_id": 4,
             "prog_name": "detect_cycle",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 4,
-            "bug_type": "",
+            "bug_type": "condition missing fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在判斷終止情況時，沒有處理hare也是空值的狀況，只有處理hare的後繼是空值的狀況，導致hare剛好是空值時會觸發AttributeError"
         },
         "patchs": [
@@ -1087,13 +1885,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/6. find_in_sorted.json",
         "sample": {
             "prog_id": 6,
             "prog_name": "find_in_sorted",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "indexing fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在目標大於中點時，新陣列起始序號mid沒有+1，導致邊緣情況遞迴不會停止"
         },
         "patchs": [
@@ -1112,14 +1913,17 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/9. get_factors.json",
         "sample": {
             "prog_id": 9,
             "prog_name": "get_factors",
             "language": "python",
             "testcase_num": 11,
             "fault_location": 8,
-            "bug_type": "",
-            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，造成輸出總是少了最後一個數，導致質數的分解出錯且遞迴的影響除1以外的所有輸入"
         },
         "patchs": [
             {
@@ -1159,14 +1963,17 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/10. hanoi.json",
         "sample": {
             "prog_id": 10,
             "prog_name": "hanoi",
             "language": "python",
             "testcase_num": 8,
             "fault_location": 5,
-            "bug_type": "",
-            "bug_detail_desc": "在步驟二中的交換把end寫成helper，使func無法交換到最後目標上，導致大部分情況都只能給出錯誤答案"
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "在步驟二中的交換把end寫成helper，使func無法交換到最後目標上，導致height=0之外的情況只能給出錯誤答案"
         },
         "patchs": [
             {
@@ -1184,14 +1991,17 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/12. kheapsort.json",
         "sample": {
             "prog_id": 12,
             "prog_name": "kheapsort",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 6,
-            "bug_type": "",
-            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，造成輸出比輸入多出3個元素且排序失效，導致除了k為0以外的輸入皆會產生錯誤"
         },
         "patchs": [
             {
@@ -1209,14 +2019,17 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/13. knapsack.json",
         "sample": {
             "prog_id": 13,
             "prog_name": "knapsack",
             "language": "python",
             "testcase_num": 9,
             "fault_location": 10,
-            "bug_type": "",
-            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，導致該類邊緣狀況輸出錯誤答案"
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，造成輸出比預期小一點，導致輸出內有機會觸發該類邊緣狀況時輸出錯誤答案"
         },
         "patchs": [
             {
@@ -1245,14 +2058,17 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/14. kth.json",
         "sample": {
             "prog_id": 14,
             "prog_name": "kth",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 11,
-            "bug_type": "",
-            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+            "bug_type": "variable assign fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置觸發IndexError"
         },
         "patchs": [
             {
@@ -1292,13 +2108,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/16. levenshtein.json",
         "sample": {
             "prog_id": 16,
             "prog_name": "levenshtein",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
         },
         "patchs": [
@@ -1317,13 +2136,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/17. lis.json",
         "sample": {
             "prog_id": 17,
             "prog_name": "lis",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 12,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
         },
         "patchs": [
@@ -1353,13 +2175,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/19. max_sublist_sum.json",
         "sample": {
             "prog_id": 19,
             "prog_name": "max_sublist_sum",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
         },
         "patchs": [
@@ -1400,13 +2225,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/22. next_palindrome.json",
         "sample": {
             "prog_id": 22,
             "prog_name": "next_palindrome",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 14,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "format error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
         },
         "patchs": [
@@ -1447,13 +2275,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/27. quicksort.json",
         "sample": {
             "prog_id": 27,
             "prog_name": "quicksort",
             "language": "python",
             "testcase_num": 13,
             "fault_location": 6,
-            "bug_type": "",
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在建立比pivot大的元素組成的陣列時，沒有將和pivot相等的元素包含進去，導致在排序有和pivot相等元素的陣列時會缺少這些元素"
         },
         "patchs": [
@@ -1472,13 +2303,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/29. rpn_eval.json",
         "sample": {
             "prog_id": 29,
             "prog_name": "rpn_eval",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 18,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
         },
         "patchs": [
@@ -1519,13 +2353,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/30. shortest_path_length.json",
         "sample": {
             "prog_id": 30,
             "prog_name": "shortest_path_length",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 21,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
         },
         "patchs": [
@@ -1544,13 +2381,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/31. shortest_path_lengths.json",
         "sample": {
             "prog_id": 31,
             "prog_name": "shortest_path_lengths",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 12,
-            "bug_type": "",
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在計算以k為中繼連結ij的距離時，將i到k、k到j誤寫為i到k、j到k，導致非無向圖結構的輸入結果皆會出錯"
         },
         "patchs": [
@@ -1580,13 +2420,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/32. shortest_paths.json",
         "sample": {
             "prog_id": 32,
             "prog_name": "shortest_paths",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在動態規劃weight_by_node變數時，誤寫為weight_by_edge，造成最後回傳的結果跟初始化的一樣，導致除了所有節點都無法到達以外的情況皆輸出錯誤"
         },
         "patchs": [
@@ -1605,13 +2448,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/38. topological_ordering.json",
         "sample": {
             "prog_id": 38,
             "prog_name": "topological_ordering",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
         },
         "patchs": [
@@ -1652,13 +2498,16 @@
     },
     {
         "exp_name": "gemini-python-with_lib_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-with_lib_v2/evals_art/39. wrap.json",
         "sample": {
             "prog_id": 39,
             "prog_name": "wrap",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
         },
         "patchs": [
@@ -1687,14 +2536,123 @@
         ]
     },
     {
+        "exp_name": "claude-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_location/evals_art/22. next_palindrome.json",
+        "sample": {
+            "prog_id": 22,
+            "prog_name": "next_palindrome",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 14,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "format error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "沒有有效更動",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_location/evals_art/27. quicksort.json",
+        "sample": {
+            "prog_id": 27,
+            "prog_name": "quicksort",
+            "language": "python",
+            "testcase_num": 13,
+            "fault_location": 6,
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在建立比pivot大的元素組成的陣列時，沒有將和pivot相等的元素包含進去，導致在排序有和pivot相等元素的陣列時會缺少這些元素"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "在最後回傳結果時，錯誤的將greater做[1:]切片",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_location",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_location/evals_art/39. wrap.json",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "加了不必要的strip",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "加了不必要的strip",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "加了不必要的lstrip",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/3. depth_first_search.json",
         "sample": {
             "prog_id": 3,
             "prog_name": "depth_first_search",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 9,
-            "bug_type": "",
+            "bug_type": "record missing fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
         },
         "patchs": [
@@ -1724,14 +2682,17 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/12. kheapsort.json",
         "sample": {
             "prog_id": 12,
             "prog_name": "kheapsort",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 6,
-            "bug_type": "",
-            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，造成輸出比輸入多出3個元素且排序失效，導致除了k為0以外的輸入皆會產生錯誤"
         },
         "patchs": [
             {
@@ -1749,13 +2710,16 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/15. lcs_length.json",
         "sample": {
             "prog_id": 15,
             "prog_name": "lcs_length",
             "language": "python",
             "testcase_num": 9,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
         },
         "patchs": [
@@ -1796,13 +2760,16 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/17. lis.json",
         "sample": {
             "prog_id": 17,
             "prog_name": "lis",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 12,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
         },
         "patchs": [
@@ -1821,13 +2788,16 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/19. max_sublist_sum.json",
         "sample": {
             "prog_id": 19,
             "prog_name": "max_sublist_sum",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
         },
         "patchs": [
@@ -1868,13 +2838,16 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/22. next_palindrome.json",
         "sample": {
             "prog_id": 22,
             "prog_name": "next_palindrome",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 14,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "format error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
         },
         "patchs": [
@@ -1893,13 +2866,16 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/29. rpn_eval.json",
         "sample": {
             "prog_id": 29,
             "prog_name": "rpn_eval",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 18,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
         },
         "patchs": [
@@ -1918,13 +2894,16 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/30. shortest_path_length.json",
         "sample": {
             "prog_id": 30,
             "prog_name": "shortest_path_length",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 21,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
         },
         "patchs": [
@@ -1965,13 +2944,16 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/36. subsequences.json",
         "sample": {
             "prog_id": 36,
             "prog_name": "subsequences",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 2,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
         },
         "patchs": [
@@ -2012,13 +2994,16 @@
     },
     {
         "exp_name": "gpt4-python-with_lib_v3",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-with_lib_v3/evals_art/39. wrap.json",
         "sample": {
             "prog_id": 39,
             "prog_name": "wrap",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
         },
         "patchs": [
@@ -2059,13 +3044,16 @@
     },
     {
         "exp_name": "gpt35-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-basic/evals_art/4. detect_cycle.json",
         "sample": {
             "prog_id": 4,
             "prog_name": "detect_cycle",
             "language": "python",
             "testcase_num": 6,
-            "fault_location": 5,
-            "bug_type": "",
+            "fault_location": 4,
+            "bug_type": "condition missing fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在判斷終止情況時，沒有處理hare也是空值的狀況，只有處理hare的後繼是空值的狀況，導致hare剛好是空值時會觸發AttributeError"
         },
         "patchs": [
@@ -2084,14 +3072,17 @@
     },
     {
         "exp_name": "gpt35-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-basic/evals_art/9. get_factors.json",
         "sample": {
             "prog_id": 9,
             "prog_name": "get_factors",
             "language": "python",
             "testcase_num": 11,
             "fault_location": 8,
-            "bug_type": "",
-            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，造成輸出總是少了最後一個數，導致質數的分解出錯且遞迴的影響除1以外的所有輸入"
         },
         "patchs": [
             {
@@ -2131,13 +3122,16 @@
     },
     {
         "exp_name": "gpt35-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-basic/evals_art/16. levenshtein.json",
         "sample": {
             "prog_id": 16,
             "prog_name": "levenshtein",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
         },
         "patchs": [
@@ -2156,13 +3150,16 @@
     },
     {
         "exp_name": "gpt35-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-basic/evals_art/17. lis.json",
         "sample": {
             "prog_id": 17,
             "prog_name": "lis",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 12,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
         },
         "patchs": [
@@ -2203,13 +3200,16 @@
     },
     {
         "exp_name": "gpt35-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-basic/evals_art/19. max_sublist_sum.json",
         "sample": {
             "prog_id": 19,
             "prog_name": "max_sublist_sum",
             "language": "python",
-            "testcase_num": 6,
-            "fault_location": 4,
-            "bug_type": "",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
         },
         "patchs": [
@@ -2250,13 +3250,16 @@
     },
     {
         "exp_name": "gpt35-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-basic/evals_art/28. reverse_linked_list.json",
         "sample": {
             "prog_id": 28,
             "prog_name": "reverse_linked_list",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
         },
         "patchs": [
@@ -2275,13 +3278,16 @@
     },
     {
         "exp_name": "gpt35-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-basic/evals_art/36. subsequences.json",
         "sample": {
             "prog_id": 36,
             "prog_name": "subsequences",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 2,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
         },
         "patchs": [
@@ -2322,13 +3328,16 @@
     },
     {
         "exp_name": "gpt35-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt35-python-basic/evals_art/39. wrap.json",
         "sample": {
             "prog_id": 39,
             "prog_name": "wrap",
             "language": "python",
             "testcase_num": 5,
-            "fault_location": 9,
-            "bug_type": "",
+            "fault_location": 8,
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
         },
         "patchs": [
@@ -2368,14 +3377,401 @@
         ]
     },
     {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/0. bitcount.json",
+        "sample": {
+            "prog_id": 0,
+            "prog_name": "bitcount",
+            "language": "python",
+            "testcase_num": 9,
+            "fault_location": 3,
+            "bug_type": "operator fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "在運算消除n中的1時，應該用and運算卻用成xor，造成原本應該能消掉1的步驟變成n只能保持不變，導致while迴圈無限循環"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/5. find_first_in_sorted.json",
+        "sample": {
+            "prog_id": 5,
+            "prog_name": "find_first_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 4,
+            "bug_type": "condition fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在whlie判斷式中，錯誤考慮了lo==hi的狀況，導致如目標不在陣列中的情況會無窮迴圈"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/8. gcd.json",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在遞迴呼叫時，沒有交換數字的位置，使得b的位置始終保持不變，導致除b=0外的情況外遞迴不會停止"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/9. get_factors.json",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，造成輸出總是少了最後一個數，導致質數的分解出錯且遞迴的影響除1以外的所有輸入"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/17. lis.json",
+        "sample": {
+            "prog_id": 17,
+            "prog_name": "lis",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 12,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/19. max_sublist_sum.json",
+        "sample": {
+            "prog_id": 19,
+            "prog_name": "max_sublist_sum",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/24. pascal.json",
+        "sample": {
+            "prog_id": 24,
+            "prog_name": "pascal",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 4,
+            "bug_type": "indexing fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在控制三角形底邊數量的for loop參數時，缺少將r+1造成底邊長度少一，導致輸出的三角形或者缺少最後一排或者訪問前一排最後元素時觸發IndexError"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/36. subsequences.json",
+        "sample": {
+            "prog_id": 36,
+            "prog_name": "subsequences",
+            "language": "python",
+            "testcase_num": 12,
+            "fault_location": 2,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
+        "exp_name": "claude-python-with_lib",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/claude-python-with_lib/evals_art/39. wrap.json",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
+        },
+        "patchs": [
+            {
+                "patch_name": "patch-0",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-1",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            },
+            {
+                "patch_name": "patch-2",
+                "patch_detail": {
+                    "is_correct": "F",
+                    "bug_location_predict": 0,
+                    "patch_fail_detail": "",
+                    "patch_correct_detail": "",
+                    "patch_repair_area": "",
+                    "patch_fail_type": ""
+                }
+            }
+        ]
+    },
+    {
         "exp_name": "gpt4-python-basic_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2/evals_art/15. lcs_length.json",
         "sample": {
             "prog_id": 15,
             "prog_name": "lcs_length",
             "language": "python",
             "testcase_num": 9,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
         },
         "patchs": [
@@ -2416,13 +3812,16 @@
     },
     {
         "exp_name": "gpt4-python-basic_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2/evals_art/19. max_sublist_sum.json",
         "sample": {
             "prog_id": 19,
             "prog_name": "max_sublist_sum",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
         },
         "patchs": [
@@ -2463,13 +3862,16 @@
     },
     {
         "exp_name": "gpt4-python-basic_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2/evals_art/22. next_palindrome.json",
         "sample": {
             "prog_id": 22,
             "prog_name": "next_palindrome",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 14,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "format error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
         },
         "patchs": [
@@ -2499,13 +3901,16 @@
     },
     {
         "exp_name": "gpt4-python-basic_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2/evals_art/28. reverse_linked_list.json",
         "sample": {
             "prog_id": 28,
             "prog_name": "reverse_linked_list",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
         },
         "patchs": [
@@ -2546,13 +3951,16 @@
     },
     {
         "exp_name": "gpt4-python-basic_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2/evals_art/30. shortest_path_length.json",
         "sample": {
             "prog_id": 30,
             "prog_name": "shortest_path_length",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 21,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
         },
         "patchs": [
@@ -2593,13 +4001,16 @@
     },
     {
         "exp_name": "gpt4-python-basic_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2/evals_art/36. subsequences.json",
         "sample": {
             "prog_id": 36,
             "prog_name": "subsequences",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 2,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
         },
         "patchs": [
@@ -2640,13 +4051,16 @@
     },
     {
         "exp_name": "gpt4-python-basic_v2",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4-python-basic_v2/evals_art/39. wrap.json",
         "sample": {
             "prog_id": 39,
             "prog_name": "wrap",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
         },
         "patchs": [
@@ -2687,13 +4101,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/3. depth_first_search.json",
         "sample": {
             "prog_id": 3,
             "prog_name": "depth_first_search",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 9,
-            "bug_type": "",
+            "bug_type": "record missing fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在向深處搜尋時，沒有紀錄已經造訪過的節點，導致除馬上找到goalnode以外的狀況遞迴都無法停止"
         },
         "patchs": [
@@ -2711,13 +4128,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/5. find_first_in_sorted.json",
         "sample": {
             "prog_id": 5,
             "prog_name": "find_first_in_sorted",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 4,
-            "bug_type": "",
+            "bug_type": "condition fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在whlie判斷式中，錯誤考慮了lo==hi的狀況，導致如目標不在陣列中的情況會無窮迴圈"
         },
         "patchs": [
@@ -2735,14 +4155,17 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/9. get_factors.json",
         "sample": {
             "prog_id": 9,
             "prog_name": "get_factors",
             "language": "python",
             "testcase_num": 11,
             "fault_location": 8,
-            "bug_type": "",
-            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，導致質數的分解出錯且遞迴的影響幾乎所有輸入"
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在輸入是質數時僅回傳空陣列而非包含數字本身的陣列，造成輸出總是少了最後一個數，導致質數的分解出錯且遞迴的影響除1以外的所有輸入"
         },
         "patchs": [
             {
@@ -2779,14 +4202,17 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/12. kheapsort.json",
         "sample": {
             "prog_id": 12,
             "prog_name": "kheapsort",
             "language": "python",
             "testcase_num": 4,
             "fault_location": 6,
-            "bug_type": "",
-            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，導致除了k為0以外的輸入皆會產生錯誤"
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在遍歷陣列時沒有排除已經在heap中的元素，造成輸出比輸入多出3個元素且排序失效，導致除了k為0以外的輸入皆會產生錯誤"
         },
         "patchs": [
             {
@@ -2803,14 +4229,17 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/13. knapsack.json",
         "sample": {
             "prog_id": 13,
             "prog_name": "knapsack",
             "language": "python",
             "testcase_num": 9,
             "fault_location": 10,
-            "bug_type": "",
-            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，導致該類邊緣狀況輸出錯誤答案"
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "在寫動態規劃的陣列時，沒有考慮到weight剛好等於容納上限的狀況，造成輸出比預期小一點，導致輸出內有機會觸發該類邊緣狀況時輸出錯誤答案"
         },
         "patchs": [
             {
@@ -2827,14 +4256,17 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/14. kth.json",
         "sample": {
             "prog_id": 14,
             "prog_name": "kth",
             "language": "python",
             "testcase_num": 7,
             "fault_location": 11,
-            "bug_type": "",
-            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置"
+            "bug_type": "variable assign fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "在處理到k存在於大於pivot的陣列above時，遞迴呼叫沒有將k的輸入根據num_lessoreq重置，導致在該類狀況中k總是代表超過陣列的位置觸發IndexError"
         },
         "patchs": [
             {
@@ -2861,13 +4293,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/15. lcs_length.json",
         "sample": {
             "prog_id": 15,
             "prog_name": "lcs_length",
             "language": "python",
             "testcase_num": 9,
             "fault_location": 8,
-            "bug_type": "",
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃陣列計算中，子問題的選擇時j沒有減一，造成動態規劃只會在一個維度中取值，導致除了答案小於1以外的輸入皆會出錯"
         },
         "patchs": [
@@ -2895,13 +4330,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/16. levenshtein.json",
         "sample": {
             "prog_id": 16,
             "prog_name": "levenshtein",
             "language": "python",
             "testcase_num": 6,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在兩個字串首字相同的情況下，在遞迴式前錯誤的+1，由於兩字一致所以對於結果的影響應該是0而非1，導致除空字串以外的輸入皆會出錯"
         },
         "patchs": [
@@ -2939,13 +4377,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/17. lis.json",
         "sample": {
             "prog_id": 17,
             "prog_name": "lis",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 12,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改longest變數時，缺少了max函數判斷新數值是否比原本長，導致在初期就找到答案的情況會在後期被更新為錯誤答案"
         },
         "patchs": [
@@ -2983,13 +4424,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/19. max_sublist_sum.json",
         "sample": {
             "prog_id": 19,
             "prog_name": "max_sublist_sum",
             "language": "python",
-            "testcase_num": 6,
-            "fault_location": 4,
-            "bug_type": "",
+            "testcase_num": 7,
+            "fault_location": 5,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在更改max_ending_here時，沒有加上max函數，造成計算總是考慮到整個list而沒有歸零機制，導致只能處理答案是整個list相加或sublist在前期出現的狀況"
         },
         "patchs": [
@@ -3017,13 +4461,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/21. minimum_spanning_tree.json",
         "sample": {
             "prog_id": 21,
             "prog_name": "minimum_spanning_tree",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 10,
-            "bug_type": "",
+            "bug_type": "function misuse fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在更新group_by_node變數時，誤用update函數在for loop中更新set引發RuntimeError，導致幾乎所有輸入都無法運行"
         },
         "patchs": [
@@ -3061,13 +4508,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/22. next_palindrome.json",
         "sample": {
             "prog_id": 22,
             "prog_name": "next_palindrome",
             "language": "python",
             "testcase_num": 5,
             "fault_location": 14,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "format error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
         },
         "patchs": [
@@ -3105,13 +4555,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/25. possible_change.json",
         "sample": {
             "prog_id": 25,
             "prog_name": "possible_change",
             "language": "python",
             "testcase_num": 10,
             "fault_location": 3,
-            "bug_type": "",
+            "bug_type": "condition missing fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在處理邊界狀況時，缺少處理硬幣沒有輸入的邊界狀況，導致沒有輸入硬幣種類時由於無法unpack coins變數觸發ValueError"
         },
         "patchs": [
@@ -3129,13 +4582,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/27. quicksort.json",
         "sample": {
             "prog_id": 27,
             "prog_name": "quicksort",
             "language": "python",
             "testcase_num": 13,
             "fault_location": 6,
-            "bug_type": "",
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在建立比pivot大的元素組成的陣列時，沒有將和pivot相等的元素包含進去，導致在排序有和pivot相等元素的陣列時會缺少這些元素"
         },
         "patchs": [
@@ -3153,13 +4609,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/28. reverse_linked_list.json",
         "sample": {
             "prog_id": 28,
             "prog_name": "reverse_linked_list",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在置換node的successor時，沒有將node賦值給prevnode，造成prevnode一直是空值且所有node的新successor都是空值，導致除了輸入空值外的所有情況都會錯誤"
         },
         "patchs": [
@@ -3197,13 +4656,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/29. rpn_eval.json",
         "sample": {
             "prog_id": 29,
             "prog_name": "rpn_eval",
             "language": "python",
             "testcase_num": 6,
-            "fault_location": 19,
-            "bug_type": "",
+            "fault_location": 18,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在運算並放回stack時，忽略了stack中第一個pop的元素是擺在運算式後的元素，導致運算不符合交換律的輸入時皆會錯誤"
         },
         "patchs": [
@@ -3241,13 +4703,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/30. shortest_path_length.json",
         "sample": {
             "prog_id": 30,
             "prog_name": "shortest_path_length",
             "language": "python",
             "testcase_num": 4,
-            "fault_location": 19,
-            "bug_type": "",
+            "fault_location": 21,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
             "bug_detail_desc": "在動態規劃更新節點距離時，沒有加上起點到前一節點的距離，導致除了起點終點相同和起點終點不可達等特殊情況以外的輸入都無法獲得正確結果"
         },
         "patchs": [
@@ -3285,13 +4750,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/31. shortest_path_lengths.json",
         "sample": {
             "prog_id": 31,
             "prog_name": "shortest_path_lengths",
             "language": "python",
             "testcase_num": 4,
-            "fault_location": 10,
-            "bug_type": "",
+            "fault_location": 12,
+            "bug_type": "indexing fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在計算以k為中繼連結ij的距離時，將i到k、k到j誤寫為i到k、j到k，導致非無向圖結構的輸入結果皆會出錯"
         },
         "patchs": [
@@ -3319,13 +4787,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/36. subsequences.json",
         "sample": {
             "prog_id": 36,
             "prog_name": "subsequences",
             "language": "python",
             "testcase_num": 12,
             "fault_location": 2,
-            "bug_type": "",
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "edge-case impact",
             "bug_detail_desc": "在處理k=0時的回傳時，缺少包含一個空陣列，造成遞迴的最後一層長度為0並且淺層呼叫也都為0，導致除了k非零且a>b的情況外的輸入皆會出錯"
         },
         "patchs": [
@@ -3363,13 +4834,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/38. topological_ordering.json",
         "sample": {
             "prog_id": 38,
             "prog_name": "topological_ordering",
             "language": "python",
             "testcase_num": 3,
             "fault_location": 5,
-            "bug_type": "",
+            "bug_type": "condition fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在判斷節點能否排進ordered_nodes時，把incoming寫成outgoing，造成除了沒有incoming節點的初始節點外沒有節點能被排序進來，導致輸入有邊圖皆會出錯"
         },
         "patchs": [
@@ -3399,13 +4873,16 @@
     },
     {
         "exp_name": "gemini-python-basic",
+        "file_path": "/Users/lucyxu/PycharmProjects/debug/exp/gemini-python-basic/evals_art/39. wrap.json",
         "sample": {
             "prog_id": 39,
             "prog_name": "wrap",
             "language": "python",
             "testcase_num": 5,
-            "fault_location": 9,
-            "bug_type": "",
+            "fault_location": 8,
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
             "bug_detail_desc": "在回傳前缺少append text，造成回傳結果缺少最後一段，導致空值以外的輸入結果皆會出錯"
         },
         "patchs": [

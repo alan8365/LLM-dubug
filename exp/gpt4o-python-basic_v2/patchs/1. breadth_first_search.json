@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while True:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(node for node in node.successors if node not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 1,
+            "prog_name": "breadth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "condition fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "\u5728while\u8ff4\u5708\u7684\u5224\u65b7\u5f0f\u4e2d\uff0c\u61c9\u8a72\u4f7f\u7528while queue\u8b93\u4f47\u5217\u6578\u91cf\u70ba0\u6642\u812b\u96e2\u8ff4\u5708\u537b\u932f\u7528\u70bawhile True\uff0c\u5c0e\u81f4\u8ff4\u5708\u7121\u9650\u5faa\u74b0\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.044010400772095,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        \n        successors = [succ for succ in node.successors if succ not in nodesseen]\n        queue.extend(successors)\n        nodesseen.update(successors)\n\n    return False\n",
+            "raw_code": "To fix the bug in the code provided, here are the key changes needed:\n\n1. Add a check to ensure the queue is not empty before calling `popleft()`. This is important because if the queue becomes empty, calling `popleft()` will raise an exception.\n2. Ensure that nodes being added to the queue are also added to the `nodesseen` set, so we don't process the same node multiple times.\n3. updated `nodesseen.update(node.successors)` to `nodesseen.update(successors)` to avoid updating with nodes that are already seen.\n\nHere is the corrected code:\n\n```python\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        \n        successors = [succ for succ in node.successors if succ not in nodesseen]\n        queue.extend(successors)\n        nodesseen.update(successors)\n\n    return False\n```\n\nExplanation of changes:\n1. The while loop now checks `while queue:`, which ensures that it only continues if there are items in the queue.\n2. When extending the queue with successors, it filters out any nodes that have already been seen and only adds new ones to both the queue and `nodesseen`.\n\nThis ensures that the `popleft()` call is safe and that nodes are not revisited unnecessarily."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 4.104903936386108,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            for succ in node.successors:\n                if succ not in nodesseen:\n                    queue.append(succ)\n                    nodesseen.add(succ)\n\n    return False\n",
+            "raw_code": "The issue in the code is that if the queue becomes empty, the `popleft` method will raise an `IndexError`, terminating the program abruptly. The while loop should be conditioned on the queue not being empty. Additionally, it is essential to add nodes to `nodesseen` only when they are added to the queue. Here is the fixed code:\n\n```python\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            for succ in node.successors:\n                if succ not in nodesseen:\n                    queue.append(succ)\n                    nodesseen.add(succ)\n\n    return False\n```\n\nKey changes:\n1. Changed the while loop condition to `while queue:` to ensure it stops if the queue is empty.\n2. Added each successor to `nodesseen` only if it is not already seen and when it is added to the queue."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.711600065231323,
+            "repaired_code": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node == goalnode:\n            return True\n        else:\n            successors_to_add = [n for n in node.successors if n not in nodesseen]\n            queue.extend(successors_to_add)\n            nodesseen.update(successors_to_add)\n\n    return False\n",
+            "raw_code": "The code you've provided has a few issues that need to be fixed:\n\n1. The `while True` loop can cause an infinite loop if the goal node is not found.\n2. When adding the node's successors to the queue, the code should also add those successors to `nodesseen` at the same time to ensure they are not re-queued.\n3. The `is` operator should not be used to compare the node to the `goalnode`, `==` should be used instead.\n4. The `nodesseen` set should be updated with the new nodes being added to the queue.\n\nHere is the fixed code:\n\n```python\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node == goalnode:\n            return True\n        else:\n            successors_to_add = [n for n in node.successors if n not in nodesseen]\n            queue.extend(successors_to_add)\n            nodesseen.update(successors_to_add)\n\n    return False\n```\n\nExplanation of changes:\n1. The `while True` loop is replaced with `while queue:` to ensure the loop terminates if the queue is empty.\n2. Used the `==` operator for comparing `node` with `goalnode`.\n3. Updated the `nodesseen` set with only new nodes that are being added to the queue.\n4. Iterated through `node.successors` and filtered out ones already seen before extending the queue."
+        }
+    ]
+}

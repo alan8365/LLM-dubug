@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 24,
+            "prog_name": "pascal",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 4,
+            "bug_type": "indexing fault",
+            "bug_consequence": "runtime error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "\u5728\u63a7\u5236\u4e09\u89d2\u5f62\u5e95\u908a\u6578\u91cf\u7684for loop\u53c3\u6578\u6642\uff0c\u7f3a\u5c11\u5c07r+1\u9020\u6210\u5e95\u908a\u9577\u5ea6\u5c11\u4e00\uff0c\u5c0e\u81f4\u8f38\u51fa\u7684\u4e09\u89d2\u5f62\u6216\u8005\u7f3a\u5c11\u6700\u5f8c\u4e00\u6392\u6216\u8005\u8a2a\u554f\u524d\u4e00\u6392\u6700\u5f8c\u5143\u7d20\u6642\u89f8\u767cIndexError"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 4.656495094299316,
+            "repaired_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1]\n            upright = rows[r - 1][c]\n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n\n    return rows\n",
+            "raw_code": "The code has an off-by-one error in the indices when building each row of Pascal's triangle. Specifically, the inner loop should iterate from `0` to `r + 1` and an additional `1` should be appended at the end of the row to handle the rightmost `1` in each row. Here's the corrected version of the code:\n\n```python\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1]\n            upright = rows[r - 1][c]\n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n\n    return rows\n```\n\nThis will produce the correct rows of Pascal's triangle for a given `n`."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.295063018798828,
+            "repaired_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]  # first element of the row is always 1\n        for c in range(1, r):  # iterate through the inner elements\n            upleft = rows[r - 1][c - 1]\n            upright = rows[r - 1][c]\n            row.append(upleft + upright)\n        row.append(1)  # last element of the row is always 1\n        rows.append(row)\n\n    return rows\n",
+            "raw_code": "The bug in the given code is that it does not correctly generate Pascal's Triangle because the inner loop does not iterate through all the columns correctly. The range for the inner loop should go from 0 to `r + 1` (inclusive). Also, the edge cases are not correctly handled for the first and the last element of each row in Pascal\u2019s triangle, they should be `1`.\n\nHere is the fixed code:\n\n```python\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]  # first element of the row is always 1\n        for c in range(1, r):  # iterate through the inner elements\n            upleft = rows[r - 1][c - 1]\n            upright = rows[r - 1][c]\n            row.append(upleft + upright)\n        row.append(1)  # last element of the row is always 1\n        rows.append(row)\n\n    return rows\n```\n\nWith this fixed code, it correctly generates Pascal's Triangle for `n` rows."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.798960208892822,
+            "repaired_code": "\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r + 1):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n\n# Example usage:\nprint(pascal(5))\n",
+            "raw_code": "The code given aims to generate Pascal's Triangle up to the `n`th row. There is a small bug in the logic that calculates each row of the triangle. Specifically, an extra `1` needs to be added to the end of each row to properly represent Pascal's Triangle. Each row in Pascal's Triangle starts and ends with `1`.\n\nHere is the fixed code:\n\n```python\ndef pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = []\n        for c in range(0, r + 1):\n            upleft = rows[r - 1][c - 1] if c > 0 else 0\n            upright = rows[r - 1][c] if c < r else 0\n            row.append(upleft + upright)\n        rows.append(row)\n\n    return rows\n\n# Example usage:\nprint(pascal(5))\n```\n\nWith this fix, the code will generate Pascal's Triangle correctly. The key changes are:\n\n1. The inner loop now iterates to `r + 1` to account for the fact that each row has one more element than its row index.\n2. This ensures that each row starts and ends with `1`."
+        }
+    ]
+}

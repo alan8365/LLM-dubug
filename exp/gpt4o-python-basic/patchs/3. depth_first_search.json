@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 3,
+            "prog_name": "depth_first_search",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 9,
+            "bug_type": "record missing fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "\u5728\u5411\u6df1\u8655\u641c\u5c0b\u6642\uff0c\u6c92\u6709\u7d00\u9304\u5df2\u7d93\u9020\u8a2a\u904e\u7684\u7bc0\u9ede\uff0c\u5c0e\u81f4\u9664\u99ac\u4e0a\u627e\u5230goalnode\u4ee5\u5916\u7684\u72c0\u6cc1\u905e\u8ff4\u90fd\u7121\u6cd5\u505c\u6b62"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.381291151046753,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        return any(\n            search_from(nextnode) for nextnode in node.successors\n        )\n\n    return search_from(startnode)\n",
+            "raw_code": "To fix the bug in the provided depth-first search code, we need to ensure that we properly track the nodes that have been visited. The primary issue here is that the `nodesvisited` set is being defined outside of the `search_from` function, but it is neither modified inside the function nor passed around.\n\nHere's the fixed code:\n\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node is goalnode:\n            return True\n        return any(\n            search_from(nextnode) for nextnode in node.successors\n        )\n\n    return search_from(startnode)\n```\n\n### Explanation:\n1. **Tracking Visited Nodes**: Inside `search_from`, after checking if the current node has been visited, we should mark the node as visited by adding it to the `nodesvisited` set.\n2. **Checking the Goal Node**: The rest of the logic remains the same, ensuring we search recursively.\n\nThis ensures that each node is only visited once, thus preventing infinite loops and ensuring the efficiency of the depth-first search algorithm."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 5.722177982330322,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node == goalnode:\n            return True\n        return any(\n            search_from(nextnode) for nextnode in node.successors\n        )\n\n    return search_from(startnode)\n",
+            "raw_code": "The provided code for a depth-first search (DFS) has a bug where it does not keep track of the visited nodes properly, potentially leading to infinite loops in the case of cyclic graphs. Additionally, it does not add nodes to the `nodesvisited` set. To fix these issues, we need to ensure that each node is marked as visited when we visit it.\n\nHere is the corrected code:\n\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        if node == goalnode:\n            return True\n        return any(\n            search_from(nextnode) for nextnode in node.successors\n        )\n\n    return search_from(startnode)\n```\n\n### Explanation of Changes:\n\n1. **Mark Nodes as Visited**: \n   - The line `nodesvisited.add(node)` is added to ensure that the current node is marked as visited as soon as it is encountered.\n   \n2. **Node Comparison**: \n   - Ensure that `node == goalnode` is used instead of `node is goalnode` to properly compare the nodes. The `is` operator checks for object identity, while `==` checks for equality, which is generally what we want in search algorithms.\n\nWith these changes, the DFS algorithm now correctly tracks visited nodes and handles comparisons appropriately to avoid infinite loops and correctly identify when the goal node is reached."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 4.063708782196045,
+            "repaired_code": "\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            nodesvisited.add(node)  # Add the node to the visited set\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n",
+            "raw_code": "The bug in the given code is that it does not update the `nodesvisited` set when visiting a new node. To fix this, you need to add an instruction to include the current node in the `nodesvisited` set inside the `search_from` function.\n\nHere is the fixed code:\n\n```python\ndef depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node in nodesvisited:\n            return False\n        elif node is goalnode:\n            return True\n        else:\n            nodesvisited.add(node)  # Add the node to the visited set\n            return any(\n                search_from(nextnode) for nextnode in node.successors\n            )\n\n    return search_from(startnode)\n```\n\nIn this fixed version, `nodesvisited.add(node)` is added before the recursive search in the successors. This ensures that once a node is visited, it is recorded, and the algorithm doesn't visit it again, preventing infinite loops and redundant checks."
+        }
+    ]
+}

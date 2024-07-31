@@ -13,5 +13,6 @@ MODEL_NAME = Literal[
     "gemini-1.0-pro",
     "gemini-1.5-pro",
     "claude-3-opus-20240229",
+    "llama3"
 ]
 PROMPT_TYPE = Literal["basic", "with_lib", "with_step", "with_location"]

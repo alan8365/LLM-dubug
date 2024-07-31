@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr)\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid\n\n        else:\n            lo = mid + 1\n\n    return -1\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 5,
+            "prog_name": "find_first_in_sorted",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 4,
+            "bug_type": "condition fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "edge-case impact",
+            "bug_detail_desc": "\u5728whlie\u5224\u65b7\u5f0f\u4e2d\uff0c\u932f\u8aa4\u8003\u616e\u4e86lo==hi\u7684\u72c0\u6cc1\uff0c\u5c0e\u81f4\u5982\u76ee\u6a19\u4e0d\u5728\u9663\u5217\u4e2d\u7684\u60c5\u6cc1\u6703\u7121\u7aae\u8ff4\u5708"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.401646852493286,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1\n",
+            "raw_code": "The given code contains a bug in the binary search algorithm due to the incorrect boundary conditions. Specifically, `hi` should be set to `len(arr) - 1` instead of `len(arr)`, and the condition in the while loop should be `lo < hi` instead of `lo <= hi`. Below is the fixed version of the code:\n\n```python\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1\n```\n\nHere\u2019s a brief explanation of the changes:\n\n1. Setting `hi` to `len(arr) - 1` ensures that the boundaries are correctly initialized.\n2. The condition in the while loop remains `lo <= hi` to cover all indices.\n3. When `x <= arr[mid]`, `hi` should be updated to `mid - 1` instead of `mid` to properly narrow down the search range.\n\nThis should properly find the first occurrence of `x` in a sorted array `arr`."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 8.837970972061157,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1\n",
+            "raw_code": "The given code aims to find the first occurrence of a specified element `x` in a sorted array `arr` using a binary search approach. However, there are a couple of issues:\n\n1. The condition `while lo <= hi` should be `while lo < hi` to maintain the invariant that `lo` is always less than or equal to `hi`.\n2. When updating `hi`, it should be `hi = mid - 1` to avoid infinite loops.\n3. The check for `arr[mid]` should handle array bounds properly.\n4. We should update the final condition to ensure we do not miss the edge cases.\n\nHere's the corrected code:\n\n```python\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x <= arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1\n```\n\nKey changes:\n1. `hi` is initialized to `len(arr) - 1` instead of `len(arr)`.\n2. The condition in the loop is `while lo <= hi`, which is correct since we are checking inclusive bounds.\n3. The `hi` update step is changed to `hi = mid - 1`.\n\nAfter these changes, the code should correctly find the first occurrence of the element in a sorted array."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.00573992729187,
+            "repaired_code": "\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if arr[mid] == x:\n            if mid == 0 or arr[mid - 1] != x:\n                return mid\n            else:\n                hi = mid - 1\n        elif arr[mid] < x:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n\n    return -1\n",
+            "raw_code": "The code provided is intended to find the first occurrence of the element `x` in a sorted array `arr`. However, there are some issues with the code:\n1. The condition `while lo <= hi` should be `while lo < hi` because `hi` should be an exclusive upper bound.\n2. The condition `x == arr[mid] and (mid == 0 or x != arr[mid - 1])` should be inside the range check for `arr[mid]`.\n3. The update of `hi = mid` should be `hi = mid - 1` when `x <= arr[mid]` to correctly reduce the search range.\n\nHere is the corrected code:\n\n```python\ndef find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if arr[mid] == x:\n            if mid == 0 or arr[mid - 1] != x:\n                return mid\n            else:\n                hi = mid - 1\n        elif arr[mid] < x:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n\n    return -1\n```\n\nThis fixed code will correctly find the first occurrence of `x` in `arr`, or return `-1` if `x` is not present in the array."
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return []\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 9,
+            "prog_name": "get_factors",
+            "language": "python",
+            "testcase_num": 11,
+            "fault_location": 8,
+            "bug_type": "variable assign fault",
+            "bug_consequence": "output error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "\u5728\u8f38\u5165\u662f\u8cea\u6578\u6642\u50c5\u56de\u50b3\u7a7a\u9663\u5217\u800c\u975e\u5305\u542b\u6578\u5b57\u672c\u8eab\u7684\u9663\u5217\uff0c\u9020\u6210\u8f38\u51fa\u7e3d\u662f\u5c11\u4e86\u6700\u5f8c\u4e00\u500b\u6578\uff0c\u5c0e\u81f4\u8cea\u6578\u7684\u5206\u89e3\u51fa\u932f\u4e14\u905e\u8ff4\u7684\u5f71\u97ff\u96641\u4ee5\u5916\u7684\u6240\u6709\u8f38\u5165"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 5.849462985992432,
+            "repaired_code": "\ndef get_factors(n):\n    if n <= 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        while n % i == 0:\n            factors.append(i)\n            n //= i\n\n    if n > 1:\n        factors.append(n)\n\n    return factors\n\n# Testing the function\nprint(get_factors(28))  # Output: [2, 2, 7]\nprint(get_factors(30))  # Output: [2, 3, 5]\nprint(get_factors(1))   # Output: []\nprint(get_factors(13))  # Output: [13]\n",
+            "raw_code": "To fix the bug in your code, we need to ensure that it correctly returns all factors of the number `n`. The existing code has a few issues:\n1. It returns only the factors found in the loop, not considering all other factors.\n2. It fails to return `n` itself when `n` is a prime number.\n\nHere's the fixed code:\n```python\ndef get_factors(n):\n    if n <= 1:\n        return []\n\n    factors = []\n    for i in range(2, int(n ** 0.5) + 1):\n        while n % i == 0:\n            factors.append(i)\n            n //= i\n\n    if n > 1:\n        factors.append(n)\n\n    return factors\n\n# Testing the function\nprint(get_factors(28))  # Output: [2, 2, 7]\nprint(get_factors(30))  # Output: [2, 3, 5]\nprint(get_factors(1))   # Output: []\nprint(get_factors(13))  # Output: [13]\n```\n### Explanation:\n1. **Edge Case Handling**: Handled the case when `n <= 1` by returning an empty list.\n2. **Factor Extraction**: \n   - Iterated `i` from 2 to `\u221an` and divided `n` by `i` whenever it's divisible, appending `i` to the factors list.\n   - Used a `while` loop within the `for` loop to handle multiple occurrences of the same factor.\n3. **Adding Remaining Factor**: After exiting the loop, if `n` is still greater than 1, appended `n` to the factors list, which handles the case for prime numbers."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 2.849604845046997,
+            "repaired_code": "\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]\n",
+            "raw_code": "The issue with your code is that it doesn't handle the case where `n` is a prime number. If `n` is prime, the function will return an empty list, which is incorrect. Here is the corrected version of your code:\n\n```python\ndef get_factors(n):\n    if n == 1:\n        return []\n\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return [i] + get_factors(n // i)\n\n    return [n]\n```\n\nChanges made:\n1. When the loop finishes without finding any factors (meaning `n` is prime), the function now returns `[n]` instead of an empty list."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 5.9403252601623535,
+            "repaired_code": "\ndef get_factors(n):\n    def factors_recursive(n, start):\n        for i in range(start, int(n ** 0.5) + 1):\n            if n % i == 0:\n                return [i] + factors_recursive(n // i, i)\n        return [n]\n\n    if n <= 1:\n        return []\n\n    return factors_recursive(n, 2)\n\n# Example usage:\nprint(get_factors(28))  # Output: [2, 2, 7]\nprint(get_factors(30))  # Output: [2, 3, 5]\nprint(get_factors(17))  # Output: [17]\n",
+            "raw_code": "The provided code is intended to return the factors of a given number `n` recursively. However, it fails to properly handle cases where `n` is a prime number or when all factors are needed. Here\u2019s the fixed version of the code:\n\n1. Modify the base case to handle the case where `n` is a prime number.\n2. Append the factor pairs correctly to ensure all factors are captured.\n\nHere\u2019s the corrected version of the code:\n\n```python\ndef get_factors(n):\n    def factors_recursive(n, start):\n        for i in range(start, int(n ** 0.5) + 1):\n            if n % i == 0:\n                return [i] + factors_recursive(n // i, i)\n        return [n]\n\n    if n <= 1:\n        return []\n\n    return factors_recursive(n, 2)\n\n# Example usage:\nprint(get_factors(28))  # Output: [2, 2, 7]\nprint(get_factors(30))  # Output: [2, 3, 5]\nprint(get_factors(17))  # Output: [17]\n```\n\n### Explanation:\n1. **Helper Function `factors_recursive`**:\n   - Added a helper function to encapsulate the recursive logic and to handle the starting point for finding factors.\n   \n2. **Base Case**:\n   - Adjusted the base case to return `[n]` if no factor is found before `sqrt(n)`, which means `n` is a prime number.\n\n3. **Handling Primes**:\n   - If no factors are found in the main loop, the function returns `[n]` indicating `n` is a prime number.\n\n4. **Handling Small Numbers**:\n   - Added a check to immediately return an empty list for `n <= 1` as they don't have positive integer factors.\n\nThis version of the code correctly handles prime numbers and returns all factors of the number `n`."
+        }
+    ]
+}

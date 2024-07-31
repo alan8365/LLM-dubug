@@ -1,0 +1,8 @@
+{
+    "name": "llama3-python-with_location",
+    "lang": "python",
+    "llm_api": "OllamaApi",
+    "prompt_type": "with_location",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/llama3-python-with_location",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/llama3-python-with_location/patchs"
+}

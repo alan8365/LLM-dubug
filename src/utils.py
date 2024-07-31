@@ -104,7 +104,7 @@ def get_pass_ratio(patch_info):
 
 def get_correct_ratio(patch_info):
     eval_values = patch_info["patchs_art_evals"].values()
-    correct_ratio = [v["is_correct"] == "T" for v in eval_values]
+    correct_ratio = [v["is_correct"] in ["T", "U"] for v in eval_values]
     correct_ratio = sum(correct_ratio) / 3
 
     return correct_ratio
@@ -139,3 +139,8 @@ def calculate_ratio(
             result[prog_name] = get_correct_ratio(patch_info)
 
     return result
+
+
+if __name__ == "__main__":
+    breakpoint()
+    calculate_ratio("gpt35-python-with_lib", "plausible")

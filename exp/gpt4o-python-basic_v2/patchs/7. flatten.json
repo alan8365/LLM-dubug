@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield flatten(x)\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 7,
+            "prog_name": "flatten",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 6,
+            "bug_type": "function misuse fault",
+            "bug_consequence": "format error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "\u5728\u905e\u56de\u7684\u7d42\u6b62\u689d\u4ef6\u56de\u50b3\u6642\uff0c\u5c0d\u65bc\u4e0d\u662flist\u7684\u8f38\u5165\u4f9d\u820a\u4f7f\u7528\u905e\u8ff4\uff0c\u5c0e\u81f4\u5927\u90e8\u5206\u8f38\u51fa\u4e0d\u662f\u9810\u671f\u7684\u683c\u5f0f"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.8323440551757812,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n",
+            "raw_code": "The issue in the original code is that it recursively calls `flatten` on non-list elements, which results in an incorrect output. Instead, the code should simply yield the non-list elements directly.\n\nHere's the corrected version:\n\n```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```\n\nThis should properly flatten a nested list. Here\u2019s an example of how you might use it:\n\n```python\nnested_list = [1, [2, [3, 4]], 5]\nflat_list = list(flatten(nested_list))\nprint(flat_list)  # Output: [1, 2, 3, 4, 5]\n```"
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.4079349040985107,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n",
+            "raw_code": "The issue with the provided code is in the `else` block. It recursively calls `flatten` on `x`, which is not necessary if `x` is not a list. Instead, `x` itself should be returned.\n\nHere is the fixed code:\n\n```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```\n\nIn this corrected version, if `x` is not a list, it correctly yields `x` itself instead of recursively calling `flatten(x)`."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 2.1872668266296387,
+            "repaired_code": "\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n",
+            "raw_code": "The bug in the code is that the else clause is mistakenly calling `flatten(x)` even when `x` is not a list, which leads to an infinite recursion. Instead, it should simply yield `x`. Here is the fixed code:\n\n```python\ndef flatten(arr):\n    for x in arr:\n        if isinstance(x, list):\n            for y in flatten(x):\n                yield y\n        else:\n            yield x\n```\n\nThis corrected implementation ensures that non-list elements are directly yielded, while lists are recursively flattened."
+        }
+    ]
+}

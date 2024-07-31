@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b)\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 8,
+            "prog_name": "gcd",
+            "language": "python",
+            "testcase_num": 6,
+            "fault_location": 4,
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "\u5728\u905e\u8ff4\u547c\u53eb\u6642\uff0c\u6c92\u6709\u4ea4\u63db\u6578\u5b57\u7684\u4f4d\u7f6e\uff0c\u4f7f\u5f97b\u7684\u4f4d\u7f6e\u59cb\u7d42\u4fdd\u6301\u4e0d\u8b8a\uff0c\u5c0e\u81f4\u9664b=0\u5916\u7684\u60c5\u6cc1\u5916\u905e\u8ff4\u4e0d\u6703\u505c\u6b62"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.8107876777648926,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n",
+            "raw_code": "The given code to calculate the greatest common divisor (GCD) using the Euclidean algorithm has a small bug. The parameters need to be correctly rearranged in the recursive call. The parameter `b` should be passed first, then `a % b`.\n\nHere is the fixed code:\n\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```\n\nThis should correctly calculate the GCD of `a` and `b`."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.209902048110962,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n",
+            "raw_code": "The bug in the provided code is in the recursive call to `gcd`. In the Euclidean algorithm for finding the greatest common divisor (GCD), the parameters should be swapped in the recursive call. You need to pass `b` as the first argument and `a % b` as the second argument.\n\nHere is the fixed code:\n\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```\n\nThis correctly implements the Euclidean algorithm for finding the GCD."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.436976194381714,
+            "repaired_code": "\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n",
+            "raw_code": "The bug in the provided code is that the arguments in the recursive call to the `gcd` function are in the wrong order. The correct arguments should be `b` and `a % b`. Here's the fixed code:\n\n```python\ndef gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n```\n\nThis ensures that in each recursive call, `b` is the new `a` and `a % b` is the new `b`, which conforms to the Euclidean algorithm for computing the greatest common divisor."
+        }
+    ]
+}

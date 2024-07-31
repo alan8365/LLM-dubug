@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n\n    return lines\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "\u5728\u56de\u50b3\u524d\u7f3a\u5c11append text\uff0c\u9020\u6210\u56de\u50b3\u7d50\u679c\u7f3a\u5c11\u6700\u5f8c\u4e00\u6bb5\uff0c\u5c0e\u81f4\u7a7a\u503c\u4ee5\u5916\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.9290120601654053,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n\n    if text:  # Add any remaining text\n        lines.append(text)\n\n    return lines\n",
+            "raw_code": "The provided code snippet has a bug where the last portion of the `text` that is less than or equal to `cols` is never appended to the `lines` list. To fix this, you need to ensure that any remaining text after the while loop also gets added to the `lines` list. Here is the corrected version:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n\n    if text:  # Add any remaining text\n        lines.append(text)\n\n    return lines\n```\n\nKey changes made:\n1. Stripped leading whitespace from `text[end:]` using `.lstrip()` to avoid leading spaces in the next line.\n2. Added a final check to append any remaining text after the while loop."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.6104400157928467,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()  # Use lstrip() to remove leading spaces from the remaining text\n        lines.append(line)\n\n    if text:  # Append the last remaining text if it's not empty\n        lines.append(text)\n\n    return lines\n",
+            "raw_code": "Certainly! The current code has a bug where it does not handle the remaining text that is shorter than the column width after the loop. Here's the corrected version of the code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()  # Use lstrip() to remove leading spaces from the remaining text\n        lines.append(line)\n\n    if text:  # Append the last remaining text if it's not empty\n        lines.append(text)\n\n    return lines\n```\n\nChanges made:\n1. Added `text[end:].lstrip()` to remove any leading spaces from the remaining text after wrapping.\n2. Added a check to append any remaining text after the loop if it's not empty.\n\nNow the function should correctly wrap the text into lines with the specified column width."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 6.0273730754852295,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        else:\n            end += 1\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    \n    if text:\n        lines.append(text)\n\n    return lines\n",
+            "raw_code": "The provided code has a couple of issues that need to be fixed for it to work correctly:\n\n1. When there is no space found within the first `cols` characters, the line is cut at `cols`, but the leading space of the next line is kept. This needs to be managed.\n2. After the loop, it doesn't add the remaining text to the `lines` list, which is necessary to capture the last portion of the text.\n\nHere's the fixed code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        else:\n            end += 1\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    \n    if text:\n        lines.append(text)\n\n    return lines\n```\n\n### Explanation of Fixes:\n1. **Handling the case when no space is found:**\n   - If `text.rfind(' ', 0, cols + 1)` returns `-1`, set `end` to `cols`. This cuts the text at exactly `cols` characters.\n  \n2. **Adjust the split and remove leading spaces (if any) on the next part of the text:**\n   - When a space is found within the first `cols`, `end` is adjusted to `end + 1` to include the space in the split, so the leading space does not remain in the next portion of the text. \n   - `text = text[end:].lstrip()` is used to remove any leading spaces from the remaining text.\n\n3. **Include the remaining text:**\n   - After the loop, check if any text remains and append it to the `lines` list.\n\nThis modified code ensures the text wrapping functions correctly and handles edge cases appropriately."
+        }
+    ]
+}

@@ -1,361 +1,481 @@
-,bug_type,bug_consequence,bug_impact,exp_name,correct_ratio,prompt,model,available,stable
-0,variable assign fault,infinite loop error,all-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-1,condition fault,infinite loop error,edge-case impact,gemini-python-with_location,0.6666666666666666,with_location,gemini,True,False
-2,variable misuse fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-3,variable misuse fault,infinite loop error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-4,condition fault,runtime error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-5,condition fault,infinite loop error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-6,indexing fault,infinite loop error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-7,variable misuse fault,format error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-8,variable misuse fault,infinite loop error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-9,variable assign fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-10,variable misuse fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-11,variable assign fault,output error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-12,indexing fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-13,condition fault,output error,edge-case impact,gemini-python-with_location,0.0,with_location,gemini,False,False
-14,variable assign fault,runtime error,base-case impact,gemini-python-with_location,0.6666666666666666,with_location,gemini,True,False
-15,indexing fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-16,variable assign fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-17,variable assign fault,output error,base-case impact,gemini-python-with_location,0.6666666666666666,with_location,gemini,True,False
-18,indexing fault,output error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-19,variable assign fault,output error,base-case impact,gemini-python-with_location,0.3333333333333333,with_location,gemini,True,False
-20,condition fault,infinite loop error,all-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-21,variable misuse fault,runtime error,all-case impact,gemini-python-with_location,0.0,with_location,gemini,False,False
-22,variable assign fault,format error,edge-case impact,gemini-python-with_location,0.0,with_location,gemini,False,False
-23,condition fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-24,indexing fault,runtime error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-25,condition fault,runtime error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-26,variable assign fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-27,condition fault,output error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-28,variable assign missing fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-29,variable assign fault,output error,edge-case impact,gemini-python-with_location,0.6666666666666666,with_location,gemini,True,False
-30,variable assign fault,output error,base-case impact,gemini-python-with_location,0.6666666666666666,with_location,gemini,True,False
-31,indexing fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-32,variable misuse fault,output error,all-case impact,gemini-python-with_location,0.6666666666666666,with_location,gemini,True,False
-33,variable assign missing fault,output error,base-case impact,gemini-python-with_location,0.6666666666666666,with_location,gemini,True,False
-34,condition fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-35,condition fault,infinite loop error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-36,variable assign fault,output error,edge-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-37,variable assign fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-38,condition fault,output error,all-case impact,gemini-python-with_location,0.3333333333333333,with_location,gemini,True,False
-39,variable assign missing fault,format error,all-case impact,gemini-python-with_location,1.0,with_location,gemini,True,True
-40,variable assign fault,infinite loop error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-41,condition fault,infinite loop error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-42,variable misuse fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-43,variable misuse fault,infinite loop error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-44,condition fault,runtime error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-45,condition fault,infinite loop error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-46,indexing fault,infinite loop error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-47,variable misuse fault,format error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-48,variable misuse fault,infinite loop error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-49,variable assign fault,output error,base-case impact,gpt35-python-with_lib,0.6666666666666666,with_lib,gpt35,True,False
-50,variable misuse fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-51,variable assign fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-52,indexing fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-53,condition fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-54,variable assign fault,runtime error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-55,indexing fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-56,variable assign fault,output error,base-case impact,gpt35-python-with_lib,0.6666666666666666,with_lib,gpt35,True,False
-57,variable assign fault,output error,base-case impact,gpt35-python-with_lib,0.0,with_lib,gpt35,False,False
-58,indexing fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-59,variable assign fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-60,condition fault,infinite loop error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-61,variable misuse fault,runtime error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-62,variable assign fault,format error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-63,condition fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-64,indexing fault,runtime error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-65,condition fault,runtime error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-66,variable assign fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-67,condition fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-68,variable assign missing fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-69,variable assign fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-70,variable assign fault,output error,base-case impact,gpt35-python-with_lib,0.6666666666666666,with_lib,gpt35,True,False
-71,indexing fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-72,variable misuse fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-73,variable assign missing fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-74,condition fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-75,condition fault,infinite loop error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-76,variable assign fault,output error,edge-case impact,gpt35-python-with_lib,0.0,with_lib,gpt35,False,False
-77,variable assign fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,gpt35,True,True
-78,condition fault,output error,all-case impact,gpt35-python-with_lib,0.3333333333333333,with_lib,gpt35,True,False
-79,variable assign missing fault,format error,all-case impact,gpt35-python-with_lib,0.0,with_lib,gpt35,False,False
-80,variable assign fault,infinite loop error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-81,condition fault,infinite loop error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-82,variable misuse fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-83,variable misuse fault,infinite loop error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-84,condition fault,runtime error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-85,condition fault,infinite loop error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-86,indexing fault,infinite loop error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-87,variable misuse fault,format error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-88,variable misuse fault,infinite loop error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-89,variable assign fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-90,variable misuse fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-91,variable assign fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-92,indexing fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-93,condition fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-94,variable assign fault,runtime error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-95,indexing fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-96,variable assign fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-97,variable assign fault,output error,base-case impact,gpt35-python-with_location,0.0,with_location,gpt35,False,False
-98,indexing fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-99,variable assign fault,output error,base-case impact,gpt35-python-with_location,0.6666666666666666,with_location,gpt35,True,False
-100,condition fault,infinite loop error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-101,variable misuse fault,runtime error,all-case impact,gpt35-python-with_location,0.6666666666666666,with_location,gpt35,True,False
-102,variable assign fault,format error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-103,condition fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-104,indexing fault,runtime error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-105,condition fault,runtime error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-106,variable assign fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-107,condition fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-108,variable assign missing fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-109,variable assign fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-110,variable assign fault,output error,base-case impact,gpt35-python-with_location,0.0,with_location,gpt35,False,False
-111,indexing fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-112,variable misuse fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-113,variable assign missing fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-114,condition fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-115,condition fault,infinite loop error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-116,variable assign fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-117,variable assign fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-118,condition fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,gpt35,True,True
-119,variable assign missing fault,format error,all-case impact,gpt35-python-with_location,0.3333333333333333,with_location,gpt35,True,False
-120,variable assign fault,infinite loop error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-121,condition fault,infinite loop error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-122,variable misuse fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-123,variable misuse fault,infinite loop error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-124,condition fault,runtime error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-125,condition fault,infinite loop error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-126,indexing fault,infinite loop error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-127,variable misuse fault,format error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-128,variable misuse fault,infinite loop error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-129,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-130,variable misuse fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-131,variable assign fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-132,indexing fault,output error,base-case impact,gpt4-python-with_location,0.6666666666666666,with_location,gpt4,True,False
-133,condition fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-134,variable assign fault,runtime error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-135,indexing fault,output error,base-case impact,gpt4-python-with_location,0.0,with_location,gpt4,False,False
-136,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-137,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-138,indexing fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-139,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-140,condition fault,infinite loop error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-141,variable misuse fault,runtime error,all-case impact,gpt4-python-with_location,0.6666666666666666,with_location,gpt4,True,False
-142,variable assign fault,format error,edge-case impact,gpt4-python-with_location,0.3333333333333333,with_location,gpt4,True,False
-143,condition fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-144,indexing fault,runtime error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-145,condition fault,runtime error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-146,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-147,condition fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-148,variable assign missing fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-149,variable assign fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-150,variable assign fault,output error,base-case impact,gpt4-python-with_location,0.6666666666666666,with_location,gpt4,True,False
-151,indexing fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-152,variable misuse fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-153,variable assign missing fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-154,condition fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-155,condition fault,infinite loop error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-156,variable assign fault,output error,edge-case impact,gpt4-python-with_location,0.3333333333333333,with_location,gpt4,True,False
-157,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-158,condition fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,gpt4,True,True
-159,variable assign missing fault,format error,all-case impact,gpt4-python-with_location,0.0,with_location,gpt4,False,False
-160,variable assign fault,infinite loop error,all-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-161,condition fault,infinite loop error,edge-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-162,variable misuse fault,output error,all-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-163,variable misuse fault,infinite loop error,edge-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-164,condition fault,runtime error,edge-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,gemini,True,False
-165,condition fault,infinite loop error,edge-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-166,indexing fault,infinite loop error,edge-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,gemini,True,False
-167,variable misuse fault,format error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-168,variable misuse fault,infinite loop error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-169,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.0,with_lib,gemini,False,False
-170,variable misuse fault,output error,all-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,gemini,True,False
-171,variable assign fault,output error,edge-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-172,indexing fault,output error,base-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,gemini,True,False
-173,condition fault,output error,edge-case impact,gemini-python-with_lib,0.3333333333333333,with_lib,gemini,True,False
-174,variable assign fault,runtime error,base-case impact,gemini-python-with_lib,0.0,with_lib,gemini,False,False
-175,indexing fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-176,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,gemini,True,False
-177,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.3333333333333333,with_lib,gemini,True,False
-178,indexing fault,output error,edge-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-179,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.0,with_lib,gemini,False,False
-180,condition fault,infinite loop error,all-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-181,variable misuse fault,runtime error,all-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-182,variable assign fault,format error,edge-case impact,gemini-python-with_lib,0.0,with_lib,gemini,False,False
-183,condition fault,output error,all-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-184,indexing fault,runtime error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-185,condition fault,runtime error,edge-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-186,variable assign fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-187,condition fault,output error,edge-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,gemini,True,False
-188,variable assign missing fault,output error,all-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-189,variable assign fault,output error,edge-case impact,gemini-python-with_lib,0.0,with_lib,gemini,False,False
-190,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,gemini,True,False
-191,indexing fault,output error,all-case impact,gemini-python-with_lib,0.3333333333333333,with_lib,gemini,True,False
-192,variable misuse fault,output error,all-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,gemini,True,False
-193,variable assign missing fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-194,condition fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-195,condition fault,infinite loop error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-196,variable assign fault,output error,edge-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-197,variable assign fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,gemini,True,True
-198,condition fault,output error,all-case impact,gemini-python-with_lib,0.0,with_lib,gemini,False,False
-199,variable assign missing fault,format error,all-case impact,gemini-python-with_lib,0.3333333333333333,with_lib,gemini,True,False
-200,variable assign fault,infinite loop error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-201,condition fault,infinite loop error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-202,variable misuse fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-203,variable misuse fault,infinite loop error,edge-case impact,gpt4-python-with_lib,0.3333333333333333,with_lib,gpt4,True,False
-204,condition fault,runtime error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-205,condition fault,infinite loop error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-206,indexing fault,infinite loop error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-207,variable misuse fault,format error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-208,variable misuse fault,infinite loop error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-209,variable assign fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-210,variable misuse fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-211,variable assign fault,output error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-212,indexing fault,output error,base-case impact,gpt4-python-with_lib,0.6666666666666666,with_lib,gpt4,True,False
-213,condition fault,output error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-214,variable assign fault,runtime error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-215,indexing fault,output error,base-case impact,gpt4-python-with_lib,0.0,with_lib,gpt4,False,False
-216,variable assign fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-217,variable assign fault,output error,base-case impact,gpt4-python-with_lib,0.6666666666666666,with_lib,gpt4,True,False
-218,indexing fault,output error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-219,variable assign fault,output error,base-case impact,gpt4-python-with_lib,0.0,with_lib,gpt4,False,False
-220,condition fault,infinite loop error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-221,variable misuse fault,runtime error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-222,variable assign fault,format error,edge-case impact,gpt4-python-with_lib,0.6666666666666666,with_lib,gpt4,True,False
-223,condition fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-224,indexing fault,runtime error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-225,condition fault,runtime error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-226,variable assign fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-227,condition fault,output error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-228,variable assign missing fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-229,variable assign fault,output error,edge-case impact,gpt4-python-with_lib,0.6666666666666666,with_lib,gpt4,True,False
-230,variable assign fault,output error,base-case impact,gpt4-python-with_lib,0.0,with_lib,gpt4,False,False
-231,indexing fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-232,variable misuse fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-233,variable assign missing fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-234,condition fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-235,condition fault,infinite loop error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-236,variable assign fault,output error,edge-case impact,gpt4-python-with_lib,0.0,with_lib,gpt4,False,False
-237,variable assign fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-238,condition fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,gpt4,True,True
-239,variable assign missing fault,format error,all-case impact,gpt4-python-with_lib,0.0,with_lib,gpt4,False,False
-240,variable assign fault,infinite loop error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-241,condition fault,infinite loop error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-242,variable misuse fault,output error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-243,variable misuse fault,infinite loop error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-244,condition fault,runtime error,edge-case impact,gpt35-python-basic,0.6666666666666666,basic,gpt35,True,False
-245,condition fault,infinite loop error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-246,indexing fault,infinite loop error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-247,variable misuse fault,format error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-248,variable misuse fault,infinite loop error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-249,variable assign fault,output error,base-case impact,gpt35-python-basic,0.0,basic,gpt35,False,False
-250,variable misuse fault,output error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-251,variable assign fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-252,indexing fault,output error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-253,condition fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-254,variable assign fault,runtime error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-255,indexing fault,output error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-256,variable assign fault,output error,base-case impact,gpt35-python-basic,0.6666666666666666,basic,gpt35,True,False
-257,variable assign fault,output error,base-case impact,gpt35-python-basic,0.0,basic,gpt35,False,False
-258,indexing fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-259,variable assign fault,output error,base-case impact,gpt35-python-basic,0.0,basic,gpt35,False,False
-260,condition fault,infinite loop error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-261,variable misuse fault,runtime error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-262,variable assign fault,format error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-263,condition fault,output error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-264,indexing fault,runtime error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-265,condition fault,runtime error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-266,variable assign fault,output error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-267,condition fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-268,variable assign missing fault,output error,all-case impact,gpt35-python-basic,0.6666666666666666,basic,gpt35,True,False
-269,variable assign fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-270,variable assign fault,output error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-271,indexing fault,output error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-272,variable misuse fault,output error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-273,variable assign missing fault,output error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-274,condition fault,output error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-275,condition fault,infinite loop error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-276,variable assign fault,output error,edge-case impact,gpt35-python-basic,0.0,basic,gpt35,False,False
-277,variable assign fault,output error,base-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-278,condition fault,output error,all-case impact,gpt35-python-basic,1.0,basic,gpt35,True,True
-279,variable assign missing fault,format error,all-case impact,gpt35-python-basic,0.0,basic,gpt35,False,False
-280,variable assign fault,infinite loop error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-281,condition fault,infinite loop error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-282,variable misuse fault,output error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-283,variable misuse fault,infinite loop error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-284,condition fault,runtime error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-285,condition fault,infinite loop error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-286,indexing fault,infinite loop error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-287,variable misuse fault,format error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-288,variable misuse fault,infinite loop error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-289,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-290,variable misuse fault,output error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-291,variable assign fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-292,indexing fault,output error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-293,condition fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-294,variable assign fault,runtime error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-295,indexing fault,output error,base-case impact,gpt4-python-basic,0.0,basic,gpt4,False,False
-296,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-297,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-298,indexing fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-299,variable assign fault,output error,base-case impact,gpt4-python-basic,0.0,basic,gpt4,False,False
-300,condition fault,infinite loop error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-301,variable misuse fault,runtime error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-302,variable assign fault,format error,edge-case impact,gpt4-python-basic,0.3333333333333333,basic,gpt4,True,False
-303,condition fault,output error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-304,indexing fault,runtime error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-305,condition fault,runtime error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-306,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-307,condition fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-308,variable assign missing fault,output error,all-case impact,gpt4-python-basic,0.0,basic,gpt4,False,False
-309,variable assign fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-310,variable assign fault,output error,base-case impact,gpt4-python-basic,0.0,basic,gpt4,False,False
-311,indexing fault,output error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-312,variable misuse fault,output error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-313,variable assign missing fault,output error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-314,condition fault,output error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-315,condition fault,infinite loop error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-316,variable assign fault,output error,edge-case impact,gpt4-python-basic,0.0,basic,gpt4,False,False
-317,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-318,condition fault,output error,all-case impact,gpt4-python-basic,1.0,basic,gpt4,True,True
-319,variable assign missing fault,format error,all-case impact,gpt4-python-basic,0.0,basic,gpt4,False,False
-320,variable assign fault,infinite loop error,all-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-321,condition fault,infinite loop error,edge-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-322,variable misuse fault,output error,all-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-323,variable misuse fault,infinite loop error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,gemini,True,False
-324,condition fault,runtime error,edge-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-325,condition fault,infinite loop error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,gemini,True,False
-326,indexing fault,infinite loop error,edge-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-327,variable misuse fault,format error,base-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-328,variable misuse fault,infinite loop error,base-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-329,variable assign fault,output error,base-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-330,variable misuse fault,output error,all-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-331,variable assign fault,output error,edge-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-332,indexing fault,output error,base-case impact,gemini-python-basic,0.6666666666666666,basic,gemini,True,False
-333,condition fault,output error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,gemini,True,False
-334,variable assign fault,runtime error,base-case impact,gemini-python-basic,0.3333333333333333,basic,gemini,True,False
-335,indexing fault,output error,base-case impact,gemini-python-basic,0.3333333333333333,basic,gemini,True,False
-336,variable assign fault,output error,base-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-337,variable assign fault,output error,base-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-338,indexing fault,output error,edge-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-339,variable assign fault,output error,base-case impact,gemini-python-basic,0.3333333333333333,basic,gemini,True,False
-340,condition fault,infinite loop error,all-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-341,variable misuse fault,runtime error,all-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-342,variable assign fault,format error,edge-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-343,condition fault,output error,all-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-344,indexing fault,runtime error,base-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-345,condition fault,runtime error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,gemini,True,False
-346,variable assign fault,output error,base-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-347,condition fault,output error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,gemini,True,False
-348,variable assign missing fault,output error,all-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-349,variable assign fault,output error,edge-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-350,variable assign fault,output error,base-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-351,indexing fault,output error,all-case impact,gemini-python-basic,0.3333333333333333,basic,gemini,True,False
-352,variable misuse fault,output error,all-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-353,variable assign missing fault,output error,base-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-354,condition fault,output error,base-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-355,condition fault,infinite loop error,base-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-356,variable assign fault,output error,edge-case impact,gemini-python-basic,0.0,basic,gemini,False,False
-357,variable assign fault,output error,base-case impact,gemini-python-basic,1.0,basic,gemini,True,True
-358,condition fault,output error,all-case impact,gemini-python-basic,0.3333333333333333,basic,gemini,True,False
-359,variable assign missing fault,format error,all-case impact,gemini-python-basic,0.0,basic,gemini,False,False
+,prog_name,bug_type,bug_consequence,bug_impact,exp_name,correct_ratio,prompt,model,available,stable
+0,bitcount,variable assign fault,infinite loop error,all-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+1,breadth_first_search,condition fault,infinite loop error,edge-case impact,gemini-python-with_location,0.6666666666666666,with_location,Gemini,1,0
+2,bucketsort,variable misuse fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+3,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+4,detect_cycle,condition fault,runtime error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+5,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+6,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+7,flatten,variable misuse fault,format error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+8,gcd,variable misuse fault,infinite loop error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+9,get_factors,variable assign fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+10,hanoi,variable misuse fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+11,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+12,kheapsort,indexing fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+13,knapsack,condition fault,output error,edge-case impact,gemini-python-with_location,0.0,with_location,Gemini,0,0
+14,kth,variable assign fault,runtime error,base-case impact,gemini-python-with_location,0.6666666666666666,with_location,Gemini,1,0
+15,lcs_length,indexing fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+16,levenshtein,variable assign fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+17,lis,variable assign fault,output error,base-case impact,gemini-python-with_location,0.6666666666666666,with_location,Gemini,1,0
+18,longest_common_subsequence,indexing fault,output error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+19,max_sublist_sum,variable assign fault,output error,base-case impact,gemini-python-with_location,0.3333333333333333,with_location,Gemini,1,0
+20,mergesort,condition fault,infinite loop error,all-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+21,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gemini-python-with_location,0.0,with_location,Gemini,0,0
+22,next_palindrome,variable assign fault,format error,edge-case impact,gemini-python-with_location,0.0,with_location,Gemini,0,0
+23,next_permutation,condition fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+24,pascal,indexing fault,runtime error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+25,possible_change,condition fault,runtime error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+26,powerset,variable assign fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+27,quicksort,condition fault,output error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+28,reverse_linked_list,variable assign missing fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+29,rpn_eval,variable assign fault,output error,edge-case impact,gemini-python-with_location,0.6666666666666666,with_location,Gemini,1,0
+30,shortest_path_length,variable assign fault,output error,base-case impact,gemini-python-with_location,0.6666666666666666,with_location,Gemini,1,0
+31,shortest_path_lengths,indexing fault,output error,all-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+32,shortest_paths,variable misuse fault,output error,all-case impact,gemini-python-with_location,0.6666666666666666,with_location,Gemini,1,0
+33,shunting_yard,variable assign missing fault,output error,base-case impact,gemini-python-with_location,0.6666666666666666,with_location,Gemini,1,0
+34,sieve,condition fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+35,sqrt,condition fault,infinite loop error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+36,subsequences,variable assign fault,output error,edge-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+37,to_base,variable assign fault,output error,base-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+38,topological_ordering,condition fault,output error,all-case impact,gemini-python-with_location,0.3333333333333333,with_location,Gemini,1,0
+39,wrap,variable assign missing fault,format error,all-case impact,gemini-python-with_location,1.0,with_location,Gemini,1,1
+40,bitcount,variable assign fault,infinite loop error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+41,breadth_first_search,condition fault,infinite loop error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+42,bucketsort,variable misuse fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+43,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+44,detect_cycle,condition fault,runtime error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+45,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+46,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+47,flatten,variable misuse fault,format error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+48,gcd,variable misuse fault,infinite loop error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+49,get_factors,variable assign fault,output error,base-case impact,gpt35-python-with_lib,0.6666666666666666,with_lib,GPT-3.5,1,0
+50,hanoi,variable misuse fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+51,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+52,kheapsort,indexing fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+53,knapsack,condition fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+54,kth,variable assign fault,runtime error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+55,lcs_length,indexing fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+56,levenshtein,variable assign fault,output error,base-case impact,gpt35-python-with_lib,0.6666666666666666,with_lib,GPT-3.5,1,0
+57,lis,variable assign fault,output error,base-case impact,gpt35-python-with_lib,0.0,with_lib,GPT-3.5,0,0
+58,longest_common_subsequence,indexing fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+59,max_sublist_sum,variable assign fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+60,mergesort,condition fault,infinite loop error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+61,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+62,next_palindrome,variable assign fault,format error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+63,next_permutation,condition fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+64,pascal,indexing fault,runtime error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+65,possible_change,condition fault,runtime error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+66,powerset,variable assign fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+67,quicksort,condition fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+68,reverse_linked_list,variable assign missing fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+69,rpn_eval,variable assign fault,output error,edge-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+70,shortest_path_length,variable assign fault,output error,base-case impact,gpt35-python-with_lib,0.6666666666666666,with_lib,GPT-3.5,1,0
+71,shortest_path_lengths,indexing fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+72,shortest_paths,variable misuse fault,output error,all-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+73,shunting_yard,variable assign missing fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+74,sieve,condition fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+75,sqrt,condition fault,infinite loop error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+76,subsequences,variable assign fault,output error,edge-case impact,gpt35-python-with_lib,0.0,with_lib,GPT-3.5,0,0
+77,to_base,variable assign fault,output error,base-case impact,gpt35-python-with_lib,1.0,with_lib,GPT-3.5,1,1
+78,topological_ordering,condition fault,output error,all-case impact,gpt35-python-with_lib,0.3333333333333333,with_lib,GPT-3.5,1,0
+79,wrap,variable assign missing fault,format error,all-case impact,gpt35-python-with_lib,0.0,with_lib,GPT-3.5,0,0
+80,bitcount,variable assign fault,infinite loop error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+81,breadth_first_search,condition fault,infinite loop error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+82,bucketsort,variable misuse fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+83,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+84,detect_cycle,condition fault,runtime error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+85,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+86,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+87,flatten,variable misuse fault,format error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+88,gcd,variable misuse fault,infinite loop error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+89,get_factors,variable assign fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+90,hanoi,variable misuse fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+91,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+92,kheapsort,indexing fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+93,knapsack,condition fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+94,kth,variable assign fault,runtime error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+95,lcs_length,indexing fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+96,levenshtein,variable assign fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+97,lis,variable assign fault,output error,base-case impact,gpt35-python-with_location,0.0,with_location,GPT-3.5,0,0
+98,longest_common_subsequence,indexing fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+99,max_sublist_sum,variable assign fault,output error,base-case impact,gpt35-python-with_location,0.6666666666666666,with_location,GPT-3.5,1,0
+100,mergesort,condition fault,infinite loop error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+101,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gpt35-python-with_location,0.6666666666666666,with_location,GPT-3.5,1,0
+102,next_palindrome,variable assign fault,format error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+103,next_permutation,condition fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+104,pascal,indexing fault,runtime error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+105,possible_change,condition fault,runtime error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+106,powerset,variable assign fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+107,quicksort,condition fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+108,reverse_linked_list,variable assign missing fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+109,rpn_eval,variable assign fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+110,shortest_path_length,variable assign fault,output error,base-case impact,gpt35-python-with_location,0.0,with_location,GPT-3.5,0,0
+111,shortest_path_lengths,indexing fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+112,shortest_paths,variable misuse fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+113,shunting_yard,variable assign missing fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+114,sieve,condition fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+115,sqrt,condition fault,infinite loop error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+116,subsequences,variable assign fault,output error,edge-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+117,to_base,variable assign fault,output error,base-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+118,topological_ordering,condition fault,output error,all-case impact,gpt35-python-with_location,1.0,with_location,GPT-3.5,1,1
+119,wrap,variable assign missing fault,format error,all-case impact,gpt35-python-with_location,0.3333333333333333,with_location,GPT-3.5,1,0
+120,bitcount,variable assign fault,infinite loop error,all-case impact,claude-python-basic,1.0,basic,Claude,1,1
+121,breadth_first_search,condition fault,infinite loop error,edge-case impact,claude-python-basic,1.0,basic,Claude,1,1
+122,bucketsort,variable misuse fault,output error,all-case impact,claude-python-basic,1.0,basic,Claude,1,1
+123,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,claude-python-basic,0.6666666666666666,basic,Claude,1,0
+124,detect_cycle,condition fault,runtime error,edge-case impact,claude-python-basic,1.0,basic,Claude,1,1
+125,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,claude-python-basic,0.0,basic,Claude,0,0
+126,find_in_sorted,indexing fault,infinite loop error,edge-case impact,claude-python-basic,1.0,basic,Claude,1,1
+127,flatten,variable misuse fault,format error,base-case impact,claude-python-basic,0.3333333333333333,basic,Claude,1,0
+128,gcd,variable misuse fault,infinite loop error,base-case impact,claude-python-basic,0.6666666666666666,basic,Claude,1,0
+129,get_factors,variable assign fault,output error,base-case impact,claude-python-basic,0.0,basic,Claude,0,0
+130,hanoi,variable misuse fault,output error,all-case impact,claude-python-basic,0.6666666666666666,basic,Claude,1,0
+131,is_valid_parenthesization,variable assign fault,output error,edge-case impact,claude-python-basic,1.0,basic,Claude,1,1
+132,kheapsort,indexing fault,output error,base-case impact,claude-python-basic,1.0,basic,Claude,1,1
+133,knapsack,condition fault,output error,edge-case impact,claude-python-basic,1.0,basic,Claude,1,1
+134,kth,variable assign fault,runtime error,base-case impact,claude-python-basic,1.0,basic,Claude,1,1
+135,lcs_length,indexing fault,output error,base-case impact,claude-python-basic,0.0,basic,Claude,0,0
+136,levenshtein,variable assign fault,output error,base-case impact,claude-python-basic,1.0,basic,Claude,1,1
+137,lis,variable assign fault,output error,base-case impact,claude-python-basic,0.0,basic,Claude,0,0
+138,longest_common_subsequence,indexing fault,output error,edge-case impact,claude-python-basic,0.6666666666666666,basic,Claude,1,0
+139,max_sublist_sum,variable assign fault,output error,base-case impact,claude-python-basic,0.3333333333333333,basic,Claude,1,0
+140,mergesort,condition fault,infinite loop error,all-case impact,claude-python-basic,1.0,basic,Claude,1,1
+141,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,claude-python-basic,1.0,basic,Claude,1,1
+142,next_palindrome,variable assign fault,format error,edge-case impact,claude-python-basic,1.0,basic,Claude,1,1
+143,next_permutation,condition fault,output error,all-case impact,claude-python-basic,1.0,basic,Claude,1,1
+144,pascal,indexing fault,runtime error,base-case impact,claude-python-basic,1.0,basic,Claude,1,1
+145,possible_change,condition fault,runtime error,edge-case impact,claude-python-basic,1.0,basic,Claude,1,1
+146,powerset,variable assign fault,output error,base-case impact,claude-python-basic,0.6666666666666666,basic,Claude,1,0
+147,quicksort,condition fault,output error,edge-case impact,claude-python-basic,0.6666666666666666,basic,Claude,1,0
+148,reverse_linked_list,variable assign missing fault,output error,all-case impact,claude-python-basic,1.0,basic,Claude,1,1
+149,rpn_eval,variable assign fault,output error,edge-case impact,claude-python-basic,0.3333333333333333,basic,Claude,1,0
+150,shortest_path_length,variable assign fault,output error,base-case impact,claude-python-basic,0.6666666666666666,basic,Claude,1,0
+151,shortest_path_lengths,indexing fault,output error,all-case impact,claude-python-basic,0.0,basic,Claude,0,0
+152,shortest_paths,variable misuse fault,output error,all-case impact,claude-python-basic,0.3333333333333333,basic,Claude,1,0
+153,shunting_yard,variable assign missing fault,output error,base-case impact,claude-python-basic,1.0,basic,Claude,1,1
+154,sieve,condition fault,output error,base-case impact,claude-python-basic,1.0,basic,Claude,1,1
+155,sqrt,condition fault,infinite loop error,base-case impact,claude-python-basic,1.0,basic,Claude,1,1
+156,subsequences,variable assign fault,output error,edge-case impact,claude-python-basic,0.0,basic,Claude,0,0
+157,to_base,variable assign fault,output error,base-case impact,claude-python-basic,1.0,basic,Claude,1,1
+158,topological_ordering,condition fault,output error,all-case impact,claude-python-basic,1.0,basic,Claude,1,1
+159,wrap,variable assign missing fault,format error,all-case impact,claude-python-basic,0.0,basic,Claude,0,0
+160,bitcount,variable assign fault,infinite loop error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+161,breadth_first_search,condition fault,infinite loop error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+162,bucketsort,variable misuse fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+163,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+164,detect_cycle,condition fault,runtime error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+165,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+166,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+167,flatten,variable misuse fault,format error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+168,gcd,variable misuse fault,infinite loop error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+169,get_factors,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+170,hanoi,variable misuse fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+171,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+172,kheapsort,indexing fault,output error,base-case impact,gpt4-python-with_location,0.6666666666666666,with_location,GPT-4,1,0
+173,knapsack,condition fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+174,kth,variable assign fault,runtime error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+175,lcs_length,indexing fault,output error,base-case impact,gpt4-python-with_location,0.0,with_location,GPT-4,0,0
+176,levenshtein,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+177,lis,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+178,longest_common_subsequence,indexing fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+179,max_sublist_sum,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+180,mergesort,condition fault,infinite loop error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+181,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gpt4-python-with_location,0.6666666666666666,with_location,GPT-4,1,0
+182,next_palindrome,variable assign fault,format error,edge-case impact,gpt4-python-with_location,0.3333333333333333,with_location,GPT-4,1,0
+183,next_permutation,condition fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+184,pascal,indexing fault,runtime error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+185,possible_change,condition fault,runtime error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+186,powerset,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+187,quicksort,condition fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+188,reverse_linked_list,variable assign missing fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+189,rpn_eval,variable assign fault,output error,edge-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+190,shortest_path_length,variable assign fault,output error,base-case impact,gpt4-python-with_location,0.6666666666666666,with_location,GPT-4,1,0
+191,shortest_path_lengths,indexing fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+192,shortest_paths,variable misuse fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+193,shunting_yard,variable assign missing fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+194,sieve,condition fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+195,sqrt,condition fault,infinite loop error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+196,subsequences,variable assign fault,output error,edge-case impact,gpt4-python-with_location,0.3333333333333333,with_location,GPT-4,1,0
+197,to_base,variable assign fault,output error,base-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+198,topological_ordering,condition fault,output error,all-case impact,gpt4-python-with_location,1.0,with_location,GPT-4,1,1
+199,wrap,variable assign missing fault,format error,all-case impact,gpt4-python-with_location,0.0,with_location,GPT-4,0,0
+200,bitcount,variable assign fault,infinite loop error,all-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+201,breadth_first_search,condition fault,infinite loop error,edge-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+202,bucketsort,variable misuse fault,output error,all-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+203,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+204,detect_cycle,condition fault,runtime error,edge-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,Gemini,1,0
+205,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+206,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,Gemini,1,0
+207,flatten,variable misuse fault,format error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+208,gcd,variable misuse fault,infinite loop error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+209,get_factors,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.0,with_lib,Gemini,0,0
+210,hanoi,variable misuse fault,output error,all-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,Gemini,1,0
+211,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+212,kheapsort,indexing fault,output error,base-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,Gemini,1,0
+213,knapsack,condition fault,output error,edge-case impact,gemini-python-with_lib,0.3333333333333333,with_lib,Gemini,1,0
+214,kth,variable assign fault,runtime error,base-case impact,gemini-python-with_lib,0.0,with_lib,Gemini,0,0
+215,lcs_length,indexing fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+216,levenshtein,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,Gemini,1,0
+217,lis,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.3333333333333333,with_lib,Gemini,1,0
+218,longest_common_subsequence,indexing fault,output error,edge-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+219,max_sublist_sum,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.0,with_lib,Gemini,0,0
+220,mergesort,condition fault,infinite loop error,all-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+221,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+222,next_palindrome,variable assign fault,format error,edge-case impact,gemini-python-with_lib,0.0,with_lib,Gemini,0,0
+223,next_permutation,condition fault,output error,all-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+224,pascal,indexing fault,runtime error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+225,possible_change,condition fault,runtime error,edge-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+226,powerset,variable assign fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+227,quicksort,condition fault,output error,edge-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,Gemini,1,0
+228,reverse_linked_list,variable assign missing fault,output error,all-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+229,rpn_eval,variable assign fault,output error,edge-case impact,gemini-python-with_lib,0.0,with_lib,Gemini,0,0
+230,shortest_path_length,variable assign fault,output error,base-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,Gemini,1,0
+231,shortest_path_lengths,indexing fault,output error,all-case impact,gemini-python-with_lib,0.3333333333333333,with_lib,Gemini,1,0
+232,shortest_paths,variable misuse fault,output error,all-case impact,gemini-python-with_lib,0.6666666666666666,with_lib,Gemini,1,0
+233,shunting_yard,variable assign missing fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+234,sieve,condition fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+235,sqrt,condition fault,infinite loop error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+236,subsequences,variable assign fault,output error,edge-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+237,to_base,variable assign fault,output error,base-case impact,gemini-python-with_lib,1.0,with_lib,Gemini,1,1
+238,topological_ordering,condition fault,output error,all-case impact,gemini-python-with_lib,0.0,with_lib,Gemini,0,0
+239,wrap,variable assign missing fault,format error,all-case impact,gemini-python-with_lib,0.3333333333333333,with_lib,Gemini,1,0
+240,bitcount,variable assign fault,infinite loop error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+241,breadth_first_search,condition fault,infinite loop error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+242,bucketsort,variable misuse fault,output error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+243,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+244,detect_cycle,condition fault,runtime error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+245,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+246,find_in_sorted,indexing fault,infinite loop error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+247,flatten,variable misuse fault,format error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+248,gcd,variable misuse fault,infinite loop error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+249,get_factors,variable assign fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+250,hanoi,variable misuse fault,output error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+251,is_valid_parenthesization,variable assign fault,output error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+252,kheapsort,indexing fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+253,knapsack,condition fault,output error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+254,kth,variable assign fault,runtime error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+255,lcs_length,indexing fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+256,levenshtein,variable assign fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+257,lis,variable assign fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+258,longest_common_subsequence,indexing fault,output error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+259,max_sublist_sum,variable assign fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+260,mergesort,condition fault,infinite loop error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+261,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+262,next_palindrome,variable assign fault,format error,edge-case impact,claude-python-with_location,0.6666666666666666,with_location,Claude,1,0
+263,next_permutation,condition fault,output error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+264,pascal,indexing fault,runtime error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+265,possible_change,condition fault,runtime error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+266,powerset,variable assign fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+267,quicksort,condition fault,output error,edge-case impact,claude-python-with_location,0.6666666666666666,with_location,Claude,1,0
+268,reverse_linked_list,variable assign missing fault,output error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+269,rpn_eval,variable assign fault,output error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+270,shortest_path_length,variable assign fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+271,shortest_path_lengths,indexing fault,output error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+272,shortest_paths,variable misuse fault,output error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+273,shunting_yard,variable assign missing fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+274,sieve,condition fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+275,sqrt,condition fault,infinite loop error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+276,subsequences,variable assign fault,output error,edge-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+277,to_base,variable assign fault,output error,base-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+278,topological_ordering,condition fault,output error,all-case impact,claude-python-with_location,1.0,with_location,Claude,1,1
+279,wrap,variable assign missing fault,format error,all-case impact,claude-python-with_location,0.0,with_location,Claude,0,0
+280,bitcount,variable assign fault,infinite loop error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+281,breadth_first_search,condition fault,infinite loop error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+282,bucketsort,variable misuse fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+283,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gpt4-python-with_lib,0.3333333333333333,with_lib,GPT-4,1,0
+284,detect_cycle,condition fault,runtime error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+285,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+286,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+287,flatten,variable misuse fault,format error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+288,gcd,variable misuse fault,infinite loop error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+289,get_factors,variable assign fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+290,hanoi,variable misuse fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+291,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+292,kheapsort,indexing fault,output error,base-case impact,gpt4-python-with_lib,0.6666666666666666,with_lib,GPT-4,1,0
+293,knapsack,condition fault,output error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+294,kth,variable assign fault,runtime error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+295,lcs_length,indexing fault,output error,base-case impact,gpt4-python-with_lib,0.0,with_lib,GPT-4,0,0
+296,levenshtein,variable assign fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+297,lis,variable assign fault,output error,base-case impact,gpt4-python-with_lib,0.6666666666666666,with_lib,GPT-4,1,0
+298,longest_common_subsequence,indexing fault,output error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+299,max_sublist_sum,variable assign fault,output error,base-case impact,gpt4-python-with_lib,0.0,with_lib,GPT-4,0,0
+300,mergesort,condition fault,infinite loop error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+301,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+302,next_palindrome,variable assign fault,format error,edge-case impact,gpt4-python-with_lib,0.6666666666666666,with_lib,GPT-4,1,0
+303,next_permutation,condition fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+304,pascal,indexing fault,runtime error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+305,possible_change,condition fault,runtime error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+306,powerset,variable assign fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+307,quicksort,condition fault,output error,edge-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+308,reverse_linked_list,variable assign missing fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+309,rpn_eval,variable assign fault,output error,edge-case impact,gpt4-python-with_lib,0.6666666666666666,with_lib,GPT-4,1,0
+310,shortest_path_length,variable assign fault,output error,base-case impact,gpt4-python-with_lib,0.0,with_lib,GPT-4,0,0
+311,shortest_path_lengths,indexing fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+312,shortest_paths,variable misuse fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+313,shunting_yard,variable assign missing fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+314,sieve,condition fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+315,sqrt,condition fault,infinite loop error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+316,subsequences,variable assign fault,output error,edge-case impact,gpt4-python-with_lib,0.0,with_lib,GPT-4,0,0
+317,to_base,variable assign fault,output error,base-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+318,topological_ordering,condition fault,output error,all-case impact,gpt4-python-with_lib,1.0,with_lib,GPT-4,1,1
+319,wrap,variable assign missing fault,format error,all-case impact,gpt4-python-with_lib,0.0,with_lib,GPT-4,0,0
+320,bitcount,variable assign fault,infinite loop error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+321,breadth_first_search,condition fault,infinite loop error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+322,bucketsort,variable misuse fault,output error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+323,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+324,detect_cycle,condition fault,runtime error,edge-case impact,gpt35-python-basic,0.6666666666666666,basic,GPT-3.5,1,0
+325,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+326,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+327,flatten,variable misuse fault,format error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+328,gcd,variable misuse fault,infinite loop error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+329,get_factors,variable assign fault,output error,base-case impact,gpt35-python-basic,0.0,basic,GPT-3.5,0,0
+330,hanoi,variable misuse fault,output error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+331,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+332,kheapsort,indexing fault,output error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+333,knapsack,condition fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+334,kth,variable assign fault,runtime error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+335,lcs_length,indexing fault,output error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+336,levenshtein,variable assign fault,output error,base-case impact,gpt35-python-basic,0.6666666666666666,basic,GPT-3.5,1,0
+337,lis,variable assign fault,output error,base-case impact,gpt35-python-basic,0.0,basic,GPT-3.5,0,0
+338,longest_common_subsequence,indexing fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+339,max_sublist_sum,variable assign fault,output error,base-case impact,gpt35-python-basic,0.0,basic,GPT-3.5,0,0
+340,mergesort,condition fault,infinite loop error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+341,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+342,next_palindrome,variable assign fault,format error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+343,next_permutation,condition fault,output error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+344,pascal,indexing fault,runtime error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+345,possible_change,condition fault,runtime error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+346,powerset,variable assign fault,output error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+347,quicksort,condition fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+348,reverse_linked_list,variable assign missing fault,output error,all-case impact,gpt35-python-basic,0.6666666666666666,basic,GPT-3.5,1,0
+349,rpn_eval,variable assign fault,output error,edge-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+350,shortest_path_length,variable assign fault,output error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+351,shortest_path_lengths,indexing fault,output error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+352,shortest_paths,variable misuse fault,output error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+353,shunting_yard,variable assign missing fault,output error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+354,sieve,condition fault,output error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+355,sqrt,condition fault,infinite loop error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+356,subsequences,variable assign fault,output error,edge-case impact,gpt35-python-basic,0.0,basic,GPT-3.5,0,0
+357,to_base,variable assign fault,output error,base-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+358,topological_ordering,condition fault,output error,all-case impact,gpt35-python-basic,1.0,basic,GPT-3.5,1,1
+359,wrap,variable assign missing fault,format error,all-case impact,gpt35-python-basic,0.0,basic,GPT-3.5,0,0
+360,bitcount,variable assign fault,infinite loop error,all-case impact,claude-python-with_lib,0.6666666666666666,with_lib,Claude,1,0
+361,breadth_first_search,condition fault,infinite loop error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+362,bucketsort,variable misuse fault,output error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+363,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+364,detect_cycle,condition fault,runtime error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+365,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,claude-python-with_lib,0.0,with_lib,Claude,0,0
+366,find_in_sorted,indexing fault,infinite loop error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+367,flatten,variable misuse fault,format error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+368,gcd,variable misuse fault,infinite loop error,base-case impact,claude-python-with_lib,0.3333333333333333,with_lib,Claude,1,0
+369,get_factors,variable assign fault,output error,base-case impact,claude-python-with_lib,0.3333333333333333,with_lib,Claude,1,0
+370,hanoi,variable misuse fault,output error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+371,is_valid_parenthesization,variable assign fault,output error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+372,kheapsort,indexing fault,output error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+373,knapsack,condition fault,output error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+374,kth,variable assign fault,runtime error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+375,lcs_length,indexing fault,output error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+376,levenshtein,variable assign fault,output error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+377,lis,variable assign fault,output error,base-case impact,claude-python-with_lib,0.6666666666666666,with_lib,Claude,1,0
+378,longest_common_subsequence,indexing fault,output error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+379,max_sublist_sum,variable assign fault,output error,base-case impact,claude-python-with_lib,0.0,with_lib,Claude,0,0
+380,mergesort,condition fault,infinite loop error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+381,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+382,next_palindrome,variable assign fault,format error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+383,next_permutation,condition fault,output error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+384,pascal,indexing fault,runtime error,base-case impact,claude-python-with_lib,0.0,with_lib,Claude,0,0
+385,possible_change,condition fault,runtime error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+386,powerset,variable assign fault,output error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+387,quicksort,condition fault,output error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+388,reverse_linked_list,variable assign missing fault,output error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+389,rpn_eval,variable assign fault,output error,edge-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+390,shortest_path_length,variable assign fault,output error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+391,shortest_path_lengths,indexing fault,output error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+392,shortest_paths,variable misuse fault,output error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+393,shunting_yard,variable assign missing fault,output error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+394,sieve,condition fault,output error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+395,sqrt,condition fault,infinite loop error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+396,subsequences,variable assign fault,output error,edge-case impact,claude-python-with_lib,0.0,with_lib,Claude,0,0
+397,to_base,variable assign fault,output error,base-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+398,topological_ordering,condition fault,output error,all-case impact,claude-python-with_lib,1.0,with_lib,Claude,1,1
+399,wrap,variable assign missing fault,format error,all-case impact,claude-python-with_lib,0.0,with_lib,Claude,0,0
+400,bitcount,variable assign fault,infinite loop error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+401,breadth_first_search,condition fault,infinite loop error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+402,bucketsort,variable misuse fault,output error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+403,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+404,detect_cycle,condition fault,runtime error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+405,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+406,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+407,flatten,variable misuse fault,format error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+408,gcd,variable misuse fault,infinite loop error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+409,get_factors,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+410,hanoi,variable misuse fault,output error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+411,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+412,kheapsort,indexing fault,output error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+413,knapsack,condition fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+414,kth,variable assign fault,runtime error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+415,lcs_length,indexing fault,output error,base-case impact,gpt4-python-basic,0.0,basic,GPT-4,0,0
+416,levenshtein,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+417,lis,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+418,longest_common_subsequence,indexing fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+419,max_sublist_sum,variable assign fault,output error,base-case impact,gpt4-python-basic,0.0,basic,GPT-4,0,0
+420,mergesort,condition fault,infinite loop error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+421,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+422,next_palindrome,variable assign fault,format error,edge-case impact,gpt4-python-basic,0.3333333333333333,basic,GPT-4,1,0
+423,next_permutation,condition fault,output error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+424,pascal,indexing fault,runtime error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+425,possible_change,condition fault,runtime error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+426,powerset,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+427,quicksort,condition fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+428,reverse_linked_list,variable assign missing fault,output error,all-case impact,gpt4-python-basic,0.0,basic,GPT-4,0,0
+429,rpn_eval,variable assign fault,output error,edge-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+430,shortest_path_length,variable assign fault,output error,base-case impact,gpt4-python-basic,0.0,basic,GPT-4,0,0
+431,shortest_path_lengths,indexing fault,output error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+432,shortest_paths,variable misuse fault,output error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+433,shunting_yard,variable assign missing fault,output error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+434,sieve,condition fault,output error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+435,sqrt,condition fault,infinite loop error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+436,subsequences,variable assign fault,output error,edge-case impact,gpt4-python-basic,0.0,basic,GPT-4,0,0
+437,to_base,variable assign fault,output error,base-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+438,topological_ordering,condition fault,output error,all-case impact,gpt4-python-basic,1.0,basic,GPT-4,1,1
+439,wrap,variable assign missing fault,format error,all-case impact,gpt4-python-basic,0.0,basic,GPT-4,0,0
+440,bitcount,variable assign fault,infinite loop error,all-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+441,breadth_first_search,condition fault,infinite loop error,edge-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+442,bucketsort,variable misuse fault,output error,all-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+443,depth_first_search,variable misuse fault,infinite loop error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,Gemini,1,0
+444,detect_cycle,condition fault,runtime error,edge-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+445,find_first_in_sorted,condition fault,infinite loop error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,Gemini,1,0
+446,find_in_sorted,indexing fault,infinite loop error,edge-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+447,flatten,variable misuse fault,format error,base-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+448,gcd,variable misuse fault,infinite loop error,base-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+449,get_factors,variable assign fault,output error,base-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+450,hanoi,variable misuse fault,output error,all-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+451,is_valid_parenthesization,variable assign fault,output error,edge-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+452,kheapsort,indexing fault,output error,base-case impact,gemini-python-basic,0.6666666666666666,basic,Gemini,1,0
+453,knapsack,condition fault,output error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,Gemini,1,0
+454,kth,variable assign fault,runtime error,base-case impact,gemini-python-basic,0.3333333333333333,basic,Gemini,1,0
+455,lcs_length,indexing fault,output error,base-case impact,gemini-python-basic,0.3333333333333333,basic,Gemini,1,0
+456,levenshtein,variable assign fault,output error,base-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+457,lis,variable assign fault,output error,base-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+458,longest_common_subsequence,indexing fault,output error,edge-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+459,max_sublist_sum,variable assign fault,output error,base-case impact,gemini-python-basic,0.3333333333333333,basic,Gemini,1,0
+460,mergesort,condition fault,infinite loop error,all-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+461,minimum_spanning_tree,variable misuse fault,runtime error,all-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+462,next_palindrome,variable assign fault,format error,edge-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+463,next_permutation,condition fault,output error,all-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+464,pascal,indexing fault,runtime error,base-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+465,possible_change,condition fault,runtime error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,Gemini,1,0
+466,powerset,variable assign fault,output error,base-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+467,quicksort,condition fault,output error,edge-case impact,gemini-python-basic,0.6666666666666666,basic,Gemini,1,0
+468,reverse_linked_list,variable assign missing fault,output error,all-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+469,rpn_eval,variable assign fault,output error,edge-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+470,shortest_path_length,variable assign fault,output error,base-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+471,shortest_path_lengths,indexing fault,output error,all-case impact,gemini-python-basic,0.3333333333333333,basic,Gemini,1,0
+472,shortest_paths,variable misuse fault,output error,all-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+473,shunting_yard,variable assign missing fault,output error,base-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+474,sieve,condition fault,output error,base-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+475,sqrt,condition fault,infinite loop error,base-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+476,subsequences,variable assign fault,output error,edge-case impact,gemini-python-basic,0.0,basic,Gemini,0,0
+477,to_base,variable assign fault,output error,base-case impact,gemini-python-basic,1.0,basic,Gemini,1,1
+478,topological_ordering,condition fault,output error,all-case impact,gemini-python-basic,0.3333333333333333,basic,Gemini,1,0
+479,wrap,variable assign missing fault,format error,all-case impact,gemini-python-basic,0.0,basic,Gemini,0,0

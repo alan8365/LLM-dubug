@@ -1,0 +1,38 @@
+{
+    "model_name": "claude-3-opus-20240229",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_edge[u, v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 32,
+            "prog_name": "shortest_paths",
+            "language": "python",
+            "testcase_num": 3,
+            "fault_location": 8,
+            "bug_type": "variable misuse fault",
+            "bug_consequence": "output error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "\u5728\u52d5\u614b\u898f\u5283weight_by_node\u8b8a\u6578\u6642\uff0c\u8aa4\u5beb\u70baweight_by_edge\uff0c\u9020\u6210\u6700\u5f8c\u56de\u50b3\u7684\u7d50\u679c\u8ddf\u521d\u59cb\u5316\u7684\u4e00\u6a23\uff0c\u5c0e\u81f4\u9664\u4e86\u6240\u6709\u7bc0\u9ede\u90fd\u7121\u6cd5\u5230\u9054\u4ee5\u5916\u7684\u60c5\u6cc1\u7686\u8f38\u51fa\u932f\u8aa4"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 15.409594058990479,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n",
+            "raw_code": "Here's the fixed code:\n\n```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```\n\nThe bug in the original code was in the line:\n```python\nweight_by_edge[u, v] = min(\n    weight_by_node[u] + weight,\n    weight_by_node[v]\n)\n```\n\nIt should have been updating `weight_by_node[v]` instead of `weight_by_edge[u, v]`. The corrected line is:\n```python\nweight_by_node[v] = min(\n    weight_by_node[u] + weight,\n    weight_by_node[v]\n)\n```\n\nThis ensures that the shortest path weights are correctly updated in the `weight_by_node` dictionary instead of modifying the input `weight_by_edge` dictionary.\n\nThe rest of the code remains the same. The fixed code should now correctly compute the shortest paths from the source node to all other nodes using the Bellman-Ford algorithm."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 13.833029985427856,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n",
+            "raw_code": "Here's the fixed version of the code:\n\n```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```\n\nThe bug in the original code was in the line:\n\n```python\nweight_by_edge[u, v] = min(\n    weight_by_node[u] + weight,\n    weight_by_node[v]\n)\n```\n\nThis line was incorrectly updating the `weight_by_edge` dictionary instead of the `weight_by_node` dictionary. The correct line should be:\n\n```python\nweight_by_node[v] = min(\n    weight_by_node[u] + weight,\n    weight_by_node[v]\n)\n```\n\nHere, we update the `weight_by_node` dictionary with the minimum distance to reach node `v` either through the current path (`weight_by_node[v]`) or by going through node `u` and the edge `(u, v)` with weight `weight` (`weight_by_node[u] + weight`).\n\nWith this fix, the `shortest_paths` function should correctly calculate the shortest paths from the source node to all other nodes using the Bellman-Ford algorithm."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 14.507747888565063,
+            "repaired_code": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n",
+            "raw_code": "Here's the fixed version of the code:\n\n```python\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n```\n\nThe bug in the original code was in the line:\n```python\nweight_by_edge[u, v] = min(\n    weight_by_node[u] + weight,\n    weight_by_node[v]\n)\n```\n\nThis line was updating the `weight_by_edge` dictionary instead of the `weight_by_node` dictionary. The correct line should be:\n```python\nweight_by_node[v] = min(\n    weight_by_node[u] + weight,\n    weight_by_node[v]\n)\n```\n\nBy updating the `weight_by_node` dictionary with the minimum weight path to each node, the algorithm correctly computes the shortest paths from the source node to all other nodes in the graph.\n\nThe fixed code should now work as expected, calculating the shortest paths using the Bellman-Ford algorithm."
+        }
+    ]
+}

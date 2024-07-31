@@ -1,0 +1,38 @@
+{
+    "model_name": "claude-3-opus-20240229",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:]\n        lines.append(line)\n\n    return lines\n```\nHere is the library code used in the code above. The library is view-only and uneditable:\n```python=\n\n```\nFixed code:\n",
+        "sample": {
+            "prog_id": 39,
+            "prog_name": "wrap",
+            "language": "python",
+            "testcase_num": 5,
+            "fault_location": 8,
+            "bug_type": "variable assign missing fault",
+            "bug_consequence": "format error",
+            "bug_impact": "all-case impact",
+            "bug_detail_desc": "\u5728\u56de\u50b3\u524d\u7f3a\u5c11append text\uff0c\u9020\u6210\u56de\u50b3\u7d50\u679c\u7f3a\u5c11\u6700\u5f8c\u4e00\u6bb5\uff0c\u5c0e\u81f4\u7a7a\u503c\u4ee5\u5916\u7684\u8f38\u5165\u7d50\u679c\u7686\u6703\u51fa\u932f"
+        },
+        "prompt_type": "with_lib"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 13.247383117675781,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].strip()\n        lines.append(line)\n    \n    if text:\n        lines.append(text)\n    \n    return lines\n",
+            "raw_code": "Here's the fixed code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].strip()\n        lines.append(line)\n    \n    if text:\n        lines.append(text)\n    \n    return lines\n```\n\nThe bug in the original code is that it doesn't handle the remaining text after the last line is extracted. If there is any remaining text that is shorter than or equal to `cols`, it will be ignored and not included in the `lines` list.\n\nTo fix this, I added an additional check after the while loop to see if there is any remaining text in the `text` variable. If there is, it appends that text as the last line to the `lines` list.\n\nAlso, when slicing the `text` variable to update it for the next iteration, I added the `strip()` method to remove any leading whitespace that may occur when splitting the text at a space character.\n\nWith these changes, the `wrap` function should now correctly handle all the text and include any remaining text as the last line in the output list."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 13.552934885025024,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].strip()\n        lines.append(line)\n\n    if text:\n        lines.append(text)\n\n    return lines\n",
+            "raw_code": "Here's the fixed version of the code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].strip()\n        lines.append(line)\n\n    if text:\n        lines.append(text)\n\n    return lines\n```\n\nThe bug in the original code was that it didn't handle the remaining text after the last line was extracted. If the remaining text was shorter than or equal to `cols`, it would not be appended to the `lines` list.\n\nTo fix this, I added an additional check after the `while` loop to see if there is any remaining text in the `text` variable. If there is, it appends that remaining text as the last line to the `lines` list.\n\nAlso, when splitting the text into `line` and `text`, I added the `strip()` method to remove any leading whitespace from the remaining `text`. This ensures that the next line starts without any unnecessary whitespace.\n\nWith these changes, the `wrap` function should now correctly handle wrapping the text into lines of the specified column width and return all the lines, including the last line if it exists."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 17.331305027008057,
+            "repaired_code": "\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines\n",
+            "raw_code": "Here's the fixed code:\n\n```python\ndef wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols)\n        if end == -1:\n            end = cols\n        line, text = text[:end], text[end:].lstrip()\n        lines.append(line)\n    if text:\n        lines.append(text)\n    return lines\n```\n\nThe bug in the original code is that it doesn't handle the remaining text properly after the last line is extracted. It also doesn't remove the leading spaces from the remaining text after each line is extracted.\n\nThe fixed code makes the following changes:\n\n1. In the `rfind()` function call, the second argument is changed from `0` to `cols + 1`. This ensures that the search for the last space starts from the beginning of the string up to the `cols` index, rather than up to `cols + 1`.\n\n2. After extracting each line, the remaining text is updated using `text[end:].lstrip()`. The `lstrip()` function removes any leading whitespace from the remaining text, ensuring that the next line starts without unnecessary spaces.\n\n3. After the loop ends, an additional check is added to append any remaining text as the last line if it exists. This ensures that the remaining text is included in the output even if it doesn't exceed the specified number of columns.\n\nWith these modifications, the `wrap()` function should correctly wrap the text based on the specified number of columns and return a list of lines."
+        }
+    ]
+}

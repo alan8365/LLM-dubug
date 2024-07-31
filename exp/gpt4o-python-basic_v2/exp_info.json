@@ -1,0 +1,8 @@
+{
+    "name": "gpt4o-python-basic_",
+    "lang": "python",
+    "llm_api": "OpenAiApi",
+    "prompt_type": "basic",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4o-python-basic_",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/gpt4o-python-basic_/patchs"
+}

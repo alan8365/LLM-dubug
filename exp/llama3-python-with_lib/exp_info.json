@@ -1,0 +1,8 @@
+{
+    "name": "llama3-python-with_lib",
+    "lang": "python",
+    "llm_api": "OllamaApi",
+    "prompt_type": "with_lib",
+    "exp_dir": "/Users/lucyxu/PycharmProjects/debug/exp/llama3-python-with_lib",
+    "patch_dir": "/Users/lucyxu/PycharmProjects/debug/exp/llama3-python-with_lib/patchs"
+}

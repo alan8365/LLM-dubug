@@ -1,0 +1,38 @@
+{
+    "model_name": "gpt-4o",
+    "prompt": {
+        "prompt": "Fix the bug in the following code:\n```python=\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```\n\nFixed code:\n",
+        "sample": {
+            "prog_id": 35,
+            "prog_name": "sqrt",
+            "language": "python",
+            "testcase_num": 7,
+            "fault_location": 2,
+            "bug_type": "condition fault",
+            "bug_consequence": "infinite loop error",
+            "bug_impact": "base-case impact",
+            "bug_detail_desc": "\u5728\u8aa4\u5dee\u8a08\u7b97\u6642\uff0c\u5fd8\u8a18\u628aapprox\u5e73\u65b9\uff0c\u9020\u6210\u8aa4\u5dee\u8a08\u7b97\u7684\u662fx\u8ddf\u6839\u865fx\u7684\u5dee\uff0c\u5c0e\u81f4\u9664\u4e86x=1\u6216epsilon\u5f88\u5927\u7684\u60c5\u6cc1\u5916\u8a08\u7b97\u90fd\u4e0d\u6703\u505c\u4e0b"
+        },
+        "prompt_type": "basic"
+    },
+    "patches": [
+        {
+            "patch_id": 0,
+            "run_time": 2.5787529945373535,
+            "repaired_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(approx**2 - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n",
+            "raw_code": "The bug in your code is in the condition of the `while` loop. The condition should compare the difference between `approx**2` and `x` to `epsilon`, not the difference between `x` and `approx`. Additionally, `approx` should be updated correctly using the iteration formula.\n\nHere's the corrected code:\n\n```python\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(approx**2 - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```\n\nThis code should now correctly calculate the square root of `x` to within `epsilon` of the true value."
+        },
+        {
+            "patch_id": 1,
+            "run_time": 3.0315027236938477,
+            "repaired_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(approx**2 - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n",
+            "raw_code": "The bug in your code is in the condition of the `while` loop. You should compare the difference between the square of the approximation and `x` to the given `epsilon` rather than comparing `x` and `approx` directly.\n\nHere is the corrected code:\n\n```python\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(approx**2 - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```\n\nThis change ensures that the `while` loop continues to iterate until the square of the approximation is sufficiently close to `x`, within the specified epsilon range."
+        },
+        {
+            "patch_id": 2,
+            "run_time": 3.594595193862915,
+            "repaired_code": "\ndef sqrt(x, epsilon):\n    approx = x / 2.0\n    while abs(approx**2 - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n",
+            "raw_code": "To fix the bug in the provided code, we need to ensure that the termination condition in the while loop correctly checks if the approximation is within the desired tolerance (`epsilon`). The current condition `abs(x - approx) > epsilon` incorrectly compares `x` and `approx`. Instead, we should compare the difference between the square of the approximation and `x` to `epsilon`.\n\nHere's the corrected code:\n\n```python\ndef sqrt(x, epsilon):\n    approx = x / 2.0\n    while abs(approx**2 - x) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n```\n\nChanges made:\n1. Adjusted the termination condition to `abs(approx**2 - x) > epsilon`.\n2. Ensured that `approx` is initialized as a float by using `2.0`. This is important for numeric stability, especially in Python 2 or environments where division might default to integer division.\n\nThis will now correctly approximate the square root of `x` to within the specified tolerance `epsilon`."
+        }
+    ]
+}

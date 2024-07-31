@@ -1,0 +1,39 @@
+{
+    "sample": {
+        "prog_id": 22,
+        "prog_name": "next_palindrome",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 14,
+        "bug_type": "variable assign fault",
+        "bug_consequence": "format error",
+        "bug_impact": "edge-case impact",
+        "bug_detail_desc": "在如999這類需要進位的輸入而進入最後一個進位處理邏輯時，沒有將原始位數-1造成回傳結果多一位，導致類似邊緣情況的輸入無法獲得正確輸出"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 18.222482919692993,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    high_mid = n // 2\n    low_mid = (n - 1) // 2\n    all_nines = True\n    for digit in digit_list:\n        if digit != 9:\n            all_nines = False\n            break\n    if all_nines:\n        return [1] + [0] * (n - 1) + [1]\n    for i in range((n + 1) // 2):\n        digit_list[-(i + 1)] = digit_list[i]\n    if digit_list <= digit_list[::-1]:\n        carry = 1\n        i = low_mid\n        while i >= 0 and carry != 0:\n            new_digit = digit_list[i] + carry\n            carry = new_digit // 10\n            digit_list[i] = new_digit % 10\n            digit_list[-(i + 1)] = digit_list[i]\n            i -= 1\n    return digit_list\n\n\nprint(next_palindrome([1, 2, 9]))\nprint(next_palindrome([9, 9, 9]))"
+        },
+        {
+            "run_time": 33.0251898765564,
+            "is_plausible": true,
+            "is_correct": false,
+            "pass_num": 5,
+            "fail_num": 0,
+            "reparied_code": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    if n == 0:\n        return [1]\n    mid = n // 2\n    left = mid - 1\n    right = mid if n % 2 == 0 else mid + 1\n    while left >= 0 and digit_list[left] == digit_list[right]:\n        left -= 1\n        right += 1\n    need_to_increment = (left < 0) or digit_list[left] < digit_list[right]\n    left = mid - 1\n    right = mid if n % 2 == 0 else mid + 1\n    if need_to_increment:\n        carry = 1\n        if n % 2 == 1:\n            digit_list[mid] += 1\n            carry = digit_list[mid] // 10\n            digit_list[mid] %= 10\n            right = mid + 1\n        while left >= 0:\n            digit_list[left] += carry\n            carry = digit_list[left] // 10\n            digit_list[left] %= 10\n            digit_list[right] = digit_list[left]\n            left -= 1\n            right += 1\n    while left >= 0:\n        digit_list[right] = digit_list[left]\n        left -= 1\n        right += 1\n    if need_to_increment and carry:\n        digit_list = [1] + [0] * (n - 1) + [1]\n    return digit_list\n\n\nprint(next_palindrome([1, 2, 3]))\nprint(next_palindrome([9, 9, 9]))\nprint(next_palindrome([1, 2, 2, 1]))"
+        },
+        {
+            "run_time": 15.274474859237671,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 4,
+            "fail_num": 1,
+            "reparied_code": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    mid = n // 2\n    left_side = digit_list[:mid]\n    if digit_list == digit_list[::-1]:\n        if n % 2 == 0:\n            left_incremented = increment(left_side)\n            digit_list = left_incremented + left_incremented[::-1]\n        else:\n            left_incremented = increment(left_side + [digit_list[mid]])\n            digit_list = left_incremented[: mid + 1] + left_incremented[:mid][::-1]\n    else:\n        if n % 2 == 0:\n            digit_list = left_side + left_side[::-1]\n        else:\n            digit_list = left_side + [digit_list[mid]] + left_side[::-1]\n    return digit_list\n\n\ndef increment(digit_list):\n    n = len(digit_list)\n    carry = 1\n    for i in range(n - 1, -1, -1):\n        digit_list[i] += carry\n        if digit_list[i] < 10:\n            carry = 0\n            break\n        else:\n            digit_list[i] = 0\n            carry = 1\n    if carry == 1:\n        digit_list = [1] + digit_list\n    return digit_list\n\n\nprint(next_palindrome([1, 2, 9]))\nprint(next_palindrome([9, 9, 9]))"
+        }
+    ]
+}

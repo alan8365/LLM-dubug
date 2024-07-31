@@ -1,0 +1,39 @@
+{
+    "sample": {
+        "prog_id": 24,
+        "prog_name": "pascal",
+        "language": "python",
+        "testcase_num": 5,
+        "fault_location": 4,
+        "bug_type": "indexing fault",
+        "bug_consequence": "runtime error",
+        "bug_impact": "base-case impact",
+        "bug_detail_desc": "在控制三角形底邊數量的for loop參數時，缺少將r+1造成底邊長度少一，導致輸出的三角形或者缺少最後一排或者訪問前一排最後元素時觸發IndexError"
+    },
+    "patchs_eval": [
+        {
+            "run_time": 12.623558282852173,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 2,
+            "fail_num": 3,
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1]\n            upright = rows[r - 1][c] if c < r - 1 else 0\n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n    return rows"
+        },
+        {
+            "run_time": 23.025681972503662,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 2,
+            "fail_num": 3,
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1]\n            upright = rows[r - 1][c] if c < r - 1 else 0\n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n    return rows"
+        },
+        {
+            "run_time": 20.9757399559021,
+            "is_plausible": false,
+            "is_correct": false,
+            "pass_num": 2,
+            "fail_num": 3,
+            "reparied_code": "def pascal(n):\n    rows = [[1]]\n    for r in range(1, n):\n        row = [1]\n        for c in range(1, r):\n            upleft = rows[r - 1][c - 1]\n            upright = rows[r - 1][c] if c < r - 1 else 0\n            row.append(upleft + upright)\n        row.append(1)\n        rows.append(row)\n    return rows"
+        }
+    ]
+}
